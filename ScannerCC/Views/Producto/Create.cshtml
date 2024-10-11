@@ -1,0 +1,131 @@
+﻿@model ScannerCC.Models.Productos
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<style>
+    body {
+        background-color: #242424;
+        color: white;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    input, select {
+        width: 100%;
+        margin: 5px;
+    }
+
+        input[type="submit"] {
+            background-color: #20777A;
+            color: white;
+        }
+
+    .btn-dark:hover {
+        background-color: #62EBF0;
+        border-color: #20777A;
+        color: black;
+    }
+
+    a {
+        color: white;
+    }
+
+        a:hover {
+            color: #62EBF0;
+        }
+</style>
+
+<h1>Crear</h1>
+
+<h4>Producto</h4>
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdInformacionQuimica" class="control-label">Id Informaciion Quimica</label>
+                        <select asp-for="IdInformacionQuimica" class="form-control" asp-items="ViewBag.IdInformacionQuimica"></select>
+                        <span asp-validation-for="IdInformacionQuimica" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CodigoBarra" class="control-label">Codigo de barra</label>
+                        <input asp-for="CodigoBarra" class="form-control" />
+                        <span asp-validation-for="CodigoBarra" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CodigoVE" class="control-label">Codigo VE</label>
+                        <input asp-for="CodigoVE" class="form-control" />
+                        <span asp-validation-for="CodigoVE" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Nombre" class="control-label">Nombre</label>
+                        <input asp-for="Nombre" class="form-control" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="URLImagen" class="control-label">Url de imagen</label>
+                        <input asp-for="URLImagen" class="form-control" />
+                        <span asp-validation-for="URLImagen" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PaisDestino" class="control-label">Pais de destino</label>
+                        <input asp-for="PaisDestino" class="form-control" />
+                        <span asp-validation-for="PaisDestino" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdUsuarios" class="control-label">Id Usuario</label>
+                        <select asp-for="IdUsuarios" class="form-control" asp-items="ViewBag.IdUsuarios"></select>
+                        <span asp-validation-for="IdUsuarios" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <input asp-for="Activo" class="form-check-input" type="checkbox" />
+                        <label asp-for="Activo" class="form-check-label">Activo</label>
+                        <span asp-validation-for="Activo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FechaRegistro" class="control-label">Fecha de registro</label>
+                        <input asp-for="FechaRegistro" class="form-control" type="datetime-local" />
+                        <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Idioma" class="control-label">Idioma</label>
+                        <input asp-for="Idioma" class="form-control" />
+                        <span asp-validation-for="Idioma" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UnidadMedida" class="control-label">Unidad de medida</label>
+                        <input asp-for="UnidadMedida" class="form-control" />
+                        <span asp-validation-for="UnidadMedida" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DescripcionCapsula" class="control-label">Descripcion de la capsula</label>
+                        <input asp-for="DescripcionCapsula" class="form-control" />
+                        <span asp-validation-for="DescripcionCapsula" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Crear" class="btn btn-dark" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Home">Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,61 @@
+﻿@model ScannerCC.Models.Usuarios
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    body {
+        background-color: #242424;
+        color: white;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    a {
+        color: white;
+    }
+
+    a:hover {
+        color: #62EBF0;
+    }
+</style>
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="row justify-content-center">
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.Rut)
+        </dt>
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.Rut)
+        </dd>
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.Activo)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a style="margin-right: 20px;" asp-action="Edit" asp-route-id="@Model?.Id">Editar</a> |
+    <a style="margin-left: 20px;" asp-action="Index" asp-controller="Home">Volver a la lista</a>
+</div>

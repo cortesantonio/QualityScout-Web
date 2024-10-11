@@ -1,0 +1,416 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 2fr 12fr;
+}
+
+.line {
+  background-color: #202020;
+  height: 1px;
+  width: 100%;
+}
+
+.menu {
+  background-color: #353535;
+  color: white;
+  width: 100%;
+  padding: 10px;
+}
+
+.menu .logo {
+  text-align: center;
+  margin-top: 30px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.menu .logo img {
+  width: 125px;
+  margin: auto;
+}
+
+.menu .links {
+  margin: 50px auto 50px;
+  width: 100%;
+  text-align: left;
+}
+
+.menu .links ul li {
+  margin-bottom: 20px;
+}
+
+#btnView {
+  transition: 0.5s;
+
+  color: white;
+  background-color: transparent;
+  font-size: 1.2rem;
+  width: 90%;
+  margin-top: 15px;
+  margin: auto;
+  display: flex;
+  border: none;
+  cursor: pointer;
+}
+
+#btnView > i {
+  margin-right: 15px;
+}
+
+.main {
+  background-color: #242424;
+  padding: 20px;
+}
+
+.main .navbar {
+  width: 100%;
+  height: 7vh;
+  border-bottom: 1px solid #353535;
+  margin: auto;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar .div1 {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  padding: 10px;
+}
+
+.navbar .div1 input {
+  margin-left: 10px;
+  width: 100%;
+  height: 100%;
+  color: white;
+  font-size: 1.2rem;
+  background-color: transparent;
+  border: none;
+}
+
+.navbar .div1 input:focus {
+  outline: none;
+}
+
+.div2 {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.notificacion i {
+  font-size: 2.2rem;
+  margin-right: 15px;
+}
+
+#showOptionUser {
+  background-color: transparent;
+  margin-left: 20px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  border: none;
+  color: white;
+}
+
+.view {
+  color: white;
+  width: 100%;
+  padding-top: 20px;
+  height: 85vh;
+}
+
+.view header {
+  width: 100%;
+  height: 10%;
+}
+
+.view header h1 {
+  font-size: 2.5rem;
+  font-weight: 100;
+}
+
+.view header p {
+  font-size: 1rem;
+  font-weight: 100;
+}
+
+.dashboard-container {
+  width: 100%;
+  height: 80%;
+  margin-top: 30px;
+}
+.parent {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+}
+.parent > div {
+  border-radius: 15px;
+  padding: 15px;
+  background-color: #353535;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.dashboard-container > div > h3 {
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+}
+.dashboard-container > div > h3 {
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.dashboard-container > div > p {
+  font-weight: 100;
+  font-size: 1rem;
+  text-align: center;
+}
+.div1 {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.div2 {
+  grid-area: 2 / 1 / 3 / 2;
+}
+
+.div3 {
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+.div4 {
+  grid-area: 2 / 2 / 3 / 3;
+}
+
+.div5 {
+  grid-area: 1 / 3 / 2 / 4;
+}
+
+.div6 {
+  grid-area: 2 / 3 / 3 / 4;
+}
+
+.div7 {
+  grid-area: 1 / 4 / 3 / 6;
+}
+
+.div8 {
+  grid-area: 3 / 1 / 4 / 4;
+}
+.flex {
+  display: grid !important;
+  grid-template-columns: 1fr 2fr;
+  width: 100%;
+}
+.tablaPaises {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.div9 {
+  grid-area: 4 / 1 / 6 / 4;
+}
+.div9 {
+  justify-content: center !important;
+  align-items: start !important;
+}
+.div9 h3 {
+  font-size: 1.5rem;
+  font-weight: 100;
+}
+.div9 table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+.div9 table th {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.div9 table td {
+  font-size: 1rem;
+  font-weight: lighter;
+}
+.div9 table td,
+.div9 table th {
+  border-bottom: 1px solid #202020;
+  padding: 10px;
+}
+.Adminstrador {
+  color: rgb(7, 190, 7);
+  border-radius: 20px;
+}
+.Especialista {
+  color: rgb(7, 108, 190);
+  border-radius: 20px;
+}
+.div10 {
+  grid-area: 3 / 4 / 6 / 6;
+}
+
+.usuario-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.usuario-container table,
+.productos-container table {
+  width: 90%;
+  text-align: left;
+  background-color: #353535;
+  border-radius: 15px;
+  border-collapse: collapse;
+  border-spacing: 30px;
+}
+
+.tableUsuarios th,
+.tableUsuarios tr,
+.tableUsuarios td {
+  padding: 20px;
+}
+
+.tableUsuarios thead tr th {
+  border-bottom: 3px solid #202020;
+  font-size: 1.2rem;
+}
+
+.productos-container {
+  display: flex;
+  flex-direction: column;
+}
+.head-producto {
+  width: 100%;
+  height: 75px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.head-producto .busqueda {
+  width: 80%;
+}
+.head-producto .busqueda form input {
+  width: 90%;
+  height: 50px;
+  background-color: transparent;
+  color: #b4b4b4;
+  font-size: 1.2rem;
+  border: none;
+  border-bottom: 2px solid #353535;
+}
+.busqueda form button {
+  font-size: 24px;
+  background-color: transparent;
+  border: none;
+  margin: auto 15px auto 25px;
+}
+
+.head-producto .busqueda form input:focus {
+  outline: none;
+}
+.head-producto .add a {
+  font-size: 16px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#opcionesUser {
+  position: absolute;
+  top: 90px;
+  right: 10px;
+  background-color: #353535;
+  font-size: 1rem;
+  border-radius: 10px;
+  
+
+}
+#opcionesUser ul {list-style: none;}
+#opcionesUser ul li{
+  margin: 15px;
+  cursor: pointer;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    .close:hover {
+        color: black;
+    }
+#camera {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+}
+    #camera > video {
+        width: 250px;
+        height: 250px;
+        margin: 0 auto;
+    
+}
+.menu .links ul li{
+    list-style:none;
+
+}
+
+
+    @media only screen and (max-width: 900px) {
+        .container {
+            grid-template-columns: 1fr;
+        }
+
+        .menu .links ul {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            margin:20px auto 20px;
+            }
+
+    }

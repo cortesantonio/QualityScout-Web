@@ -1,0 +1,132 @@
+﻿@model ScannerCC.Models.ProductoDetalles
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    body {
+        background-color: #242424;
+        color: white;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    input, select {
+        width: 100%;
+        margin: 5px;
+    }
+
+        input[type="submit"] {
+            background-color: #20777A;
+            color: white;
+        }
+
+    .btn-dark:hover {
+        background-color: #62EBF0;
+        border-color: #20777A;
+        color: black;
+    }
+
+    a {
+        color: white;
+    }
+
+    a:hover {
+        color: #62EBF0;
+    }
+</style>
+
+<h1>Editar</h1>
+
+<h4>Producto detalles</h4>
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdProductos" class="control-label">Id Producto</label>
+                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos"></select>
+                        <span asp-validation-for="IdProductos" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdBotellaDetalles" class="control-label">Botella detalles</label>
+                        <select asp-for="IdBotellaDetalles" class="form-control" asp-items="ViewBag.IdBotellaDetalles"></select>
+                        <span asp-validation-for="IdBotellaDetalles" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Capacidad" class="control-label">Capacidad</label>
+                        <input asp-for="Capacidad" class="form-control" />
+                        <span asp-validation-for="Capacidad" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TipoCapsula" class="control-label">Tipo de capsula</label>
+                        <input asp-for="TipoCapsula" class="form-control" />
+                        <span asp-validation-for="TipoCapsula" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TipoEtiqueta" class="control-label">Tipo de etiqueta</label>
+                        <input asp-for="TipoEtiqueta" class="form-control" />
+                        <span asp-validation-for="TipoEtiqueta" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ColorBotella" class="control-label">Color de la botella</label>
+                        <input asp-for="ColorBotella" class="form-control" />
+                        <span asp-validation-for="ColorBotella" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <input asp-for="Medalla" class="form-check-input" type="checkbox" />
+                        <label asp-for="Medalla" class="form-check-label">Medalla</label>
+                        <span asp-validation-for="Medalla" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ColorCapsula" class="control-label">Color de la capsula</label>
+                        <input asp-for="ColorCapsula" class="form-control" />
+                        <span asp-validation-for="ColorCapsula" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TipoCorcho" class="control-label">Tipo de corcho</label>
+                        <input asp-for="TipoCorcho" class="form-control" />
+                        <span asp-validation-for="TipoCorcho" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TipoBotella" class="control-label">Tipo de botella</label>
+                        <input asp-for="TipoBotella" class="form-control" />
+                        <span asp-validation-for="TipoBotella" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MedidaEtiquetaABoquete" class="control-label">Medida de etiqueta a boquete</label>
+                        <input asp-for="MedidaEtiquetaABoquete" class="form-control" />
+                        <span asp-validation-for="MedidaEtiquetaABoquete" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MedidaEtiquetaABase" class="control-label">Medida de etiqueta a base</label>
+                        <input asp-for="MedidaEtiquetaABase" class="form-control" />
+                        <span asp-validation-for="MedidaEtiquetaABase" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Guardar" class="btn btn-dark" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Home" >Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

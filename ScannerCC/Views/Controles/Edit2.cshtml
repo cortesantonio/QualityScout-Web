@@ -1,0 +1,123 @@
+﻿@model ScannerCC.Models.Controles
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    body {
+        background-color: #242424;
+        color: white;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    input, select {
+        width: 100%;
+        margin: 5px;
+    }
+
+        input[type="submit"] {
+            background-color: #20777A;
+            color: white;
+        }
+
+    .btn-dark:hover {
+        background-color: #62EBF0;
+        border-color: #20777A;
+        color: black;
+    }
+
+    a {
+        color: white;
+    }
+
+    a:hover {
+        color: #62EBF0;
+    }
+</style>
+
+<h1>Editar</h1>
+
+<h4>Control</h4>
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <form asp-action="Edit2">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdProductos" class="control-label">Id Producto</label>
+                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos"></select>
+                        <span asp-validation-for="IdProductos" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Linea" class="control-label">Linea</label>
+                        <input asp-for="Linea" class="form-control" />
+                        <span asp-validation-for="Linea" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PaisDestino" class="control-label">País de destino</label>
+                        <input asp-for="PaisDestino" class="form-control" />
+                        <span asp-validation-for="PaisDestino" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Comentario" class="control-label">Comentario</label>
+                        <input asp-for="Comentario" class="form-control" />
+                        <span asp-validation-for="Comentario" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Tipodecontrol" class="control-label">Tipo de control</label>
+                        <input asp-for="Tipodecontrol" class="form-control" />
+                        <span asp-validation-for="Tipodecontrol" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FechaHoraPrimerControl" class="control-label">Fecha y hora primer control</label>
+                        <input asp-for="FechaHoraPrimerControl" class="form-control" type="datetime-local" />
+                        <span asp-validation-for="FechaHoraPrimerControl" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Estado" class="control-label">Estado inicial</label>
+                        <input asp-for="Estado" class="form-control" />
+                        <span asp-validation-for="Estado" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EstadoFinal" class="control-label">Estado final</label>
+                        <input asp-for="EstadoFinal" class="form-control" />
+                        <span asp-validation-for="EstadoFinal" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdUsuarios" class="control-label">Id Usuario</label>
+                        <select asp-for="IdUsuarios" class="form-control" asp-items="ViewBag.IdUsuarios"></select>
+                        <span asp-validation-for="IdUsuarios" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FechaHoraControlFinal" class="control-label">Fecha y hora control final</label>
+                        <input asp-for="FechaHoraControlFinal" class="form-control" type="datetime-local" />
+                        <span asp-validation-for="FechaHoraControlFinal" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Guardar" class="btn btn-dark" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Home">Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

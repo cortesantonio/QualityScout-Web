@@ -1,0 +1,160 @@
+body {
+    background-color:  #445657;
+    
+}
+
+.presentacionLog {
+    background-color: #20777A;
+    background-image: linear-gradient(135deg, #62EBF0 0%, #20777A 100%);
+    padding: 25px;
+    height: 80vh;
+
+}
+
+.logcontenedor {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 70%;
+    margin: 50px auto;
+    background-color: white;
+    border-radius: 40px;
+    box-shadow: 10px 10px 20px rgba(161, 161, 161, 0.336);
+}
+
+.logcontenedor>* {
+    font-family: 'Rubik', sans-serif;
+
+}
+
+
+
+.nameApp {
+    font-size: 16px;
+    font-weight: 100;
+    color: white;
+    margin-bottom: 200px;
+}
+
+.bnvLog,
+.sisLog,
+.tituloLog,
+.infoLog {
+    color: white;
+    text-align: center;
+
+}
+
+.tituloLog{
+    margin: 10px auto;
+    font-style: italic;
+
+}
+
+
+.sisLog {
+    font-size: 1.2rem;
+    font-weight: 100;
+}
+
+.line10 {
+    width: 15%;
+    height: 3px;
+    background-color: white;
+    margin:  auto;
+    margin-bottom: 50px;
+    border-radius: 20px;
+
+}
+
+.tituloLog {
+    font-size: 3.5rem;
+}
+
+.infoLog {
+    font-weight: 100;
+    font-size: 1rem;
+}
+
+.formularioLogin {
+    height: 80vh;
+    width: 100%;
+    background-color: white;
+}
+
+.formularioLogin form {
+    margin: 100px auto 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.formularioLogin h2 {
+    text-align: center;
+    margin: 200px auto 0px;
+    color: #1E3233;
+}
+.alerta{
+    font-size: 0.8rem;
+    color: red;
+}
+form input {
+    display: block;
+    margin: 10px auto;
+    width: 50%;
+    padding: 10px;
+    border: none;
+    border-left: 3px solid #20777a;
+
+}
+
+form button {
+    width: 150px;
+    margin-top: 20px;
+    color: white;
+    background-color: #20777A;
+    background-image: linear-gradient(135deg, #44898b 0%, #20777A 100%);
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+
+
+}
+form input:focus{
+    outline:#20777a 1px solid;
+
+}
+
+a button {
+    width: 100px;
+    margin-top: 0px;
+    color: #1E3233;
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+}
+
+.arrow {
+    display: none;
+    margin-top: 150px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.618);
+}
+
+@media screen and (max-width:490px) {
+    .logcontenedor {
+        grid-template-columns: 1fr;
+        width: 100%;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width:960px) {
+    .logcontenedor {
+        grid-template-columns: 1fr;
+        margin: auto;
+
+    }
+
+    .arrow {
+        display: block;
+    }
+}

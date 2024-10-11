@@ -1,0 +1,117 @@
+﻿@model ScannerCC.Models.InformacionQuimica
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    body {
+        background-color: #242424;
+        color: white;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    input, select {
+        width: 100%;
+        margin: 5px;
+    }
+
+        input[type="submit"] {
+            background-color: #20777A;
+            color: white;
+        }
+
+    .btn-dark:hover {
+        background-color: #62EBF0;
+        border-color: #20777A;
+        color: black;
+    }
+
+    a {
+        color: white;
+    }
+
+    a:hover {
+        color: #62EBF0;
+    }
+</style>
+
+<h1>Editar</h1>
+
+<h4>Informacion quimica</h4>
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Cepa" class="control-label">Cepa</label>
+                        <input asp-for="Cepa" class="form-control" />
+                        <span asp-validation-for="Cepa" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MinAzucar" class="control-label">Mínimo de azúcar</label>
+                        <input asp-for="MinAzucar" class="form-control" type="number" step="any" />
+                        <span asp-validation-for="MinAzucar" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MaxAzucar" class="control-label">Maximo de azúcar</label>
+                        <input asp-for="MaxAzucar" class="form-control" type="number" step="any" />
+                        <span asp-validation-for="MaxAzucar" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MinSulfuroso" class="control-label">Mínimo de sulfuroso</label>
+                        <input asp-for="MinSulfuroso" class="form-control" type="number" step="any" />
+                        <span asp-validation-for="MinSulfuroso" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MaxSulfuroso" class="control-label">Maximo de sulfuroso</label>
+                        <input asp-for="MaxSulfuroso" class="form-control" type="number" step="any" />
+                        <span asp-validation-for="MaxSulfuroso" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MinDensidad" class="control-label">Mínimo de densidad</label>
+                        <input asp-for="MinDensidad" class="form-control" type="number" step="any" />
+                        <span asp-validation-for="MinDensidad" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MaxDensidad" class="control-label">Maximo de densidad</label>
+                        <input asp-for="MaxDensidad" class="form-control" type="number" step="any" />
+                        <span asp-validation-for="MaxDensidad" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MinGradoAlcohol" class="control-label">Mínimo de grado de alcohol</label>
+                        <input asp-for="MinGradoAlcohol" class="form-control" type="number" step="any" />
+                        <span asp-validation-for="MinGradoAlcohol" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MaxGradoAlcohol" class="control-label">Maximo de grado de alcohol</label>
+                        <input asp-for="MaxGradoAlcohol" class="form-control" type="number" step="any" />
+                        <span asp-validation-for="MaxGradoAlcohol" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Guardar" class="btn btn-dark" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Home" >Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

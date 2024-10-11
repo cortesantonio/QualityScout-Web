@@ -1,0 +1,90 @@
+﻿@model ScannerCC.Models.Controles
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    body {
+        background-color: #242424;
+        color: white;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    a {
+        color: white;
+    }
+
+    a:hover {
+        color: #62EBF0;
+    }
+
+    .row dt,
+    .row dd {
+        margin-top: 5px; 
+        margin-bottom: 5px; 
+    }
+</style>
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Control</h4>
+    <hr />
+    <dl class="row justify-content-center">
+        <div class="col-sm-4">
+            <div class="row justify-content-center">
+                <dt class="col-sm-6">
+                    Codigo de barra
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.CodigoBarra)
+                </dd>
+                <dt class="col-sm-6">
+                    Linea
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.Linea)
+                </dd>
+                <dt class="col-sm-6">
+                    Cepa
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.Cepa)
+                </dd>
+                <dt class="col-sm-6">
+                    Pais de origen
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.PaisOrigen)
+                </dd>
+                <dt class="col-sm-6">
+                    Pais de destino
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.PaisDestino)
+                </dd>
+                <dt class="col-sm-6">
+                    Medalla
+                </dt>
+                <dd class="col-sm-6">
+                    @if (Model.Tipodecontrol.HasValue)
+                    {
+                        <text>@(Model.Tipodecontrol.Value ? "Rechazo" : "Preventivo")</text>
+                    }
+                    else
+                    {
+                        <text>Nulo</text>
+                    }
+                </dd>
+               
+            </div>
+        </div>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Home">Volver a la lista</a>
+</div>

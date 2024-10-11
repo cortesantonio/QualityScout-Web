@@ -1,0 +1,92 @@
+﻿@model ScannerCC.Models.ProductoHistorial
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    body {
+        background-color: #242424;
+        color: white;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    input, select {
+        width: 100%;
+        margin: 5px;
+    }
+
+        input[type="submit"] {
+            background-color: #20777A;
+            color: white;
+        }
+
+    .btn-dark:hover {
+        background-color: #62EBF0;
+        border-color: #20777A;
+        color: black;
+    }
+
+    a {
+        color: white;
+    }
+
+    a:hover {
+        color: #62EBF0;
+    }
+</style>
+
+<h1>Editar</h1>
+
+<h4>Producto historial</h4>
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdProductos" class="control-label">Id Producto</label>
+                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos"></select>
+                        <span asp-validation-for="IdProductos" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FechaCosecha" class="control-label">Fecha de cosecha</label>
+                        <input asp-for="FechaCosecha" class="form-control" type="datetime-local" />
+                        <span asp-validation-for="FechaCosecha" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FechaProduccion" class="control-label">Fecha de produccion</label>
+                        <input asp-for="FechaProduccion" class="form-control" type="datetime-local" />
+                        <span asp-validation-for="FechaProduccion" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FechaEnvasado" class="control-label">Fecha de envasado</label>
+                        <input asp-for="FechaEnvasado" class="form-control" type="datetime-local" />
+                        <span asp-validation-for="FechaEnvasado" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Guardar" class="btn btn-dark" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Home" >Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

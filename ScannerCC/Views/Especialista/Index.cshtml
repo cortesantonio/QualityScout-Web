@@ -1,0 +1,1172 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="~/css/style.css" />
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container">
+    <aside class="menu">
+      <div class="logo">
+        <img src="img/Brand initial Simple Logo.png" alt="LOGO" />
+      </div>
+      <div class="line"></div>
+      <div class="links">
+          <ul class="listar"> 
+          <li>
+            <button onclick="switchView('dashboard')" id="btnView">
+              <i class="fa-solid fa-chart-line"></i> Dashboard
+            </button>
+          </li>
+          <li>
+            <button onclick="switchView('informe')" id="btnView">
+              <i class="fa-solid fa-chart-pie"></i> Informe gerencial
+            </button>
+          </li>
+                    </li>
+                    <li>
+                        <button onclick="switchView('informesp')" id="btnView">
+                            <i class="fa-solid fa-bag-shopping"></i> Adm. de informes
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="switchView('infquimica')" id="btnView">
+                            <i class="fa-solid fa-bag-shopping"></i> Adm. de inf quimica
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="switchView('botellas')" id="btnView">
+                            <i class="fa-solid fa-bag-shopping"></i> Adm. de botellas
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="switchView('escaneos')" id="btnView">
+                            <i class="fa-solid fa-bag-shopping"></i> Adm. de escaneos
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="switchView('controles')" id="btnView">
+                            <i class="fa-solid fa-clipboard-list"></i> Adm. de controles
+                        </button>
+                    </li>
+          <li>
+            <button onclick="switchView('usuarios')" id="btnView">
+              <i class="fa-regular fa-user"></i>Adm. de usuarios
+            </button>
+          </li>
+                    <li>
+                        <button onclick="switchView('productosh')" id="btnView">
+                            <i class="fa-solid fa-bag-shopping"></i> Adm. de productos historial
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="switchView('productosd')" id="btnView">
+                            <i class="fa-solid fa-bag-shopping"></i> Adm. de producto detalles
+                        </button>
+                    </li>
+          <li>
+            <button onclick="switchView('productos')" id="btnView">
+              <i class="fa-solid fa-bag-shopping"></i> Adm. de productos
+            </button>
+          <li>
+            <button onclick="switchView('busqueda')" id="btnView">
+              <i class="fa-solid fa-barcode"></i> Buscador/Scanner
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="line"></div>
+    </aside>
+    <div class="main">
+      <nav class="navbar">
+        <div class="div1">
+          <i class="fa-solid fa-magnifying-glass" style="color: #bbbbbb"></i>
+          <input disabled type="text" placeholder="Busqueda de Herramientas" name="" id="" />
+        </div>
+        <div class="div2">
+
+          <div class="user">
+            <h3>@ViewBag.trab.Nombre</h3>
+            <p>Especialista</p>
+          </div>
+          <button id="showOptionUser" onclick="showOptionUser()">
+            <i class="fa-solid fa-caret-down"></i>
+          </button>
+          <div id="opcionesUser" style="display: none">
+            <ul>
+                            <li>
+                                <a style="color:white;" asp-action="Edit" asp-controller="Usuario" asp-route-id="@ViewBag.trab.Id">
+                                    Editar perfil
+                                </a> 
+                            </li>
+
+              <li><a asp-controller="Auth" style="color:red; text-decoration:none;" asp-action="LogOut"
+                  class="dropdown-item">Cerrar Sesion</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="view" style="display:none" id="dashboard">
+        <header>
+          <h1>Dashboard</h1>
+          <p>Aqui encuentras informacion relevante.</p>
+        </header>
+        <main class="dashboard-container parent">
+          <div class="div1">
+            <h3> @ViewBag.countUsuarios</h3>
+            <p>Numero de Usuario Registrados</p>
+          </div>
+          <div class="div2">
+            <h3>@ViewBag.countUsuariosControlcalidad</h3>
+            <p>Numero de Control de calidad Registrados</p>
+          </div>
+          <div class="div3">
+            <h3>@ViewBag.countUsuariosEspecialistas</h3>
+            <p>Numero de Escpecialistas Registrados</p>
+          </div>
+          <div class="div4">
+            <h3>@ViewBag.countProductos</h3>
+            <p>Numero de Productos</p>
+          </div>
+          <div class="div5">
+            <h3>@ViewBag.countEscaneos</h3>
+            <p>Numero de Escaneos (Totales)</p>
+          </div>
+          <div class="div7">
+            <div class="card col-sm" style="width: 500px">
+              <canvas id="graficaproduccion"></canvas>
+            </div>
+          </div>
+
+          <div class="div9" style="background-color:transparent;">
+
+          </div>
+          <div class="div10" style="position: relative">
+            <div class="card col-sm" style="width: 70%">
+              <canvas id="grafica"></canvas>
+            </div>
+            <p style="position: absolute; top: 20px">Tipos de etiquetas</p>
+          </div>
+        </main>
+      </div>
+
+            <div class="view" style="display: none" id="informe">
+                <header>
+                    <h1 style="margin-bottom: 8px">Informe gerencial</h1>
+                    <p>Aqui encuentras la información gerencial especifica.</p>
+                </header>
+                <main class="informe-container parent">
+                    <div class="div40">
+                        <h3>@ViewBag.countProductos</h3>
+                        <p>Número de productos totales</p>
+                    </div>
+                    <div class="div50">
+                        <h3>@ViewBag.countEscaneos</h3>
+                        <p>Número de escaneos totales</p>
+                    </div>
+                    <div class="div60">
+                        <h3>@ViewBag.Rechazos</h3>
+                        <p>Número total de tipos de control como rechazo</p>
+                    </div>
+                    <div class="div30">
+                        <h3>@ViewBag.Preventivos</h3>
+                        <p>Número total de tipos de control como preventivo</p>
+                    </div>
+                    <div class="div20">
+                        <h3>@ViewBag.TotalControles</h3>
+                        <p>Número total de controles</p>
+                    </div>
+                    <div class="div70">
+                        <div class="card col-sm" style="width: 500px">
+                            <canvas id="graficaproduccioninforme"></canvas>
+                        </div>
+                    </div>
+                    <div class="div100">
+                        <div>
+                            <h3>Información de los escaneos</h3>
+                        </div>
+                        <div>
+                            <table class="tablaEscaneos">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre producto</th>
+                                        <th>Nombre usuario</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in ViewBag.Escaneos)
+                                    {
+                                        <tr>
+                                            <td>@item.Producto.Nombre</td>
+                                            <td>@item.Usuario.Nombre</td>
+                                            <td>@item.Fecha</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div id="paginacionEscaneos" class="botons">
+                                <button id="btnAnterior" class="boton-anterior"><i class="fa-solid fa-arrow-left"></i> Anterior</button>
+                                <button id="btnSiguiente" class="boton-siguiente">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="div90">
+                        <div>
+                            <h3>Información de los controles</h3>
+                        </div>
+                        <div>
+                            <table class="tablaControl">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre producto</th>
+                                        <th>Línea</th>
+                                        <th>Cepa</th>
+                                        <th>País destino</th>
+                                        <th>Comentario</th>
+                                        <th>Tipo de control</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                      @foreach(var item in ViewBag.Controless) {
+                                          <tr>
+                                              <td>@item.Producto.Nombre</td>
+                                              <td>@item.Linea</td>
+                                              <td>@item.Cepa</td>
+                                              <td>@item.PaisDestino</td>
+                                              <td>@item.Comentario</td>
+                                            <td>
+                                                @item.Tipodecontrol
+                                            </td>
+                                          </tr>
+                                      }                    
+                                </tbody>
+                            </table>
+                            <div id="paginacionControles" class="botons">
+                                <button id="btnAnteriorControles" class="boton-anterior"><i class="fa-solid fa-arrow-left"></i> Anterior</button>
+                                <button id="btnSiguienteControles" class="boton-siguiente">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+
+            </div>
+
+      <div class="view" id="usuarios" style="display: none">
+        <header>
+          <h1>Adm. de Usuarios</h1>
+          <p>
+                        Aqui puedes adminstrar los usuario. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>), ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) y borrar (<i class="fa-solid fa-trash" style="color: #ffffff;"></i>)
+            usuarios como estimes necesario con los iconos que salen más adelante.
+          </p>
+        </header>
+
+        <main class="usuario-container" style="display:flex; flex-direction:column;">
+          <div class="head-producto">
+            <div class="busqueda">
+              <form asp-action="Index" method="get">
+                <button type="submit">
+                  <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+                </button>
+                <input name="BusquedaUsuarios" type="text" placeholder="Busqueda por RUT o Nombre" />
+              </form>
+            </div>
+
+          </div>
+
+          <table class="tableUsuarios">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Rut</th>
+                <th>Email</th>
+                <th>Rol</th>
+
+                <th> <a asp-action="Create" style="color:white;text-decoration:none;" asp-controller="Usuario"><i
+                      class="fa-solid fa-user-plus" style="color: #ffffff;"></i> Nuevo Usuario</a> </th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach (var item in ViewBag.Usuarios)
+              {
+
+                <tr>
+                  <td>@item.Nombre</td>
+                  <td>@item.Rut</td>
+                  <td>@item.Email</td>
+                  <td>@item.Rol.Nombre</td>
+
+                  <td>
+                    <a asp-action="Edit" asp-controller="Usuario" asp-route-id="@item.Id"><i
+                        class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
+                    |
+                    <a asp-action="Details" asp-controller="Usuario" asp-route-id="@item.Id"><i
+                        class="fa-solid fa-circle-info" style="color: #ffffff;"></i></a>
+                    |
+                    <a asp-action="Delete" asp-controller="Usuario" asp-route-id="@item.Id"><i
+                        class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </main>
+      </div>
+
+            <div class="view" id="botellas" style="display: none">
+                <header>
+                    <h1>Adm. de botella detalles</h1>
+                    <p>
+                        Aqui puedes adminstrar las botellas. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-folder-plus" style="color: #ffffff"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>), ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) y borrar (<i class="fa-solid fa-trash" style="color: #ffffff;"></i>)
+                        botellas como estimes necesario con los iconos que salen más adelante.
+                    </p>
+                </header>
+
+                <main class="productos-container">
+                    <div class="head-producto">
+                        <div class="busqueda">
+                            <form asp-action="Index" method="get">
+                                <button type="submit">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+                                </button>
+                                <input name="Busqueda" type="text" placeholder="Busqueda por Codigo o Nombre" />
+                            </form>
+                        </div>
+                        <div class="add">
+                            <a asp-action="Create" asp-controller="BotellaDetalles">
+                                <i class="fa-solid fa-folder-plus"
+                                   style="color: #ffffff"></i>
+                                Nueva Botella Detalles
+                            </a>
+                        </div>
+                    </div>
+                    <table class="tableUsuarios">
+                        <thead>
+                            <tr>
+                                <th>Nombre de la botella</th>
+                                <th>Altura de la botella</th>
+                                <th>Ancho de la botella</th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.BotellaDetalles)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @item.NombreBotella
+                                    </td>
+                                    <td>
+                                        @item.AlturaBotella
+                                    </td>
+                                    <td>
+                                        @item.AnchoBotella
+                                    </td>
+
+                                    <td>
+                                        <a asp-action="Edit" asp-controller="BotellaDetalles" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                        </a>
+                                        |
+                                        <a asp-action="Details" asp-controller="BotellaDetalles" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                        </a>
+                                        |
+                                        <a asp-action="Delete" asp-controller="BotellaDetalles" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </main>
+            </div>
+
+            <div class="view" id="infquimica" style="display: none">
+                <header>
+                    <h1>Adm. de Informacion quimica</h1>
+                    <p>
+                        Aqui puedes adminstrar la informacion quimica. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-folder-plus" style="color: #ffffff"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>), ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) y borrar (<i class="fa-solid fa-trash" style="color: #ffffff;"></i>)
+                        informacion quimica como estimes necesario con los iconos que salen más adelante.
+                    </p>
+                </header>
+
+                <main class="productos-container">
+                    <div class="head-producto">
+                        <div class="busqueda">
+                            <form asp-action="Index" method="get">
+                                <button type="submit">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+                                </button>
+                                <input name="Busqueda" type="text" placeholder="Busqueda por Codigo o Nombre" />
+                            </form>
+                        </div>
+                        <div class="add">
+                            <a asp-action="Create" asp-controller="InformacionQuimica">
+                                <i class="fa-solid fa-folder-plus"
+                                   style="color: #ffffff"></i>
+                                Nueva Informacion Quimica
+                            </a>
+                        </div>
+                    </div>
+                    <table class="tableUsuarios">
+                        <thead>
+                            <tr>
+                                <th>Cepa</th>
+                                <th>Minimo de azucar</th>
+                                <th>Maximo de azucar</th>
+                                <th>Minimo de grado de alcohol</th>
+                                <th>Maximo de grado de alcohol</th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.InformacionQuimica)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @item.Cepa
+                                    </td>
+                                    <td>
+                                        @item.MinAzucar
+                                    </td>
+                                    <td>
+                                        @item.MaxAzucar
+                                    </td>
+                                    <td>
+                                        @item.MinGradoAlcohol
+                                    </td>
+                                    <td>
+                                        @item.MaxGradoAlcohol
+                                    </td>
+
+                                    <td>
+                                        <a asp-action="Edit" asp-controller="InformacionQuimica" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                        </a>
+                                        |
+                                        <a asp-action="Details" asp-controller="InformacionQuimica" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                        </a>
+                                        |
+                                        <a asp-action="Delete" asp-controller="InformacionQuimica" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </main>
+            </div>
+
+            <div class="view" id="informesp" style="display: none">
+                <header>
+                    <h1>Adm. de Informes</h1>
+                    <p>
+                        Aqui puedes adminstrar los informes. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-folder-plus" style="color: #ffffff"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>), ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) y borrar (<i class="fa-solid fa-trash" style="color: #ffffff;"></i>)
+                        informes como estimes necesario con los iconos que salen más adelante.
+                    </p>
+                </header>
+
+                <main class="productos-container">
+                    <div class="head-producto">
+                        <div class="busqueda">
+                            <form asp-action="Index" method="get">
+                                <button type="submit">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+                                </button>
+                                <input name="Busqueda" type="text" placeholder="Busqueda por Codigo o Nombre" />
+                            </form>
+                        </div>
+                        <div class="add">
+                            <a asp-action="Create" asp-controller="Informes">
+                                <i class="fa-solid fa-folder-plus"
+                                   style="color: #ffffff"></i>
+                                Nuevo informe
+                            </a>
+                        </div>
+                    </div>
+                    <table class="tableUsuarios">
+                        <thead>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Enfoque</th>
+                                <th>Descripcion</th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.Informes)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @item.Titulo
+                                    </td>
+                                    <td>
+                                        @item.Enfoque
+                                    </td>
+                                    <td>
+                                        @item.Descripcion
+                                    </td>
+
+                                    <td>
+                                        <a asp-action="Edit" asp-controller="Informes" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                        </a>
+                                        |
+                                        <a asp-action="Details" asp-controller="Informes" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                        </a>
+                                        |
+                                        <a asp-action="Delete" asp-controller="Informes" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </main>
+            </div>
+
+      <div class="view" id="productosh" style="display: none">
+        <header>
+          <h1>Adm. de Productos historial</h1>
+          <p>
+                        Aqui puedes adminstrar los productos. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-folder-plus" style="color: #ffffff"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>), ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) y borrar (<i class="fa-solid fa-trash" style="color: #ffffff;"></i>)
+                        productos como estimes necesario con los iconos que salen más adelante.
+          </p>
+        </header>
+
+        <main class="productos-container">
+          <div class="head-producto">
+            <div class="busqueda">
+              <form asp-action="Index" method="get">
+                <button type="submit">
+                  <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+                </button>
+                <input name="Busqueda" type="text" placeholder="Busqueda por Codigo o Nombre" />
+              </form>
+            </div>
+            <div class="add">
+              <a asp-action="Create" asp-controller="ProductoHistorial"><i class="fa-solid fa-folder-plus"
+                  style="color: #ffffff"></i>
+                Nuevo Producto Historial
+              </a>
+            </div>
+          </div>
+          <table class="tableUsuarios">
+            <thead>
+              <tr>
+                <th>Id Productos</th>
+                <th>Fecha de cosecha</th>
+                <th>Fecha de Produccion</th>
+                <th>Fecha de envasado</th>
+
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach (var item in ViewBag.ProductoHistorial)
+              {
+
+                <tr>
+                  <td>
+                    @item.IdProductos
+                  </td>
+                  <td>
+                     @item.FechaCosecha
+                  </td>
+                  <td>
+                    @item.FechaProduccion
+                  </td>
+                  <td>
+                    @item.FechaEnvasado
+                  </td>
+
+                  <td>
+                    <a asp-action="Edit" asp-controller="ProductoHistorial" asp-route-id="@item.Id">
+                        <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                    </a> 
+                    |
+                    <a asp-action="Details" asp-controller="ProductoHistorial" asp-route-id="@item.Id">
+                        <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                    </a>
+                    |
+                    <a asp-action="Delete" asp-controller="ProductoHistorial" asp-route-id="@item.Id">
+                        <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                    </a>
+
+                  </td>
+                </tr>
+
+              }
+            </tbody>
+          </table>
+        </main>
+      </div>
+            <div class="view" id="productosd" style="display: none">
+                <header>
+                    <h1>Adm. de Producto detalles</h1>
+                    <p>
+                        Aqui puedes adminstrar los productos. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-folder-plus" style="color: #ffffff"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>), ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) y borrar (<i class="fa-solid fa-trash" style="color: #ffffff;"></i>)
+                        productos como estimes necesario con los iconos que salen más adelante.
+                    </p>
+                </header>
+
+                <main class="productos-container">
+                    <div class="head-producto">
+                        <div class="busqueda">
+                            <form asp-action="Index" method="get">
+                                <button type="submit">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+                                </button>
+                                <input name="Busqueda" type="text" placeholder="Busqueda por Codigo o Nombre" />
+                            </form>
+                        </div>
+                        <div class="add">
+                            <a asp-action="Create" asp-controller="ProductoDetalles">
+                                <i class="fa-solid fa-folder-plus"
+                                   style="color: #ffffff"></i>
+                                Nuevo Producto Detalles
+                            </a>
+                        </div>
+                    </div>
+                    <table class="tableUsuarios">
+                        <thead>
+                            <tr>
+                                <th>Capacidad</th>
+                                <th>Medalla</th>
+                                <th>TipoBotella</th>
+                                <th>ColorBotella</th>
+                                <th>Medida de etiqueta a boquete</th>
+                                <th>Medida de etiqueta a base</th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.ProductoDetalles)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @item.Capacidad
+                                    </td>
+                                    <td>
+                                        @item.Medalla
+                                    </td>
+                                    <td>
+                                        @item.TipoBotella
+                                    </td>
+                                    <td>
+                                        @item.ColorBotella
+                                    </td>
+                                    <td>
+                                        @item.MedidadEtiquetaABoquete
+                                    </td>
+                                    <td>
+                                        @item.MedidadEtiquetaABase
+                                    </td>
+
+                                    <td>
+                                        <a asp-action="Edit" asp-controller="ProductoDetalles" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                        </a>
+                                        |
+                                        <a asp-action="Details" asp-controller="ProductoDetalles" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                        </a>
+                                        |
+                                        <a asp-action="Delete" asp-controller="ProductoDetalles" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </main>
+            </div>
+            <div class="view" id="productos" style="display: none">
+                <header>
+                    <h1>Adm. de Productos</h1>
+                    <p>
+                        Aqui puedes adminstrar los productos. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-folder-plus" style="color: #ffffff"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>), ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) y borrar (<i class="fa-solid fa-trash" style="color: #ffffff;"></i>)
+                        productos como estimes necesario con los iconos que salen más adelante.
+                    </p>
+                </header>
+
+                <main class="productos-container">
+                    <div class="head-producto">
+                        <div class="busqueda">
+                            <form asp-action="Index" method="get">
+                                <button type="submit">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+                                </button>
+                                <input name="Busqueda" type="text" placeholder="Busqueda por Codigo o Nombre" />
+                            </form>
+                        </div>
+                        <div class="add">
+                            <a asp-action="Create" asp-controller="Producto">
+                                <i class="fa-solid fa-folder-plus"
+                                   style="color: #ffffff"></i>
+                                Nuevo Producto
+                            </a>
+                        </div>
+                    </div>
+                    <table class="tableUsuarios">
+                        <thead>
+                            <tr>
+                                <th>Codigo barra</th>
+                                <th>Codigo VE</th>
+                                <th>Nombre</th>
+                                <th>Pais destino</th>
+                                <th>Fecha registro</th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.Productos)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @item.CodigoBarra
+                                    </td>
+                                    <td>
+                                        @item.Cepa
+                                    </td>
+                                    <td>
+                                        @item.Nombre
+                                    </td>
+                                    <td>
+                                        @item.PaisDestino
+                                    </td>
+                                    <td>
+                                        @item.FechaRegistro
+                                    </td>
+
+                                    <td>
+                                        <a asp-action="Edit" asp-controller="Producto" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                        </a>
+                                        |
+                                        <a asp-action="Details" asp-controller="Producto" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                        </a>
+                                        |
+                                        <a asp-action="Delete" asp-controller="Producto" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </main>
+            </div>
+
+            <div class="view" id="escaneos" style="display: none">
+                <header>
+                    <h1>Adm. de escaneos</h1>
+                    <p>
+                        Aqui puedes adminstrar los escaneos. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-folder-plus" style="color: #ffffff"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>), ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) y borrar (<i class="fa-solid fa-trash" style="color: #ffffff;"></i>)
+                        escaneos como estimes necesario con los iconos que salen más adelante.
+                    </p>
+                </header>
+
+                <main class="productos-container">
+                    <div class="head-producto">
+                        <div class="busqueda">
+                            <form asp-action="Index" method="get">
+                                <button type="submit">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+                                </button>
+                                <input name="Busqueda" type="text" placeholder="Busqueda por Codigo o Nombre" />
+                            </form>
+                        </div>
+                        <div class="add">
+                            <a asp-action="Create" asp-controller="Escaneos">
+                                <i class="fa-solid fa-folder-plus"
+                                   style="color: #ffffff"></i>
+                                Nuevo escaneo
+                            </a>
+                        </div>
+                    </div>
+                    <table class="tableUsuarios">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.Escaneoss)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @item.Fecha
+                                    </td>
+                                    <td>
+                                        @item.Hora
+                                    </td>
+
+                                    <td>
+                                        <a asp-action="Edit" asp-controller="Escaneos" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                        </a>
+                                        |
+                                        <a asp-action="Details" asp-controller="Escaneos" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                        </a>
+                                        |
+                                        <a asp-action="Delete" asp-controller="Escaneos" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </main>
+            </div>
+
+            <div class="view" id="controles" style="display: none">
+                <header>
+                    <h1>Adm. de Controles</h1>
+                    <p>
+                        Aqui puedes adminstrar los controles. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-notes-medical"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>), ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) y borrar (<i class="fa-solid fa-trash" style="color: #ffffff;"></i>)
+                        controles como estimes necesario con los iconos que salen más adelante.
+                    </p>
+                </header>
+
+                <main class="productos-container">
+                    <div class="head-producto">
+                        <div class="busqueda">
+                            <form asp-action="Index" method="get" id="formularioBuscar">
+                                <button type="submit">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+                                </button>
+                                <input type="text" name="Busqueda" id="Busqueda" placeholder="Busqueda por Codigo o Nombre" />
+                            </form>
+                        </div>
+                        <div class="add">
+                            <a asp-action="CreateControl" asp-controller="Controles">
+                                <i class="fa-solid fa-notes-medical"></i>
+                                Agregar Control
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <table class="tableUsuarios">
+                        <thead>
+                            <tr>
+                                <th>Nombre producto</th>
+                                <th>Linea</th>
+                                <th>Cepa</th>
+                                <th>Pais destino</th>
+                                <th>Comentario</th>
+                                <th>Tipo de control</th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.Controles)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @item.Producto.Nombre
+                                    </td>
+                                    <td>
+                                        @item.Linea
+                                    </td>
+                                    <td>
+                                        @item.Cepa
+                                    </td>
+                                    <td>
+                                        @item.PaisOrigen
+                                    </td>
+                                    <td>
+                                        @item.PaisDestino
+                                    </td>
+                                    <td>
+                                        @item.Comentario
+                                    </td>
+                                    <td>
+                                        @item.Tipodecontrol
+                                    </td>
+
+                                    <td>
+                                        <a asp-action="Edit2" asp-controller="Controles" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                        </a>
+                                        |
+                                        <a asp-action="Details2" asp-controller="Controles" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                        </a>
+                                        |
+                                        <a asp-action="Delete2" asp-controller="Controles" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </main>
+
+            </div>
+
+      <div class="view" id="busqueda" style="display: none">
+        <header>
+          <h1>Buscador/Scanner</h1>
+          <p>
+                        Aqui puedes buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>) por nombre, codigo o escaneando el codigo de
+                        barra (<i class="fa-solid fa-camera" style="color: #ffffff"></i>) del producto para ver su informacion y además ver detalladamente la informacion (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) con los iconos que salen más adelante.
+          </p>
+        </header>
+
+        <main class="productos-container">
+          <div class="head-producto">
+            <div class="busqueda">
+              <form asp-action="Index" method="get" id="formularioBuscar">
+                <button type="submit">
+                  <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+                </button>
+                <input type="text" name="Busqueda" id="Busqueda" placeholder="Busqueda por Codigo o Nombre" />
+              </form>
+            </div>
+            <div class="add">
+              <a id="openModalBtn"><i class="fa-solid fa-camera" style="color: #ffffff"></i>
+
+                Scanner
+              </a>
+            </div>
+          </div>
+
+          <table class="tableUsuarios">
+            <thead>
+              <tr>
+                <th>Codigo barra</th>
+                <th>Nombre</th>
+                <th>Pais destino</th>
+
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach (var item in ViewBag.Productos)
+              {
+
+                <tr>
+                  <td>
+                    @item.CodigoBarra
+                  </td>
+                  <td>
+                    @item.Nombre
+                  </td>
+                  <td>
+                    @item.PaisDestino
+                  </td>
+
+                  <td>
+                    <a asp-action="Details" asp-controller="Producto" asp-route-id="@item.Id"><i
+                        class="fa-solid fa-circle-info" style="color: #ffffff;"></i></a>
+
+                  </td>
+                </tr>
+
+              }
+            </tbody>
+          </table>
+        </main>
+      </div>
+    </div>
+  </div>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModalBtn">&times;</span>
+      <div style="width:250px;" id="camera"></div>
+      <p>Resultado: <span id="resultado"></span></p>
+    </div>
+  </div>
+</body>
+
+
+<script src="~/js/quagga.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+<script type="text/javascript">
+  (function () {
+    const labels1 = ["Blanco", "Tinto", "Rose"];
+    const colors1 = ["white", "#5e2129", "#FF007F"];
+
+    const graph1 = document.querySelector("#grafica");
+
+    const data1 = {
+      labels: labels1,
+      datasets: [
+        {
+          data: [@ViewBag.countBlanco, @ViewBag.countTinto, @ViewBag.countRose],
+          backgroundColor: colors1,
+          borderColor: "transparent",
+        },
+      ],
+    };
+
+    const config1 = {
+      type: "doughnut",
+      data: data1,
+      options: {
+        plugins: {
+          legend: {
+            position: "right", // Coloca las etiquetas en el lado derecho
+            labels: {
+              color: "white", // Cambia el color de las etiquetas a blanco
+              font: {
+                size: 18, // Cambia el tamaño de las etiquetas
+              },
+            },
+          },
+        },
+      },
+    };
+
+    new Chart(graph1, config1);
+  })();
+
+  (function () {
+    const labels2 = ["2022", "2023"];
+    const graph2 = document.querySelector("#graficaproduccion");
+
+    const data2 = {
+      labels: labels2,
+      datasets: [
+        {
+          label: "Produccion c/Año",
+
+          data: [@ViewBag.produccionDosAnio, @ViewBag.produccionUnAnio],
+          backgroundColor: ["#34baeb"],
+        },
+      ],
+    };
+
+    const config2 = {
+      type: "bar",
+      data: data2,
+    };
+
+    new Chart(graph2, config2);
+  })();
+
+    (function () {
+        const labels20 = ["2022", "2023"];
+        const graph20 = document.querySelector("#graficaproduccioninforme");
+
+        const data20 = {
+            labels: labels20,
+            datasets: [
+                {
+                    label: "Produccion por año",
+                    data: [@ViewBag.produccionDosAnio, @ViewBag.produccionUnAnio],
+                    backgroundColor: ["#34baeb"],
+                },
+            ],
+        };
+
+        const config20 = {
+            type: "bar",
+            data: data20,
+            options: {
+                scales: {
+                    x: {
+                        grid: {
+                            color: "white",
+                            borderColor: "white",
+                        },
+                    },
+                    y: {
+                        grid: {
+                            color: "white",
+                            borderColor: "white",
+                        },
+                    },
+                },
+            },
+        };
+
+        new Chart(graph20, config20);
+    })();
+
+    $(document).ready(function () {
+        $('#btnAnterior').on('click', function () {
+            if (@ViewBag.PaginaActualEscaneos > 1) {
+                window.location.href = '@Url.Action("Index", "Especialista", new { paginaEscaneos = ViewBag.PaginaActualEscaneos - 1 })';
+            }
+        });
+
+        $('#btnSiguiente').on('click', function () {
+            window.location.href = '@Url.Action("Index", "Especialista", new { paginaEscaneos = ViewBag.PaginaActualEscaneos + 1 })';
+        });
+    });
+
+    $(document).ready(function () {
+        $('#btnAnteriorControles').on('click', function () {
+            if (@ViewBag.PaginaActualControles > 1) {
+                window.location.href = '@Url.Action("Index", "Especialista", new { paginaControles = ViewBag.PaginaActualControles - 1 })';
+            }
+        });
+
+        $('#btnSiguienteControles').on('click', function () {
+            window.location.href = '@Url.Action("Index", "Especialista", new { paginaControles = ViewBag.PaginaActualControles + 1 })';
+        });
+    });
+
+</script>
+<script src="~/js/especialista.js"></script>
+
+</html>

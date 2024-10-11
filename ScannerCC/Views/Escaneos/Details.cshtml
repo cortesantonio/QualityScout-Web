@@ -1,0 +1,165 @@
+﻿@model ScannerCC.Models.Escaneos
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    body {
+        background-color: #242424;
+        color: white;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    a {
+        color: white;
+    }
+
+    a:hover {
+        color: #62EBF0;
+    }
+
+    .row dt,
+    .row dd {
+        margin-top: 5px; 
+        margin-bottom: 5px; 
+    }
+</style>
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Escaneos</h4>
+    <hr />
+    <dl class="row justify-content-center">
+        <div class="col-sm-4">
+            <div class="row justify-content-center">
+                <dt class="col-sm-6">
+                   Id Producto
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.IdProductos)
+                </dd>
+                <dt class="col-sm-6">
+                    Id Usuarios
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.IdUsuarios)
+                </dd>
+                <dt class="col-sm-6">
+                    Fecha
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.Fecha)
+                </dd>
+                <dt class="col-sm-6">
+                    Hora
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.Hora)
+                </dd>
+            </div>
+        </div>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Home">Volver a la lista</a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@@tensorflow-models/coco-ssd"></script>
+<div class="col-sm-4">
+    <div class="row justify-content-center">
+
+        <div style="text-align:center;" id="deteccion"></div>
+
+            <div style="flex: 1;">
+                <h2>Vista Reconocimiento</h2>
+                <video id="video" width="640" height="480" autoplay></video>
+            </div>
+            <div style="flex: 1;">
+                <canvas id="canvas" width="640" height="480"></canvas>
+            </div>
+        
+
+
+
+    </div></div>
+
+    <script>
+    async function detectObjects() {
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Cargar el modelo preentrenado COCO-SSD
+        const model = await cocoSsd.load();
+
+        // Dimensiones físicas estimadas del objeto en metros
+        const objectWidth = 0.02;  // Ancho del objeto en metros
+        const objectHeight = 0.2;// Altura del objeto en metros
+        const assumedDistance = 0.25; // Distancia estimada de la cámara al objeto en metros
+
+        // Obtener el stream de la cámara
+        const stream = await navigator.mediaDevices.getUserMedia({ video: {} });
+        video.srcObject = stream;
+
+        // Esperar a que la cámara cargue y realizar la detección en bucle
+        video.addEventListener('loadeddata', async () => {
+            while (true) {
+                // Realizar la detección de objetos
+                const predictions = await model.detect(video);
+
+                // Dibujar las predicciones en el canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                predictions.forEach(prediction => {
+                    ctx.beginPath();
+                    ctx.rect(
+                        prediction.bbox[0],
+                        prediction.bbox[1],
+                        prediction.bbox[2],
+                        prediction.bbox[3]
+                    );
+                    ctx.lineWidth = 2;
+                    ctx.strokeStyle = 'red';
+                    ctx.fillStyle = 'red';
+                    ctx.stroke();
+                    ctx.fillText(
+                        `${prediction.class} (${Math.round(prediction.score * 100)}%)`,
+                        prediction.bbox[0],
+                        prediction.bbox[1] > 10 ? prediction.bbox[1] - 5 : 10
+                    );
+
+                    // Calcular dimensiones estimadas en metros
+                    const estimatedWidth = (objectWidth * canvas.width) / prediction.bbox[2];
+                    const estimatedHeight = (objectHeight * canvas.height) / prediction.bbox[3];
+
+                    // Mostrar dimensiones estimadas en el HTML
+                    const infoDiv = document.getElementById('deteccion');
+
+                    if (prediction.class == "bottle") {
+                        infoDiv.innerHTML = "";
+                        infoDiv.innerHTML = `
+                            <p>Object: ${prediction.class}</p>
+                            <p>Estimated Width: ${estimatedWidth.toFixed(2)} meters</p>
+                            <p>Estimated Height: ${estimatedHeight.toFixed(2)} meters</p>
+                        `;
+                    }
+
+                    
+                });
+
+                // Esperar un breve periodo antes de la próxima detección
+                await new Promise(resolve => requestAnimationFrame(resolve));
+            }
+        });
+    }
+
+    // Iniciar la detección de objetos cuando la ventana haya cargado completamente
+    window.onload = detectObjects;
+
+    </script>

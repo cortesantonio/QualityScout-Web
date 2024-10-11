@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/login.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap"
+          rel="stylesheet" />
+    <title>Login</title>
+</head>
+<body>
+    <div class="logcontenedor">
+        <div class="presentacionLog">
+            <div class="nameApp">
+                <i class="fa-brands fa-opencart">QualityScoult</i>
+            </div>
+            <div class="bnvLog">
+                <div class="sisLog">
+                    Herramienta de Control de
+                    Calidad.
+                </div>
+
+                <div class="tituloLog">
+                    QualityScoult
+                    <div class="line10"></div>
+                </div>
+
+                <div class="infoLog">
+                    Bienvenido a la plataforma de gestión y consulta de control de calidad.  <br>
+                    Si ya es usuario de esta plataforma, por favor inicie sesión utilizando
+                    los datos proporcionados por su superior. <br>Si ha olvidado sus datos de inicio
+                    de sesión, no dude en ponerse en contacto con el administrador para recibir asistencia.
+
+                </div>
+                <div class="arrow">
+                    <center><i class="fa-solid fa-arrow-down"></i></center>
+                </div>
+            </div>
+        </div>
+
+        <div class="formularioLogin">
+            <h2>Inicio de Sesion</h2>
+            <form asp-action="Login" asp-controller="Auth" method="post">
+                <input type="text" name="user" id="" placeholder="RUT o Email" />
+                <input type="password" name="password" id="" placeholder="Password" />
+                <button style="cursor: pointer" type="submit">
+                    <i class="fa-solid fa-right-to-bracket"></i> Entrar
+                </button>
+            </form>
+            <center>
+                <a href="/"><button style="cursor: pointer">Volver atras</button></a>
+            </center>
+        </div>
+    </div>
+</body>
+</html>

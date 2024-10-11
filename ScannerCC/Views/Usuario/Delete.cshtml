@@ -1,0 +1,82 @@
+﻿@model ScannerCC.Models.Usuarios
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<style>
+    body {
+        background-color: #242424;
+        color: white;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    h4 {
+        margin-top: 20px;
+    }
+
+    input{
+        width: 30%;
+        margin: 10px;
+    }
+
+    input[type="submit"] {
+        background-color: red; 
+        color: white;
+        margin-bottom: 15px;
+    }
+
+    .btn-danger:hover {
+        background-color: darkred; 
+        border-color: red; 
+    }
+
+    a {
+        color: white; 
+    }
+
+    a:hover {
+        color: #62EBF0;
+    }
+</style>
+
+<h1>Eliminar</h1>
+
+<h3>¿Estás seguro de que quieres eliminar esto?</h3>
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="row justify-content-center">
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Rut)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Rut)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        
+        
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> 
+    </form>
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Home">Volver a la lista</a>
+</div>

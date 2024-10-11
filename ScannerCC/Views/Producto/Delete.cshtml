@@ -1,0 +1,113 @@
+﻿@model ScannerCC.Models.Productos
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<style>
+    body {
+        background-color: #242424;
+        color: white;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    h4 {
+        margin-top: 20px;
+    }
+
+    input {
+        width: 30%;
+        margin: 10px;
+    }
+
+        input[type="submit"] {
+            background-color: red;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+    .btn-danger:hover {
+        background-color: darkred;
+        border-color: red;
+    }
+
+    a {
+        color: white;
+    }
+
+    a:hover {
+        color: #62EBF0;
+    }
+
+    .row dt,
+    .row dd {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+</style>
+
+<h1>Eliminar</h1>
+
+<h3>¿Estás seguro de que quieres eliminar esto?</h3>
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="row justify-content-center">
+        <div class="col-sm-4">
+            <div class="row justify-content-center">
+                <dt class="col-sm-6">
+                    Codigo de barra
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.CodigoBarra)
+                </dd>
+                <dt class="col-sm-6">
+                    Codigo VE
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.CodigoVE)
+                </dd>
+                <dt class="col-sm-6">
+                    Nombre
+                </dt> 
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.Nombre)
+                </dd> 
+                <dt class="col-sm-6">
+                    Pais de destino
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.PaisDestino)
+                </dd>
+                <dt class="col-sm-6">
+                    Activo
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.Activo)
+                </dd>
+                <dt class="col-sm-6">
+                    Idioma
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.Idioma)
+                </dd>
+                <dt class="col-sm-6">
+                    Unidad de medida
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.UnidadMedida)
+                </dd>
+            </div>
+        </div>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> 
+    </form>
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Home">Volver a la lista</a>
+</div>

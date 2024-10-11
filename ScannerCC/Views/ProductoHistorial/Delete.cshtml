@@ -1,0 +1,89 @@
+﻿@model ScannerCC.Models.ProductoHistorial
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<style>
+    body {
+        background-color: #242424;
+        color: white;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    h4 {
+        margin-top: 20px;
+    }
+
+    input {
+        width: 30%;
+        margin: 10px;
+    }
+
+        input[type="submit"] {
+            background-color: red;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+    .btn-danger:hover {
+        background-color: darkred;
+        border-color: red;
+    }
+
+    a {
+        color: white;
+    }
+
+    a:hover {
+        color: #62EBF0;
+    }
+
+    .row dt,
+    .row dd {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+</style>
+
+<h1>Eliminar</h1>
+
+<h3>¿Estás seguro de que quieres eliminar esto?</h3>
+<div>
+    <h4>Producto historial</h4>
+    <hr />
+    <dl class="row justify-content-center">
+        <div class="col-sm-4">
+            <div class="row justify-content-center">
+                <dt class="col-sm-6">
+                    Fecha de cosecha
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.FechaCosecha)
+                </dd>
+                <dt class="col-sm-6">
+                    Fecha de produccion
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.FechaProduccion)
+                </dd>
+                <dt class="col-sm-6">
+                    Fecha de envasado
+                </dt> 
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.FechaEnvasado)
+                </dd> 
+            </div>
+        </div>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> 
+    </form>
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Home">Volver a la lista</a>
+</div>
