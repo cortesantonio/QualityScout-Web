@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -45,71 +46,76 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Controles/Create
-        public IActionResult CreateControl() {
+        public IActionResult CreateControl()
+        {
+            var productos = _context.Producto.Select(p => new { p.Id, p.Nombre }).ToList();
+            var usuarios = _context.Usuario.Select(u => new { u.Id, u.Nombre }).ToList();
 
-            var productos = _context.Producto.Select(p => new { p.Id }).ToList();
-            var usuarios = _context.Usuario.Select(u => new { u.Id }).ToList();
-
-            ViewData["IdProductos"] = new SelectList(productos, "Id", "Id");
-            ViewData["IdUsuarios"] = new SelectList(usuarios, "Id", "Id");
+            ViewData["IdProductos"] = new SelectList(productos, "Id", "Nombre");
+            ViewData["IdUsuarios"] = new SelectList(usuarios, "Id", "Nombre");
             return View();
         }
 
         // POST: Controles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateControl([Bind("Id,IdProductos,Linea,PaisDestino,Comentario,Tipodecontrol,FechaHoraPrimerControl,Estado,EstadoFinal,IdUsuarios,FechaHoraControlFinal")] Controles controles)
+        public async Task<IActionResult> CreateControl([Bind("Id,IdProductos,Linea,PaisDestino,Comentario,Tipodecontrol,Estado")] Controles controles)
         {
-           
-                _context.Add(controles);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index","Home");
-            
-            
+            // Obtener el usuario logueado
+            var currentUser = await _context.Usuario.FirstOrDefaultAsync(u => u.Email == User.Identity.Name); // Ajusta según cómo almacenas el nombre del usuario
+            if (currentUser == null)
+            {
+                return Problem("Usuario no encontrado.");
+            }
+
+            controles.IdUsuarios = currentUser.Id; // Asignar IdUsuarios
+            controles.FechaHoraPrimerControl = DateTime.Now; // Asignar fecha actual
+
+            _context.Add(controles);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Controles/Edit/5
-        public async Task<IActionResult> Edit2(int? id)
+        public async Task<IActionResult> Edit2(int id)
         {
-            if (id == null || _context.Controles == null)
+            var control = await _context.Controles.FindAsync(id);
+            if (control == null)
             {
                 return NotFound();
             }
-
-            var controles = await _context.Controles.FindAsync(id);
-            if (controles == null)
+            if (control.Estado != "Reproceso")
             {
-                return NotFound();
+                // Aquí puedes redirigir a otra vista o mostrar un mensaje
+                return RedirectToAction(nameof(Index)); // Cambia a la acción adecuada si no está en reproceso
             }
 
-            ViewData["IdProductos"] = new SelectList(_context.Producto, "Id", "Id", controles.IdProductos);
-            ViewData["IdUsuarios"] = new SelectList(_context.Usuario, "Id", "Id", controles.IdUsuarios);
-            return View(controles);
+            ViewBag.IdProductos = new SelectList(_context.Producto, "Id", "NombreProducto", control.IdProductos);
+            ViewBag.IdUsuarios = new SelectList(_context.Usuario, "Id", "NombreUsuario", control.IdUsuarios);
+            return View(control);
         }
 
-        // POST: Controles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit2(int id, [Bind("Id,IdProductos,Linea,PaisDestino,Comentario,Tipodecontrol,FechaHoraPrimerControl,Estado,EstadoFinal,IdUsuarios,FechaHoraControlFinal")] Controles controles)
+        public async Task<IActionResult> Edit2(int id, Controles model)
         {
-            if (id != controles.Id)
+            if (id != model.Id)
             {
                 return NotFound();
             }
 
-            
+            if (ModelState.IsValid)
+            {
                 try
                 {
-                    _context.Update(controles);
+                    // Rellenar automáticamente con la fecha y hora actual
+                    model.FechaHoraControlFinal = DateTime.Now;
+                    _context.Update(model);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ControlesExists(controles.Id))
+                    if (!ControlExists(model.Id))
                     {
                         return NotFound();
                     }
@@ -118,9 +124,11 @@ namespace ScannerCC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index","Home");
-            
-            
+                return RedirectToAction(nameof(Index)); // Cambia a la acción adecuada después de editar
+            }
+            ViewBag.IdProductos = new SelectList(_context.Producto, "Id", "NombreProducto", model.IdProductos);
+            ViewBag.IdUsuarios = new SelectList(_context.Usuario, "Id", "NombreUsuario", model.IdUsuarios);
+            return View(model);
         }
 
         // GET: Controles/Delete/5
@@ -161,8 +169,12 @@ namespace ScannerCC.Controllers
           return (_context.Controles?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
+        private bool ControlExists(int id)
+        {
+            return _context.Controles.Any(e => e.Id == id);
+        }
 
-		[HttpGet]
+        [HttpGet]
 		[Route("Productos/getData")]
 		public IActionResult GetInfo()
 		{

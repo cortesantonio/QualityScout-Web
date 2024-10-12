@@ -54,54 +54,54 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label asp-for="IdProductos" class="control-label">Id Producto</label>
-                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos"></select>
-                        <span asp-validation-for="IdProductos" class="text-danger"></span>
+                        <label asp-for="IdProductos" class="control-label">Productos</label>
+                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos">
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdUsuarios" class="control-label">Usuarios</label>
+                        <select asp-for="IdUsuarios" class="form-control" asp-items="ViewBag.IdUsuarios">
+                            <option value="">Seleccione un usuario</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label asp-for="Linea" class="control-label">Linea</label>
                         <input asp-for="Linea" class="form-control" />
                         <span asp-validation-for="Linea" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label asp-for="PaisDestino" class="control-label">Pais de destino</label>
                         <input asp-for="PaisDestino" class="form-control" />
                         <span asp-validation-for="PaisDestino" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label asp-for="Comentario" class="control-label">Comentario</label>
                         <input asp-for="Comentario" class="form-control" />
                         <span asp-validation-for="Comentario" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label asp-for="Tipodecontrol" class="control-label">Tipo de control</label>
                         <input asp-for="Tipodecontrol" class="form-control" />
                         <span asp-validation-for="Tipodecontrol" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label asp-for="FechaHoraPrimerControl" class="control-label">Fecha y hora primer control</label>
-                        <input asp-for="FechaHoraPrimerControl" class="form-control" type="datetime-local" />
+                        <input asp-for="FechaHoraPrimerControl" class="form-control" type="datetime" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" readonly />
                         <span asp-validation-for="FechaHoraPrimerControl" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
-                        <label asp-for="Estado" class="control-label">Estado inicial</label>
-                        <input asp-for="Estado" class="form-control" />
-                        <span asp-validation-for="Estado" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="EstadoFinal" class="control-label">Estado final</label>
-                        <input asp-for="EstadoFinal" class="form-control" />
-                        <span asp-validation-for="EstadoFinal" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="IdUsuarios" class="control-label">Id Usuario</label>
-                        <select asp-for="IdUsuarios" class="form-control" asp-items="ViewBag.IdUsuarios"></select>
-                        <span asp-validation-for="IdUsuarios" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="FechaHoraControlFinal" class="control-label">Fecha y hora control final</label>
-                        <input asp-for="FechaHoraControlFinal" class="form-control" type="datetime-local" />
-                        <span asp-validation-for="FechaHoraControlFinal" class="text-danger"></span>
+                        <label for="Estado">Estado</label>
+                        <select name="Estado" id="Estado" class="form-control" onchange="checkReproceso()">
+                            <option value="Aprobado">Aprobado</option>
+                            <option value="Reproceso">Reproceso</option>
+                            <option value="Reprobado">Reprobado</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Crear" class="btn btn-dark" />

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
 using ScannerCC.Models;
 using System.Security.Cryptography;
@@ -48,7 +49,7 @@ namespace QualityScout.MobileEndpoints
             var descryptedRut = DecryptText(request.Rut);
             var descryptedPass = DecryptText(request.Password);
 
-            var userFound = _context.Usuario
+            var userFound = _context.Usuario.Include(r => r.Rol)
                 .FirstOrDefault(x => x.Rut == descryptedRut);
 
 
@@ -69,6 +70,7 @@ namespace QualityScout.MobileEndpoints
                     UserToSend.Rut = userFound.Rut;
                     UserToSend.Email = userFound.Email;
                     UserToSend.RolId = userFound.RolId;
+                    UserToSend.Token = userFound.Token;
 
 
 

@@ -38,8 +38,9 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
-            var usuarios = _context.BotellaDetalle.Select(bd => new { bd.Id }).ToList();
-            ViewData["IdUsuarios"] = new SelectList(usuarios, "Id", "Id");
+            var usuarios = _context.Usuario.Select(u => new { u.Id, u.Nombre }).ToList(); 
+
+            ViewData["IdUsuarios"] = new SelectList(usuarios, "Id", "Nombre");
             return View();
         }
 
@@ -54,6 +55,15 @@ namespace ScannerCC.Controllers
         {
             if (ModelState.IsValid)
             {
+                var currentUser = await _context.Usuario.FirstOrDefaultAsync(u => u.Email == User.Identity.Name); // Ajusta según cómo almacenas el nombre del usuario
+                if (currentUser == null)
+                {
+                    return Problem("Usuario no encontrado.");
+                }
+
+                informes.IdUsuarios = currentUser.Id; // Asigna el Id del usuario logueado
+                informes.Fecha = DateTime.Now; // Asigna la fecha actual
+
                 _context.Add(informes);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
@@ -75,8 +85,9 @@ namespace ScannerCC.Controllers
             {
                 return NotFound();
             }
-            var usuarios = _context.BotellaDetalle.Select(bd => new { bd.Id }).ToList();
-            ViewData["IdUsuarios"] = new SelectList(usuarios, "Id", "Id");
+            var usuarios = _context.Usuario.Select(u => new { u.Id, u.Nombre }).ToList();
+
+            ViewData["IdUsuarios"] = new SelectList(usuarios, "Id", "Nombre", informes.IdUsuarios);
             return View(informes);
         }
 

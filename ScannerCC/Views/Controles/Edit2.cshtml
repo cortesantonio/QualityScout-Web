@@ -54,9 +54,16 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label asp-for="IdProductos" class="control-label">Id Producto</label>
-                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos"></select>
-                        <span asp-validation-for="IdProductos" class="text-danger"></span>
+                        <label asp-for="IdProductos" class="control-label">Productos</label>
+                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos">
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdUsuarios" class="control-label">Usuarios</label>
+                        <select asp-for="IdUsuarios" class="form-control" asp-items="ViewBag.IdUsuarios">
+                            <option value="">Seleccione un usuario</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label asp-for="Linea" class="control-label">Linea</label>
@@ -64,7 +71,7 @@
                         <span asp-validation-for="Linea" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="PaisDestino" class="control-label">País de destino</label>
+                        <label asp-for="PaisDestino" class="control-label">Pais de destino</label>
                         <input asp-for="PaisDestino" class="form-control" />
                         <span asp-validation-for="PaisDestino" class="text-danger"></span>
                     </div>
@@ -79,24 +86,12 @@
                         <span asp-validation-for="Tipodecontrol" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="FechaHoraPrimerControl" class="control-label">Fecha y hora primer control</label>
-                        <input asp-for="FechaHoraPrimerControl" class="form-control" type="datetime-local" />
-                        <span asp-validation-for="FechaHoraPrimerControl" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Estado" class="control-label">Estado inicial</label>
-                        <input asp-for="Estado" class="form-control" />
-                        <span asp-validation-for="Estado" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="EstadoFinal" class="control-label">Estado final</label>
-                        <input asp-for="EstadoFinal" class="form-control" />
-                        <span asp-validation-for="EstadoFinal" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="IdUsuarios" class="control-label">Id Usuario</label>
-                        <select asp-for="IdUsuarios" class="form-control" asp-items="ViewBag.IdUsuarios"></select>
-                        <span asp-validation-for="IdUsuarios" class="text-danger"></span>
+                        <label for="EstadoFinal">Estado final</label>
+                        <select name="EstadoFinal" id="EstadoFinal" class="form-control">
+                            <option value="Aprobado">Aprobado</option>
+                            <option value="Reproceso">Reproceso</option>
+                            <option value="Reprobado">Reproceso</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label asp-for="FechaHoraControlFinal" class="control-label">Fecha y hora control final</label>

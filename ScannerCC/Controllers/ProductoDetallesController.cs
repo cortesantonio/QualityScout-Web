@@ -38,11 +38,11 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
-            var productos = _context.Producto.Select(p => new { p.Id }).ToList();
-            var botellaDetalles = _context.BotellaDetalle.Select(bd => new { bd.Id }).ToList();
+            var productos = _context.Producto.Select(p => new { p.Id, p.Nombre }).ToList();
+            var botellaDetalles = _context.BotellaDetalle.Select(bd => new { bd.Id, bd.NombreBotella }).ToList();
 
-            ViewData["IdProductos"] = new SelectList(productos, "Id", "Id");
-            ViewData["IdBotellaDetalles"] = new SelectList(botellaDetalles, "Id", "Id");
+            ViewData["IdProductos"] = new SelectList(productos, "Id", "Nombre");
+            ViewData["IdBotellaDetalles"] = new SelectList(botellaDetalles, "Id", "NombreBotella");
 
             return View();
         }
@@ -80,11 +80,11 @@ namespace ScannerCC.Controllers
             {
                 return NotFound();
             }
-            var productos = _context.Producto.Select(p => new { p.Id }).ToList();
-            var botellaDetalles = _context.BotellaDetalle.Select(bd => new { bd.Id }).ToList();
+            var productos = _context.Producto.Select(p => new { p.Id, p.Nombre }).ToList();
+            var botellaDetalles = _context.BotellaDetalle.Select(bd => new { bd.Id, bd.NombreBotella }).ToList();
 
-            ViewData["IdProductos"] = new SelectList(productos, "Id", "Id");
-            ViewData["IdBotellaDetalles"] = new SelectList(botellaDetalles, "Id", "Id");
+            ViewData["IdProductos"] = new SelectList(productos, "Id", "Nombre", productod.IdProductos);
+            ViewData["IdBotellaDetalles"] = new SelectList(botellaDetalles, "Id", "NombreBotella", productod.IdBotellaDetalles);
             return View(productod);
         }
 

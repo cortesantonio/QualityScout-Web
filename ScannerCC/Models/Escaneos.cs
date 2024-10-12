@@ -10,7 +10,7 @@ namespace ScannerCC.Models
         public int IdProductos { get; set; }
         public int IdUsuarios { get; set; }
         public DateTime Fecha { get; set; }
-        public DateTime Hora { get; set; }
+        public TimeSpan Hora { get; set; }
 
         //Relaciones
         public Productos Productos { get; set; }

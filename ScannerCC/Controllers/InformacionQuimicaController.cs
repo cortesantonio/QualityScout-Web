@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using ScannerCC.Models;
+using System.Globalization;
 
 namespace ScannerCC.Controllers
 {
@@ -47,7 +49,7 @@ namespace ScannerCC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-    [Bind("Id,Cepa,MinAzucar,MaxAzucar,MinSulforoso,MaxSulfosoro,MinDensidad,MaxDensidad,MinGradoAlcohol,MaxGradoAlcohol")] InformacionQuimica infqui)
+    [Bind("Id,Cepa,MinAzucar,MaxAzucar,MinSulfuroso,MaxSulfuroso,MinDensidad,MaxDensidad,MinGradoAlcohol,MaxGradoAlcohol")] InformacionQuimica infqui)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +84,7 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Cepa,MinAzucar,MaxAzucar,MinSulforoso,MaxSulfosoro,MinDensidad,MaxDensidad,MinGradoAlcohol,MaxGradoAlcohol")] InformacionQuimica infqui)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Cepa,MinAzucar,MaxAzucar,MinSulfuroso,MaxSulfuroso,MinDensidad,MaxDensidad,MinGradoAlcohol,MaxGradoAlcohol")] InformacionQuimica infqui)
         {
             if (id != infqui.Id)
             {
@@ -155,5 +157,7 @@ namespace ScannerCC.Controllers
         {
             return (_context.InformacionQuimica?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+
     }
 }

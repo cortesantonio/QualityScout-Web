@@ -16,4 +16,6 @@ namespace ScannerCC.Models
         public float MinGradoAlcohol { get; set; }
         public float MaxGradoAlcohol { get; set; }
     }
+
+
 }

@@ -1,7 +1,7 @@
 ﻿@model ScannerCC.Models.Usuarios
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Activar Usuario";
 }
 
 <style>
@@ -14,29 +14,33 @@
         text-align: center;
     }
 
+    h4 {
+        margin-top: 20px;
+    }
+
+    input[type="submit"] {
+        background-color: green;
+        color: white;
+        margin-bottom: 15px;
+    }
+
+    .btn-success:hover {
+        background-color: darkgreen;
+        border-color: green;
+    }
+
     a {
         color: white;
     }
 
-        a:hover {
-            color: #62EBF0;
-        }
-
-    .active-status {
-        font-weight: bold;
-    }
-
-    .active {
+    a:hover {
         color: #62EBF0;
-    }
-
-    .inactive {
-        color: #FF5733; 
     }
 </style>
 
-<h1>Detalles</h1>
+<h1>Activar Usuario</h1>
 
+<h3>¿Estás seguro de que quieres activar este usuario?</h3>
 <div>
     <h4>Usuario</h4>
     <hr />
@@ -59,23 +63,14 @@
         <dd class="col-sm-6">
             @Html.DisplayFor(model => model.Email)
         </dd>
-        <dt class="col-sm-6">
-            @Html.DisplayNameFor(model => model.Activo)
-        </dt>
-        <dd class="col-sm-6 active-status">
-            @{
-                var activo = Model.Activo ? "Sí" : "No";
-                var statusClass = Model.Activo ? "active" : "inactive";
-            }
-            <span class="@statusClass">@activo</span>
-        </dd>
     </dl>
+
+    <form asp-action="Activar">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Activar" class="btn btn-success" />
+    </form>
 </div>
 <div>
-    @if (Model.Activo) 
-    {
-        <a style="margin-right: 20px;" asp-action="Edit" asp-route-id="@Model?.Id">Editar</a>
-    } 
-    <a style="margin-left: 20px;" asp-action="Index" asp-controller="Home">Volver a la lista</a>
+    <a asp-action="Index" asp-controller="Home">Volver a la lista</a>
 </div>
 

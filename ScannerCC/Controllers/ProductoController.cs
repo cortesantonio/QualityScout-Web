@@ -19,7 +19,6 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
-        
         // GET: Productoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -42,31 +41,56 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
-            var infquimica = _context.InformacionQuimica.Select(iq => new { iq.Id }).ToList();
-            var usuarios = _context.Usuario.Select(u => new { u.Id }).ToList();
 
-            ViewData["IdInformacionQuimica"] = new SelectList(infquimica, "Id", "Id");
-            ViewData["IdUsuarios"] = new SelectList(usuarios, "Id", "Id");
+            var infquimica = _context.InformacionQuimica
+                .Select(iq => new
+                {
+                    iq.Id,
+                    DisplayInfo = String.Format(
+                        "Cepa: {0} | Azúcar: {1} - {2} | Sulfuroso: {3} - {4} | Densidad: {5} - {6} | Alcohol: {7} - {8}",
+                        iq.Cepa,
+                        iq.MinAzucar, iq.MaxAzucar,
+                        iq.MinSulfuroso, iq.MaxSulfuroso,
+                        iq.MinDensidad, iq.MaxDensidad,
+                        iq.MinGradoAlcohol, iq.MaxGradoAlcohol
+                    )
+                })
+                .ToList();
+
+            var usuarios = _context.Usuario.Select(u => new { u.Id, u.Nombre }).ToList(); 
+
+            ViewData["IdInformacionQuimica"] = new SelectList(infquimica, "Id", "DisplayInfo");
+            ViewData["IdUsuarios"] = new SelectList(usuarios, "Id", "Nombre"); 
             return View();
         }
 
-        // POST: Productoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Productoes/Edit/5
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-    [Bind("Id,IdInformacionQuimica,CodigoBarra,CodigoVE,Nombre,URLImagen,PaisDestino,IdUsuarios,Activo,FechaRegistro," +
-    "Idioma,UnidadMedida,DescripcionCapsula")] Productos producto)
+            [Bind("Id,IdInformacionQuimica,CodigoBarra,CodigoVE,Nombre,URLImagen,PaisDestino,IdUsuarios,Activo,FechaRegistro,Idioma,UnidadMedida,DescripcionCapsula")] Productos producto)
         {
             if (ModelState.IsValid)
             {
+                // Obtener el usuario actualmente logueado
+                var currentUser = await _context.Usuario
+                    .FirstOrDefaultAsync(u => u.Email == User.Identity.Name); // Ajusta según cómo almacenas el nombre del usuario
+                if (currentUser == null)
+                {
+                    return Problem("Usuario no encontrado.");
+                }
+
+                producto.IdUsuarios = currentUser.Id; // Asigna el Id del usuario logueado
+                producto.FechaRegistro = DateTime.Now; // Asigna la fecha actual
+                producto.Activo = true; // Por defecto activo
+
                 _context.Add(producto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home");
+
+            return View(producto);
         }
 
 
@@ -84,18 +108,31 @@ namespace ScannerCC.Controllers
                 return NotFound();
             }
 
-            var infquimica = _context.InformacionQuimica.Select(iq => new { iq.Id }).ToList();
-            var usuarios = _context.Usuario.Select( u => new { u.Id }).ToList();
+            var infquimica = _context.InformacionQuimica
+                .Select(iq => new
+                {
+                    iq.Id,
+                    DisplayInfo = String.Format(
+                        "Cepa: {0} | Azúcar: {1} - {2} | Sulfuroso: {3} - {4} | Densidad: {5} - {6} | Alcohol: {7} - {8}",
+                        iq.Cepa,
+                        iq.MinAzucar, iq.MaxAzucar,
+                        iq.MinSulfuroso, iq.MaxSulfuroso,
+                        iq.MinDensidad, iq.MaxDensidad,
+                        iq.MinGradoAlcohol, iq.MaxGradoAlcohol
+                    )
+                })
+                .ToList();
 
-            ViewData["IdInformacionQuimica"] = new SelectList(infquimica, "Id", "Id");
-            ViewData["IdUsuarios"] = new SelectList(usuarios, "Id", "Id");
-            return View(producto);
+            var usuarios = _context.Usuario.Select(u => new { u.Id, u.Nombre }).ToList(); // Incluye nombres para identificación
+
+            ViewData["IdInformacionQuimica"] = new SelectList(infquimica, "Id", "DisplayInfo", producto?.IdInformacionQuimica);
+            ViewData["IdUsuarios"] = new SelectList(usuarios, "Id", "Nombre", producto.IdUsuarios); // Mostrar los nombres de usuario
+
+            return View(producto); // Devuelve el producto con los datos actuales
         }
 
-        // POST: Productoes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
 
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Productoes/Edit/5
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -129,9 +166,10 @@ namespace ScannerCC.Controllers
             return View(producto);
         }
 
-        // GET: Productoes/Delete/5
+
+        // GET: Productoes/Desactivar/5
         [Authorize(Roles = "Especialista")]
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Desactivar(int? id)
         {
             if (id == null || _context.Producto == null)
             {
@@ -148,29 +186,73 @@ namespace ScannerCC.Controllers
             return View(producto);
         }
 
+        // POST: Productoes/Desactivar/5
         [Authorize(Roles = "Especialista")]
-        // POST: Productoes/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Desactivar")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DesactivarConfirmedo(int id)
         {
             if (_context.Producto == null)
             {
-                return Problem("Entity set 'AppDbContext.Producto'  is null.");
+                return Problem("Entity set 'AppDbContext.Producto' is null.");
             }
+
             var producto = await _context.Producto.FindAsync(id);
             if (producto != null)
             {
-                _context.Producto.Remove(producto);
+                producto.Activo = false; 
+                _context.Producto.Update(producto);
             }
-            
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        // GET: Productoes/Activar/5
+        [Authorize(Roles = "Especialista")]
+        public async Task<IActionResult> Activar(int? id)
+        {
+            if (id == null || _context.Producto == null)
+            {
+                return NotFound();
+            }
+
+            var producto = await _context.Producto
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (producto == null)
+            {
+                return NotFound();
+            }
+
+            return View(producto);
+        }
+
+        // POST: Productoes/Activar/5
+        [Authorize(Roles = "Especialista")]
+        [HttpPost, ActionName("Activar")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ActivarConfirmedo(int id)
+        {
+            if (_context.Producto == null)
+            {
+                return Problem("Entity set 'AppDbContext.Producto' is null.");
+            }
+
+            var producto = await _context.Producto.FindAsync(id);
+            if (producto != null)
+            {
+                producto.Activo = true; 
+                _context.Producto.Update(producto);
+            }
+
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Home");
         }
 
         private bool ProductoExists(int id)
         {
-          return (_context.Producto?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Producto?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
+
 }

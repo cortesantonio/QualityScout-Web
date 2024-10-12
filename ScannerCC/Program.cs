@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Localization;
 using ScannerCC.Models;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +48,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization(); //Middleware
+
 
 // app.UseHttpsRedirection(); Se desactiva redireccion a HTTPS para evitar errores de certificados ssl en la app movil durante desarrollo.
 app.UseSession();

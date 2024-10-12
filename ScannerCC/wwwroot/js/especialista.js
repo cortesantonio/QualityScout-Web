@@ -1,5 +1,5 @@
 function switchView(view) {
-    views = ["dashboard", "informe", "usuarios", "botellas", "infquimica", "informesp", "productosh", "productosd", "productos", "escaneos", "controles", "busqueda"];
+    views = ["dashboard", "informe", "usuarios", "botellas", "infquimica", "informesp", "productosh", "productosd", "productos", "controles", "busqueda"];
   for (i = 0; i < views.length; i++) {
     pagina = document.getElementById(views[i]);
     pagina.style.display = "none";

@@ -19,7 +19,6 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
-
         // GET: Usuarios/Details/5
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Details(int? id)
@@ -29,8 +28,8 @@ namespace ScannerCC.Controllers
                 return NotFound();
             }
 
-            var usuario = await _context.Usuario
-                .FirstOrDefaultAsync(m => m.Id == id);
+            // Ya no se filtra por Activo
+            var usuario = await _context.Usuario.FirstOrDefaultAsync(m => m.Id == id);
             if (usuario == null)
             {
                 return NotFound();
@@ -40,16 +39,26 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Usuarios/Create
-        [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
             return View();
         }
 
         // POST: Usuarios/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-
+        [Authorize(Roles = "Especialista")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Nombre,Rut,Email,RolId")] Usuarios usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                usuario.Activo = true; 
+                _context.Add(usuario);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index), "Home");
+            }
+            return View(usuario);
+        }
 
         // GET: Usuarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -59,39 +68,7 @@ namespace ScannerCC.Controllers
                 return NotFound();
             }
 
-            var usuario =  _context.Usuario.Include(x => x.Rol).Where( x => x.Id == id).FirstOrDefault();
-            var usuarioSesion = _context.Usuario.Include(x => x.Rol).Where(x => x.Rut.Equals(User.Identity.Name)).FirstOrDefault();
-            if (usuario == null)
-            {
-                return NotFound();
-            }
-
-            if (id == usuarioSesion.Id)
-            {
-                return View(usuario);
-
-            }else if (usuarioSesion.Rol.Nombre == "Especialista") {
-                return View(usuario);
-
-            }else
-            {
-                return NotFound();
-            }
-        }
-
-
-
-        // GET: Usuarios/Delete/5
-        [Authorize(Roles = "Especialista")]
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Usuario == null)
-            {
-                return NotFound();
-            }
-
-            var usuario = await _context.Usuario
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var usuario = await _context.Usuario.FindAsync(id);
             if (usuario == null)
             {
                 return NotFound();
@@ -100,29 +77,96 @@ namespace ScannerCC.Controllers
             return View(usuario);
         }
 
-        // POST: Usuarios/Delete/5
+        // POST: Usuarios/Edit/5
         [Authorize(Roles = "Especialista")]
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Rut,Email,RolId")] Usuarios usuario)
         {
-            if (_context.Usuario == null)
+            if (id != usuario.Id)
             {
-                return Problem("Entity set 'AppDbContext.Usuario'  is null.");
+                return NotFound();
             }
+
+            if (ModelState.IsValid)
+            {
+                _context.Update(usuario);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(usuario);
+        }
+
+        // GET: Usuarios/Desactivar/5
+        public async Task<IActionResult> Desactivar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var usuario = await _context.Usuario.FindAsync(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            return View(usuario); 
+        }
+
+        // POST: Usuarios/Desactivar/5
+        [Authorize(Roles = "Especialista")]
+        [HttpPost, ActionName("Desactivar")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DesactivarConfirmado(int id)
+        {
             var usuario = await _context.Usuario.FindAsync(id);
             if (usuario != null)
             {
-                _context.Usuario.Remove(usuario);
+                usuario.Activo = false; 
+                _context.Update(usuario);
+                await _context.SaveChangesAsync();
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction(nameof(Index), "Home");
+        }
+
+        // GET: Usuarios/Activar/5
+        public async Task<IActionResult> Activar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var usuario = await _context.Usuario.FindAsync(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            return View(usuario); 
+        }
+
+        // POST: Usuarios/Activar/5
+        [Authorize(Roles = "Especialista")]
+        [HttpPost, ActionName("Activar")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ActivarConfirmado(int id)
+        {
+            var usuario = await _context.Usuario.FindAsync(id);
+            if (usuario != null)
+            {
+                usuario.Activo = true; 
+                _context.Update(usuario);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index), "Home");
         }
 
         private bool UsuarioExists(int id)
         {
-          return (_context.Usuario?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Usuario?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
+
 }

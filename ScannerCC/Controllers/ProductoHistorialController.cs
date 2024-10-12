@@ -38,9 +38,9 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
-            var productos = _context.Producto.Select(p => new { p.Id }).ToList();
+            var productos = _context.Producto.Select(p => new { p.Id, p.Nombre }).ToList();
 
-            ViewData["IdProductos"] = new SelectList(productos, "Id", "Id");
+            ViewData["IdProductos"] = new SelectList(productos, "Id", "Nombre");
             return View();
         }
 
@@ -76,6 +76,10 @@ namespace ScannerCC.Controllers
             {
                 return NotFound();
             }
+
+            var productos = _context.Producto.Select(p => new { p.Id, p.Nombre }).ToList();
+
+            ViewData["IdProductos"] = new SelectList(productos, "Id", "Nombre", productoh.IdProductos);
 
             return View(productoh);
         }

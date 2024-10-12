@@ -12,7 +12,7 @@ namespace ScannerCC.Models
         public int RolId { get; set; }
         public byte[]? PasswordHash { get; set; }
         public byte[]? PasswordSalt { get; set; }
-        public bool Activo { get; set; }
+        public bool Activo { get; set; } 
         public string? Token { get; set; }
 
         //Relaciones

@@ -54,9 +54,10 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label asp-for="IdProductos" class="control-label">Id Producto</label>
-                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos"></select>
-                        <span asp-validation-for="IdProductos" class="text-danger"></span>
+                        <label asp-for="IdProductos" class="control-label">Productos</label>
+                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos">
+                            <option value="">Seleccione un producto</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label asp-for="FechaCosecha" class="control-label">Fecha de cosecha</label>

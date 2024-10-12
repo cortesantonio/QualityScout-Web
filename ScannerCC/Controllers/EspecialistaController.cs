@@ -102,7 +102,6 @@ namespace ScannerCC.Controllers
                 ViewBag.Informes = _context.Informe.ToList();
                 ViewBag.ProductoHistorial = _context.ProductoHistorial.ToList();
                 ViewBag.ProductoDetalles = _context.ProductoDetalle.ToList();
-                ViewBag.Escaneoss = _context.Escaneo.ToList();
 
                 //Datos para la tablaControl y sus count
 
@@ -129,6 +128,8 @@ namespace ScannerCC.Controllers
                         Escaneos E = new Escaneos();
                         E.IdProductos = ProductoResultado.FirstOrDefault().Id;
                         E.IdUsuarios = TrabajadorActivo.Id;
+                        E.Fecha = fechaHoy.Date;  
+                        E.Hora = fechaHoy.TimeOfDay;
                         _context.Escaneo.Add(E);
                         _context.SaveChanges();
                     }             

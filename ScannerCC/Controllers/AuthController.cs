@@ -6,6 +6,8 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 
 using ScannerCC.Models;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 
 namespace ScannerCC.Controllers
@@ -104,7 +106,7 @@ namespace ScannerCC.Controllers
         }
 
 
-        
+
         public IActionResult CreateAdminUser()
         {
             Usuarios U = new Usuarios();
@@ -127,7 +129,6 @@ namespace ScannerCC.Controllers
 
 
 
-
         [HttpPost]
         public IActionResult Create(string Email, string Rut, string Nombre, string Password, string Rol)
         {
@@ -138,7 +139,7 @@ namespace ScannerCC.Controllers
                 //el usuario ya esta registrado con el Rut ingresado
                 ModelState.AddModelError("", "RUT Ya Registrado!");
                 return RedirectToAction("Index", "Home");
-
+                
             }
             else
             {
@@ -149,7 +150,7 @@ namespace ScannerCC.Controllers
                 U.Email = Email;
                 U.Rut = Rut;
                 U.RolId = id_rol_ingresado;
-
+                U.Activo=true;
                 CreatePasswordHash(Password, out byte[] passwordHash, out byte[] passwordSalt);
 
                 U.PasswordHash = passwordHash;
@@ -216,6 +217,5 @@ namespace ScannerCC.Controllers
                 return pass.SequenceEqual(passwordHash);
             }
         }
-
     }
 }

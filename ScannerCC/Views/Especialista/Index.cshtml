@@ -1,3 +1,4 @@
+
 @{
     Layout = null;
 }
@@ -48,11 +49,6 @@
                     <li>
                         <button onclick="switchView('botellas')" id="btnView">
                             <i class="fa-solid fa-bag-shopping"></i> Adm. de botellas
-                        </button>
-                    </li>
-                    <li>
-                        <button onclick="switchView('escaneos')" id="btnView">
-                            <i class="fa-solid fa-bag-shopping"></i> Adm. de escaneos
                         </button>
                     </li>
                     <li>
@@ -204,6 +200,7 @@
                                         <th>Nombre producto</th>
                                         <th>Nombre usuario</th>
                                         <th>Fecha</th>
+                                        <th>Hora</th>
                                     </tr>
                                 </thead>
 
@@ -214,6 +211,7 @@
                                             <td>@item.Producto.Nombre</td>
                                             <td>@item.Usuario.Nombre</td>
                                             <td>@item.Fecha</td>
+                                            <td>@item.Hora</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -265,66 +263,92 @@
 
             </div>
 
-      <div class="view" id="usuarios" style="display: none">
-        <header>
-          <h1>Adm. de Usuarios</h1>
-          <p>
-                        Aqui puedes adminstrar los usuario. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>), ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) y borrar (<i class="fa-solid fa-trash" style="color: #ffffff;"></i>)
-            usuarios como estimes necesario con los iconos que salen más adelante.
-          </p>
-        </header>
+            <div class="view" id="usuarios" style="display: none">
+                <header>
+                    <h1>Adm. de Usuarios</h1>
+                    <p>
+                        Aquí puedes administrar los usuarios. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>), ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) y desactivar (<i class="fa-solid fa-user-slash" style="color: #ffffff;"></i>) usuarios como estimes necesario con los iconos que salen más adelante.
+                    </p>
+                </header>
 
-        <main class="usuario-container" style="display:flex; flex-direction:column;">
-          <div class="head-producto">
-            <div class="busqueda">
-              <form asp-action="Index" method="get">
-                <button type="submit">
-                  <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
-                </button>
-                <input name="BusquedaUsuarios" type="text" placeholder="Busqueda por RUT o Nombre" />
-              </form>
+                <main class="usuario-container" style="display:flex; flex-direction:column;">
+                    <div class="head-producto">
+                        <div class="busqueda">
+                            <form asp-action="Index" method="get">
+                                <button type="submit">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+                                </button>
+                                <input name="BusquedaUsuarios" type="text" placeholder="Búsqueda por RUT o Nombre" />
+                            </form>
+                        </div>
+                    </div>
+
+                    <table class="tableUsuarios">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Rut</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>
+                                    <a asp-action="Create" style="color:white;text-decoration:none;" asp-controller="Usuario">
+                                        <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i> Nuevo Usuario
+                                    </a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.Usuarios)
+                            {
+                                <tr>
+                                    <td>@item.Nombre</td>
+                                    <td>@item.Rut</td>
+                                    <td>@item.Email</td>
+                                    <td>
+                                        @switch (item.Rol.Nombre)
+                                        {
+                                            case "Controlcalidad":
+                                                @:Control de calidad
+                                                break;
+                                            case "Especialista":
+                                                @:Especialista
+                                                break;
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.Activo) 
+                                        {
+                                            <a asp-action="Edit" asp-controller="Usuario" asp-route-id="@item.Id">
+                                                <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                            </a>
+                                                    
+                                             <a asp-action="Details" asp-controller="Usuario" asp-route-id ="@item.Id">
+                                                 <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                              </a>
+                                                            
+                                             <a asp-action="Desactivar" asp-controller="Usuario" asp-route-id="@item.Id">
+                                                 <i class="fa-solid fa-user-slash" style="color: #ffffff;"></i>
+                                            </a>
+                                        }
+                                        else 
+                                        {
+                                            <a asp-action="Activar" asp-controller="Usuario" asp-route-id="@item.Id">
+                                                <i class="fa-solid fa-user-check" style="color: #ffffff;"></i>
+                                            </a>
+
+                                            <a asp-action="Details" asp-controller="Usuario" asp-route-id="@item.Id">
+                                                <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </main>
             </div>
 
-          </div>
 
-          <table class="tableUsuarios">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Rut</th>
-                <th>Email</th>
-                <th>Rol</th>
-
-                <th> <a asp-action="Create" style="color:white;text-decoration:none;" asp-controller="Usuario"><i
-                      class="fa-solid fa-user-plus" style="color: #ffffff;"></i> Nuevo Usuario</a> </th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach (var item in ViewBag.Usuarios)
-              {
-
-                <tr>
-                  <td>@item.Nombre</td>
-                  <td>@item.Rut</td>
-                  <td>@item.Email</td>
-                  <td>@item.Rol.Nombre</td>
-
-                  <td>
-                    <a asp-action="Edit" asp-controller="Usuario" asp-route-id="@item.Id"><i
-                        class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
-                    |
-                    <a asp-action="Details" asp-controller="Usuario" asp-route-id="@item.Id"><i
-                        class="fa-solid fa-circle-info" style="color: #ffffff;"></i></a>
-                    |
-                    <a asp-action="Delete" asp-controller="Usuario" asp-route-id="@item.Id"><i
-                        class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </main>
-      </div>
 
             <div class="view" id="botellas" style="display: none">
                 <header>
@@ -464,11 +488,11 @@
                                         <a asp-action="Edit" asp-controller="InformacionQuimica" asp-route-id="@item.Id">
                                             <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
                                         </a>
-                                        |
+                                        
                                         <a asp-action="Details" asp-controller="InformacionQuimica" asp-route-id="@item.Id">
                                             <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
                                         </a>
-                                        |
+                                        
                                         <a asp-action="Delete" asp-controller="InformacionQuimica" asp-route-id="@item.Id">
                                             <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                                         </a>
@@ -776,90 +800,31 @@
                                     <td>
                                         @item.FechaRegistro
                                     </td>
-
                                     <td>
-                                        <a asp-action="Edit" asp-controller="Producto" asp-route-id="@item.Id">
-                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
-                                        </a>
-                                        |
-                                        <a asp-action="Details" asp-controller="Producto" asp-route-id="@item.Id">
-                                            <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
-                                        </a>
-                                        |
-                                        <a asp-action="Delete" asp-controller="Producto" asp-route-id="@item.Id">
-                                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
-                                        </a>
+                                        @if (item.Activo)
+                                        {
+                                            <a asp-action="Edit" asp-controller="Producto" asp-route-id="@item.Id">
+                                                <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                            </a>
 
-                                    </td>
-                                </tr>
+                                            <a asp-action="Details" asp-controller="Producto" asp-route-id="@item.Id">
+                                                <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                            </a>
 
-                            }
-                        </tbody>
-                    </table>
-                </main>
-            </div>
+                                            <a asp-action="Desactivar" asp-controller="Producto" asp-route-id="@item.Id">
+                                                <i class="fa-solid fa-user-slash" style="color: #ffffff;"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-action="Activar" asp-controller="Producto" asp-route-id="@item.Id">
+                                                <i class="fa-solid fa-user-check" style="color: #ffffff;"></i>
+                                            </a>
 
-            <div class="view" id="escaneos" style="display: none">
-                <header>
-                    <h1>Adm. de escaneos</h1>
-                    <p>
-                        Aqui puedes adminstrar los escaneos. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-folder-plus" style="color: #ffffff"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>), ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) y borrar (<i class="fa-solid fa-trash" style="color: #ffffff;"></i>)
-                        escaneos como estimes necesario con los iconos que salen más adelante.
-                    </p>
-                </header>
-
-                <main class="productos-container">
-                    <div class="head-producto">
-                        <div class="busqueda">
-                            <form asp-action="Index" method="get">
-                                <button type="submit">
-                                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
-                                </button>
-                                <input name="Busqueda" type="text" placeholder="Busqueda por Codigo o Nombre" />
-                            </form>
-                        </div>
-                        <div class="add">
-                            <a asp-action="Create" asp-controller="Escaneos">
-                                <i class="fa-solid fa-folder-plus"
-                                   style="color: #ffffff"></i>
-                                Nuevo escaneo
-                            </a>
-                        </div>
-                    </div>
-                    <table class="tableUsuarios">
-                        <thead>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Hora</th>
-
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in ViewBag.Escaneoss)
-                            {
-
-                                <tr>
-                                    <td>
-                                        @item.Fecha
-                                    </td>
-                                    <td>
-                                        @item.Hora
-                                    </td>
-
-                                    <td>
-                                        <a asp-action="Edit" asp-controller="Escaneos" asp-route-id="@item.Id">
-                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
-                                        </a>
-                                        |
-                                        <a asp-action="Details" asp-controller="Escaneos" asp-route-id="@item.Id">
-                                            <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
-                                        </a>
-                                        |
-                                        <a asp-action="Delete" asp-controller="Escaneos" asp-route-id="@item.Id">
-                                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
-                                        </a>
-
+                                            <a asp-action="Details" asp-controller="Producto" asp-route-id="@item.Id">
+                                                <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                            </a>
+                                        }
                                     </td>
                                 </tr>
 

@@ -18,14 +18,20 @@
         color: white;
     }
 
-    a:hover {
+        a:hover {
+            color: #62EBF0;
+        }
+
+    .active-status {
+        font-weight: bold;
+    }
+
+    .active {
         color: #62EBF0;
     }
 
-    .row dt,
-    .row dd {
-        margin-top: 5px; 
-        margin-bottom: 5px; 
+    .inactive {
+        color: #FF5733;
     }
 </style>
 
@@ -62,12 +68,6 @@
                     @Html.DisplayFor(model => model.PaisDestino)
                 </dd>
                 <dt class="col-sm-6">
-                    Activo
-                </dt>
-                <dd class="col-sm-6">
-                    @Html.DisplayFor(model => model.Activo)
-                </dd>
-                <dt class="col-sm-6">
                     Fecha de registro
                 </dt>
                 <dd class="col-sm-6">
@@ -85,36 +85,51 @@
                 <dd class="col-sm-6">
                     @Html.DisplayFor(model => model.UnidadMedida)
                 </dd>
+                <dt class="col-sm-6">
+                    Activo
+                </dt>
+                <dd class="col-sm-6 active-status">
+                    @{
+                        var activo = Model.Activo ? "Sí" : "No";
+                        var statusClass = Model.Activo ? "active" : "inactive";
+                    }
+                    <span class="@statusClass">@activo</span>
+                </dd>
             </div>
         </div>
     </dl>
 </div>
 <div>
-    <a asp-action="Index" asp-controller="Home">Volver a la lista</a>
+    @if (Model.Activo)
+    {
+        <a style="margin-right: 20px;" asp-action="Edit" asp-route-id="@Model?.Id">Editar</a>
+    }
+    <a style="margin-left: 20px;" asp-action="Index" asp-controller="Home">Volver a la lista</a>
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@@tensorflow/tfjs"></script>
+@*<script src="https://cdn.jsdelivr.net/npm/@@tensorflow/tfjs"></script>
 <script src="https://cdn.jsdelivr.net/npm/@@tensorflow-models/coco-ssd"></script>
 <div class="col-sm-4">
     <div class="row justify-content-center">
 
         <div style="text-align:center;" id="deteccion"></div>
 
-            <div style="flex: 1;">
-                <h2>Vista Reconocimiento</h2>
-                <video id="video" width="640" height="480" autoplay></video>
-            </div>
-            <div style="flex: 1;">
-                <canvas id="canvas" width="640" height="480"></canvas>
-            </div>
-        
+        <div style="flex: 1;">
+            <h2>Vista Reconocimiento</h2>
+            <video id="video" width="640" height="480" autoplay></video>
+        </div>
+        <div style="flex: 1;">
+            <canvas id="canvas" width="640" height="480"></canvas>
+        </div>
 
 
 
-    </div></div>
 
-    <script>
+    </div>
+</div>
+
+<script>
     async function detectObjects() {
         const video = document.getElementById('video');
         const canvas = document.getElementById('canvas');
@@ -168,13 +183,13 @@
                     if (prediction.class == "bottle") {
                         infoDiv.innerHTML = "";
                         infoDiv.innerHTML = `
-                            <p>Object: ${prediction.class}</p>
-                            <p>Estimated Width: ${estimatedWidth.toFixed(2)} meters</p>
-                            <p>Estimated Height: ${estimatedHeight.toFixed(2)} meters</p>
-                        `;
+                                <p>Object: ${prediction.class}</p>
+                                <p>Estimated Width: ${estimatedWidth.toFixed(2)} meters</p>
+                                <p>Estimated Height: ${estimatedHeight.toFixed(2)} meters</p>
+                            `;
                     }
 
-                    
+
                 });
 
                 // Esperar un breve periodo antes de la próxima detección
@@ -186,4 +201,4 @@
     // Iniciar la detección de objetos cuando la ventana haya cargado completamente
     window.onload = detectObjects;
 
-    </script>
+</script>*@

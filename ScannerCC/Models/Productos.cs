@@ -14,7 +14,7 @@ namespace ScannerCC.Models
         public string URLImagen {  get; set; }
         public string? PaisDestino { get; set; }
         public int IdUsuarios { get; set; }
-        public bool Activo { get; set; }
+        public bool Activo { get; set; } = true;
         public DateTime FechaRegistro { get; set; }
         public string Idioma { get; set; }
         public string UnidadMedida { get; set; }

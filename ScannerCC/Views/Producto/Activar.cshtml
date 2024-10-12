@@ -1,0 +1,83 @@
+﻿@model ScannerCC.Models.Productos
+
+@{
+    ViewData["Title"] = "Activar Producto";
+}
+
+<style>
+    body {
+        background-color: #242424;
+        color: white;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    h4 {
+        margin-top: 20px;
+    }
+
+    input[type="submit"] {
+        background-color: green;
+        color: white;
+        margin-bottom: 15px;
+    }
+
+    .btn-success:hover {
+        background-color: darkgreen;
+        border-color: green;
+    }
+
+    a {
+        color: white;
+    }
+
+        a:hover {
+            color: #62EBF0;
+        }
+</style>
+
+<h1>Activar Producto</h1>
+
+<h3>¿Estás seguro de que quieres activar este producto?</h3>
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="row justify-content-center">
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.CodigoBarra)
+        </dt>
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.CodigoBarra)
+        </dd>
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.CodigoVE)
+        </dt>
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.CodigoVE)
+        </dd>
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.PaisDestino)
+        </dt>
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.PaisDestino)
+        </dd>
+    </dl>
+
+    <form asp-action="Activar">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Activar" class="btn btn-success" />
+    </form>
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Home">Volver a la lista</a>
+</div>
+
+
