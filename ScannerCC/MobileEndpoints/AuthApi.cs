@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
+using QualityScout.Models;
 using ScannerCC.Models;
 using System.Security.Cryptography;
 using System.Text;
@@ -64,13 +66,14 @@ namespace QualityScout.MobileEndpoints
 
                 if (VerificarPassApi(verificationData))
                 {
-                    Usuarios UserToSend = new Usuarios();
+                    UsuarioToSend UserToSend = new UsuarioToSend();
                     UserToSend.Id = userFound.Id;
                     UserToSend.Nombre = userFound.Nombre;
                     UserToSend.Rut = userFound.Rut;
                     UserToSend.Email = userFound.Email;
-                    UserToSend.RolId = userFound.RolId;
+                    UserToSend.NombreRol = userFound.Rol.Nombre;
                     UserToSend.Token = userFound.Token;
+                    UserToSend.Activo = userFound.Activo;
 
 
 
@@ -80,6 +83,58 @@ namespace QualityScout.MobileEndpoints
 
             return Unauthorized("Invalid credentials");
         }
+
+
+        [HttpPost("CreateUsuario")]
+        public async Task<ActionResult<Usuarios>> CreateUsuario(UserToReceive userToReceive)
+        {
+
+
+            var usuarioExiste = _context.Usuario.Where(u => u.Rut.Equals(userToReceive.Rut)).FirstOrDefault();
+            if (usuarioExiste != null)
+            {
+                //el usuario ya esta registrado con el Rut ingresado
+                return BadRequest(new { message = "El usuario ya está registrado" });
+            }
+
+            CreatePasswordHash(userToReceive.Password, out byte[] passwordHash, out byte[] passwordSalt);
+
+            // Crear el usuario
+            var usuario = new Usuarios
+            {
+                Nombre = userToReceive.Nombre,
+                Rut = userToReceive.Rut,
+                Email = userToReceive.Email,
+                RolId = userToReceive.RolId,
+                Activo = true, 
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                Token = Guid.NewGuid().ToString()
+            };
+
+            _context.Add(usuario);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+
+        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        {
+            using (var hmac = new HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+            }
+        }
+
+
+
+
+
+
+
+
         // POST api/<AuthApi>
         [HttpPost]
         public void Post([FromBody] string value)
@@ -107,7 +162,6 @@ namespace QualityScout.MobileEndpoints
                 return pass.SequenceEqual(data.PasswordHash);
             }
         }
-
 
         public static string DecryptText(string encryptedText)
         {

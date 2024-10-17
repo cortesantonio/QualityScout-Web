@@ -132,7 +132,6 @@ namespace ScannerCC.Controllers
         [HttpPost]
         public IActionResult Create(string Email, string Rut, string Nombre, string Password, string Rol)
         {
-            //Especialista
             var us = _context.Usuario.Where(u => u.Rut.Equals(Rut)).FirstOrDefault();
             if (us != null)
             {
@@ -151,6 +150,8 @@ namespace ScannerCC.Controllers
                 U.Rut = Rut;
                 U.RolId = id_rol_ingresado;
                 U.Activo=true;
+                U.Token = Guid.NewGuid().ToString();
+
                 CreatePasswordHash(Password, out byte[] passwordHash, out byte[] passwordSalt);
 
                 U.PasswordHash = passwordHash;

@@ -939,3 +939,4 @@ C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Debug\net6.0\refin
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Debug\net6.0\QualityScout.pdb
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Debug\net6.0\QualityScout.genruntimeconfig.cache
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Debug\net6.0\ref\QualityScout.dll
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\bin\Debug\net6.0\System.Formats.Asn1.dll

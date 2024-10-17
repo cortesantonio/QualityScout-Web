@@ -118,6 +118,32 @@
   },
   {
     "ContainingType": "QualityScout.MobileEndpoints.AuthApi",
+    "Method": "CreateUsuario",
+    "RelativePath": "api/AuthApi/CreateUsuario",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userToReceive",
+        "Type": "QualityScout.Models.UserToReceive",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ScannerCC.Models.Usuarios",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.AuthApi",
     "Method": "AuthLogin",
     "RelativePath": "api/AuthApi/login",
     "HttpMethod": "POST",
@@ -361,16 +387,16 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "QualityScout.MobileEndpoints.UsuariosApi",
-    "Method": "GetUsuario",
-    "RelativePath": "api/UsuariosApi",
+    "ContainingType": "QualityScout.MobileEndpoints.RolsController",
+    "Method": "GetRol",
+    "RelativePath": "api/Rols",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ScannerCC.Models.Usuarios, QualityScout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ScannerCC.Models.Rol, QualityScout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -381,22 +407,22 @@
     ]
   },
   {
-    "ContainingType": "QualityScout.MobileEndpoints.UsuariosApi",
-    "Method": "PostUsuario",
-    "RelativePath": "api/UsuariosApi",
+    "ContainingType": "QualityScout.MobileEndpoints.RolsController",
+    "Method": "PostRol",
+    "RelativePath": "api/Rols",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "usuario",
-        "Type": "ScannerCC.Models.Usuarios",
+        "Name": "rol",
+        "Type": "ScannerCC.Models.Rol",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ScannerCC.Models.Usuarios",
+        "Type": "ScannerCC.Models.Rol",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -407,9 +433,9 @@
     ]
   },
   {
-    "ContainingType": "QualityScout.MobileEndpoints.UsuariosApi",
-    "Method": "GetUsuario",
-    "RelativePath": "api/UsuariosApi/{id}",
+    "ContainingType": "QualityScout.MobileEndpoints.RolsController",
+    "Method": "GetRol",
+    "RelativePath": "api/Rols/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -422,7 +448,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ScannerCC.Models.Usuarios",
+        "Type": "ScannerCC.Models.Rol",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -433,9 +459,9 @@
     ]
   },
   {
-    "ContainingType": "QualityScout.MobileEndpoints.UsuariosApi",
-    "Method": "PutUsuario",
-    "RelativePath": "api/UsuariosApi/{id}",
+    "ContainingType": "QualityScout.MobileEndpoints.RolsController",
+    "Method": "PutRol",
+    "RelativePath": "api/Rols/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -446,12 +472,80 @@
         "IsRequired": true
       },
       {
-        "Name": "usuario",
-        "Type": "ScannerCC.Models.Usuarios",
+        "Name": "rol",
+        "Type": "ScannerCC.Models.Rol",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.RolsController",
+    "Method": "DeleteRol",
+    "RelativePath": "api/Rols/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.UsuariosApi",
+    "Method": "GetUsuario",
+    "RelativePath": "api/UsuariosApi",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ScannerCC.Models.UsuarioToSend, QualityScout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.UsuariosApi",
+    "Method": "GetUsuario",
+    "RelativePath": "api/UsuariosApi/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ScannerCC.Models.Usuarios",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "QualityScout.MobileEndpoints.UsuariosApi",
@@ -464,6 +558,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.UsuariosApi",
+    "Method": "UpdateActivo",
+    "RelativePath": "api/UsuariosApi/UpdateActivo/{rut}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rut",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

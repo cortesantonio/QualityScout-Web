@@ -19,7 +19,7 @@ namespace ScannerCC.Controllers
         {
             var rol = _context.Rol.ToList().Count;
             if (rol == 0) {
-                string[] roles = { "Controlcalidad", "Especialista"};
+                string[] roles = { "Control de Calidad", "Especialista"};
                 for (int i = 0; i < roles.Length; i++)
                 {
                     Rol R = new Rol();
