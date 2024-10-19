@@ -49,57 +49,78 @@ namespace ScannerCC.Controllers
         public IActionResult CreateControl()
         {
             var productos = _context.Producto.Select(p => new { p.Id, p.Nombre }).ToList();
-            var usuarios = _context.Usuario.Select(u => new { u.Id, u.Nombre }).ToList();
-
             ViewData["IdProductos"] = new SelectList(productos, "Id", "Nombre");
-            ViewData["IdUsuarios"] = new SelectList(usuarios, "Id", "Nombre");
             return View();
         }
 
         // POST: Controles/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateControl([Bind("Id,IdProductos,Linea,PaisDestino,Comentario,Tipodecontrol,Estado")] Controles controles)
+        public async Task<IActionResult> CreateControl(string IdProductos, string Linea, string PaisDestino, string Comentario, string Tipodecontrol, string Estado)
         {
-            // Obtener el usuario logueado
-            var currentUser = await _context.Usuario.FirstOrDefaultAsync(u => u.Email == User.Identity.Name); // Ajusta según cómo almacenas el nombre del usuario
-            if (currentUser == null)
+            try
             {
-                return Problem("Usuario no encontrado.");
+                // Obtener el usuario logueado
+                var currentUser = await _context.Usuario.FirstOrDefaultAsync(u => u.Email == User.Identity.Name);
+                if (currentUser == null)
+                {
+                    return Problem("Usuario no encontrado.");
+                }
+
+                // Crear y asignar el nuevo control
+                Controles control = new Controles(); // Usando new Controles() en lugar de inicialización
+                control.IdProductos = int.Parse(IdProductos); // Asignar IdProductos
+                control.Linea = Linea;
+                control.PaisDestino = PaisDestino;
+                control.Comentario = Comentario;
+                control.Tipodecontrol = Tipodecontrol;
+                control.Estado = Estado;
+                control.IdUsuarios = currentUser.Id; // Asignar IdUsuarios
+                control.FechaHoraPrimerControl = DateTime.Now; // Asignar fecha actual
+
+                // Guardar control
+                _context.Add(control);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Home");
             }
-
-            controles.IdUsuarios = currentUser.Id; // Asignar IdUsuarios
-            controles.FechaHoraPrimerControl = DateTime.Now; // Asignar fecha actual
-
-            _context.Add(controles);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Home");
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al crear el control: " + ex.Message);
+            }
         }
 
         // GET: Controles/Edit/5
         public async Task<IActionResult> Edit2(int id)
         {
-            var control = await _context.Controles.FindAsync(id);
-            if (control == null)
+            try
             {
-                return NotFound();
-            }
-            if (control.Estado != "Reproceso")
-            {
-                // Aquí puedes redirigir a otra vista o mostrar un mensaje
-                return RedirectToAction(nameof(Index)); // Cambia a la acción adecuada si no está en reproceso
-            }
+                var control = await _context.Controles.FindAsync(id);
+                if (control == null)
+                {
+                    return NotFound("Control no encontrado.");
+                }
 
-            ViewBag.IdProductos = new SelectList(_context.Producto, "Id", "NombreProducto", control.IdProductos);
-            ViewBag.IdUsuarios = new SelectList(_context.Usuario, "Id", "NombreUsuario", control.IdUsuarios);
-            return View(control);
+                // Verificar si el estado es "Reproceso"
+                if (control.Estado != "Reproceso")
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ViewBag.IdProductos = new SelectList(_context.Producto, "Id", "Nombre", control.IdProductos);
+                return View(control);
+            }
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al cargar el control para edición: " + ex.Message);
+            }
         }
 
+        // POST: Controles/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit2(int id, Controles model)
+        public async Task<IActionResult> Edit2(int id, string IdProductos, string Linea, string PaisDestino, string Comentario, string Tipodecontrol, string EstadoFinal)
         {
-            if (id != model.Id)
+            if (id != id) // Se mantiene como estaba para verificar que el id coincida
             {
                 return NotFound();
             }
@@ -108,14 +129,31 @@ namespace ScannerCC.Controllers
             {
                 try
                 {
-                    // Rellenar automáticamente con la fecha y hora actual
-                    model.FechaHoraControlFinal = DateTime.Now;
-                    _context.Update(model);
+                    // Obtener el control a editar
+                    Controles control = new Controles(); // Usando new Controles() en lugar de inicialización
+                    control = await _context.Controles.FindAsync(id);
+                    if (control == null)
+                    {
+                        return NotFound("Control no encontrado.");
+                    }
+
+                    // Asignar propiedades para editar
+                    control.IdProductos = int.Parse(IdProductos); // Asignar IdProductos
+                    control.Linea = Linea;
+                    control.PaisDestino = PaisDestino;
+                    control.Comentario = Comentario;
+                    control.Tipodecontrol = Tipodecontrol;
+                    control.EstadoFinal = EstadoFinal;
+                    control.FechaHoraControlFinal = DateTime.Now; // Asignar fecha actual al finalizar el control
+
+                    // Guardar cambios
+                    _context.Update(control);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction("Index", "Home");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ControlExists(model.Id))
+                    if (!ControlExists(id))
                     {
                         return NotFound();
                     }
@@ -124,12 +162,16 @@ namespace ScannerCC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index)); // Cambia a la acción adecuada después de editar
+                catch (Exception ex)
+                {
+                    return Problem("Ocurrió un error al editar el control: " + ex.Message);
+                }
             }
-            ViewBag.IdProductos = new SelectList(_context.Producto, "Id", "NombreProducto", model.IdProductos);
-            ViewBag.IdUsuarios = new SelectList(_context.Usuario, "Id", "NombreUsuario", model.IdUsuarios);
-            return View(model);
+
+            ViewBag.IdProductos = new SelectList(_context.Producto, "Id", "Nombre", IdProductos);
+            return View();
         }
+
 
         // GET: Controles/Delete/5
         public async Task<IActionResult> Delete2(int? id)
@@ -150,23 +192,27 @@ namespace ScannerCC.Controllers
             return View(controles);
         }
 
-		
-
-
-		// POST: Controles/Delete/5
-		[HttpPost]
-        public IActionResult DeleteConfirmed(int id)
-        { 
-            var control =  _context.Controles.Where(x=>x.Id == id).FirstOrDefault();
-            _context.Controles.Remove(control);
-            _context.SaveChanges();
-            return RedirectToAction("Index", "Home");
-            
-        }
-
-        private bool ControlesExists(int id)
+        // POST: Controles/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
         {
-          return (_context.Controles?.Any(e => e.Id == id)).GetValueOrDefault();
+            try
+            {
+                var control = await _context.Controles.FindAsync(id);
+                if (control == null)
+                {
+                    return NotFound("Control no encontrado.");
+                }
+
+                _context.Controles.Remove(control);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al eliminar el control: " + ex.Message);
+            }
         }
 
         private bool ControlExists(int id)

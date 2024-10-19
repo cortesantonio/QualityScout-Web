@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 
 
@@ -8,6 +9,7 @@ namespace ScannerCC.Models
     {
         [Key]
         public int Id { get; set; }
+        [ForeignKey("Productos")]
         public int IdProductos { get; set; }
         public string Linea { get; set; }
         public string? PaisDestino { get; set; }
@@ -16,6 +18,7 @@ namespace ScannerCC.Models
         public DateTime FechaHoraPrimerControl { get; set; }
         public string Estado { get; set; }
         public string? EstadoFinal { get; set; }
+        [ForeignKey("Usuarios")]
         public int IdUsuarios { get; set; }
         public DateTime? FechaHoraControlFinal { get; set; }
 

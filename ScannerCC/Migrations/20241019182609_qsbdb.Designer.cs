@@ -12,8 +12,8 @@ using ScannerCC.Models;
 namespace QualityScout.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241018031031_relaciones producto2")]
-    partial class relacionesproducto2
+    [Migration("20241019182609_qsbdb")]
+    partial class qsbdb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -193,12 +193,9 @@ namespace QualityScout.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UsuariosId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuariosId");
+                    b.HasIndex("IdUsuarios");
 
                     b.ToTable("Informe");
                 });
@@ -278,12 +275,9 @@ namespace QualityScout.Migrations
                     b.Property<int>("IdProductos")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductosId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductosId");
+                    b.HasIndex("IdProductos");
 
                     b.ToTable("ProductoHistorial");
                 });
@@ -445,7 +439,7 @@ namespace QualityScout.Migrations
                 {
                     b.HasOne("ScannerCC.Models.Usuarios", "Usuarios")
                         .WithMany()
-                        .HasForeignKey("UsuariosId")
+                        .HasForeignKey("IdUsuarios")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -475,7 +469,7 @@ namespace QualityScout.Migrations
                 {
                     b.HasOne("ScannerCC.Models.Productos", "Productos")
                         .WithMany()
-                        .HasForeignKey("ProductosId")
+                        .HasForeignKey("IdProductos")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

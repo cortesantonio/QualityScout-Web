@@ -39,27 +39,37 @@ namespace ScannerCC.Controllers
         public IActionResult Create()
         {
             var productos = _context.Producto.Select(p => new { p.Id, p.Nombre }).ToList();
-
             ViewData["IdProductos"] = new SelectList(productos, "Id", "Nombre");
             return View();
         }
 
         // POST: Productoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(
-    [Bind("Id,IdProductos,FechaCosecha,FechaProduccion,FechaEnvasado")] ProductoHistorial productoh)
+        public async Task<IActionResult> Create(DateTime FechaCosecha, DateTime FechaProduccion, DateTime FechaEnvasado)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(productoh);
-                await _context.SaveChangesAsync();
+                // Crear un nuevo objeto de ProductoHistorial
+                ProductoHistorial productoh = new ProductoHistorial();
+                productoh.FechaCosecha = FechaCosecha;
+                productoh.FechaProduccion = FechaProduccion;
+                productoh.FechaEnvasado = FechaEnvasado;
+
+                // Validar el modelo
+                if (ModelState.IsValid)
+                {
+                    _context.Add(productoh);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index", "Home");
+                }
                 return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home");
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al crear el historial del producto: " + ex.Message);
+            }
         }
 
 
@@ -78,48 +88,46 @@ namespace ScannerCC.Controllers
             }
 
             var productos = _context.Producto.Select(p => new { p.Id, p.Nombre }).ToList();
-
             ViewData["IdProductos"] = new SelectList(productos, "Id", "Nombre", productoh.IdProductos);
 
             return View(productoh);
         }
 
         // POST: Productoes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdProductos,FechaCosecha,FechaProduccion,FechaEnvasado")] ProductoHistorial productoh)
+        public async Task<IActionResult> Edit(int id, DateTime FechaCosecha, DateTime FechaProduccion, DateTime FechaEnvasado)
         {
-            if (id != productoh.Id)
+            try
             {
-                return NotFound();
-            }
+                // Obtener el producto historial a editar
+                var productoh = await _context.ProductoHistorial.FindAsync(id);
+                if (productoh == null)
+                {
+                    return NotFound("Historial del producto no encontrado.");
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                // Asignar propiedades del producto historial
+                productoh.FechaCosecha = FechaCosecha;
+                productoh.FechaProduccion = FechaProduccion;
+                productoh.FechaEnvasado = FechaEnvasado;
+
+                // Validar el modelo
+                if (ModelState.IsValid)
                 {
                     _context.Update(productoh);
                     await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductoHExists(productoh.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return RedirectToAction("Index", "Home");
                 }
                 return RedirectToAction("Index", "Home");
             }
-            return View(productoh);
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al editar el historial del producto: " + ex.Message);
+            }
         }
+
 
         // GET: Productoes/Delete/5
         [Authorize(Roles = "Especialista")]
@@ -141,23 +149,29 @@ namespace ScannerCC.Controllers
         }
 
         [Authorize(Roles = "Especialista")]
-        // POST: Productoes/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (_context.ProductoHistorial == null)
+            try
             {
-                return Problem("Entity set 'AppDbContext.ProductoHistorial'  is null.");
-            }
-            var productoh = await _context.ProductoHistorial.FindAsync(id);
-            if (productoh != null)
-            {
-                _context.ProductoHistorial.Remove(productoh);
-            }
+                // Obtener el producto historial a eliminar
+                var productoh = await _context.ProductoHistorial.FindAsync(id);
+                if (productoh == null)
+                {
+                    return NotFound("Historial del producto no encontrado.");
+                }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Home");
+                // Eliminar el producto historial
+                _context.ProductoHistorial.Remove(productoh);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al eliminar el historial del producto: " + ex.Message);
+            }
         }
 
         private bool ProductoHExists(int id)

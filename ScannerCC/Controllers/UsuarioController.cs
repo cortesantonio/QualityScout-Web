@@ -41,6 +41,8 @@ namespace ScannerCC.Controllers
         // GET: Usuarios/Create
         public IActionResult Create()
         {
+            var rols = _context.Rol.Select(bd => new { bd.idRol, bd.Nombre }).ToList();
+            ViewData["Roles"] = new SelectList(rols,  "idRol", "Nombre");
             return View();
         }
 
@@ -48,17 +50,31 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nombre,Rut,Email,RolId")] Usuarios usuario)
+        public async Task<IActionResult> Create(string Nombre, string Rut, string Email, int RolId)
         {
-            if (ModelState.IsValid)
+            try
             {
-                usuario.Activo = true; 
-                _context.Add(usuario);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), "Home");
+                if (ModelState.IsValid)
+                {
+                    Usuarios usuario = new Usuarios();
+                    usuario.Nombre = Nombre;
+                    usuario.Rut = Rut;
+                    usuario.Email = Email;
+                    usuario.RolId = RolId;
+                    usuario.Activo = true; // Asigna el estado activo por defecto
+
+                    _context.Add(usuario);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index", "Home");
+                }
+                return View();
             }
-            return View(usuario);
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al crear el usuario: " + ex.Message);
+            }
         }
+
 
         // GET: Usuarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -81,20 +97,37 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Rut,Email,RolId")] Usuarios usuario)
+        public async Task<IActionResult> Edit(int id, string Nombre, string Rut, string Email, int RolId)
         {
-            if (id != usuario.Id)
+            try
             {
-                return NotFound();
-            }
+                if (ModelState.IsValid)
+                {
+                    // Obtener el usuario a editar
+                    var usuario = await _context.Usuario.FindAsync(id);
+                    if (usuario == null)
+                    {
+                        return NotFound("Usuario no encontrado.");
+                    }
 
-            if (ModelState.IsValid)
-            {
-                _context.Update(usuario);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                    // Asignar propiedades del usuario
+                    usuario.Nombre = Nombre;
+                    usuario.Rut = Rut;
+                    usuario.Email = Email;
+                    usuario.RolId = RolId;
+
+                    // Guardar cambios
+                    _context.Update(usuario);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction("Index", "Home");
+                }
+                return View();
             }
-            return View(usuario);
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al editar el usuario: " + ex.Message);
+            }
         }
 
         // GET: Usuarios/Desactivar/5
@@ -116,18 +149,32 @@ namespace ScannerCC.Controllers
 
         // POST: Usuarios/Desactivar/5
         [Authorize(Roles = "Especialista")]
-        [HttpPost, ActionName("Desactivar")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DesactivarConfirmado(int id)
+        public async Task<IActionResult> Desactivar(int id)
         {
-            var usuario = await _context.Usuario.FindAsync(id);
-            if (usuario != null)
+            try
             {
-                usuario.Activo = false; 
+                // Obtener el usuario a desactivar
+                var usuario = await _context.Usuario.FindAsync(id);
+                if (usuario == null)
+                {
+                    return NotFound("Usuario no encontrado.");
+                }
+
+                // Marcar el usuario como inactivo
+                usuario.Activo = false;
+
+                // Guardar cambios
                 _context.Update(usuario);
                 await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction(nameof(Index), "Home");
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al desactivar el usuario: " + ex.Message);
+            }
         }
 
         // GET: Usuarios/Activar/5
@@ -149,19 +196,34 @@ namespace ScannerCC.Controllers
 
         // POST: Usuarios/Activar/5
         [Authorize(Roles = "Especialista")]
-        [HttpPost, ActionName("Activar")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ActivarConfirmado(int id)
+        public async Task<IActionResult> Activar(int id)
         {
-            var usuario = await _context.Usuario.FindAsync(id);
-            if (usuario != null)
+            try
             {
-                usuario.Activo = true; 
+                // Obtener el usuario a activar
+                var usuario = await _context.Usuario.FindAsync(id);
+                if (usuario == null)
+                {
+                    return NotFound("Usuario no encontrado.");
+                }
+
+                // Marcar el usuario como activo
+                usuario.Activo = true;
+
+                // Guardar cambios
                 _context.Update(usuario);
                 await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction(nameof(Index), "Home");
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al activar el usuario: " + ex.Message);
+            }
         }
+
 
         private bool UsuarioExists(int id)
         {

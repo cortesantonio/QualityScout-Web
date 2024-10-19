@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace QualityScout.Migrations
 {
     /// <inheritdoc />
-    public partial class mods : Migration
+    public partial class qsbdb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -96,15 +96,14 @@ namespace QualityScout.Migrations
                     Titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Enfoque = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UsuariosId = table.Column<int>(type: "int", nullable: false)
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Informe", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Informe_Usuario_UsuariosId",
-                        column: x => x.UsuariosId,
+                        name: "FK_Informe_Usuario_IdUsuarios",
+                        column: x => x.IdUsuarios,
                         principalTable: "Usuario",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -127,22 +126,20 @@ namespace QualityScout.Migrations
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Idioma = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UnidadMedida = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DescripcionCapsula = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UsuariosId = table.Column<int>(type: "int", nullable: false),
-                    InformacionQuimicaId = table.Column<int>(type: "int", nullable: false)
+                    DescripcionCapsula = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Producto", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Producto_InformacionQuimica_InformacionQuimicaId",
-                        column: x => x.InformacionQuimicaId,
+                        name: "FK_Producto_InformacionQuimica_IdInformacionQuimica",
+                        column: x => x.IdInformacionQuimica,
                         principalTable: "InformacionQuimica",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Producto_Usuario_UsuariosId",
-                        column: x => x.UsuariosId,
+                        name: "FK_Producto_Usuario_IdUsuarios",
+                        column: x => x.IdUsuarios,
                         principalTable: "Usuario",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -225,7 +222,6 @@ namespace QualityScout.Migrations
                     Medalla = table.Column<bool>(type: "bit", nullable: false),
                     ColorCapsula = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TipoCorcho = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TipoBotella = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MedidaEtiquetaABoquete = table.Column<int>(type: "int", nullable: false),
                     MedidaEtiquetaABase = table.Column<int>(type: "int", nullable: false)
                 },
@@ -255,15 +251,14 @@ namespace QualityScout.Migrations
                     IdProductos = table.Column<int>(type: "int", nullable: false),
                     FechaCosecha = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FechaProduccion = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FechaEnvasado = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ProductosId = table.Column<int>(type: "int", nullable: false)
+                    FechaEnvasado = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductoHistorial", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductoHistorial_Producto_ProductosId",
-                        column: x => x.ProductosId,
+                        name: "FK_ProductoHistorial_Producto_IdProductos",
+                        column: x => x.IdProductos,
                         principalTable: "Producto",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -290,19 +285,19 @@ namespace QualityScout.Migrations
                 column: "IdUsuarios");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Informe_UsuariosId",
+                name: "IX_Informe_IdUsuarios",
                 table: "Informe",
-                column: "UsuariosId");
+                column: "IdUsuarios");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Producto_InformacionQuimicaId",
+                name: "IX_Producto_IdInformacionQuimica",
                 table: "Producto",
-                column: "InformacionQuimicaId");
+                column: "IdInformacionQuimica");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Producto_UsuariosId",
+                name: "IX_Producto_IdUsuarios",
                 table: "Producto",
-                column: "UsuariosId");
+                column: "IdUsuarios");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductoDetalle_IdBotellaDetalles",
@@ -315,9 +310,9 @@ namespace QualityScout.Migrations
                 column: "IdProductos");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductoHistorial_ProductosId",
+                name: "IX_ProductoHistorial_IdProductos",
                 table: "ProductoHistorial",
-                column: "ProductosId");
+                column: "IdProductos");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Usuario_RolId",

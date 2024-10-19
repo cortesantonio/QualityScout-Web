@@ -69,9 +69,11 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string CodigoBarra, string CodigoVE, string Nombre, string URLImagen, string PaisDestino, int IdInformacionQuimica, string Idioma, string UnidadMedida, string DescripcionCapsula)
         {
+            try
+            {
                 // Obtener el usuario actualmente logueado
                 var currentUser = await _context.Usuario
-                    .FirstOrDefaultAsync(u => u.Rut == User.Identity.Name); 
+                    .FirstOrDefaultAsync(u => u.Rut == User.Identity.Name);
                 if (currentUser == null)
                 {
                     return Problem("Usuario no encontrado.");
@@ -94,9 +96,13 @@ namespace ScannerCC.Controllers
                 _context.Add(producto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
-            
-
+            }
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al crear el producto: " + ex.Message);
+            }
         }
+
 
 
         // GET: Productoes/Edit/5
@@ -127,12 +133,7 @@ namespace ScannerCC.Controllers
                     )
                 })
                 .ToList();
-
-            var usuarios = _context.Usuario.Select(u => new { u.Id, u.Nombre }).ToList(); // Incluye nombres para identificación
-
             ViewData["IdInformacionQuimica"] = new SelectList(infquimica, "Id", "DisplayInfo", producto?.IdInformacionQuimica);
-            ViewData["IdUsuarios"] = new SelectList(usuarios, "Id", "Nombre", producto.IdUsuarios); // Mostrar los nombres de usuario
-
             return View(producto); // Devuelve el producto con los datos actuales
         }
 
@@ -141,35 +142,40 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdInformacionQuimica,CodigoBarra,CodigoVE,Nombre,URLImagen,PaisDestino,IdUsuarios,Activo,FechaRegistro,Idioma,UnidadMedida,DescripcionCapsula")] Productos producto)
+        public async Task<IActionResult> Edit(int id, string CodigoBarra, string CodigoVE, string Nombre, string URLImagen, string PaisDestino, int IdInformacionQuimica, string Idioma, string UnidadMedida, string DescripcionCapsula)
         {
-            if (id != producto.Id)
+            try
             {
-                return NotFound();
-            }
+                // Obtener el producto a editar
+                var producto = await _context.Producto.FindAsync(id);
+                if (producto == null)
+                {
+                    return NotFound("Producto no encontrado.");
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(producto);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductoExists(producto.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                // Actualizar propiedades del producto
+                producto.CodigoBarra = CodigoBarra;
+                producto.CodigoVE = CodigoVE;
+                producto.Nombre = Nombre;
+                producto.URLImagen = URLImagen;
+                producto.PaisDestino = PaisDestino;
+                producto.Idioma = Idioma;
+                producto.IdInformacionQuimica = IdInformacionQuimica;
+                producto.UnidadMedida = UnidadMedida;
+                producto.DescripcionCapsula = DescripcionCapsula;
+
+                // Guardar cambios
+                _context.Update(producto);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction("Index", "Home");
             }
-            return View(producto);
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al editar el producto: " + ex.Message);
+            }
         }
+
 
 
         // GET: Productoes/Desactivar/5
@@ -192,26 +198,37 @@ namespace ScannerCC.Controllers
         }
 
         // POST: Productoes/Desactivar/5
+
         [Authorize(Roles = "Especialista")]
-        [HttpPost, ActionName("Desactivar")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DesactivarConfirmedo(int id)
+        public async Task<IActionResult> Desactivar(int id)
         {
-            if (_context.Producto == null)
+            try
             {
-                return Problem("Entity set 'AppDbContext.Producto' is null.");
-            }
+                // Obtener el producto a desactivar
+                var producto = await _context.Producto.FindAsync(id);
+                if (producto == null)
+                {
+                    return NotFound("Producto no encontrado.");
+                }
 
-            var producto = await _context.Producto.FindAsync(id);
-            if (producto != null)
+                // Marcar el producto como inactivo
+                producto.Activo = false;
+
+                // Guardar cambios
+                _context.Update(producto);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
             {
-                producto.Activo = false; 
-                _context.Producto.Update(producto);
+                return Problem("Ocurrió un error al desactivar el producto: " + ex.Message);
             }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Home");
         }
+
+
 
         // GET: Productoes/Activar/5
         [Authorize(Roles = "Especialista")]
@@ -234,25 +251,34 @@ namespace ScannerCC.Controllers
 
         // POST: Productoes/Activar/5
         [Authorize(Roles = "Especialista")]
-        [HttpPost, ActionName("Activar")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ActivarConfirmedo(int id)
+        public async Task<IActionResult> Activar(int id)
         {
-            if (_context.Producto == null)
+            try
             {
-                return Problem("Entity set 'AppDbContext.Producto' is null.");
-            }
+                // Obtener el producto a activar
+                var producto = await _context.Producto.FindAsync(id);
+                if (producto == null)
+                {
+                    return NotFound("Producto no encontrado.");
+                }
 
-            var producto = await _context.Producto.FindAsync(id);
-            if (producto != null)
+                // Marcar el producto como activo
+                producto.Activo = true;
+
+                // Guardar cambios
+                _context.Update(producto);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
             {
-                producto.Activo = true; 
-                _context.Producto.Update(producto);
+                return Problem("Ocurrió un error al activar el producto: " + ex.Message);
             }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Home");
         }
+
 
         private bool ProductoExists(int id)
         {

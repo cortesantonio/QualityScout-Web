@@ -49,17 +49,14 @@ namespace ScannerCC.Controllers
         }
 
         // POST: Productoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int IdProductos, int IdBotellaDetalles , int Capacidad ,  string TipoCapsula , string TipoEtiqueta , string ColorBotella, bool Medalla, string ColorCapsula,
-                                                    string TipoCorcho , int MedidaEtiquetaABoquete , int MedidaEtiquetaABase)
+        public async Task<IActionResult> Create(int IdProductos, int IdBotellaDetalles, int Capacidad, string TipoCapsula, string TipoEtiqueta, string ColorBotella, bool Medalla, string ColorCapsula,
+                                                string TipoCorcho, int MedidaEtiquetaABoquete, int MedidaEtiquetaABase)
         {
-
-
-            
+            try
+            {
                 ProductoDetalles productoDetalle = new ProductoDetalles();
                 productoDetalle.IdProductos = IdProductos;
                 productoDetalle.IdBotellaDetalles = IdBotellaDetalles;
@@ -71,25 +68,21 @@ namespace ScannerCC.Controllers
                 productoDetalle.ColorCapsula = ColorCapsula;
                 productoDetalle.TipoCorcho = TipoCorcho;
                 productoDetalle.MedidaEtiquetaABoquete = MedidaEtiquetaABoquete;
-                productoDetalle.MedidaEtiquetaABase = MedidaEtiquetaABase;  
+                productoDetalle.MedidaEtiquetaABase = MedidaEtiquetaABase;
 
                 _context.ProductoDetalle.Add(productoDetalle);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync(); 
                 return RedirectToAction("Index", "Home");
-
-
-
-            
-            
-
-
-
-
+            }
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al crear el detalle del producto: " + ex.Message);
+            }
         }
 
 
-    // GET: Productoes/Edit/5
-    public async Task<IActionResult> Edit(int? id)
+        // GET: Productoes/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ProductoDetalle == null)
             {
@@ -109,42 +102,47 @@ namespace ScannerCC.Controllers
             return View(productod);
         }
 
-        // POST: Productoes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Productoes/Edit/
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdProductos,IdBotellaDetalles,Capacidad,TipoCapsula,TipoEtiqueta,ColorBotella,Medalla,ColorCapsula,TipoCorcho,TipoBotella,MedidaEtiquetaABoquete,MedidaEtiquetaABase")] ProductoDetalles productod)
+        public async Task<IActionResult> Edit(int id, int IdProductos, int IdBotellaDetalles, int Capacidad, string TipoCapsula, string TipoEtiqueta, string ColorBotella, bool Medalla, string ColorCapsula,
+                                        string TipoCorcho, int MedidaEtiquetaABoquete, int MedidaEtiquetaABase)
         {
-            if (id != productod.Id)
+            try
             {
-                return NotFound();
-            }
+                // Obtener el producto detalle a editar
+                var productoDetalle = await _context.ProductoDetalle.FindAsync(id);
+                if (productoDetalle == null)
+                {
+                    return NotFound("Detalle del producto no encontrado.");
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(productod);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductoDExists(productod.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                // Actualizar propiedades del producto detalle
+                productoDetalle.IdProductos = IdProductos;
+                productoDetalle.IdBotellaDetalles = IdBotellaDetalles;
+                productoDetalle.Capacidad = Capacidad;
+                productoDetalle.TipoCapsula = TipoCapsula;
+                productoDetalle.TipoEtiqueta = TipoEtiqueta;
+                productoDetalle.ColorBotella = ColorBotella;
+                productoDetalle.Medalla = Medalla;
+                productoDetalle.ColorCapsula = ColorCapsula;
+                productoDetalle.TipoCorcho = TipoCorcho;
+                productoDetalle.MedidaEtiquetaABoquete = MedidaEtiquetaABoquete;
+                productoDetalle.MedidaEtiquetaABase = MedidaEtiquetaABase;
+
+                // Guardar cambios
+                _context.ProductoDetalle.Update(productoDetalle);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction("Index", "Home");
             }
-            return View(productod);
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al editar el detalle del producto: " + ex.Message);
+            }
         }
+
 
         // GET: Productoes/Delete/5
         [Authorize(Roles = "Especialista")]
@@ -165,24 +163,32 @@ namespace ScannerCC.Controllers
             return View(productod);
         }
 
-        [Authorize(Roles = "Especialista")]
-        // POST: Productoes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.ProductoDetalle == null)
-            {
-                return Problem("Entity set 'AppDbContext.ProductoDetalle'  is null.");
-            }
-            var productod = await _context.ProductoDetalle.FindAsync(id);
-            if (productod != null)
-            {
-                _context.ProductoDetalle.Remove(productod);
-            }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Home");
+        // POST: Productoes/Delete/5
+        [Authorize(Roles = "Especialista")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                // Obtener el producto detalle a eliminar
+                var productoDetalle = await _context.ProductoDetalle.FindAsync(id);
+                if (productoDetalle == null)
+                {
+                    return NotFound("Detalle del producto no encontrado.");
+                }
+
+                // Eliminar el producto detalle
+                _context.ProductoDetalle.Remove(productoDetalle);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al eliminar el detalle del producto: " + ex.Message);
+            }
         }
 
         private bool ProductoDExists(int id)

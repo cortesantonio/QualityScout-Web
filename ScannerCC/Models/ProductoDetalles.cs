@@ -19,7 +19,6 @@ namespace ScannerCC.Models
         public bool Medalla { get; set; }
         public string ColorCapsula { get; set; }
         public string TipoCorcho { get; set; }
-        // public string TipoBotella { get; set; } REPETIDO
         public int MedidaEtiquetaABoquete { get; set; }
         public int MedidaEtiquetaABase { get; set; }
 

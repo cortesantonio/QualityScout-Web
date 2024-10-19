@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ScannerCC.Models
 {
@@ -6,6 +7,7 @@ namespace ScannerCC.Models
     {
         [Key]
         public int Id { get; set; }
+        [ForeignKey("Usuarios")]
         public int IdUsuarios { get; set; }
         public string Titulo { get; set; }
         public string Enfoque { get; set; }

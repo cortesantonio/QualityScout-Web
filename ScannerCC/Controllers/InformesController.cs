@@ -38,38 +38,44 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
-            var usuarios = _context.Usuario.Select(u => new { u.Id, u.Nombre }).ToList(); 
-
-            ViewData["IdUsuarios"] = new SelectList(usuarios, "Id", "Nombre");
             return View();
         }
 
         // POST: Productoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(
-    [Bind("Id,IdUsuarios,Titulo,Enfoque,Fecha,Descripcion")] Informes informes)
+        public async Task<IActionResult> Create(string Titulo, string Enfoque, string Descripcion)
         {
-            if (ModelState.IsValid)
+            try
             {
+                // Obtener el usuario actualmente logueado
                 var currentUser = await _context.Usuario.FirstOrDefaultAsync(u => u.Email == User.Identity.Name); // Ajusta según cómo almacenas el nombre del usuario
                 if (currentUser == null)
                 {
                     return Problem("Usuario no encontrado.");
                 }
 
+                // Crear un nuevo informe
+                Informes informes = new Informes();
                 informes.IdUsuarios = currentUser.Id; // Asigna el Id del usuario logueado
+                informes.Titulo = Titulo;
+                informes.Enfoque = Enfoque;
                 informes.Fecha = DateTime.Now; // Asigna la fecha actual
+                informes.Descripcion = Descripcion;
 
+                // Guardar en la base de datos
                 _context.Add(informes);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home");
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al crear el informe: " + ex.Message);
+            }
         }
+
 
 
         // GET: Productoes/Edit/5
@@ -85,48 +91,42 @@ namespace ScannerCC.Controllers
             {
                 return NotFound();
             }
-            var usuarios = _context.Usuario.Select(u => new { u.Id, u.Nombre }).ToList();
-
-            ViewData["IdUsuarios"] = new SelectList(usuarios, "Id", "Nombre", informes.IdUsuarios);
             return View(informes);
         }
 
         // POST: Productoes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdUsuarios,Titulo,Enfoque,Fecha,Descripcion")] Informes informes)
+        public async Task<IActionResult> Edit(int id, string Titulo, string Enfoque, string Descripcion)
         {
-            if (id != informes.Id)
+            try
             {
-                return NotFound();
-            }
+                // Obtener el informe a editar
+                var informes = await _context.Informe.FindAsync(id);
+                if (informes == null)
+                {
+                    return NotFound("Informe no encontrado.");
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(informes);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!InfExists(informes.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                // Asignar las propiedades del informe
+                informes.Titulo = Titulo;
+                informes.Enfoque = Enfoque;
+                informes.Descripcion = Descripcion;
+                // No es necesario actualizar la fecha, a menos que desees cambiarla
+
+                // Guardar cambios
+                _context.Update(informes);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction("Index", "Home");
             }
-            return View(informes);
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al editar el informe: " + ex.Message);
+            }
         }
+
 
         // GET: Productoes/Delete/5
         [Authorize(Roles = "Especialista")]
@@ -147,24 +147,31 @@ namespace ScannerCC.Controllers
             return View(informes);
         }
 
-        [Authorize(Roles = "Especialista")]
         // POST: Productoes/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Especialista")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (_context.Informe == null)
+            try
             {
-                return Problem("Entity set 'AppDbContext.Informe'  is null.");
-            }
-            var informes = await _context.Informe.FindAsync(id);
-            if (informes != null)
-            {
-                _context.Informe.Remove(informes);
-            }
+                // Obtener el informe a eliminar
+                var informes = await _context.Informe.FindAsync(id);
+                if (informes == null)
+                {
+                    return NotFound("Informe no encontrado.");
+                }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Home");
+                // Eliminar el informe
+                _context.Informe.Remove(informes);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al eliminar el informe: " + ex.Message);
+            }
         }
 
         private bool InfExists(int id)

@@ -1,5 +1,6 @@
 ﻿using ScannerCC.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ScannerCC.Models
 {
@@ -7,7 +8,9 @@ namespace ScannerCC.Models
     {
         [Key]
         public int Id { get; set; }
+        [ForeignKey("Productos")]
         public int IdProductos { get; set; }
+        [ForeignKey("Usuarios")]
         public int IdUsuarios { get; set; }
         public DateTime Fecha { get; set; }
         public TimeSpan Hora { get; set; }

@@ -41,22 +41,31 @@ namespace ScannerCC.Controllers
         }
 
         // POST: Productoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(
-    [Bind("Id,NombreBotella,AlturaBotella,AnchoBotella")] BotellaDetalles botella)
+        public async Task<IActionResult> Create(string NombreBotella, int AlturaBotella, int AnchoBotella)
         {
-            if (ModelState.IsValid)
+            try
             {
+                // Crear un nuevo objeto BotellaDetalles
+                BotellaDetalles botella = new BotellaDetalles();
+                botella.NombreBotella = NombreBotella;
+                botella.AlturaBotella = AlturaBotella;
+                botella.AnchoBotella = AnchoBotella;
+
+                // Guardar en la base de datos
                 _context.Add(botella);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home");
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al crear la botella: " + ex.Message);
+            }
         }
+
 
 
         // GET: Productoes/Edit/5
@@ -76,41 +85,37 @@ namespace ScannerCC.Controllers
         }
 
         // POST: Productoes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NombreBotella,AlturaBotella,AnchoBotella")] BotellaDetalles botella)
+        public async Task<IActionResult> Edit(int id, string NombreBotella, int AlturaBotella, int AnchoBotella)
         {
-            if (id != botella.Id)
+            try
             {
-                return NotFound();
-            }
+                // Obtener la botella a editar
+                var botella = await _context.BotellaDetalle.FindAsync(id);
+                if (botella == null)
+                {
+                    return NotFound("Botella no encontrada.");
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(botella);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductoExists(botella.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                // Actualizar las propiedades de la botella
+                botella.NombreBotella = NombreBotella;
+                botella.AlturaBotella = AlturaBotella;
+                botella.AnchoBotella = AnchoBotella;
+
+                // Guardar los cambios en la base de datos
+                _context.Update(botella);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction("Index", "Home");
             }
-            return View(botella);
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al editar la botella: " + ex.Message);
+            }
         }
+
 
         // GET: Productoes/Delete/5
         [Authorize(Roles = "Especialista")]
@@ -131,25 +136,33 @@ namespace ScannerCC.Controllers
             return View(botella);
         }
 
-        [Authorize(Roles = "Especialista")]
         // POST: Productoes/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Especialista")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (_context.BotellaDetalle == null)
+            try
             {
-                return Problem("Entity set 'AppDbContext.BotellaDetalle'  is null.");
-            }
-            var botella = await _context.BotellaDetalle.FindAsync(id);
-            if (botella != null)
-            {
-                _context.BotellaDetalle.Remove(botella);
-            }
+                // Obtener la botella a eliminar
+                var botella = await _context.BotellaDetalle.FindAsync(id);
+                if (botella == null)
+                {
+                    return NotFound("Botella no encontrada.");
+                }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Home");
+                // Eliminar la botella de la base de datos
+                _context.BotellaDetalle.Remove(botella);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                return Problem("Ocurrió un error al eliminar la botella: " + ex.Message);
+            }
         }
+
 
         private bool ProductoExists(int id)
         {
