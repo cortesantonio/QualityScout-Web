@@ -46,11 +46,12 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(DateTime FechaCosecha, DateTime FechaProduccion, DateTime FechaEnvasado)
+        public async Task<IActionResult> Create(int IdProductos, DateTime FechaCosecha, DateTime FechaProduccion, DateTime FechaEnvasado)
         {
             try
             {
                 ProductoHistorial productoh = new ProductoHistorial();
+                productoh.IdProductos = IdProductos;
                 productoh.FechaCosecha = FechaCosecha;
                 productoh.FechaProduccion = FechaProduccion;
                 productoh.FechaEnvasado = FechaEnvasado;
@@ -93,7 +94,7 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, DateTime FechaCosecha, DateTime FechaProduccion, DateTime FechaEnvasado)
+        public async Task<IActionResult> Edit(int id, int IdProductos, DateTime FechaCosecha, DateTime FechaProduccion, DateTime FechaEnvasado)
         {
             try
             {
@@ -102,7 +103,7 @@ namespace ScannerCC.Controllers
                 {
                     return NotFound("Historial del producto no encontrado.");
                 }
-
+                productoh.IdProductos = IdProductos;
                 productoh.FechaCosecha = FechaCosecha;
                 productoh.FechaProduccion = FechaProduccion;
                 productoh.FechaEnvasado = FechaEnvasado;

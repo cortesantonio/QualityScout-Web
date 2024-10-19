@@ -92,7 +92,9 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                var control = await _context.Controles.FindAsync(id);
+                var control = await _context.Controles
+                    .Include(c => c.Productos) 
+                    .FirstOrDefaultAsync(c => c.Id == id);
                 if (control == null)
                 {
                     return NotFound("Control no encontrado.");
@@ -104,8 +106,7 @@ namespace ScannerCC.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                ViewBag.IdProductos = new SelectList(_context.Producto, "Id", "Nombre", control.IdProductos);
-                return View(control);
+                return View(control); // Enviar el control a la vista
             }
             catch (Exception ex)
             {
@@ -134,7 +135,7 @@ namespace ScannerCC.Controllers
                         return NotFound("Control no encontrado.");
                     }
 
-                    control.IdProductos = IdProductos; ; 
+                    control.IdProductos = IdProductos; 
                     control.Linea = Linea;
                     control.PaisDestino = PaisDestino;
                     control.Comentario = Comentario;

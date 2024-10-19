@@ -54,16 +54,9 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label asp-for="IdProductos" class="control-label">Productos</label>
-                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos">
-                            <option value="">Seleccione un producto</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="IdUsuarios" class="control-label">Usuarios</label>
-                        <select asp-for="IdUsuarios" class="form-control" asp-items="ViewBag.IdUsuarios">
-                            <option value="">Seleccione un usuario</option>
-                        </select>
+                        <label>Producto</label>
+                        <input type="text" class="form-control" value="@Model.Productos.Nombre" readonly />
+                        <input type="hidden" name="IdProductos" value="@Model.IdProductos" />
                     </div>
                     <div class="form-group">
                         <label asp-for="Linea" class="control-label">Linea</label>
@@ -90,13 +83,8 @@
                         <select name="EstadoFinal" id="EstadoFinal" class="form-control">
                             <option value="Aprobado">Aprobado</option>
                             <option value="Reproceso">Reproceso</option>
-                            <option value="Reprobado">Reproceso</option>
+                            <option value="Rechazado">Rechazado</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="FechaHoraControlFinal" class="control-label">Fecha y hora control final</label>
-                        <input asp-for="FechaHoraControlFinal" class="form-control" type="datetime-local" />
-                        <span asp-validation-for="FechaHoraControlFinal" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Guardar" class="btn btn-dark" />

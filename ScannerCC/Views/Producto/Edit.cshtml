@@ -86,16 +86,6 @@
                         <span asp-validation-for="PaisDestino" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="IdUsuarios" class="control-label">Usuarios</label>
-                        <select asp-for="IdUsuarios" class="form-control" asp-items="ViewBag.IdUsuarios">
-                            <option value="">Seleccione un usuario</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="FechaRegistro" class="control-label"></label>
-                        <input asp-for="FechaRegistro" class="form-control" type="datetime" value="@Model.FechaRegistro" />
-                    </div>
-                    <div class="form-group">
                         <label asp-for="Idioma" class="control-label">Idioma</label>
                         <input asp-for="Idioma" class="form-control" />
                         <span asp-validation-for="Idioma" class="text-danger"></span>
