@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ScannerCC.Models
 {
@@ -7,7 +8,9 @@ namespace ScannerCC.Models
     {
         [Key]
         public int Id { get; set; }
+        [ForeignKey("Productos")]
         public int IdProductos { get; set; }
+        [ForeignKey("BotellaDetalles")]
         public int IdBotellaDetalles { get; set; }
         public int Capacidad { get; set; }
         public string TipoCapsula { get; set; }
@@ -16,7 +19,7 @@ namespace ScannerCC.Models
         public bool Medalla { get; set; }
         public string ColorCapsula { get; set; }
         public string TipoCorcho { get; set; }
-        public string TipoBotella { get; set; }
+        // public string TipoBotella { get; set; } REPETIDO
         public int MedidaEtiquetaABoquete { get; set; }
         public int MedidaEtiquetaABase { get; set; }
 

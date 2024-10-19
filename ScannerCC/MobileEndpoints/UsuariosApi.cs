@@ -87,8 +87,26 @@ namespace QualityScout.MobileEndpoints
 
 
         [HttpPut("UpdateActivo/{rut}")]
-        public async Task<IActionResult> UpdateActivo(string rut)
+        public async Task<IActionResult> UpdateActivo([FromHeader(Name = "Authorization")] string authorization, string rut)
         {
+            // Extrae el token de la cabecera Authorization
+            if (string.IsNullOrEmpty(authorization) || !authorization.StartsWith("Bearer "))
+            {
+                return Unauthorized("Token no proporcionado o no válido.");
+            }
+
+            var token = authorization.Substring("Bearer ".Length).Trim();
+
+            var usuarioPeticion = await _context.Usuario.FirstOrDefaultAsync(u => u.Token == token);
+            if (usuarioPeticion == null)
+            {
+                return Unauthorized("Token no válido.");
+            }
+
+
+
+
+
             if (_context.Usuario == null)
             {
                 return Problem("Entity set 'AppDbContext.Usuario' is null.");

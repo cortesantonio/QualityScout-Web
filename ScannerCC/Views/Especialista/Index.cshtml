@@ -307,7 +307,7 @@
                                     <td>
                                         @switch (item.Rol.Nombre)
                                         {
-                                            case "Controlcalidad":
+                                            case "Control de Calidad":
                                                 @:Control de calidad
                                                 break;
                                             case "Especialista":
@@ -454,7 +454,6 @@
                     <table class="tableUsuarios">
                         <thead>
                             <tr>
-                                <th>Cepa</th>
                                 <th>Minimo de azucar</th>
                                 <th>Maximo de azucar</th>
                                 <th>Minimo de grado de alcohol</th>
@@ -468,9 +467,7 @@
                             {
 
                                 <tr>
-                                    <td>
-                                        @item.Cepa
-                                    </td>
+                                    
                                     <td>
                                         @item.MinAzucar
                                     </td>
@@ -707,17 +704,15 @@
                                     <td>
                                         @item.Medalla
                                     </td>
-                                    <td>
-                                        @item.TipoBotella
-                                    </td>
+                                    
                                     <td>
                                         @item.ColorBotella
                                     </td>
                                     <td>
-                                        @item.MedidadEtiquetaABoquete
+                                        @item.MedidaEtiquetaABoquete
                                     </td>
                                     <td>
-                                        @item.MedidadEtiquetaABase
+                                        @item.MedidaEtiquetaABase
                                     </td>
 
                                     <td>
@@ -788,9 +783,7 @@
                                     <td>
                                         @item.CodigoBarra
                                     </td>
-                                    <td>
-                                        @item.Cepa
-                                    </td>
+                                    
                                     <td>
                                         @item.Nombre
                                     </td>
@@ -867,7 +860,6 @@
                             <tr>
                                 <th>Nombre producto</th>
                                 <th>Linea</th>
-                                <th>Cepa</th>
                                 <th>Pais destino</th>
                                 <th>Comentario</th>
                                 <th>Tipo de control</th>
@@ -886,9 +878,7 @@
                                     <td>
                                         @item.Linea
                                     </td>
-                                    <td>
-                                        @item.Cepa
-                                    </td>
+                                    
                                     <td>
                                         @item.PaisOrigen
                                     </td>

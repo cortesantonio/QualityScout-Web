@@ -63,7 +63,7 @@ namespace ScannerCC.Controllers
                             {
                             new Claim(ClaimTypes.Name, us.Rut),
                             new Claim(ClaimTypes.NameIdentifier, us.Rut),
-                            new Claim(ClaimTypes.Role, "Control de calidad")
+                            new Claim(ClaimTypes.Role, "Control de Calidad")
                             }; 
                             var identity = new ClaimsIdentity(Claims,
                                 CookieAuthenticationDefaults.AuthenticationScheme);
@@ -130,7 +130,7 @@ namespace ScannerCC.Controllers
 
 
         [HttpPost]
-        public IActionResult Create(string Email, string Rut, string Nombre, string Password, string Rol)
+        public IActionResult Create(string Email, string Rut, string Nombre, string Password, int Rol)
         {
             var us = _context.Usuario.Where(u => u.Rut.Equals(Rut)).FirstOrDefault();
             if (us != null)
@@ -142,13 +142,12 @@ namespace ScannerCC.Controllers
             }
             else
             {
-                var id_rol_ingresado = _context.Rol.Where(u => u.Nombre.Contains(Rol)).FirstOrDefault().idRol;
 
                 Usuarios U = new Usuarios();
                 U.Nombre = Nombre;
                 U.Email = Email;
                 U.Rut = Rut;
-                U.RolId = id_rol_ingresado;
+                U.RolId = Rol;
                 U.Activo=true;
                 U.Token = Guid.NewGuid().ToString();
 

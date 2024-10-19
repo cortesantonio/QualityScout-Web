@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ScannerCC.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ScannerCC.Controllers
 {
@@ -53,22 +54,42 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(
-    [Bind("Id,IdProductos,IdBotellaDetalles,Capacidad,TipoCapsula,TipoEtiqueta,ColorBotella,Medalla," +
-    "ColorCapsula,TipoCorcho,TipoBotella,MedidaEtiquetaABoquete,MedidaEtiquetaABase")] ProductoDetalles productod)
+        public async Task<IActionResult> Create(int IdProductos, int IdBotellaDetalles , int Capacidad ,  string TipoCapsula , string TipoEtiqueta , string ColorBotella, bool Medalla, string ColorCapsula,
+                                                    string TipoCorcho , int MedidaEtiquetaABoquete , int MedidaEtiquetaABase)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(productod);
-                await _context.SaveChangesAsync();
+
+
+            
+                ProductoDetalles productoDetalle = new ProductoDetalles();
+                productoDetalle.IdProductos = IdProductos;
+                productoDetalle.IdBotellaDetalles = IdBotellaDetalles;
+                productoDetalle.Capacidad = Capacidad;
+                productoDetalle.TipoCapsula = TipoCapsula;
+                productoDetalle.TipoEtiqueta = TipoEtiqueta;
+                productoDetalle.ColorBotella = ColorBotella;
+                productoDetalle.Medalla = Medalla;
+                productoDetalle.ColorCapsula = ColorCapsula;
+                productoDetalle.TipoCorcho = TipoCorcho;
+                productoDetalle.MedidaEtiquetaABoquete = MedidaEtiquetaABoquete;
+                productoDetalle.MedidaEtiquetaABase = MedidaEtiquetaABase;  
+
+                _context.ProductoDetalle.Add(productoDetalle);
+                _context.SaveChanges();
                 return RedirectToAction("Index", "Home");
-            }
-            return RedirectToAction("Index", "Home");
+
+
+
+            
+            
+
+
+
+
         }
 
 
-        // GET: Productoes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+    // GET: Productoes/Edit/5
+    public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ProductoDetalle == null)
             {

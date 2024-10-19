@@ -41,6 +41,10 @@ namespace ScannerCC.Controllers
         // GET: Usuarios/Create
         public IActionResult Create()
         {
+            var rols = _context.Rol.Select(bd => new { bd.idRol, bd.Nombre }).ToList();
+
+            ViewData["Roles"] = new SelectList(rols,  "idRol", "Nombre");
+
             return View();
         }
 

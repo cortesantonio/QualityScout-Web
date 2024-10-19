@@ -21,7 +21,7 @@ namespace ScannerCC.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Server=database-1.cbqcgoqi6yhb.us-east-1.rds.amazonaws.com;Database=qsdb;User Id=admin;Password=vIftdlmCGrVP3SuxYT32;Encrypt=True;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=qsLocal;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
