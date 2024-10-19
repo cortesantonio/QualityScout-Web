@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
 using QualityScout.Models;
 using ScannerCC.Models;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -85,10 +86,23 @@ namespace QualityScout.MobileEndpoints
         }
 
 
-        [HttpPost("CreateUsuario")]
-        public async Task<ActionResult<Usuarios>> CreateUsuario(UserToReceive userToReceive)
-        {
 
+        [HttpPost("CreateUsuario")]
+        public async Task<ActionResult<Usuarios>> CreateUsuario([FromHeader(Name = "Authorization")] string authorization, UserToReceive userToReceive)
+        {
+            // Extrae el token de la cabecera Authorization
+            if (string.IsNullOrEmpty(authorization) || !authorization.StartsWith("Bearer "))
+            {
+                return Unauthorized("Token no proporcionado o no válido.");
+            }
+
+            var token = authorization.Substring("Bearer ".Length).Trim();
+
+            var usuarioPeticion = await _context.Usuario.FirstOrDefaultAsync(u => u.Token == token);
+            if (usuarioPeticion == null)
+            {
+                return Unauthorized("Token no válido.");
+            }
 
             var usuarioExiste = _context.Usuario.Where(u => u.Rut.Equals(userToReceive.Rut)).FirstOrDefault();
             if (usuarioExiste != null)
@@ -117,6 +131,55 @@ namespace QualityScout.MobileEndpoints
 
             return Ok();
         }
+
+        [HttpPut("UpdatePassword/{Rut}")]
+        public async Task<IActionResult> UpdatePassword([FromHeader(Name = "Authorization")] string authorization, string Rut, [FromBody] string Password)
+        {
+
+            // Extrae el token de la cabecera Authorization
+            if (string.IsNullOrEmpty(authorization) || !authorization.StartsWith("Bearer "))
+            {
+                return Unauthorized("Token no proporcionado o no válido.");
+            }
+
+            var token = authorization.Substring("Bearer ".Length).Trim();
+
+            var usuarioPeticion = await _context.Usuario.FirstOrDefaultAsync(u => u.Token == token);
+            if (usuarioPeticion == null)
+            {
+                return Unauthorized("Token no válido.");
+            }
+
+            if (_context.Usuario == null)
+            {
+                return Problem("Entity set 'AppDbContext.Usuario' is null.");
+            }
+
+            var usuario = await _context.Usuario.Where(x => x.Rut == Rut).FirstOrDefaultAsync();
+
+            if (usuario == null)
+            {
+                return NotFound("Usuario no encontrado.");
+            }
+
+            CreatePasswordHash(Password, out byte[] passwordHash, out byte[] passwordSalt);
+
+            usuario.PasswordHash = passwordHash;
+            usuario.PasswordSalt = passwordSalt;
+
+            try
+            {
+                _context.Usuario.Update(usuario);
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Contraseña de usuario actualizada correctamente." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al actualizar el estado del usuario: {ex.Message}");
+            }
+        }
+
+
 
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

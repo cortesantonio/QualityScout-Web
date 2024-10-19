@@ -60,7 +60,6 @@ namespace ScannerCC.Controllers
             var usuarios = _context.Usuario.Select(u => new { u.Id, u.Nombre }).ToList(); 
 
             ViewData["IdInformacionQuimica"] = new SelectList(infquimica, "Id", "DisplayInfo");
-            ViewData["IdUsuarios"] = new SelectList(usuarios, "Id", "Nombre"); 
             return View();
         }
 
@@ -68,19 +67,26 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(
-            [Bind("Id,IdInformacionQuimica,CodigoBarra,CodigoVE,Nombre,URLImagen,PaisDestino,IdUsuarios,Activo,FechaRegistro,Idioma,UnidadMedida,DescripcionCapsula")] Productos producto)
+        public async Task<IActionResult> Create(string CodigoBarra, string CodigoVE, string Nombre, string URLImagen, string PaisDestino, int IdInformacionQuimica, string Idioma, string UnidadMedida, string DescripcionCapsula)
         {
-            if (ModelState.IsValid)
-            {
                 // Obtener el usuario actualmente logueado
                 var currentUser = await _context.Usuario
-                    .FirstOrDefaultAsync(u => u.Email == User.Identity.Name); // Ajusta según cómo almacenas el nombre del usuario
+                    .FirstOrDefaultAsync(u => u.Rut == User.Identity.Name); 
                 if (currentUser == null)
                 {
                     return Problem("Usuario no encontrado.");
                 }
 
+                Productos producto = new Productos();
+                producto.CodigoBarra = CodigoBarra;
+                producto.CodigoVE = CodigoVE;
+                producto.Nombre = Nombre;
+                producto.URLImagen = URLImagen;
+                producto.PaisDestino = PaisDestino;
+                producto.Idioma = Idioma;
+                producto.IdInformacionQuimica = IdInformacionQuimica;
+                producto.UnidadMedida = UnidadMedida;
+                producto.DescripcionCapsula = DescripcionCapsula;
                 producto.IdUsuarios = currentUser.Id; // Asigna el Id del usuario logueado
                 producto.FechaRegistro = DateTime.Now; // Asigna la fecha actual
                 producto.Activo = true; // Por defecto activo
@@ -88,9 +94,8 @@ namespace ScannerCC.Controllers
                 _context.Add(producto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
-            }
+            
 
-            return View(producto);
         }
 
 

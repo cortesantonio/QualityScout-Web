@@ -125,6 +125,11 @@
     "Order": 0,
     "Parameters": [
       {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
         "Name": "userToReceive",
         "Type": "QualityScout.Models.UserToReceive",
         "IsRequired": true
@@ -153,6 +158,32 @@
       {
         "Name": "request",
         "Type": "QualityScout.MobileEndpoints.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.AuthApi",
+    "Method": "UpdatePassword",
+    "RelativePath": "api/AuthApi/UpdatePassword/{Rut}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Rut",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -571,6 +602,11 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [
+      {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
+      },
       {
         "Name": "rut",
         "Type": "System.String",

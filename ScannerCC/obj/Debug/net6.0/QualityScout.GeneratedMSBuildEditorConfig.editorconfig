@@ -9,219 +9,219 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = QualityScout
 build_property.RootNamespace = QualityScout
-build_property.ProjectDir = C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\
+build_property.ProjectDir = C:\Users\Alejandra\Downloads\QualityScout-Web\ScannerCC\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC
+build_property.MSBuildProjectDirectory = C:\Users\Alejandra\Downloads\QualityScout-Web\ScannerCC
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/BotellaDetalles/Create.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/BotellaDetalles/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm90ZWxsYURldGFsbGVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/BotellaDetalles/Delete.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/BotellaDetalles/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm90ZWxsYURldGFsbGVzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/BotellaDetalles/Details.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/BotellaDetalles/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm90ZWxsYURldGFsbGVzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/BotellaDetalles/Edit.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/BotellaDetalles/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm90ZWxsYURldGFsbGVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Controlcalidad/Details.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Controlcalidad/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGNhbGlkYWRcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Controlcalidad/Index.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Controlcalidad/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGNhbGlkYWRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Controles/CreateControl.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Controles/CreateControl.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGVzXENyZWF0ZUNvbnRyb2wuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Controles/Delete2.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Controles/Delete2.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGVzXERlbGV0ZTIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Controles/Details2.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Controles/Details2.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGVzXERldGFpbHMyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Controles/Edit2.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Controles/Edit2.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGVzXEVkaXQyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Escaneos/Create.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Escaneos/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXNjYW5lb3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Escaneos/Delete.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Escaneos/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXNjYW5lb3NcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Escaneos/Details.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Escaneos/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXNjYW5lb3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Escaneos/Edit.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Escaneos/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXNjYW5lb3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Especialista/Index.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Especialista/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXNwZWNpYWxpc3RhXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Home/Index.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Home/Index2.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Home/Index2.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleDIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Home/Privacy.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/InformacionQuimica/Create.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/InformacionQuimica/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5mb3JtYWNpb25RdWltaWNhXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/InformacionQuimica/Delete.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/InformacionQuimica/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5mb3JtYWNpb25RdWltaWNhXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/InformacionQuimica/Details.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/InformacionQuimica/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5mb3JtYWNpb25RdWltaWNhXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/InformacionQuimica/Edit.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/InformacionQuimica/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5mb3JtYWNpb25RdWltaWNhXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Informes/Create.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Informes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5mb3JtZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Informes/Delete.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Informes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5mb3JtZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Informes/Details.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Informes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5mb3JtZXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Informes/Edit.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Informes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5mb3JtZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/ProductoDetalles/Create.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/ProductoDetalles/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9EZXRhbGxlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/ProductoDetalles/Delete.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/ProductoDetalles/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9EZXRhbGxlc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/ProductoDetalles/Details.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/ProductoDetalles/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9EZXRhbGxlc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/ProductoDetalles/Edit.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/ProductoDetalles/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9EZXRhbGxlc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/ProductoHistorial/Create.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/ProductoHistorial/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9IaXN0b3JpYWxcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/ProductoHistorial/Delete.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/ProductoHistorial/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9IaXN0b3JpYWxcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/ProductoHistorial/Details.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/ProductoHistorial/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9IaXN0b3JpYWxcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/ProductoHistorial/Edit.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/ProductoHistorial/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9IaXN0b3JpYWxcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Producto/Activar.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Producto/Activar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cQWN0aXZhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Producto/Create.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Producto/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Producto/Delete.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Producto/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Producto/Desactivar.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Producto/Desactivar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cRGVzYWN0aXZhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Producto/Details.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Producto/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Producto/Edit.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Producto/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Shared/Error.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Usuario/Activar.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Usuario/Activar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xBY3RpdmFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Usuario/Create.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Usuario/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Usuario/Delete.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Usuario/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Usuario/Desactivar.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Usuario/Desactivar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xEZXNhY3RpdmFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Usuario/Details.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Usuario/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Usuario/Edit.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Usuario/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Usuario/Index.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Usuario/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/_ViewImports.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/_ViewStart.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Shared/_Layout.cshtml]
+[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-82b6msl433

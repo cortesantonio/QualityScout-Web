@@ -12246,19 +12246,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Antonio\\.nuget\\packages\\": {}
+    "C:\\Users\\Alejandra\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\QualityScout.csproj",
+      "projectUniqueName": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\QualityScout.csproj",
       "projectName": "QualityScout",
-      "projectPath": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\QualityScout.csproj",
-      "packagesPath": "C:\\Users\\Antonio\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\obj\\",
+      "projectPath": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\QualityScout.csproj",
+      "packagesPath": "C:\\Users\\Alejandra\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Antonio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Alejandra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
