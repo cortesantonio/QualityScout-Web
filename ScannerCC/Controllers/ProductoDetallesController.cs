@@ -17,7 +17,7 @@ namespace ScannerCC.Controllers
         }
 
 
-        // GET: Productoes/Details/5
+        // GET: ProductoD/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.ProductoDetalle == null)
@@ -35,7 +35,7 @@ namespace ScannerCC.Controllers
             return View(productod);
         }
 
-        // GET: Productoes/Create
+        // GET: ProductoD/Create
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
@@ -48,7 +48,7 @@ namespace ScannerCC.Controllers
             return View();
         }
 
-        // POST: Productoes/Create
+        // POST: ProductoD/Create
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -81,7 +81,7 @@ namespace ScannerCC.Controllers
         }
 
 
-        // GET: Productoes/Edit/5
+        // GET: ProductoD/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ProductoDetalle == null)
@@ -102,7 +102,7 @@ namespace ScannerCC.Controllers
             return View(productod);
         }
 
-        // POST: Productoes/Edit/
+        // POST: ProductoD/Edit
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -111,14 +111,12 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Obtener el producto detalle a editar
                 var productoDetalle = await _context.ProductoDetalle.FindAsync(id);
                 if (productoDetalle == null)
                 {
                     return NotFound("Detalle del producto no encontrado.");
                 }
 
-                // Actualizar propiedades del producto detalle
                 productoDetalle.IdProductos = IdProductos;
                 productoDetalle.IdBotellaDetalles = IdBotellaDetalles;
                 productoDetalle.Capacidad = Capacidad;
@@ -131,7 +129,6 @@ namespace ScannerCC.Controllers
                 productoDetalle.MedidaEtiquetaABoquete = MedidaEtiquetaABoquete;
                 productoDetalle.MedidaEtiquetaABase = MedidaEtiquetaABase;
 
-                // Guardar cambios
                 _context.ProductoDetalle.Update(productoDetalle);
                 await _context.SaveChangesAsync();
 
@@ -142,7 +139,6 @@ namespace ScannerCC.Controllers
                 return Problem("Ocurrió un error al editar el detalle del producto: " + ex.Message);
             }
         }
-
 
         // GET: Productoes/Delete/5
         [Authorize(Roles = "Especialista")]
@@ -163,8 +159,7 @@ namespace ScannerCC.Controllers
             return View(productod);
         }
 
-
-        // POST: Productoes/Delete/5
+        // POST: ProductoD/Delete
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -172,14 +167,12 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Obtener el producto detalle a eliminar
                 var productoDetalle = await _context.ProductoDetalle.FindAsync(id);
                 if (productoDetalle == null)
                 {
                     return NotFound("Detalle del producto no encontrado.");
                 }
 
-                // Eliminar el producto detalle
                 _context.ProductoDetalle.Remove(productoDetalle);
                 await _context.SaveChangesAsync();
 

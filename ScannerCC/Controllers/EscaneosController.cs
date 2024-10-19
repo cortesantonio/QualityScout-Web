@@ -16,7 +16,7 @@ namespace ScannerCC.Controllers
         }
 
 
-        // GET: Productoes/Details/5
+        // GET: Escaneos/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Escaneo == null)

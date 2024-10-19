@@ -26,14 +26,12 @@ namespace ScannerCC.Controllers
                     R.Nombre = roles[i];
                     _context.Rol.Add(R);
                     _context.SaveChanges();
-
                 }
             }
             var Users = _context.Usuario.ToList().Count;
             if (Users == 0)
             {
                 return RedirectToAction("CreateAdminUser", "Auth");
-
             }
 
 
@@ -41,24 +39,20 @@ namespace ScannerCC.Controllers
             {
                 var trab = _context.Usuario.Include(r => r.Rol).Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
                 
-                if (trab != null && trab.Rol.Nombre == "Control de calidad")
+                if (trab != null && trab.Rol.Nombre == "Control de Calidad")
                 {
                     return RedirectToAction("Index", "Controlcalidad");
                 }
                 if (trab != null && trab.Rol.Nombre == "Especialista")
                 {
                     return RedirectToAction("Index", "Especialista");
-
                 }
             }
             else
             {
                 return View();
-
             }
-
             return View();
-
         }
 
         public IActionResult Privacy()

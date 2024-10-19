@@ -26,7 +26,7 @@ namespace ScannerCC.Controllers
             return View(await appDbContext.ToListAsync());
         }
 
-        // GET: Controles/Details/5
+        // GET: Controles/Details
         public async Task<IActionResult> Details2(int? id)
         {
             if (id == null || _context.Controles == null)
@@ -37,11 +37,11 @@ namespace ScannerCC.Controllers
             var controles = await _context.Controles
                 .Include(c => c.Productos)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (controles == null)
             {
                 return NotFound();
             }
-
             return View(controles);
         }
 
@@ -56,7 +56,7 @@ namespace ScannerCC.Controllers
         // POST: Controles/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateControl(string IdProductos, string Linea, string PaisDestino, string Comentario, string Tipodecontrol, string Estado)
+        public async Task<IActionResult> CreateControl(int IdProductos, string Linea, string PaisDestino, string Comentario, string Tipodecontrol, string Estado)
         {
             try
             {
@@ -67,9 +67,8 @@ namespace ScannerCC.Controllers
                     return Problem("Usuario no encontrado.");
                 }
 
-                // Crear y asignar el nuevo control
-                Controles control = new Controles(); // Usando new Controles() en lugar de inicialización
-                control.IdProductos = int.Parse(IdProductos); // Asignar IdProductos
+                Controles control = new Controles();
+                control.IdProductos = IdProductos; 
                 control.Linea = Linea;
                 control.PaisDestino = PaisDestino;
                 control.Comentario = Comentario;
@@ -78,7 +77,6 @@ namespace ScannerCC.Controllers
                 control.IdUsuarios = currentUser.Id; // Asignar IdUsuarios
                 control.FechaHoraPrimerControl = DateTime.Now; // Asignar fecha actual
 
-                // Guardar control
                 _context.Add(control);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
@@ -89,7 +87,7 @@ namespace ScannerCC.Controllers
             }
         }
 
-        // GET: Controles/Edit/5
+        // GET: Controles/Edit
         public async Task<IActionResult> Edit2(int id)
         {
             try
@@ -115,12 +113,12 @@ namespace ScannerCC.Controllers
             }
         }
 
-        // POST: Controles/Edit/5
+        // POST: Controles/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit2(int id, string IdProductos, string Linea, string PaisDestino, string Comentario, string Tipodecontrol, string EstadoFinal)
+        public async Task<IActionResult> Edit2(int id, int IdProductos, string Linea, string PaisDestino, string Comentario, string Tipodecontrol, string EstadoFinal)
         {
-            if (id != id) // Se mantiene como estaba para verificar que el id coincida
+            if (id != id) 
             {
                 return NotFound();
             }
@@ -129,16 +127,14 @@ namespace ScannerCC.Controllers
             {
                 try
                 {
-                    // Obtener el control a editar
-                    Controles control = new Controles(); // Usando new Controles() en lugar de inicialización
+                    Controles control = new Controles(); 
                     control = await _context.Controles.FindAsync(id);
                     if (control == null)
                     {
                         return NotFound("Control no encontrado.");
                     }
 
-                    // Asignar propiedades para editar
-                    control.IdProductos = int.Parse(IdProductos); // Asignar IdProductos
+                    control.IdProductos = IdProductos; ; 
                     control.Linea = Linea;
                     control.PaisDestino = PaisDestino;
                     control.Comentario = Comentario;
@@ -173,7 +169,7 @@ namespace ScannerCC.Controllers
         }
 
 
-        // GET: Controles/Delete/5
+        // GET: Controles/Delete
         public async Task<IActionResult> Delete2(int? id)
         {
             if (id == null || _context.Controles == null)
@@ -192,7 +188,7 @@ namespace ScannerCC.Controllers
             return View(controles);
         }
 
-        // POST: Controles/Delete/5
+        // POST: Controles/Delete
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)

@@ -19,7 +19,7 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
-        // GET: Productoes/Details/5
+        // GET: Productos/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Producto == null)
@@ -37,7 +37,7 @@ namespace ScannerCC.Controllers
             return View(producto);
         }
 
-        // GET: Productoes/Create
+        // GET: Productos/Create
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
@@ -63,7 +63,7 @@ namespace ScannerCC.Controllers
             return View();
         }
 
-        // POST: Productoes/Edit/5
+        // POST: Productos/Edit
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -103,9 +103,7 @@ namespace ScannerCC.Controllers
             }
         }
 
-
-
-        // GET: Productoes/Edit/5
+        // GET: Productos/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Producto == null)
@@ -134,11 +132,10 @@ namespace ScannerCC.Controllers
                 })
                 .ToList();
             ViewData["IdInformacionQuimica"] = new SelectList(infquimica, "Id", "DisplayInfo", producto?.IdInformacionQuimica);
-            return View(producto); // Devuelve el producto con los datos actuales
+            return View(producto); 
         }
 
-
-        // POST: Productoes/Edit/5
+        // POST: Productos/Edit
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -146,14 +143,12 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Obtener el producto a editar
                 var producto = await _context.Producto.FindAsync(id);
                 if (producto == null)
                 {
                     return NotFound("Producto no encontrado.");
                 }
 
-                // Actualizar propiedades del producto
                 producto.CodigoBarra = CodigoBarra;
                 producto.CodigoVE = CodigoVE;
                 producto.Nombre = Nombre;
@@ -164,7 +159,6 @@ namespace ScannerCC.Controllers
                 producto.UnidadMedida = UnidadMedida;
                 producto.DescripcionCapsula = DescripcionCapsula;
 
-                // Guardar cambios
                 _context.Update(producto);
                 await _context.SaveChangesAsync();
 
@@ -176,9 +170,7 @@ namespace ScannerCC.Controllers
             }
         }
 
-
-
-        // GET: Productoes/Desactivar/5
+        // GET: Productos/Desactivar
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Desactivar(int? id)
         {
@@ -197,8 +189,7 @@ namespace ScannerCC.Controllers
             return View(producto);
         }
 
-        // POST: Productoes/Desactivar/5
-
+        // POST: Productos/Desactivar
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -206,17 +197,14 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Obtener el producto a desactivar
                 var producto = await _context.Producto.FindAsync(id);
                 if (producto == null)
                 {
                     return NotFound("Producto no encontrado.");
                 }
 
-                // Marcar el producto como inactivo
                 producto.Activo = false;
 
-                // Guardar cambios
                 _context.Update(producto);
                 await _context.SaveChangesAsync();
 
@@ -228,9 +216,7 @@ namespace ScannerCC.Controllers
             }
         }
 
-
-
-        // GET: Productoes/Activar/5
+        // GET: Productos/Activar
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Activar(int? id)
         {
@@ -249,7 +235,7 @@ namespace ScannerCC.Controllers
             return View(producto);
         }
 
-        // POST: Productoes/Activar/5
+        // POST: Productos/Activar
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -257,17 +243,14 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Obtener el producto a activar
                 var producto = await _context.Producto.FindAsync(id);
                 if (producto == null)
                 {
                     return NotFound("Producto no encontrado.");
                 }
 
-                // Marcar el producto como activo
                 producto.Activo = true;
 
-                // Guardar cambios
                 _context.Update(producto);
                 await _context.SaveChangesAsync();
 
@@ -278,7 +261,6 @@ namespace ScannerCC.Controllers
                 return Problem("Ocurrió un error al activar el producto: " + ex.Message);
             }
         }
-
 
         private bool ProductoExists(int id)
         {

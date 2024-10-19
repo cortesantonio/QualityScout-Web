@@ -21,15 +21,9 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
-
-
-
-
-
         [HttpPost]
         public async Task<IActionResult> Login(string user, string password)
         {
-
             //Trabajador
             var us = _context.Usuario.Include(r => r.Rol).Where(u => u.Email.Equals(user) || u.Rut.Equals(user)).FirstOrDefault();
             if (us != null)
@@ -37,8 +31,6 @@ namespace ScannerCC.Controllers
                 //Usuario Encontrado
                 if (VerificarPass(password, us.PasswordHash, us.PasswordSalt))
                 {
-
-
                     if (us.Rol.Nombre == "Especialista") {
                             var Claims = new List<Claim>
                             {
@@ -76,8 +68,6 @@ namespace ScannerCC.Controllers
 
                             return RedirectToAction("Index", "Controlcalidad");
                     }
-
-  
                 }
                 else
                 {
@@ -85,27 +75,20 @@ namespace ScannerCC.Controllers
                     ModelState.AddModelError("", "Contraseña Incorrecta");
                     return RedirectToAction("Index", "Home");
                 }
-
-
             }
             else
             {
                 //Usuario No Existe
                 ModelState.AddModelError("", "Usuario no Encontrado!");
                 return RedirectToAction("Index", "Home");
-
             }
-
-
-
         }
+
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
-
-
 
         public IActionResult CreateAdminUser()
         {
@@ -126,9 +109,6 @@ namespace ScannerCC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
-
-
         [HttpPost]
         public IActionResult Create(string Email, string Rut, string Nombre, string Password, int Rol)
         {
@@ -136,7 +116,7 @@ namespace ScannerCC.Controllers
             if (us != null)
             {
                 //el usuario ya esta registrado con el Rut ingresado
-                ModelState.AddModelError("", "RUT Ya Registrado!");
+                ModelState.AddModelError("", "RUT ya rgistrado!");
                 return RedirectToAction("Index", "Home");
                 
             }
@@ -159,13 +139,11 @@ namespace ScannerCC.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index", "Home");
             }
-
         }
 
         [HttpPost]
         public IActionResult Edit(string Email, string Rut, string Nombre, string Password, string Rol)
         {
-
             var U = _context.Usuario.Include(r => r.Rol).FirstOrDefault(u => u.Rut.Equals(Rut));
             if (U != null) {
                 if(U.Rol.Nombre == Rol)
@@ -183,9 +161,7 @@ namespace ScannerCC.Controllers
                     U.Rut = Rut;
                     U.RolId = id_rol;
                 }
-
                 CreatePasswordHash(Password, out byte[] passwordHash, out byte[] passwordSalt);
-
                 U.PasswordHash = passwordHash;
                 U.PasswordSalt = passwordSalt;
                 _context.Usuario.Update(U);
@@ -196,8 +172,6 @@ namespace ScannerCC.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-
-
         }
 
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

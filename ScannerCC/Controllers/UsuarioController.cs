@@ -19,7 +19,7 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
-        // GET: Usuarios/Details/5
+        // GET: Usuarios/Details
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Details(int? id)
         {
@@ -75,8 +75,7 @@ namespace ScannerCC.Controllers
             }
         }
 
-
-        // GET: Usuarios/Edit/5
+        // GET: Usuarios/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Usuario == null)
@@ -93,7 +92,7 @@ namespace ScannerCC.Controllers
             return View(usuario);
         }
 
-        // POST: Usuarios/Edit/5
+        // POST: Usuarios/Edit
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -103,20 +102,17 @@ namespace ScannerCC.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    // Obtener el usuario a editar
                     var usuario = await _context.Usuario.FindAsync(id);
                     if (usuario == null)
                     {
                         return NotFound("Usuario no encontrado.");
                     }
 
-                    // Asignar propiedades del usuario
                     usuario.Nombre = Nombre;
                     usuario.Rut = Rut;
                     usuario.Email = Email;
                     usuario.RolId = RolId;
 
-                    // Guardar cambios
                     _context.Update(usuario);
                     await _context.SaveChangesAsync();
 
@@ -130,7 +126,7 @@ namespace ScannerCC.Controllers
             }
         }
 
-        // GET: Usuarios/Desactivar/5
+        // GET: Usuarios/Desactivar
         public async Task<IActionResult> Desactivar(int? id)
         {
             if (id == null)
@@ -147,7 +143,7 @@ namespace ScannerCC.Controllers
             return View(usuario); 
         }
 
-        // POST: Usuarios/Desactivar/5
+        // POST: Usuarios/Desactivar
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -155,17 +151,14 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Obtener el usuario a desactivar
                 var usuario = await _context.Usuario.FindAsync(id);
                 if (usuario == null)
                 {
                     return NotFound("Usuario no encontrado.");
                 }
 
-                // Marcar el usuario como inactivo
                 usuario.Activo = false;
 
-                // Guardar cambios
                 _context.Update(usuario);
                 await _context.SaveChangesAsync();
 
@@ -177,7 +170,7 @@ namespace ScannerCC.Controllers
             }
         }
 
-        // GET: Usuarios/Activar/5
+        // GET: Usuarios/Activar
         public async Task<IActionResult> Activar(int? id)
         {
             if (id == null)
@@ -194,7 +187,7 @@ namespace ScannerCC.Controllers
             return View(usuario); 
         }
 
-        // POST: Usuarios/Activar/5
+        // POST: Usuarios/Activar
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -202,17 +195,14 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Obtener el usuario a activar
                 var usuario = await _context.Usuario.FindAsync(id);
                 if (usuario == null)
                 {
                     return NotFound("Usuario no encontrado.");
                 }
 
-                // Marcar el usuario como activo
                 usuario.Activo = true;
 
-                // Guardar cambios
                 _context.Update(usuario);
                 await _context.SaveChangesAsync();
 
@@ -223,7 +213,6 @@ namespace ScannerCC.Controllers
                 return Problem("Ocurrió un error al activar el usuario: " + ex.Message);
             }
         }
-
 
         private bool UsuarioExists(int id)
         {

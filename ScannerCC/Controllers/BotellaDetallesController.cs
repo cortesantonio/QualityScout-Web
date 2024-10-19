@@ -14,8 +14,7 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
-
-        // GET: Productoes/Details/5
+        // GET: Botellas/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.BotellaDetalle == null)
@@ -33,14 +32,14 @@ namespace ScannerCC.Controllers
             return View(botella);
         }
 
-        // GET: Productoes/Create
+        // GET: Botellas/Create
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Productoes/Create
+        // POST: Botellas/Create
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -48,13 +47,11 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Crear un nuevo objeto BotellaDetalles
                 BotellaDetalles botella = new BotellaDetalles();
                 botella.NombreBotella = NombreBotella;
                 botella.AlturaBotella = AlturaBotella;
                 botella.AnchoBotella = AnchoBotella;
 
-                // Guardar en la base de datos
                 _context.Add(botella);
                 await _context.SaveChangesAsync();
 
@@ -66,9 +63,7 @@ namespace ScannerCC.Controllers
             }
         }
 
-
-
-        // GET: Productoes/Edit/5
+        // GET: Botellas/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.BotellaDetalle == null)
@@ -84,7 +79,7 @@ namespace ScannerCC.Controllers
             return View(botella);
         }
 
-        // POST: Productoes/Edit/5
+        // POST: Botellas/Edit
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -92,19 +87,16 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Obtener la botella a editar
                 var botella = await _context.BotellaDetalle.FindAsync(id);
                 if (botella == null)
                 {
                     return NotFound("Botella no encontrada.");
                 }
 
-                // Actualizar las propiedades de la botella
                 botella.NombreBotella = NombreBotella;
                 botella.AlturaBotella = AlturaBotella;
                 botella.AnchoBotella = AnchoBotella;
 
-                // Guardar los cambios en la base de datos
                 _context.Update(botella);
                 await _context.SaveChangesAsync();
 
@@ -117,7 +109,7 @@ namespace ScannerCC.Controllers
         }
 
 
-        // GET: Productoes/Delete/5
+        // GET: Botellas/Delete
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -136,7 +128,7 @@ namespace ScannerCC.Controllers
             return View(botella);
         }
 
-        // POST: Productoes/Delete/5
+        // POST: Botellas/Delete
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -144,14 +136,12 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Obtener la botella a eliminar
                 var botella = await _context.BotellaDetalle.FindAsync(id);
                 if (botella == null)
                 {
                     return NotFound("Botella no encontrada.");
                 }
 
-                // Eliminar la botella de la base de datos
                 _context.BotellaDetalle.Remove(botella);
                 await _context.SaveChangesAsync();
 
@@ -162,7 +152,6 @@ namespace ScannerCC.Controllers
                 return Problem("Ocurrió un error al eliminar la botella: " + ex.Message);
             }
         }
-
 
         private bool ProductoExists(int id)
         {

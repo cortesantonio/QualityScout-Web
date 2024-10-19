@@ -15,8 +15,7 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
-
-        // GET: Productoes/Details/5
+        // GET: ProductoH/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.ProductoHistorial == null)
@@ -34,7 +33,7 @@ namespace ScannerCC.Controllers
             return View(productoh);
         }
 
-        // GET: Productoes/Create
+        // GET: ProductoH/Create
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
@@ -43,7 +42,7 @@ namespace ScannerCC.Controllers
             return View();
         }
 
-        // POST: Productoes/Create
+        // POST: ProductoH/Create
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -51,13 +50,11 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Crear un nuevo objeto de ProductoHistorial
                 ProductoHistorial productoh = new ProductoHistorial();
                 productoh.FechaCosecha = FechaCosecha;
                 productoh.FechaProduccion = FechaProduccion;
                 productoh.FechaEnvasado = FechaEnvasado;
 
-                // Validar el modelo
                 if (ModelState.IsValid)
                 {
                     _context.Add(productoh);
@@ -72,8 +69,7 @@ namespace ScannerCC.Controllers
             }
         }
 
-
-        // GET: Productoes/Edit/5
+        // GET: ProductoH/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ProductoHistorial == null)
@@ -93,7 +89,7 @@ namespace ScannerCC.Controllers
             return View(productoh);
         }
 
-        // POST: Productoes/Edit/5
+        // POST: ProductoH/Edit
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -101,19 +97,16 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Obtener el producto historial a editar
                 var productoh = await _context.ProductoHistorial.FindAsync(id);
                 if (productoh == null)
                 {
                     return NotFound("Historial del producto no encontrado.");
                 }
 
-                // Asignar propiedades del producto historial
                 productoh.FechaCosecha = FechaCosecha;
                 productoh.FechaProduccion = FechaProduccion;
                 productoh.FechaEnvasado = FechaEnvasado;
 
-                // Validar el modelo
                 if (ModelState.IsValid)
                 {
                     _context.Update(productoh);
@@ -128,8 +121,7 @@ namespace ScannerCC.Controllers
             }
         }
 
-
-        // GET: Productoes/Delete/5
+        // GET: ProductoH/Delete
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -148,6 +140,7 @@ namespace ScannerCC.Controllers
             return View(productoh);
         }
 
+        // POST: ProductoH/Delete
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -155,14 +148,12 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Obtener el producto historial a eliminar
                 var productoh = await _context.ProductoHistorial.FindAsync(id);
                 if (productoh == null)
                 {
                     return NotFound("Historial del producto no encontrado.");
                 }
 
-                // Eliminar el producto historial
                 _context.ProductoHistorial.Remove(productoh);
                 await _context.SaveChangesAsync();
 

@@ -14,11 +14,10 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
-        // GET: EspecialistaController
+        // GET: ControlcalidadController
         public ActionResult Index(string Busqueda)
         {
             DateTime fechaHoy = DateTime.Now;
-
 
             if (User.Identity.IsAuthenticated)
             {
@@ -29,13 +28,9 @@ namespace ScannerCC.Controllers
                 ViewBag.Productos = _context.Producto.ToList();
                 ViewBag.Controles = _context.Controles.Include(c => c.Productos);
 
-
-
                 //Si se realiza busqueda de productos evalua y filtra datos
                 if (Busqueda != null)
                 {
-
-
                     var ProductoResultado = _context.Producto.Where(x => x.Nombre.Contains(Busqueda) || x.CodigoBarra.Contains(Busqueda)).ToList();
                     ViewBag.Productos = ProductoResultado;
 
@@ -44,23 +39,15 @@ namespace ScannerCC.Controllers
                         Escaneos E = new Escaneos();
                         E.IdProductos = ProductoResultado.FirstOrDefault().Id;
                         E.IdUsuarios = TrabajadorActivo.Id;
+                        E.Fecha = fechaHoy.Date;
+                        E.Hora = fechaHoy.TimeOfDay;
                         _context.Escaneo.Add(E);
                         _context.SaveChanges();
-
                     }
-
-
                 }
-
-
-
                 return View();
             }
             else { return RedirectToAction("Index", "Home"); }
         }
-
-
-
-
     }
 }

@@ -17,7 +17,7 @@ namespace ScannerCC.Controllers
         }
 
 
-        // GET: Productoes/Details/5
+        // GET: Informacion/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.InformacionQuimica == null)
@@ -42,7 +42,7 @@ namespace ScannerCC.Controllers
             return View();
         }
 
-        // POST: Productoes/Create
+        // POST: Informacion/Create
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -52,7 +52,6 @@ namespace ScannerCC.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    // Crear nueva instancia de InformacionQuimica
                     InformacionQuimica infqui = new InformacionQuimica();
                     infqui.Cepa = Cepa;
                     infqui.MinAzucar = MinAzucar;
@@ -64,13 +63,10 @@ namespace ScannerCC.Controllers
                     infqui.MinGradoAlcohol = MinGradoAlcohol;
                     infqui.MaxGradoAlcohol = MaxGradoAlcohol;
 
-                    // Agregar a la base de datos
                     _context.Add(infqui);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Index", "Home");
                 }
-
-                // En caso de que el modelo no sea válido, redirigir
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
@@ -79,7 +75,7 @@ namespace ScannerCC.Controllers
             }
         }
 
-        // GET: Productoes/Edit/5
+        // GET: Informacion/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.InformacionQuimica == null)
@@ -95,7 +91,7 @@ namespace ScannerCC.Controllers
             return View(infqui);
         }
 
-        // POST: Productoes/Edit/5
+        // POST: Informacion/Edit
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -103,14 +99,12 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Obtener el producto a editar
                 var infqui = await _context.InformacionQuimica.FindAsync(id);
                 if (infqui == null)
                 {
                     return NotFound("Información química no encontrada.");
                 }
 
-                // Actualizar propiedades
                 infqui.Cepa = Cepa;
                 infqui.MinAzucar = MinAzucar;
                 infqui.MaxAzucar = MaxAzucar;
@@ -121,7 +115,6 @@ namespace ScannerCC.Controllers
                 infqui.MinGradoAlcohol = MinGradoAlcohol;
                 infqui.MaxGradoAlcohol = MaxGradoAlcohol;
 
-                // Guardar cambios
                 _context.Update(infqui);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
@@ -132,8 +125,7 @@ namespace ScannerCC.Controllers
             }
         }
 
-
-        // GET: Productoes/Delete/5
+        // GET: Informacion/Delete
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -148,11 +140,10 @@ namespace ScannerCC.Controllers
             {
                 return NotFound();
             }
-
             return View(infqui);
         }
 
-        // POST: Productoes/Delete/5
+        // POST: Informacion/Delete
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -160,14 +151,12 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Obtener la información química a eliminar
                 var infqui = await _context.InformacionQuimica.FindAsync(id);
                 if (infqui == null)
                 {
                     return NotFound("Información química no encontrada.");
                 }
 
-                // Eliminar de la base de datos
                 _context.InformacionQuimica.Remove(infqui);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
@@ -177,7 +166,6 @@ namespace ScannerCC.Controllers
                 return Problem("Ocurrió un error al eliminar la información química: " + ex.Message);
             }
         }
-
 
         private bool InfQuimicaExists(int id)
         {

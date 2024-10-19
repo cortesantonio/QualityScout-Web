@@ -16,7 +16,7 @@ namespace ScannerCC.Controllers
         }
 
 
-        // GET: Productoes/Details/5
+        // GET: Informes/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Informe == null)
@@ -34,14 +34,14 @@ namespace ScannerCC.Controllers
             return View(informes);
         }
 
-        // GET: Productoes/Create
+        // GET: Informes/Create
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Productoes/Create
+        // POST: Informes/Create
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -49,14 +49,12 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Obtener el usuario actualmente logueado
-                var currentUser = await _context.Usuario.FirstOrDefaultAsync(u => u.Email == User.Identity.Name); // Ajusta según cómo almacenas el nombre del usuario
+                var currentUser = await _context.Usuario.FirstOrDefaultAsync(u => u.Email == User.Identity.Name); 
                 if (currentUser == null)
                 {
                     return Problem("Usuario no encontrado.");
                 }
 
-                // Crear un nuevo informe
                 Informes informes = new Informes();
                 informes.IdUsuarios = currentUser.Id; // Asigna el Id del usuario logueado
                 informes.Titulo = Titulo;
@@ -64,7 +62,6 @@ namespace ScannerCC.Controllers
                 informes.Fecha = DateTime.Now; // Asigna la fecha actual
                 informes.Descripcion = Descripcion;
 
-                // Guardar en la base de datos
                 _context.Add(informes);
                 await _context.SaveChangesAsync();
 
@@ -76,9 +73,7 @@ namespace ScannerCC.Controllers
             }
         }
 
-
-
-        // GET: Productoes/Edit/5
+        // GET: Informes/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Informe == null)
@@ -94,7 +89,7 @@ namespace ScannerCC.Controllers
             return View(informes);
         }
 
-        // POST: Productoes/Edit/5
+        // POST: Informes/Edit
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -102,20 +97,16 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Obtener el informe a editar
                 var informes = await _context.Informe.FindAsync(id);
                 if (informes == null)
                 {
                     return NotFound("Informe no encontrado.");
                 }
 
-                // Asignar las propiedades del informe
                 informes.Titulo = Titulo;
                 informes.Enfoque = Enfoque;
                 informes.Descripcion = Descripcion;
-                // No es necesario actualizar la fecha, a menos que desees cambiarla
 
-                // Guardar cambios
                 _context.Update(informes);
                 await _context.SaveChangesAsync();
 
@@ -128,7 +119,7 @@ namespace ScannerCC.Controllers
         }
 
 
-        // GET: Productoes/Delete/5
+        // GET: Informes/Delete
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -147,7 +138,7 @@ namespace ScannerCC.Controllers
             return View(informes);
         }
 
-        // POST: Productoes/Delete/5
+        // POST: Informes/Delete
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -155,14 +146,12 @@ namespace ScannerCC.Controllers
         {
             try
             {
-                // Obtener el informe a eliminar
                 var informes = await _context.Informe.FindAsync(id);
                 if (informes == null)
                 {
                     return NotFound("Informe no encontrado.");
                 }
 
-                // Eliminar el informe
                 _context.Informe.Remove(informes);
                 await _context.SaveChangesAsync();
 
