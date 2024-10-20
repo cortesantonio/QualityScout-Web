@@ -44,12 +44,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Controlcalidad\Details.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Controlcalidad\Details.cshtml" />
-  </ItemGroup>
-
 </Project>

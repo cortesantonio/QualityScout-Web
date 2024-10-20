@@ -61,7 +61,7 @@ namespace ScannerCC.Controllers
             try
             {
                 // Obtener el usuario logueado
-                var currentUser = await _context.Usuario.FirstOrDefaultAsync(u => u.Email == User.Identity.Name);
+                var currentUser = await _context.Usuario.FirstOrDefaultAsync(u => u.Rut == User.Identity.Name);
                 if (currentUser == null)
                 {
                     return Problem("Usuario no encontrado.");

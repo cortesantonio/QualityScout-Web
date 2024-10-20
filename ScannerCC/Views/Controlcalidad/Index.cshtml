@@ -1,3 +1,7 @@
+@{
+    Layout = null;
+}
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -20,21 +24,21 @@
       <div class="line"></div>
       <div class="links">
         <ul>
-          <li>
-                        <button onclick="switchViewControlcalidad('busqueda')" id="btnView">
-                            <i class="fa-solid fa-barcode"></i> Buscador/Scanner
-                        </button>
-          </li>
                     <li>
-                        <button onclick="switchViewControlcalidad('productos')" id="btnView">
-                            <i class="fa-solid fa-clipboard-list"></i> Adm. de controles
-                        </button>
-                    </li>
-          <li>
                         <button onclick="switchViewControlcalidad('controles')" id="btnView">
                             <i class="fa-solid fa-clipboard-list"></i> Adm. de controles
                         </button>
-          </li>
+                    </li>
+                    <li>
+                        <button onclick="switchViewControlcalidad('productos')" id="btnView">
+                            <i class="fa-solid fa-clipboard-list"></i> Adm. de productos
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="switchViewControlcalidad('busqueda')" id="btnView">
+                            <i class="fa-solid fa-barcode"></i> Buscador/Scanner
+                        </button>
+                    </li>
         </ul>
       </div>
       <div class="line"></div>
@@ -231,8 +235,7 @@
                 <header>
                     <h1>Adm. de Productos</h1>
                     <p>
-                        Aqui puedes adminstrar los productos. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-folder-plus" style="color: #ffffff"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>), ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) y borrar (<i class="fa-solid fa-trash" style="color: #ffffff;"></i>)
-                        productos como estimes necesario con los iconos que salen más adelante.
+                        Aqui puedes adminstrar los productos. Ver e ingresar a ver la información detalladamente (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>).
                     </p>
                 </header>
 

@@ -32,7 +32,7 @@ namespace ScannerCC.Controllers
                 //Consulta de usuarios en base de datos de usuarios con rol'Control de calidad'.
                 var Controlcalidad = _context.Usuario
                     .Include(x => x.Rol)
-                    .Where(r => r.Rol.Nombre == "Control de calidad").ToList();
+                    .Where(r => r.Rol.Nombre == "Control de Calidad").ToList();
                 ViewBag.countUsuariosControlcalidad = Controlcalidad.Count;
                 
                 //Consulta de usuarios en base de datos de usuarios con rol'Especialista'.
@@ -87,7 +87,7 @@ namespace ScannerCC.Controllers
                 ViewBag.Informes = _context.Informe.ToList();
                 ViewBag.ProductoHistorial = _context.ProductoHistorial.ToList();
                 ViewBag.ProductoDetalles = _context.ProductoDetalle.ToList();
-                ViewBag.Escaneoss = _context.Escaneo.ToList();
+                ViewBag.Escaneos = _context.Escaneo.ToList();
 
                 //Datos para la tablaControl y sus count
                 int totalControles = _context.Controles.Count();

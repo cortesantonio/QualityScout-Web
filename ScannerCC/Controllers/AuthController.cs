@@ -142,11 +142,13 @@ namespace ScannerCC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(string Email, string Rut, string Nombre, string Password, string Rol)
+        public IActionResult Edit(string Email, string Rut, string Nombre, string Password, int Rol)
         {
-            var U = _context.Usuario.Include(r => r.Rol).FirstOrDefault(u => u.Rut.Equals(Rut));
-            if (U != null) {
-                if(U.Rol.Nombre == Rol)
+            var U = _context.Usuario.FirstOrDefault(u => u.RolId.Equals(Rol)); 
+
+            if (U != null)
+            {
+                if (U.RolId == Rol)
                 {
                     U.Nombre = Nombre;
                     U.Email = Email;
@@ -154,25 +156,32 @@ namespace ScannerCC.Controllers
                 }
                 else
                 {
-                    var id_rol = _context.Rol.FirstOrDefault( i => i.Nombre.Equals(Rol)).idRol;
-
                     U.Nombre = Nombre;
                     U.Email = Email;
                     U.Rut = Rut;
-                    U.RolId = id_rol;
+                    U.RolId = Rol;
                 }
-                CreatePasswordHash(Password, out byte[] passwordHash, out byte[] passwordSalt);
-                U.PasswordHash = passwordHash;
-                U.PasswordSalt = passwordSalt;
+
+                if (!string.IsNullOrEmpty(Password))
+                {
+                    CreatePasswordHash(Password, out byte[] passwordHash, out byte[] passwordSalt);
+                    U.PasswordHash = passwordHash;
+                    U.PasswordSalt = passwordSalt;
+                }
+
                 _context.Usuario.Update(U);
                 _context.SaveChanges();
+
                 return RedirectToAction("Index", "Home");
             }
             else
             {
+                ModelState.AddModelError("", "Usuario no encontrado.");
                 return RedirectToAction("Index", "Home");
             }
         }
+
+
 
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
