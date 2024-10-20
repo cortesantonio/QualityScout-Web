@@ -87,6 +87,7 @@ namespace ScannerCC.Controllers
                 ViewBag.Informes = _context.Informe.ToList();
                 ViewBag.ProductoHistorial = _context.ProductoHistorial.ToList();
                 ViewBag.ProductoDetalles = _context.ProductoDetalle.ToList();
+                ViewBag.Escaneoss = _context.Escaneo.ToList();
 
                 //Datos para la tablaControl y sus count
                 int totalControles = _context.Controles.Count();

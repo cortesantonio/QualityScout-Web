@@ -117,7 +117,7 @@ namespace ScannerCC.Controllers
         // POST: Controles/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit2(int id, int IdProductos, string Linea, string PaisDestino, string Comentario, string Tipodecontrol, string EstadoFinal)
+        public async Task<IActionResult> Edit2(int id, string Comentario, string EstadoFinal)
         {
             if (id != id) 
             {
@@ -135,11 +135,7 @@ namespace ScannerCC.Controllers
                         return NotFound("Control no encontrado.");
                     }
 
-                    control.IdProductos = IdProductos; 
-                    control.Linea = Linea;
-                    control.PaisDestino = PaisDestino;
                     control.Comentario = Comentario;
-                    control.Tipodecontrol = Tipodecontrol;
                     control.EstadoFinal = EstadoFinal;
                     control.FechaHoraControlFinal = DateTime.Now; // Asignar fecha actual al finalizar el control
 
@@ -165,7 +161,6 @@ namespace ScannerCC.Controllers
                 }
             }
 
-            ViewBag.IdProductos = new SelectList(_context.Producto, "Id", "Nombre", IdProductos);
             return View();
         }
 

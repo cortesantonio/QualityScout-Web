@@ -56,7 +56,7 @@
             Producto ID
         </dt>
         <dd class = "col-sm-6">
-            @Html.DisplayFor(model => model.Productos.Id)
+            @Html.DisplayFor(model => model.Productos.Nombre)
         </dd>
         <dt class = "col-sm-6">
             Linea
@@ -84,7 +84,7 @@
         </dd>
     </dl>
     
-    <form asp-action="DeleteConfirmed">
+    <form asp-action="Delete">
         <input type="hidden" name="id" value="@Model.Id" />
         <input type="submit" value="Eliminar" class="btn btn-danger" /> 
     </form>

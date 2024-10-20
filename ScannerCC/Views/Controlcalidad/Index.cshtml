@@ -25,6 +25,11 @@
                             <i class="fa-solid fa-barcode"></i> Buscador/Scanner
                         </button>
           </li>
+                    <li>
+                        <button onclick="switchViewControlcalidad('productos')" id="btnView">
+                            <i class="fa-solid fa-clipboard-list"></i> Adm. de controles
+                        </button>
+                    </li>
           <li>
                         <button onclick="switchViewControlcalidad('controles')" id="btnView">
                             <i class="fa-solid fa-clipboard-list"></i> Adm. de controles
@@ -130,14 +135,16 @@
         </main>
       </div>
 
-      <div class="view" id="controles" style="display: none">  
-        <header>
-          <h1>Adm. de Controles</h1>
-          <p>
-                        Aqui puedes adminstrar los controles. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-notes-medical"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>) y ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) de los
+      @*~~~~~~~~~~*@
+
+            <div class="view" id="controles" style="display: none">
+                <header>
+                    <h1>Adm. de Controles</h1>
+                    <p>
+                        Aqui puedes adminstrar los controles. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-notes-medical"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>), ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) y borrar (<i class="fa-solid fa-trash" style="color: #ffffff;"></i>)
                         controles como estimes necesario con los iconos que salen más adelante.
-          </p>
-        </header>
+                    </p>
+                </header>
 
                 <main class="productos-container">
                     <div class="head-producto">
@@ -155,7 +162,7 @@
                                 Agregar Control
                             </a>
                         </div>
-                        
+
                     </div>
 
                     <table class="tableUsuarios">
@@ -163,7 +170,6 @@
                             <tr>
                                 <th>Nombre producto</th>
                                 <th>Linea</th>
-                                <th>Cepa</th>
                                 <th>Pais destino</th>
                                 <th>Comentario</th>
                                 <th>Tipo de control</th>
@@ -177,13 +183,10 @@
 
                                 <tr>
                                     <td>
-                                        @item.Producto.Nombre
+                                        @item.Productos.Nombre
                                     </td>
                                     <td>
                                         @item.Linea
-                                    </td>
-                                    <td>
-                                        @item.Cepa
                                     </td>
                                     <td>
                                         @item.PaisDestino
@@ -194,13 +197,22 @@
                                     <td>
                                         @item.Tipodecontrol
                                     </td>
+
                                     <td>
-                                        <a asp-action="Edit2" asp-controller="Controles" asp-route-id="@item.Id">
-                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
-                                        </a>
-                                        |
                                         <a asp-action="Details2" asp-controller="Controles" asp-route-id="@item.Id">
                                             <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                        </a>
+
+                                        @if (item.Estado == "Reproceso" && string.IsNullOrEmpty(item.EstadoFinal))
+                                        {
+                                            <a asp-action="Edit2" asp-controller="Controles" asp-route-id="@item.Id">
+                                                <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                            </a>
+
+                                        }
+
+                                        <a asp-action="Delete2" asp-controller="Controles" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                                         </a>
 
                                     </td>
@@ -211,7 +223,75 @@
                     </table>
                 </main>
 
-      </div>
+            </div>
+
+            @*~~~~~~~~~~*@
+
+            <div class="view" id="productos" style="display: none">
+                <header>
+                    <h1>Adm. de Productos</h1>
+                    <p>
+                        Aqui puedes adminstrar los productos. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-folder-plus" style="color: #ffffff"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>), ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) y borrar (<i class="fa-solid fa-trash" style="color: #ffffff;"></i>)
+                        productos como estimes necesario con los iconos que salen más adelante.
+                    </p>
+                </header>
+
+                <main class="productos-container">
+                    <div class="head-producto">
+                        <div class="busqueda">
+                            <form asp-action="Index" method="get">
+                                <button type="submit">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+                                </button>
+                                <input name="Busqueda" type="text" placeholder="Busqueda por Codigo o Nombre" />
+                            </form>
+                        </div>
+                    </div>
+                    <table class="tableUsuarios">
+                        <thead>
+                            <tr>
+                                <th>Codigo barra</th>
+                                <th>Codigo VE</th>
+                                <th>Nombre</th>
+                                <th>Pais destino</th>
+                                <th>Fecha registro</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.Productos)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @item.CodigoBarra
+                                    </td>
+                                    <td>
+                                        @item.CodigoVE
+                                    </td>
+
+                                    <td>
+                                        @item.Nombre
+                                    </td>
+                                    <td>
+                                        @item.PaisDestino
+                                    </td>
+                                    <td>
+                                        @item.FechaRegistro
+                                    </td>
+                                    <td>
+                                            <a asp-action="Details" asp-controller="Producto" asp-route-id="@item.Id">
+                                                <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                            </a>
+                                        
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </main>
+            </div>
 
 
   </div>

@@ -26,6 +26,8 @@ namespace ScannerCC.Controllers
             }
 
             var productod = await _context.ProductoDetalle
+                .Include(pd => pd.Productos)
+                .Include(pd => pd.BotellaDetalles)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (productod == null)
             {

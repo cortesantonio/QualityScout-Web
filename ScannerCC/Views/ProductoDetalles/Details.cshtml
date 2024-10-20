@@ -38,6 +38,18 @@
         <div class="col-sm-4">
             <div class="row justify-content-center">
                 <dt class="col-sm-6">
+                    Nombre producto
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.Productos.Nombre)
+                </dd>
+                <dt class="col-sm-6">
+                    Nombre botella
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.BotellaDetalles.NombreBotella)
+                </dd>
+                <dt class="col-sm-6">
                     Capacidad
                 </dt>
                 <dd class="col-sm-6">
@@ -59,7 +71,14 @@
                     Medalla
                 </dt>
                 <dd class="col-sm-6">
-                    @Html.DisplayFor(model => model.Medalla)
+                    @if (Model.Medalla)
+                    {
+                        <span>Sí</span>
+                    }
+                    else
+                    {
+                        <span>No</span>
+                    }
                 </dd>
                 <dt class="col-sm-6">
                     ColorCapsula

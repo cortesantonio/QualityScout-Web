@@ -25,6 +25,8 @@ namespace ScannerCC.Controllers
             }
 
             var escaneo = await _context.Escaneo
+                .Include(c => c.Productos)
+                .Include(c => c.Usuarios)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (escaneo == null)
             {

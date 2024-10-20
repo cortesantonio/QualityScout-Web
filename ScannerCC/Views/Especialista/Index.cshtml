@@ -35,6 +35,15 @@
               <i class="fa-solid fa-chart-pie"></i> Informe gerencial
             </button>
           </li>
+                    <li>
+                        <button onclick="switchView('usuarios')" id="btnView">
+                            <i class="fa-regular fa-user"></i>Adm. de usuarios
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="switchView('botellas')" id="btnView">
+                            <i class="fa-solid fa-bag-shopping"></i> Adm. de botellas
+                        </button>
                     </li>
                     <li>
                         <button onclick="switchView('informesp')" id="btnView">
@@ -47,20 +56,10 @@
                         </button>
                     </li>
                     <li>
-                        <button onclick="switchView('botellas')" id="btnView">
-                            <i class="fa-solid fa-bag-shopping"></i> Adm. de botellas
+                        <button onclick="switchView('productos')" id="btnView">
+                            <i class="fa-solid fa-bag-shopping"></i> Adm. de productos
                         </button>
-                    </li>
                     <li>
-                        <button onclick="switchView('controles')" id="btnView">
-                            <i class="fa-solid fa-clipboard-list"></i> Adm. de controles
-                        </button>
-                    </li>
-          <li>
-            <button onclick="switchView('usuarios')" id="btnView">
-              <i class="fa-regular fa-user"></i>Adm. de usuarios
-            </button>
-          </li>
                     <li>
                         <button onclick="switchView('productosh')" id="btnView">
                             <i class="fa-solid fa-bag-shopping"></i> Adm. de productos historial
@@ -71,11 +70,16 @@
                             <i class="fa-solid fa-bag-shopping"></i> Adm. de producto detalles
                         </button>
                     </li>
-          <li>
-            <button onclick="switchView('productos')" id="btnView">
-              <i class="fa-solid fa-bag-shopping"></i> Adm. de productos
-            </button>
-          <li>
+                    <li>
+                        <button onclick="switchView('controles')" id="btnView">
+                            <i class="fa-solid fa-clipboard-list"></i> Adm. de controles
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="switchView('escaneos')" id="btnView">
+                            <i class="fa-solid fa-bag-shopping"></i> Adm. de escaneos
+                        </button>
+                    </li>
             <button onclick="switchView('busqueda')" id="btnView">
               <i class="fa-solid fa-barcode"></i> Buscador/Scanner
             </button>
@@ -232,7 +236,6 @@
                                     <tr>
                                         <th>Nombre producto</th>
                                         <th>Línea</th>
-                                        <th>Cepa</th>
                                         <th>País destino</th>
                                         <th>Comentario</th>
                                         <th>Tipo de control</th>
@@ -241,9 +244,8 @@
                                 <tbody>
                                       @foreach(var item in ViewBag.Controless) {
                                           <tr>
-                                              <td>@item.Producto.Nombre</td>
+                                              <td>@item.Productos.Nombre</td>
                                               <td>@item.Linea</td>
-                                              <td>@item.Cepa</td>
                                               <td>@item.PaisDestino</td>
                                               <td>@item.Comentario</td>
                                             <td>
@@ -262,6 +264,8 @@
                 </main>
 
             </div>
+
+            @*~~~~~~~~~~*@
 
             <div class="view" id="usuarios" style="display: none">
                 <header>
@@ -290,6 +294,7 @@
                                 <th>Rut</th>
                                 <th>Email</th>
                                 <th>Rol</th>
+
                                 <th>
                                     <a asp-action="Create" style="color:white;text-decoration:none;" asp-controller="Usuario">
                                         <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i> Nuevo Usuario
@@ -308,7 +313,7 @@
                                         @switch (item.Rol.Nombre)
                                         {
                                             case "Control de Calidad":
-                                                @:Control de calidad
+                                                @:Control de Calidad
                                                 break;
                                             case "Especialista":
                                                 @:Especialista
@@ -317,27 +322,27 @@
                                     </td>
                                     <td>
                                         @if (item.Activo) 
-                                        {
-                                            <a asp-action="Edit" asp-controller="Usuario" asp-route-id="@item.Id">
-                                                <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
-                                            </a>
-                                                    
+                                        {                                                    
                                              <a asp-action="Details" asp-controller="Usuario" asp-route-id ="@item.Id">
                                                  <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
                                               </a>
-                                                            
+
+                                            <a asp-action="Edit" asp-controller="Usuario" asp-route-id="@item.Id">
+                                                <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                            </a>
+
                                              <a asp-action="Desactivar" asp-controller="Usuario" asp-route-id="@item.Id">
                                                  <i class="fa-solid fa-user-slash" style="color: #ffffff;"></i>
                                             </a>
                                         }
                                         else 
                                         {
-                                            <a asp-action="Activar" asp-controller="Usuario" asp-route-id="@item.Id">
-                                                <i class="fa-solid fa-user-check" style="color: #ffffff;"></i>
-                                            </a>
-
                                             <a asp-action="Details" asp-controller="Usuario" asp-route-id="@item.Id">
                                                 <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                            </a>
+
+                                            <a asp-action="Activar" asp-controller="Usuario" asp-route-id="@item.Id">
+                                                <i class="fa-solid fa-user-check" style="color: #ffffff;"></i>
                                             </a>
                                         }
                                     </td>
@@ -348,7 +353,7 @@
                 </main>
             </div>
 
-
+            @*~~~~~~~~~~*@
 
             <div class="view" id="botellas" style="display: none">
                 <header>
@@ -402,15 +407,15 @@
                                         @item.AnchoBotella
                                     </td>
 
-                                    <td>
-                                        <a asp-action="Edit" asp-controller="BotellaDetalles" asp-route-id="@item.Id">
-                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
-                                        </a>
-                                        |
+                                    <td>                                        
                                         <a asp-action="Details" asp-controller="BotellaDetalles" asp-route-id="@item.Id">
                                             <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
                                         </a>
-                                        |
+
+                                        <a asp-action="Edit" asp-controller="BotellaDetalles" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                        </a>
+                                        
                                         <a asp-action="Delete" asp-controller="BotellaDetalles" asp-route-id="@item.Id">
                                             <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                                         </a>
@@ -423,6 +428,8 @@
                     </table>
                 </main>
             </div>
+
+            @*~~~~~~~~~~*@
 
             <div class="view" id="infquimica" style="display: none">
                 <header>
@@ -454,6 +461,7 @@
                     <table class="tableUsuarios">
                         <thead>
                             <tr>
+                                <th>Cepa</th>
                                 <th>Minimo de azucar</th>
                                 <th>Maximo de azucar</th>
                                 <th>Minimo de grado de alcohol</th>
@@ -467,7 +475,9 @@
                             {
 
                                 <tr>
-                                    
+                                    <td>
+                                        @item.Cepa
+                                    </td>
                                     <td>
                                         @item.MinAzucar
                                     </td>
@@ -482,12 +492,13 @@
                                     </td>
 
                                     <td>
-                                        <a asp-action="Edit" asp-controller="InformacionQuimica" asp-route-id="@item.Id">
-                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
-                                        </a>
                                         
                                         <a asp-action="Details" asp-controller="InformacionQuimica" asp-route-id="@item.Id">
                                             <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                        </a>
+
+                                        <a asp-action="Edit" asp-controller="InformacionQuimica" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
                                         </a>
                                         
                                         <a asp-action="Delete" asp-controller="InformacionQuimica" asp-route-id="@item.Id">
@@ -502,6 +513,8 @@
                     </table>
                 </main>
             </div>
+
+            @*~~~~~~~~~~*@
 
             <div class="view" id="informesp" style="display: none">
                 <header>
@@ -555,15 +568,15 @@
                                         @item.Descripcion
                                     </td>
 
-                                    <td>
-                                        <a asp-action="Edit" asp-controller="Informes" asp-route-id="@item.Id">
-                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
-                                        </a>
-                                        |
+                                    <td>                                        
                                         <a asp-action="Details" asp-controller="Informes" asp-route-id="@item.Id">
                                             <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
                                         </a>
-                                        |
+
+                                        <a asp-action="Edit" asp-controller="Informes" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                        </a>
+                                        
                                         <a asp-action="Delete" asp-controller="Informes" asp-route-id="@item.Id">
                                             <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                                         </a>
@@ -576,6 +589,71 @@
                     </table>
                 </main>
             </div>
+
+            @*~~~~~~~~~~*@
+
+            <div class="view" id="escaneos" style="display: none">
+                <header>
+                    <h1>Adm. de Escaneos</h1>
+                    <p>
+                        Aqui puedes adminstrar los escaneos. Ver e ingresar a ver su información detallada (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>).
+                    </p>
+                </header>
+
+                <main class="productos-container">
+                    <div class="head-producto">
+                        <div class="busqueda">
+                            <form asp-action="Index" method="get">
+                                <button type="submit">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+                                </button>
+                                <input name="Busqueda" type="text" placeholder="Busqueda por Codigo o Nombre" />
+                            </form>
+                        </div>
+                    </div>
+                    <table class="tableUsuarios">
+                        <thead>
+                            <tr>
+                                <th>Id producto</th>
+                                <th>Id usuario</th>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.Escaneoss)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @item.IdProductos
+                                    </td>
+                                    <td>
+                                        @item.IdUsuarios
+                                    </td>
+                                    <td>
+                                        @item.Fecha
+                                    </td>
+                                    <td>
+                                        @item.Hora
+                                    </td>
+
+                                    <td>
+                                        <a asp-action="Details" asp-controller="Escaneos" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </main>
+            </div>
+
+       @*~~~~~~~~~~*@
 
       <div class="view" id="productosh" style="display: none">
         <header>
@@ -606,7 +684,7 @@
           <table class="tableUsuarios">
             <thead>
               <tr>
-                <th>Id Productos</th>
+                <th>Producto</th>
                 <th>Fecha de cosecha</th>
                 <th>Fecha de Produccion</th>
                 <th>Fecha de envasado</th>
@@ -620,7 +698,7 @@
 
                 <tr>
                   <td>
-                    @item.IdProductos
+                    @item.Productos.Nombre
                   </td>
                   <td>
                      @item.FechaCosecha
@@ -632,15 +710,15 @@
                     @item.FechaEnvasado
                   </td>
 
-                  <td>
-                    <a asp-action="Edit" asp-controller="ProductoHistorial" asp-route-id="@item.Id">
-                        <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
-                    </a> 
-                    |
+                  <td>                    
                     <a asp-action="Details" asp-controller="ProductoHistorial" asp-route-id="@item.Id">
                         <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
                     </a>
-                    |
+                   
+                    <a asp-action="Edit" asp-controller="ProductoHistorial" asp-route-id="@item.Id">
+                        <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                    </a> 
+                    
                     <a asp-action="Delete" asp-controller="ProductoHistorial" asp-route-id="@item.Id">
                         <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                     </a>
@@ -653,6 +731,9 @@
           </table>
         </main>
       </div>
+
+      @*~~~~~~~~~~*@
+
             <div class="view" id="productosd" style="display: none">
                 <header>
                     <h1>Adm. de Producto detalles</h1>
@@ -683,12 +764,11 @@
                     <table class="tableUsuarios">
                         <thead>
                             <tr>
+                                <th>Producto</th>
+                                <th>Botella</th>
                                 <th>Capacidad</th>
                                 <th>Medalla</th>
-                                <th>TipoBotella</th>
                                 <th>ColorBotella</th>
-                                <th>Medida de etiqueta a boquete</th>
-                                <th>Medida de etiqueta a base</th>
 
                                 <th></th>
                             </tr>
@@ -699,31 +779,38 @@
 
                                 <tr>
                                     <td>
+                                        @item.Productos.Nombre
+                                    </td>
+                                    <td>
+                                        @item.BotellaDetalles.NombreBotella
+                                    </td>
+                                    <td>
                                         @item.Capacidad
                                     </td>
                                     <td>
-                                        @item.Medalla
+                                        @if (item.Medalla) 
+                                        {
+                                            <span>Sí</span>
+                                        }
+                                        else
+                                        {
+                                            <span>No</span>
+                                        }
                                     </td>
-                                    
                                     <td>
                                         @item.ColorBotella
                                     </td>
-                                    <td>
-                                        @item.MedidaEtiquetaABoquete
-                                    </td>
-                                    <td>
-                                        @item.MedidaEtiquetaABase
-                                    </td>
 
                                     <td>
-                                        <a asp-action="Edit" asp-controller="ProductoDetalles" asp-route-id="@item.Id">
-                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
-                                        </a>
-                                        |
+                                        
                                         <a asp-action="Details" asp-controller="ProductoDetalles" asp-route-id="@item.Id">
                                             <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
                                         </a>
-                                        |
+
+                                        <a asp-action="Edit" asp-controller="ProductoDetalles" asp-route-id="@item.Id">
+                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                        </a>
+
                                         <a asp-action="Delete" asp-controller="ProductoDetalles" asp-route-id="@item.Id">
                                             <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                                         </a>
@@ -736,6 +823,9 @@
                     </table>
                 </main>
             </div>
+
+            @*~~~~~~~~~~*@
+
             <div class="view" id="productos" style="display: none">
                 <header>
                     <h1>Adm. de Productos</h1>
@@ -771,7 +861,6 @@
                                 <th>Nombre</th>
                                 <th>Pais destino</th>
                                 <th>Fecha registro</th>
-
                                 <th></th>
                             </tr>
                         </thead>
@@ -782,6 +871,9 @@
                                 <tr>
                                     <td>
                                         @item.CodigoBarra
+                                    </td>
+                                    <td>
+                                        @item.CodigoVE
                                     </td>
                                     
                                     <td>
@@ -796,26 +888,27 @@
                                     <td>
                                         @if (item.Activo)
                                         {
+
+                                            <a asp-action="Details" asp-controller="Producto" asp-route-id="@item.Id">
+                                                <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                            </a>
+
                                             <a asp-action="Edit" asp-controller="Producto" asp-route-id="@item.Id">
                                                 <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
                                             </a>
 
-                                            <a asp-action="Details" asp-controller="Producto" asp-route-id="@item.Id">
-                                                <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
-                                            </a>
-
                                             <a asp-action="Desactivar" asp-controller="Producto" asp-route-id="@item.Id">
-                                                <i class="fa-solid fa-user-slash" style="color: #ffffff;"></i>
+                                                <i class="fa-solid fa-ban" style="color: #ffffff;"></i>
                                             </a>
                                         }
                                         else
                                         {
-                                            <a asp-action="Activar" asp-controller="Producto" asp-route-id="@item.Id">
-                                                <i class="fa-solid fa-user-check" style="color: #ffffff;"></i>
-                                            </a>
-
                                             <a asp-action="Details" asp-controller="Producto" asp-route-id="@item.Id">
                                                 <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                            </a>
+
+                                            <a asp-action="Activar" asp-controller="Producto" asp-route-id="@item.Id">
+                                                <i class="fa-solid fa-check-double" style="color: #ffffff;"></i>
                                             </a>
                                         }
                                     </td>
@@ -826,6 +919,8 @@
                     </table>
                 </main>
             </div>
+
+            @*~~~~~~~~~~*@
 
             <div class="view" id="controles" style="display: none">
                 <header>
@@ -873,14 +968,10 @@
 
                                 <tr>
                                     <td>
-                                        @item.Producto.Nombre
+                                        @item.Productos.Nombre
                                     </td>
                                     <td>
                                         @item.Linea
-                                    </td>
-                                    
-                                    <td>
-                                        @item.PaisOrigen
                                     </td>
                                     <td>
                                         @item.PaisDestino
@@ -893,14 +984,18 @@
                                     </td>
 
                                     <td>
-                                        <a asp-action="Edit2" asp-controller="Controles" asp-route-id="@item.Id">
-                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
-                                        </a>
-                                        |
                                         <a asp-action="Details2" asp-controller="Controles" asp-route-id="@item.Id">
                                             <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
                                         </a>
-                                        |
+
+                                        @if (item.Estado == "Reproceso" && string.IsNullOrEmpty(item.EstadoFinal))
+                                        {
+                                            <a asp-action="Edit2" asp-controller="Controles" asp-route-id="@item.Id">
+                                                <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                            </a>
+
+                                        }
+
                                         <a asp-action="Delete2" asp-controller="Controles" asp-route-id="@item.Id">
                                             <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                                         </a>
@@ -914,6 +1009,8 @@
                 </main>
 
             </div>
+
+            @*~~~~~~~~~~*@
 
       <div class="view" id="busqueda" style="display: none">
         <header>

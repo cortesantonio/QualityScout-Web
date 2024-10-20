@@ -89,6 +89,9 @@ namespace ScannerCC.Controllers
                 return NotFound();
             }
 
+            var rols = _context.Rol.Select(bd => new { bd.idRol, bd.Nombre }).ToList();
+            ViewData["Roles"] = new SelectList(rols, "idRol", "Nombre");
+
             return View(usuario);
         }
 

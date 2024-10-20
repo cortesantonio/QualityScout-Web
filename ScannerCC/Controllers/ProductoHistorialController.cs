@@ -24,6 +24,7 @@ namespace ScannerCC.Controllers
             }
 
             var productoh = await _context.ProductoHistorial
+                .Include(e => e.Productos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (productoh == null)
             {

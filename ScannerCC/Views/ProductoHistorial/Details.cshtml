@@ -38,6 +38,12 @@
         <div class="col-sm-4">
             <div class="row justify-content-center">
                 <dt class="col-sm-6">
+                    Producto
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.Productos.Nombre)
+                </dd>
+                <dt class="col-sm-6">
                     Fecha de cosecha
                 </dt>
                 <dd class="col-sm-6">
@@ -64,7 +70,7 @@
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@@tensorflow/tfjs"></script>
+@*<script src="https://cdn.jsdelivr.net/npm/@@tensorflow/tfjs"></script>
 <script src="https://cdn.jsdelivr.net/npm/@@tensorflow-models/coco-ssd"></script>
 <div class="col-sm-4">
     <div class="row justify-content-center">
@@ -156,4 +162,4 @@
     // Iniciar la detección de objetos cuando la ventana haya cargado completamente
     window.onload = detectObjects;
 
-    </script>
+    </script>*@

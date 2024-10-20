@@ -54,29 +54,9 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Producto</label>
-                        <input type="text" class="form-control" value="@Model.Productos.Nombre" readonly />
-                        <input type="hidden" name="IdProductos" value="@Model.IdProductos" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Linea" class="control-label">Linea</label>
-                        <input asp-for="Linea" class="form-control" />
-                        <span asp-validation-for="Linea" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="PaisDestino" class="control-label">Pais de destino</label>
-                        <input asp-for="PaisDestino" class="form-control" />
-                        <span asp-validation-for="PaisDestino" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
                         <label asp-for="Comentario" class="control-label">Comentario</label>
                         <input asp-for="Comentario" class="form-control" />
                         <span asp-validation-for="Comentario" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Tipodecontrol" class="control-label">Tipo de control</label>
-                        <input asp-for="Tipodecontrol" class="form-control" />
-                        <span asp-validation-for="Tipodecontrol" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label for="EstadoFinal">Estado final</label>
