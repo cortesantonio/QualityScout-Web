@@ -79,7 +79,14 @@
                     Medalla
                 </dt>
                 <dd class="col-sm-6">
-                    @Html.DisplayFor(model => model.Medalla)
+                    @if (Model.Medalla)
+                    {
+                        <span>Sí</span>
+                    }
+                    else
+                    {
+                        <span>No</span>
+                    }
                 </dd>
                 <dt class="col-sm-6">
                     ColorCapsula
