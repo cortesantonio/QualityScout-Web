@@ -21,7 +21,7 @@ namespace ScannerCC.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=qsbd5;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=qsbd9;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -48,18 +48,6 @@ namespace ScannerCC.Models
                 .HasOne(c => c.Usuarios)
                 .WithMany()
                 .HasForeignKey(c => c.IdUsuarios)
-                .OnDelete(DeleteBehavior.Restrict); // Cambiado de Cascade a Restrict
-
-            modelBuilder.Entity<ProductoDetalles>()
-                .HasOne(pd => pd.Productos)
-                .WithMany()
-                .HasForeignKey(pd => pd.IdProductos)
-                .OnDelete(DeleteBehavior.Restrict); // Cambiado de Cascade a Restrict
-
-            modelBuilder.Entity<ProductoDetalles>()
-                .HasOne(pd => pd.BotellaDetalles)
-                .WithMany()
-                .HasForeignKey(pd => pd.IdBotellaDetalles)
                 .OnDelete(DeleteBehavior.Restrict); // Cambiado de Cascade a Restrict
 
             base.OnModelCreating(modelBuilder);

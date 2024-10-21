@@ -9,5 +9,7 @@ namespace ScannerCC.Models
         public string NombreBotella { get; set; }
         public int AlturaBotella { get; set; }
         public int AnchoBotella { get; set; }
+
+        public ICollection<ProductoDetalles> ProductoDetalles { get; set; }
     }
 }

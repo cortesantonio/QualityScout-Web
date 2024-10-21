@@ -41,10 +41,20 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
-            var productos = _context.Producto.Select(p => new { p.Id, p.Nombre }).ToList();
-            var botellaDetalles = _context.BotellaDetalle.Select(bd => new { bd.Id, bd.NombreBotella }).ToList();
+            var productosConDetalles = _context.ProductoDetalle
+                .Select(pd => pd.IdProductos)
+                .ToList(); 
 
-            ViewData["IdProductos"] = new SelectList(productos, "Id", "Nombre");
+            var productosDisponibles = _context.Producto
+                .Where(p => !productosConDetalles.Contains(p.Id)) 
+                .Select(p => new { p.Id, p.Nombre })
+                .ToList();
+
+            var botellaDetalles = _context.BotellaDetalle
+                .Select(bd => new { bd.Id, bd.NombreBotella })
+                .ToList();
+
+            ViewData["IdProductos"] = new SelectList(productosDisponibles, "Id", "Nombre");
             ViewData["IdBotellaDetalles"] = new SelectList(botellaDetalles, "Id", "NombreBotella");
 
             return View();

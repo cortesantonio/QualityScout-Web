@@ -27,5 +27,9 @@ namespace ScannerCC.Models
         // Relaciones
         public Usuarios Usuarios { get; set; }
         public InformacionQuimica InformacionQuimica { get; set; }
+
+        public ICollection<ProductoDetalles> ProductoDetalles { get; set; }
+        public ICollection<ProductoHistorial> ProductoHistorial { get; set; }
+        public ICollection<BotellaDetalles> BotellaDetalles { get; set; }
     }
 }

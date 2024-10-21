@@ -6,26 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace QualityScout.Migrations
 {
     /// <inheritdoc />
-    public partial class qsbd4 : Migration
+    public partial class qsbd9 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "BotellaDetalle",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreBotella = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AlturaBotella = table.Column<int>(type: "int", nullable: false),
-                    AnchoBotella = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BotellaDetalle", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "InformacionQuimica",
                 columns: table => new
@@ -146,6 +131,27 @@ namespace QualityScout.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BotellaDetalle",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NombreBotella = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AlturaBotella = table.Column<int>(type: "int", nullable: false),
+                    AnchoBotella = table.Column<int>(type: "int", nullable: false),
+                    ProductosId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BotellaDetalle", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BotellaDetalle_Producto_ProductosId",
+                        column: x => x.ProductosId,
+                        principalTable: "Producto",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Controles",
                 columns: table => new
                 {
@@ -208,6 +214,28 @@ namespace QualityScout.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductoHistorial",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdProductos = table.Column<int>(type: "int", nullable: false),
+                    FechaCosecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FechaProduccion = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FechaEnvasado = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductoHistorial", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductoHistorial_Producto_IdProductos",
+                        column: x => x.IdProductos,
+                        principalTable: "Producto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductoDetalle",
                 columns: table => new
                 {
@@ -233,36 +261,19 @@ namespace QualityScout.Migrations
                         column: x => x.IdBotellaDetalles,
                         principalTable: "BotellaDetalle",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ProductoDetalle_Producto_IdProductos",
                         column: x => x.IdProductos,
                         principalTable: "Producto",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductoHistorial",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdProductos = table.Column<int>(type: "int", nullable: false),
-                    FechaCosecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FechaProduccion = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FechaEnvasado = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductoHistorial", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProductoHistorial_Producto_IdProductos",
-                        column: x => x.IdProductos,
-                        principalTable: "Producto",
-                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BotellaDetalle_ProductosId",
+                table: "BotellaDetalle",
+                column: "ProductosId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Controles_IdProductos",

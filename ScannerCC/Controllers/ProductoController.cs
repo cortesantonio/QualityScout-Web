@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -28,7 +29,13 @@ namespace ScannerCC.Controllers
             }
 
             var producto = await _context.Producto
+                .Include(p => p.InformacionQuimica) 
+                .Include(p => p.ProductoDetalles)      
+                    .ThenInclude(pd => pd.BotellaDetalles) 
+                .Include(p => p.ProductoHistorial)   
+                .Include(p => p.Usuarios)            
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (producto == null)
             {
                 return NotFound();

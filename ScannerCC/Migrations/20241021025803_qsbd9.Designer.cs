@@ -12,8 +12,8 @@ using ScannerCC.Models;
 namespace QualityScout.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241020024507_qsbd4")]
-    partial class qsbd4
+    [Migration("20241021025803_qsbd9")]
+    partial class qsbd9
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,12 @@ namespace QualityScout.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ProductosId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductosId");
 
                     b.ToTable("BotellaDetalle");
                 });
@@ -397,6 +402,13 @@ namespace QualityScout.Migrations
                     b.ToTable("Usuario");
                 });
 
+            modelBuilder.Entity("ScannerCC.Models.BotellaDetalles", b =>
+                {
+                    b.HasOne("ScannerCC.Models.Productos", null)
+                        .WithMany("BotellaDetalles")
+                        .HasForeignKey("ProductosId");
+                });
+
             modelBuilder.Entity("ScannerCC.Models.Controles", b =>
                 {
                     b.HasOne("ScannerCC.Models.Productos", "Productos")
@@ -449,15 +461,15 @@ namespace QualityScout.Migrations
             modelBuilder.Entity("ScannerCC.Models.ProductoDetalles", b =>
                 {
                     b.HasOne("ScannerCC.Models.BotellaDetalles", "BotellaDetalles")
-                        .WithMany()
+                        .WithMany("ProductoDetalles")
                         .HasForeignKey("IdBotellaDetalles")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ScannerCC.Models.Productos", "Productos")
-                        .WithMany()
+                        .WithMany("ProductoDetalles")
                         .HasForeignKey("IdProductos")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("BotellaDetalles");
@@ -468,7 +480,7 @@ namespace QualityScout.Migrations
             modelBuilder.Entity("ScannerCC.Models.ProductoHistorial", b =>
                 {
                     b.HasOne("ScannerCC.Models.Productos", "Productos")
-                        .WithMany()
+                        .WithMany("ProductoHistorial")
                         .HasForeignKey("IdProductos")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -504,6 +516,20 @@ namespace QualityScout.Migrations
                         .IsRequired();
 
                     b.Navigation("Rol");
+                });
+
+            modelBuilder.Entity("ScannerCC.Models.BotellaDetalles", b =>
+                {
+                    b.Navigation("ProductoDetalles");
+                });
+
+            modelBuilder.Entity("ScannerCC.Models.Productos", b =>
+                {
+                    b.Navigation("BotellaDetalles");
+
+                    b.Navigation("ProductoDetalles");
+
+                    b.Navigation("ProductoHistorial");
                 });
 #pragma warning restore 612, 618
         }
