@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace QualityScout.Migrations
 {
     /// <inheritdoc />
-    public partial class qsbd9 : Migration
+    public partial class bdqs : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
