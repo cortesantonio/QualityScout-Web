@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ScannerCC.Models
 {
@@ -23,7 +24,9 @@ namespace ScannerCC.Models
         public int MedidaEtiquetaABase { get; set; }
 
         //Relaciones
+        [JsonIgnore]
         public Productos Productos { get; set; }
+        [JsonIgnore]
         public BotellaDetalles BotellaDetalles { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ScannerCC.Models
 {
@@ -14,6 +15,7 @@ namespace ScannerCC.Models
         public DateTime FechaEnvasado { get; set; }
 
         //Relaciones
+        [JsonIgnore]
         public Productos Productos { get; set; }
     }
 }

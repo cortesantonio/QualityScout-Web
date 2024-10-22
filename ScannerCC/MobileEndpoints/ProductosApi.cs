@@ -28,7 +28,7 @@ namespace QualityScout.MobileEndpoints
             {
                 return NotFound();
             }
-            return await _context.Producto.ToListAsync();
+            return await _context.Producto.Include(x =>x.InformacionQuimica).ToListAsync();
         }
 
         // GET: api/ProductosApi/5
@@ -39,7 +39,14 @@ namespace QualityScout.MobileEndpoints
             {
                 return NotFound();
             }
-            var producto = await _context.Producto.FindAsync(id);
+            var producto = await _context.Producto
+                 .Include(p => p.InformacionQuimica)
+                 .Include(p => p.ProductoDetalles)
+                     .ThenInclude(pd => pd.BotellaDetalles)
+                 .Include(p => p.ProductoHistorial)
+                 .Include(p => p.Usuarios)
+                 .FirstOrDefaultAsync(m => m.Id == id);
+
 
             if (producto == null)
             {
@@ -51,33 +58,30 @@ namespace QualityScout.MobileEndpoints
 
         // PUT: api/ProductosApi/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutProducto(int id, Productos producto)
+        [HttpPut("UpdateActivo/{id}")]
+        public async Task<IActionResult> UpdateActivo(int id)
         {
-            if (id != producto.Id)
+            var p = _context.Producto.Where(x => x.Id == id).FirstOrDefault();
+
+            if (p == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(producto).State = EntityState.Modified;
-
-            try
+            if (p.Activo == true)
             {
-                await _context.SaveChangesAsync();
+                p.Activo = false;
             }
-            catch (DbUpdateConcurrencyException)
+            else
             {
-                if (!ProductoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                p.Activo = true;
             }
 
-            return NoContent();
+            _context.Producto.Update(p);
+            _context.SaveChanges();
+            return Ok();
+
+
         }
 
         // POST: api/ProductosApi

@@ -382,9 +382,9 @@
   },
   {
     "ContainingType": "QualityScout.MobileEndpoints.ProductosApi",
-    "Method": "PutProducto",
+    "Method": "DeleteProducto",
     "RelativePath": "api/ProductosApi/{id}",
-    "HttpMethod": "PUT",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -392,20 +392,15 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
-      },
-      {
-        "Name": "producto",
-        "Type": "ScannerCC.Models.Productos",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
     "ContainingType": "QualityScout.MobileEndpoints.ProductosApi",
-    "Method": "DeleteProducto",
-    "RelativePath": "api/ProductosApi/{id}",
-    "HttpMethod": "DELETE",
+    "Method": "UpdateActivo",
+    "RelativePath": "api/ProductosApi/UpdateActivo/{id}",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
