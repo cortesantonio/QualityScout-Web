@@ -56,9 +56,37 @@ namespace QualityScout.MobileEndpoints
             return producto;
         }
 
-        // PUT: api/ProductosApi/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("UpdateActivo/{id}")]
+
+
+
+        // GET: api/ProductosApi/5
+        [HttpGet("GetBotella/{id}")]
+        public async Task<ActionResult<Productos>> GetBotella(int id)
+        {
+            if (_context.BotellaDetalle == null)
+            {
+                return NotFound();
+            }
+            var botella = await _context.BotellaDetalle.Where(x => x.Id == id).FirstOrDefaultAsync();
+
+
+            if (botella == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(botella);
+        }
+
+
+
+
+
+
+
+            // PUT: api/ProductosApi/5
+            // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+            [HttpPut("UpdateActivo/{id}")]
         public async Task<IActionResult> UpdateActivo(int id)
         {
             var p = _context.Producto.Where(x => x.Id == id).FirstOrDefault();
