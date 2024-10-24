@@ -335,32 +335,6 @@
   },
   {
     "ContainingType": "QualityScout.MobileEndpoints.ProductosApi",
-    "Method": "PostProducto",
-    "RelativePath": "api/ProductosApi",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "producto",
-        "Type": "ScannerCC.Models.Productos",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "ScannerCC.Models.Productos",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "QualityScout.MobileEndpoints.ProductosApi",
     "Method": "GetProducto",
     "RelativePath": "api/ProductosApi/{id}",
     "HttpMethod": "GET",
@@ -400,6 +374,103 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.ProductosApi",
+    "Method": "CrearProducto",
+    "RelativePath": "api/ProductosApi/CrearProducto",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "pr",
+        "Type": "QualityScout.MobileEndpoints.ProductoRecibido",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ScannerCC.Models.Productos",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.ProductosApi",
+    "Method": "GetBotella",
+    "RelativePath": "api/ProductosApi/GetBotella/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ScannerCC.Models.Productos",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.ProductosApi",
+    "Method": "GetBotellas",
+    "RelativePath": "api/ProductosApi/GetBotellas",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ScannerCC.Models.Productos",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.ProductosApi",
+    "Method": "GetInfoQuimica",
+    "RelativePath": "api/ProductosApi/GetInfoQuimica",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ScannerCC.Models.Productos",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "QualityScout.MobileEndpoints.ProductosApi",
