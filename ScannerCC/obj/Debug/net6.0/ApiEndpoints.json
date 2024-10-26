@@ -361,22 +361,6 @@
   },
   {
     "ContainingType": "QualityScout.MobileEndpoints.ProductosApi",
-    "Method": "DeleteProducto",
-    "RelativePath": "api/ProductosApi/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "QualityScout.MobileEndpoints.ProductosApi",
     "Method": "CrearProducto",
     "RelativePath": "api/ProductosApi/CrearProducto",
     "HttpMethod": "POST",
@@ -405,6 +389,27 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.ProductosApi",
+    "Method": "EditarProducto",
+    "RelativePath": "api/ProductosApi/EditarProducto/{IdOriginalProducto}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productoEditado",
+        "Type": "QualityScout.MobileEndpoints.ProductoRecibido",
+        "IsRequired": true
+      },
+      {
+        "Name": "IdOriginalProducto",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "QualityScout.MobileEndpoints.ProductosApi",
@@ -460,6 +465,32 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ScannerCC.Models.Productos",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.ProductosApi",
+    "Method": "GetProductoToEdit",
+    "RelativePath": "api/ProductosApi/GetProductoToEdit/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "ScannerCC.Models.Productos",

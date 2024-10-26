@@ -110,6 +110,279 @@ namespace QualityScout.MobileEndpoints
 
 
 
+
+        // GET: api/ProductosApi/5
+        [HttpGet("GetProductoToEdit/{id}")]
+        public async Task<ActionResult<Productos>> GetProductoToEdit(int id)
+        {
+            if (_context.Producto == null)
+            {
+                return NotFound();
+            }
+            var producto = await _context.Producto
+                 .Include(p => p.InformacionQuimica)
+                 .Include(p => p.ProductoHistorial)
+                 .FirstOrDefaultAsync(m => m.Id == id);
+            var detalles = await _context.ProductoDetalle.Include(x=>x.BotellaDetalles).Where(x => x.IdProductos == id).FirstOrDefaultAsync();
+            var historial = await _context.ProductoHistorial.Where(x => x.IdProductos == id).FirstOrDefaultAsync();
+
+            if (producto == null)
+            {
+                return NotFound();
+            }
+
+
+            var productoRecibido = new ProductoRecibido();
+
+            productoRecibido.CodigoBarra = producto.CodigoBarra;
+            productoRecibido.CodigoVE = producto.CodigoVE;
+            productoRecibido.NombreVino = producto.Nombre;
+            productoRecibido.PaisDestino = producto.PaisDestino;
+            productoRecibido.Idioma = producto.Idioma;
+            productoRecibido.UnidadMedida = producto.UnidadMedida;
+            productoRecibido.DescripcionCapsula = producto.DescripcionCapsula;
+
+            if(detalles != null)
+            {
+                productoRecibido.Capacidad = detalles.Capacidad;
+                productoRecibido.TipoCapsula = detalles.TipoCapsula;
+                productoRecibido.ColorCapsula = detalles.ColorCapsula;
+                productoRecibido.ColorBotella = detalles.ColorBotella;
+                productoRecibido.TipoEtiqueta = detalles.TipoEtiqueta;
+                productoRecibido.TipoCorcho = detalles.TipoCorcho;
+                productoRecibido.MedidaEtiquetaBoquete = detalles.MedidaEtiquetaABoquete;
+                productoRecibido.MedidaEtiquetaBase = detalles.MedidaEtiquetaABase;
+                productoRecibido.Medalla = detalles.Medalla;
+                if (detalles.BotellaDetalles != null)
+                {
+                    productoRecibido.IdBotellaDetalle = detalles.BotellaDetalles.Id;
+                    productoRecibido.NombreBotella = detalles.BotellaDetalles.NombreBotella;
+                    productoRecibido.AltoBotella = detalles.BotellaDetalles.AlturaBotella;
+                    productoRecibido.AnchoBotella = detalles.BotellaDetalles.AnchoBotella;
+                }
+            }
+
+
+            productoRecibido.IdInformacionQuimica = producto.IdInformacionQuimica;
+            productoRecibido.Cepa = producto.InformacionQuimica?.Cepa;
+            productoRecibido.AzucarMin = (int?)producto.InformacionQuimica?.MinAzucar;
+            productoRecibido.AzucarMax = (int?)producto.InformacionQuimica?.MaxAzucar;
+            productoRecibido.SulfurosMin = (int?)producto.InformacionQuimica?.MinSulfuroso;
+            productoRecibido.SulfurosMax = (int?)producto.InformacionQuimica?.MaxSulfuroso;
+            productoRecibido.DensidadMin = (int?)producto.InformacionQuimica?.MinDensidad;
+            productoRecibido.DensidadMax = (int?)producto.InformacionQuimica?.MaxDensidad;
+            productoRecibido.GradoAlcoholicoMin = (int?)producto.InformacionQuimica?.MinGradoAlcohol;
+            productoRecibido.GradoAlcoholicoMax = (int?)producto.InformacionQuimica?.MaxGradoAlcohol;
+
+            
+            if(historial !=null)
+            {
+                productoRecibido.GuardarHistorial = producto.ProductoHistorial?.Any();
+                productoRecibido.FechaCosecha = producto.ProductoHistorial?.FirstOrDefault()?.FechaCosecha.ToString("dd-MM-yyyy HH:mm:ss");
+                productoRecibido.FechaProduccion = producto.ProductoHistorial?.FirstOrDefault()?.FechaProduccion.ToString("dd-MM-yyyy HH:mm:ss");
+                productoRecibido.FechaEnvasado = producto.ProductoHistorial?.FirstOrDefault()?.FechaEnvasado.ToString("dd-MM-yyyy HH:mm:ss");
+
+            }
+      
+            return Ok(productoRecibido);
+        }
+
+        [HttpPost("EditarProducto/{IdOriginalProducto}")]
+        public async Task<IActionResult> EditarProducto(ProductoRecibido productoEditado, int IdOriginalProducto)
+        {
+            if (_context.Producto == null)
+            {
+                return NotFound();
+            }
+            var productoOriginal = await _context.Producto
+                 .Include(p => p.InformacionQuimica)
+                 .Include(p => p.ProductoHistorial)
+                 .FirstOrDefaultAsync(m => m.Id == IdOriginalProducto);
+            var detalles = await _context.ProductoDetalle.Include(x => x.BotellaDetalles).Where(x => x.IdProductos == IdOriginalProducto).FirstOrDefaultAsync();
+            var historial = await _context.ProductoHistorial.Where(x => x.IdProductos == IdOriginalProducto).FirstOrDefaultAsync();
+
+            if (productoOriginal == null)
+            {
+                return NotFound();
+            }
+
+            if (productoOriginal.CodigoBarra != productoEditado.CodigoBarra)
+            {
+                productoOriginal.CodigoBarra = productoEditado.CodigoBarra;
+            }
+            if (productoOriginal.CodigoVE != productoEditado.CodigoVE)
+            {
+                productoOriginal.CodigoVE = productoEditado.CodigoVE;
+            }
+            if (productoOriginal.Nombre != productoEditado.NombreVino)
+            {
+                productoOriginal.Nombre = productoEditado.NombreVino;
+            }
+            if (productoOriginal.PaisDestino != productoEditado.PaisDestino)
+            {
+                productoOriginal.PaisDestino = productoEditado.PaisDestino;
+            }
+            if (productoOriginal.Idioma != productoEditado.Idioma)
+            {
+                productoOriginal.Idioma = productoEditado.Idioma;
+            }
+            if (productoOriginal.UnidadMedida != productoEditado.UnidadMedida)
+            {
+                productoOriginal.UnidadMedida = productoEditado.UnidadMedida;
+            }
+            if (productoOriginal.DescripcionCapsula != productoEditado.DescripcionCapsula)
+            {
+                productoOriginal.DescripcionCapsula = productoEditado.DescripcionCapsula;
+            }
+            if (productoOriginal.IdInformacionQuimica != productoEditado.IdInformacionQuimica)
+            {
+                productoOriginal.IdInformacionQuimica = (int)productoEditado.IdInformacionQuimica;
+            }
+
+
+            if(detalles != null)
+            {
+
+                // Comparación para detalles
+                if ( productoEditado.Capacidad.HasValue && detalles.Capacidad != productoEditado.Capacidad)
+                {
+                    detalles.Capacidad = productoEditado.Capacidad.Value;
+                }
+                if ( detalles.TipoCapsula != productoEditado.TipoCapsula)
+                {
+                    detalles.TipoCapsula = productoEditado.TipoCapsula;
+                }
+                if ( detalles.ColorCapsula != productoEditado.ColorCapsula)
+                {
+                    detalles.ColorCapsula = productoEditado.ColorCapsula;
+                }
+                if ( detalles.ColorBotella != productoEditado.ColorBotella)
+                {
+                    detalles.ColorBotella = productoEditado.ColorBotella;
+                }
+                if ( detalles.TipoEtiqueta != productoEditado.TipoEtiqueta)
+                {
+                    detalles.TipoEtiqueta = productoEditado.TipoEtiqueta;
+                }
+                if ( detalles.TipoCorcho != productoEditado.TipoCorcho)
+                {
+                    detalles.TipoCorcho = productoEditado.TipoCorcho;
+                }
+                if ( productoEditado.MedidaEtiquetaBoquete.HasValue && detalles.MedidaEtiquetaABoquete != productoEditado.MedidaEtiquetaBoquete)
+                {
+                    detalles.MedidaEtiquetaABoquete = productoEditado.MedidaEtiquetaBoquete.Value;
+                }
+                if ( productoEditado.MedidaEtiquetaBase.HasValue && detalles.MedidaEtiquetaABase != productoEditado.MedidaEtiquetaBase)
+                {
+                    detalles.MedidaEtiquetaABase = productoEditado.MedidaEtiquetaBase.Value;
+                }
+                if ( productoEditado.Medalla.HasValue && detalles.Medalla != productoEditado.Medalla)
+                {
+                    detalles.Medalla = productoEditado.Medalla.Value;
+                }
+                if ( productoEditado.IdBotellaDetalle.HasValue && detalles.IdBotellaDetalles != productoEditado.IdBotellaDetalle)
+                {
+                    detalles.IdBotellaDetalles = (int)productoEditado.IdBotellaDetalle;
+
+                }
+
+            }
+
+            if(detalles == null && productoEditado.Capacidad != null)
+            {
+                ProductoDetalles nuevoDetalles = new ProductoDetalles();
+                nuevoDetalles.IdProductos = IdOriginalProducto;
+                nuevoDetalles.IdBotellaDetalles = (int)productoEditado.IdBotellaDetalle;
+                nuevoDetalles.Capacidad = (int)productoEditado.Capacidad;
+                nuevoDetalles.TipoCapsula = productoEditado.TipoCapsula;
+                nuevoDetalles.TipoEtiqueta = productoEditado.TipoEtiqueta;
+                nuevoDetalles.ColorBotella = productoEditado.ColorBotella;
+                nuevoDetalles.Medalla = (bool)productoEditado.Medalla;
+                nuevoDetalles.ColorCapsula = productoEditado.ColorCapsula;
+                nuevoDetalles.TipoCorcho = productoEditado.TipoCorcho;
+                nuevoDetalles.MedidaEtiquetaABase = (int)productoEditado.MedidaEtiquetaBase;
+                nuevoDetalles.MedidaEtiquetaABoquete = (int)productoEditado.MedidaEtiquetaBoquete;
+
+                _context.ProductoDetalle.Add(nuevoDetalles);
+                _context.SaveChanges();
+
+            }
+
+
+
+            // Comparación para ProductoHistorial
+            if (historial != null)
+            {
+                // Comparación y actualización de FechaCosecha
+                if (!string.IsNullOrEmpty(productoEditado.FechaCosecha) &&
+                    historial.FechaCosecha.ToString("dd-MM-yyyy HH:mm:ss") != productoEditado.FechaCosecha)
+                {
+                    historial.FechaCosecha = DateTime.ParseExact(productoEditado.FechaCosecha, "dd-MM-yyyy HH:mm:ss", null);
+                }
+
+                // Comparación y actualización de FechaProduccion
+                if (!string.IsNullOrEmpty(productoEditado.FechaProduccion) &&
+                    historial.FechaProduccion.ToString("dd-MM-yyyy HH:mm:ss") != productoEditado.FechaProduccion)
+                {
+                    historial.FechaProduccion = DateTime.ParseExact(productoEditado.FechaProduccion, "dd-MM-yyyy HH:mm:ss", null);
+                }
+
+                // Comparación y actualización de FechaEnvasado
+                if (!string.IsNullOrEmpty(productoEditado.FechaEnvasado) &&
+                    historial.FechaEnvasado.ToString("dd-MM-yyyy HH:mm:ss") != productoEditado.FechaEnvasado)
+                {
+                    historial.FechaEnvasado = DateTime.ParseExact(productoEditado.FechaEnvasado, "dd-MM-yyyy HH:mm:ss", null);
+                }
+            }
+            if (historial == null &&
+                (!string.IsNullOrEmpty(productoEditado.FechaCosecha) ||
+                 !string.IsNullOrEmpty(productoEditado.FechaProduccion) ||
+                 !string.IsNullOrEmpty(productoEditado.FechaEnvasado)))
+            {
+                ProductoHistorial nuevoHistorial = new ProductoHistorial
+                {
+                    IdProductos = IdOriginalProducto,
+                    FechaCosecha = (DateTime)(!string.IsNullOrEmpty(productoEditado.FechaCosecha)
+                        ? DateTime.ParseExact(productoEditado.FechaCosecha, "dd-MM-yyyy HH:mm:ss", null)
+                        : (DateTime?)null),
+                    FechaProduccion = (DateTime)(!string.IsNullOrEmpty(productoEditado.FechaProduccion)
+                        ? DateTime.ParseExact(productoEditado.FechaProduccion, "dd-MM-yyyy HH:mm:ss", null)
+                        : (DateTime?)null),
+                    FechaEnvasado = (DateTime)(!string.IsNullOrEmpty(productoEditado.FechaEnvasado)
+                        ? DateTime.ParseExact(productoEditado.FechaEnvasado, "dd-MM-yyyy HH:mm:ss", null)
+                        : (DateTime?)null)
+                };
+
+                _context.ProductoHistorial.Add(nuevoHistorial);
+                _context.SaveChanges();
+            }
+
+
+
+
+
+
+
+            _context.Producto.Update(productoOriginal);
+            _context.SaveChanges();
+
+            if (detalles != null)
+            {
+                _context.ProductoDetalle.Update(detalles);
+                _context.SaveChanges();
+            }
+            if (historial != null)
+            {
+                _context.ProductoHistorial.Update(historial);
+                _context.SaveChanges();
+            }
+            
+            return Ok();
+
+        }
+
+
+
         // GET: api/ProductosApi/5
         [HttpGet("GetBotella/{id}")]
         public async Task<ActionResult<Productos>> GetBotella(int id)
@@ -212,6 +485,10 @@ namespace QualityScout.MobileEndpoints
                 return Unauthorized("Token no válido.");
             }
 
+            if (ProductoExists(pr.CodigoBarra))
+            {
+                return BadRequest("El codigo de barra ya existe en base de datos");
+            }
 
             Productos producto = new Productos();
 
@@ -331,29 +608,9 @@ namespace QualityScout.MobileEndpoints
 
 
 
-        // DELETE: api/ProductosApi/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProducto(int id)
+        private bool ProductoExists(string codigoBarra)
         {
-            if (_context.Producto == null)
-            {
-                return NotFound();
-            }
-            var producto = await _context.Producto.FindAsync(id);
-            if (producto == null)
-            {
-                return NotFound();
-            }
-
-            _context.Producto.Remove(producto);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool ProductoExists(int id)
-        {
-            return (_context.Producto?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Producto?.Any(e => e.CodigoBarra == codigoBarra)).GetValueOrDefault();
         }
     }
 }
