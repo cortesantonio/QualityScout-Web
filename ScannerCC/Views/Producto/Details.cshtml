@@ -1,50 +1,367 @@
 ﻿@model ScannerCC.Models.Productos
 
 @{
-    ViewData["Title"] = "Details";
+    Layout = null;
+    bool isEspecialista = User.IsInRole("Especialista");
+    bool isControlCalidad = User.IsInRole("Control de Calidad");
 }
 
 <style>
-    body {
-        background-color: #242424;
-        color: white;
-    }
-
     .container {
-        text-align: center;
+        position: relative;
+        z-index: 1; /* Asegura que el contenido esté por encima de las imágenes de fondo */
+        max-width: 500px; /* Ajusta el ancho máximo que desees */
+        margin: auto; /* Centra el contenedor en la pantalla */
     }
 
-    a {
-        color: white;
+    .form-group {
+        margin-bottom: 15px;
     }
 
-        a:hover {
-            color: #62EBF0;
+    label, dt {
+        color: #4B0404; /* Cambia este valor por el color que desees */
+        font-family: Arial;
+        border: none;
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    input, dd {
+        color: black; /* Color del texto */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        background-color: #DBD7D7;
+        padding: 5px;
+        border: none;
+        font-size: 12px;
+    }
+
+        input.acc {
+            color: white;
+            background-color: #BF6565;
+            width: 30%;
+            padding: 5px;
+            font-size: 14px;
         }
 
-    .active {
-        color: aquamarine;
+    h5 {
+        margin-top: 15px;
+        color: #4B0404;
+        font-family: Arial;
+        font-size: 15px;
     }
 
-    .True {
-        color: aquamarine;
+    select {
+        color: black; /* Color del texto */
+        background-color: #DBD7D7; /* Color de fondo */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
     }
 
-    .False {
-        color: red;
+    button {
+        color: white; /* Color del texto */
+        padding: 5px; /* Espaciado interno */
+        background-color: #BF6565;
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
+        width: 30%;
     }
-    .inactive {
-        color: red;
+
+        button.btn {
+            background-color: black;
+            width: 30%;
+        }
+        button.a {
+            background-color: none;
+        }
+
+        a.btn {
+        color: white; /* Color del texto */
+        padding: 5px; /* Espaciado interno */
+        background-color: #BF6565;
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
+        width: 30%;
+        }
+
+    input, select, dd {
+        width: 100%;
+        margin: 5px;
+    }
+
+    button[type="submit"] {
+        background-color: #BF6565;
+        color: white;
+        width: 30%;
+    }
+
+        button[type="submit"]:hover {
+            background-color: #F25757;
+            color: white;
+            width: 30%;
+        }
+
+    a.a {
+        color: #F25C5C;
+        text-decoration: none;
+        margin: 15px;
+        font-family: Arial;
+        font-size: 13px;
+    }
+
+        a.a:hover {
+            color: #260202;
+            margin: 15px;
+            font-family: Arial;
+            font-size: 13px;
+        }
+
+    h3 {
+        color: #4B0404;
+    }
+
+    .titulos {
+        font-family: Arial;
+        font-size: 10px;
+        padding-left: 5px;
+    }
+
+    .profile-header {
+        display: flex;
+        align-items: center; /* Alinea verticalmente la imagen y el texto */
+        margin-bottom: 20px;
+    }
+
+    .profile-image {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background-color: #260202;
+        margin-top: 60px;
+        margin-left: 80px;
+    }
+
+    .info-left {
+        text-align: center;
+        margin-top: 80px;
+    }
+
+    .modal {
+        display: none; /* Oculto por defecto */
+        position: fixed;
+        z-index: 100; /* Asegura que está por encima del contenido */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    }
+
+    /* El contenedor de contenido del modal */
+    .modal-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    /* Título de alerta */
+    .alerta {
+        color: #260202;
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    /* Texto dentro del modal */
+    .modal-content p {
+        font-size: 18px;
+        color: #333;
+    }
+
+    /* Botones del modal */
+    .modal-buttons {
+        margin-top: 20px;
+    }
+
+    /* Texto destacado en rojo */
+    .desactivar {
+        color: #f25757;
+    }
+
+    .modall {
+        display: none; /* Oculto por defecto */
+        position: fixed;
+        z-index: 100; /* Asegura que está por encima del contenido */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    }
+
+    /* El contenedor de contenido del modal */
+    .modall-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    /* Texto dentro del modal */
+    .modall-content p {
+        font-size: 18px;
+        color: #333;
+    }
+
+    /* Botones del modal */
+    .modall-buttons {
+        margin-top: 20px;
+    }
+
+    .activar {
+        color: #f25757;
     }
 </style>
 
-<h1 class="mt-3 mb-5">Información completa del producto</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualityScoutNoLog</title>
+    <link rel="stylesheet" href="~/css/Nav.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="nav-i">
+            <a href="">
+                <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo Quality Scout">
+            </a>
+            <div class="navstyle">
+                @if (isEspecialista)
+                {
+                    <div class="iconosnav">
+                        <a asp-action="Index" asp-controller="Especialista">
+                            <img src="~/Extras/home.png" alt="Inicio" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionUsuarios" asp-controller="Usuario">
+                            <img src="~/Extras/usuarios.png" alt="Usuarios" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="Controles" asp-controller="Controles">
+                            <img src="~/Extras/controles.png" alt="Controles" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionProductos" asp-controller="Producto">
+                            <img src="~/Extras/productos.png" alt="Productos" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionInformes" asp-controller="Informes">
+                            <img src="~/Extras/Informes.png" alt="Informes" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                            <img src="~/Extras/escaner.png" alt="Informes" />
+                        </a>
+                    </div>
+                }
 
-<div class="container">
-    <dl class="row justify-content-center g-5 me-3">
-        <!-- Columna 1 -->
-        <div class="col-sm-4">
-            <h5>Información del producto</h5>
+                @if (isControlCalidad)
+                {
+                    <div class="iconosnav">
+                        <a asp-action="Index" asp-controller="Controlcalidad">
+                            <img src="~/Extras/home.png" alt="Inicio" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="Controles" asp-controller="Controles">
+                            <img src="~/Extras/controles.png" alt="Controles" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionProductos" asp-controller="Producto">
+                            <img src="~/Extras/productos.png" alt="Productos" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionInformes" asp-controller="Informes">
+                            <img src="~/Extras/Informes.png" alt="Informes" />
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="login-btn">
+                <div class="div2">
+                    @if (isEspecialista)
+                    {
+                        <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
+                        <div class="welcome-container">
+                            <span class="welcome-text">Bienvenido!</span>
+                            <p>@ViewBag.trab.Nombre</p>
+                            <p>Especialista</p>
+                        </div>
+                    }
+
+                    @if (isControlCalidad)
+                    {
+                        <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
+                        <div class="welcome-container">
+                            <span class="welcome-text">Bienvenido!</span>
+                            <p>@ViewBag.trab.Nombre</p>
+                            <p style="font-size: 10px;">Control de Calidad</p>
+                        </div>
+                    }
+                </div>
+                <button id="showOptionUser" onclick="showOptionUser()">
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div id="opcionesUser" style="display: none">
+                    <ul>
+                        <li>
+                            <a style="color:white;" asp-action="Details" asp-controller="Usuario" asp-route-id="@ViewBag.trab.Id">
+                                Editar usuario
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="Auth" asp-action="LogOut" class="dropdown-item" style="color:red; text-decoration:none;">
+                                Cerrar sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="content">
+        <div class="content">
+            <h2 class="accesotitulo">Ver producto</h2>
+        </div>
+    </div>
+
+    <div class=" container">
+        <h5 style="margin-left: 160px;">Información del producto</h5>
             <hr/>
             <div class="row"  >
                 <dt class="col-sm-6">Nombre del usuario</dt>
@@ -90,16 +407,16 @@
                 <dd class="col-sm-6">@Html.DisplayFor(model => model.DescripcionCapsula)</dd>
             </div>
             <div class="mt-3">
-                @if (Model.Activo && User.IsInRole("Especialista"))
+            @if (isEspecialista)
                 {
-                    <a style="margin-right: 20px;" asp-action="Edit" asp-route-id="@Model?.Id">Editar producto</a>
+                    <a class="a" style="margin-left: 200px;" asp-action="Edit" asp-route-id="@Model?.Id">Editar producto</a>
                 }
             </div>
         </div>
 
         <!-- Columna 2 -->
-        <div class="col-sm-4">
-            <h5>Detalles de la información química</h5>
+        <div class=" container">
+        <h5 style="margin-left: 130px; margin-top: 15px;">Detalles de la información química</h5>
             <hr />
             <div class="row">
             @if (Model.InformacionQuimica != null)
@@ -141,16 +458,16 @@
             }
             </div>
             <div class="mt-3">
-                @if (Model.Activo && User.IsInRole("Especialista"))
+            @if (isEspecialista)
                 {
-                    <a style="margin-right: 20px;" asp-action="Edit" asp-controller="InformacionQuimica" asp-route-id="@Model?.Id">Editar la información quimica</a>
+                <a class="a" style="margin-left: 160px;" asp-action="Edit" asp-controller="InformacionQuimica" asp-route-id="@Model?.Id">Editar la información quimica</a>
                 }
             </div>
         </div>
 
         <!-- Columna 3 -->
-        <div class="col-sm-4">
-            <h5>Detalles de la botella</h5>
+    <div class=" container">
+        <h5 style="margin-left: 180px; margin-top: 15px;">Detalles de la botella</h5>
             <hr />
             <div class="row">
             @if (Model.ProductoDetalles != null && Model.ProductoDetalles.Any())
@@ -173,16 +490,16 @@
                 }
             </div>
             <div class="mt-3">
-                @if (Model.Activo && User.IsInRole("Especialista"))
+            @if (isEspecialista)
                 {
-                    <a style="margin-right: 20px;" asp-action="Edit" asp-controller="BotellaDetalles" asp-route-id="@Model?.Id">Editar la botella</a>
+                <a class="a" style="margin-left: 200px;" asp-action="Edit" asp-controller="BotellaDetalles" asp-route-id="@Model?.Id">Editar la botella</a>
                 }
             </div>
         </div>
 
         <!-- Columna 4 -->
-        <div class="col-sm-6">
-            <h5>Detalles del producto</h5>
+    <div class=" container">
+        <h5 style="margin-left: 180px; margin-top: 15px;">Detalles del producto</h5>
             <hr />
             <div class="row">
             @if (Model.ProductoDetalles != null && Model.ProductoDetalles.Any())
@@ -229,16 +546,16 @@
                 }
             </div>
             <div class="mt-3">
-                @if (Model.Activo && User.IsInRole("Especialista"))
+            @if (isEspecialista)
                 {
-                    <a style="margin-right: 20px;" asp-action="Edit" asp-controller="ProductoDetalles" asp-route-id="@Model?.Id">Editar detalles del producto</a>
+                <a class="a" style="margin-left: 170px;" asp-action="Edit" asp-controller="ProductoDetalles" asp-route-id="@Model?.Id">Editar detalles del producto</a>
                 }
             </div>
         </div>
 
         <!-- Columna 5 -->
-        <div class="col-sm-6">
-            <h5>Historial del producto</h5>
+    <div class=" container">
+        <h5 style="margin-left: 180px; margin-top: 15px;">Historial del producto</h5>
             <hr />
             <div class="row">
             @if (Model.ProductoHistorial != null && Model.ProductoHistorial.Any())
@@ -261,110 +578,95 @@
                 }
             </div>
             <div class="mt-3">
-                @if (Model.Activo && User.IsInRole("Especialista"))
+            @if (isEspecialista)
                 {
-                    <a style="margin-right: 20px;" asp-action="Edit" asp-controller="ProductoHistorial" asp-route-id="@Model?.Id">Editar el historial del producto</a>
+                <a class="a" style="margin-left: 165px;" asp-action="Edit" asp-controller="ProductoHistorial" asp-route-id="@Model?.Id">Editar el historial del producto</a>
                 }
             </div>
         </div>
-    </dl>
-</div>
-<div>
-    <a style="margin-left: 20px;" asp-action="Index" asp-controller="Home">Volver a la lista</a>
-</div>
+    <div class="container">
+        @if (isEspecialista)
+        {
+            @if (Model.Activo)
+            {
+                <button class="btn-deactivate" style="color:white; margin-left: 400px; margin-top: 20px; margin-bottom: 15px;" onclick="openModal()"><i class="fa-solid fa-trash-can"></i> Desactivar producto</button>
+            }
+            else
+            {
+                <button class="btn-activate" style="color:white; margin-left: 400px; margin-top: 20px; margin-bottom: 15px;" onclick="openModall()">
+                    <i class="fa-solid fa-check"></i> Activar producto
+                </button>
+            }
 
 
-@*<script src="https://cdn.jsdelivr.net/npm/@@tensorflow/tfjs"></script>
-<script src="https://cdn.jsdelivr.net/npm/@@tensorflow-models/coco-ssd"></script>
-<div class="col-sm-4">
-    <div class="row justify-content-center">
+        }
 
-        <div style="text-align:center;" id="deteccion"></div>
+        @if (isControlCalidad)
+        {
+            @if (Model.Activo)
+            {
+                <button class="a" style="color:white; margin-left: 400px; margin-top: 20px; margin-bottom: 15px;">
+                    <a class="btn" style="color:white; text-decoration: none; font-family: Arial;" asp-action="CreateControl" asp-controller="Controles">
+                        <strong>+</strong> Agregar control
 
-        <div style="flex: 1;">
-            <h2>Vista Reconocimiento</h2>
-            <video id="video" width="640" height="480" autoplay></video>
-        </div>
-        <div style="flex: 1;">
-            <canvas id="canvas" width="640" height="480"></canvas>
-        </div>
+                    </a>
+                </button>
 
+            }
 
-
+        }
 
     </div>
-</div>
+    <div id="modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2 class="alerta">ALERTA</h2>
+            <p>¿Está seguro que desea <span class="desactivar">desactivar</span> este producto?</p>
+            <div class="d-flex justify-content-between w-100" style="margin-left: 5px; margin-top: 15px;">
+                <form asp-action="Desactivar">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Aceptar" class="acc btn btn-danger" />
+                </form>
+                <button onclick="window.location.href='@Url.Action("Details", "Producto")'" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <div id="modall" class="modall" style="display: none;">
+        <div class="modal-content">
+            <h2 class="alerta">ALERTA</h2>
+            <p>¿Está seguro que desea <span class="activar">activar</span> este producto?</p>
+            <div class="d-flex justify-content-between w-100" style="margin-left: 5px; margin-top: 15px;">
+                <form asp-action="Activar">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Activar" class="acc btn btn-danger" />
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="~/js/quagga.min.js"></script>
+<script src="~/js/especialista.js"></script>
+
+</html>
+
 
 <script>
-    async function detectObjects() {
-        const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-
-        // Cargar el modelo preentrenado COCO-SSD
-        const model = await cocoSsd.load();
-
-        // Dimensiones físicas estimadas del objeto en metros
-        const objectWidth = 0.02;  // Ancho del objeto en metros
-        const objectHeight = 0.2;// Altura del objeto en metros
-        const assumedDistance = 0.25; // Distancia estimada de la cámara al objeto en metros
-
-        // Obtener el stream de la cámara
-        const stream = await navigator.mediaDevices.getUserMedia({ video: {} });
-        video.srcObject = stream;
-
-        // Esperar a que la cámara cargue y realizar la detección en bucle
-        video.addEventListener('loadeddata', async () => {
-            while (true) {
-                // Realizar la detección de objetos
-                const predictions = await model.detect(video);
-
-                // Dibujar las predicciones en el canvas
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                predictions.forEach(prediction => {
-                    ctx.beginPath();
-                    ctx.rect(
-                        prediction.bbox[0],
-                        prediction.bbox[1],
-                        prediction.bbox[2],
-                        prediction.bbox[3]
-                    );
-                    ctx.lineWidth = 2;
-                    ctx.strokeStyle = 'red';
-                    ctx.fillStyle = 'red';
-                    ctx.stroke();
-                    ctx.fillText(
-                        `${prediction.class} (${Math.round(prediction.score * 100)}%)`,
-                        prediction.bbox[0],
-                        prediction.bbox[1] > 10 ? prediction.bbox[1] - 5 : 10
-                    );
-
-                    // Calcular dimensiones estimadas en metros
-                    const estimatedWidth = (objectWidth * canvas.width) / prediction.bbox[2];
-                    const estimatedHeight = (objectHeight * canvas.height) / prediction.bbox[3];
-
-                    // Mostrar dimensiones estimadas en el HTML
-                    const infoDiv = document.getElementById('deteccion');
-
-                    if (prediction.class == "bottle") {
-                        infoDiv.innerHTML = "";
-                        infoDiv.innerHTML = `
-                                <p>Object: ${prediction.class}</p>
-                                <p>Estimated Width: ${estimatedWidth.toFixed(2)} meters</p>
-                                <p>Estimated Height: ${estimatedHeight.toFixed(2)} meters</p>
-                            `;
-                    }
-
-
-                });
-
-                // Esperar un breve periodo antes de la próxima detección
-                await new Promise(resolve => requestAnimationFrame(resolve));
-            }
-        });
+    // Función para abrir el modal
+    function openModal() {
+        document.getElementById('modal').style.display = 'block';
     }
 
-    // Iniciar la detección de objetos cuando la ventana haya cargado completamente
-    window.onload = detectObjects;
+    // Función para cerrar el modal
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+    }
 
-</script>*@
+    // Función para abrir el modal
+    function openModall() {
+        document.getElementById('modall').style.display = 'block';
+    }
+
+    // Función para cerrar el modal
+    function closeModall() {
+        document.getElementById('modall').style.display = 'none';
+    }
+</script>

@@ -1,62 +1,113 @@
 @{
-    ViewData["Title"] = "Login";
     Layout = null;
 }
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="~/css/login.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap"
-          rel="stylesheet" />
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualityScoutNoLog</title>
+    <link rel="stylesheet" href="~/css/IndicadorHome.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="logcontenedor">
-        <div class="presentacionLog">
-            <div class="nameApp">
-                <i class="fa-brands fa-opencart">QualityScoult</i>
+    <header>
+        <nav class="nav-i">
+            <div>
+                <a href="./QSLogin.html">
+                    <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="">
+                </a>
             </div>
-            <div class="bnvLog">
-                <div class="sisLog">
-                    Herramienta de Control de
-                    Calidad.
-                </div>
-
-                <div class="tituloLog">
-                    QualityScoult
-                    <div class="line10"></div>
-                </div>
-
-                <div class="infoLog">
-                    Bienvenido a la plataforma de gestión y consulta de control de calidad.  <br>
-                    Si ya es usuario de esta plataforma, por favor inicie sesión utilizando
-                    los datos proporcionados por su superior. <br>Si ha olvidado sus datos de inicio
-                    de sesión, no dude en ponerse en contacto con el administrador para recibir asistencia.
-
-                </div>
-                <div class="arrow">
-                    <center><i class="fa-solid fa-arrow-down"></i></center>
+            <div class="login-btn">
+                <div class="div2">
+                    <div class="welcome-container">
+                        <span class="welcome-text">Bienvenido!</span>
+                        <a class="btn-login" asp-action="Index1" asp-controller="Home">Iniciar sesión</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </nav>
+    </header>
+    <div class="content">
+        <div class="content">
+            <h2 class="accesotitulo">Accesos rápidos</h2>
+            <div class="quick-access">
+                <div class="icon-item">
+                    <img src="~/Extras/dashboardc.png" href="./QSLogin.html" alt="Dashboard">
+                    <span>Dashboard</span>
+                </div>
+                <div class="icon-item">
+                    <a asp-action="Index2" asp-controller="Home">
+                        <img src="~/Extras/usuarios.png" alt="Usuarios" />
+                    </a>
+                    <span>Usuarios</span>
+                </div>
+                <div class="icon-item">
+                    <img src="~/Extras/controles.png" href="./QSLogin.html" alt="Dashboard">
+                    <span>Controles</span>
+                </div>
+                <div class="icon-item">
+                    <img src="~/Extras/productos.png" href="./QSLogin.html" alt="Dashboard">
+                    <span>Productos</span>
+                </div>
+                <div class="icon-item">
+                    <img src="~/Extras/informes.png" href="./QSLogin.html" alt="Dashboard">
+                    <span>Informes</span>
+                </div>
+                <div class="icon-item">
+                    <img src="~/Extras/escanera.png" alt="Informes" />
+                    <span>Escaneos</span>
+                </div>
+            </div>
 
-        <div class="formularioLogin">
-            <h2>Inicio de Sesion</h2>
-            <form asp-action="Login" asp-controller="Auth" method="post">
-                <input type="text" name="user" id="" placeholder="RUT o Email" />
-                <input type="password" name="password" id="" placeholder="Password" />
-                <button style="cursor: pointer" type="submit">
-                    <i class="fa-solid fa-right-to-bracket"></i> Entrar
-                </button>
-            </form>
-            <center>
-                <a href="/"><button style="cursor: pointer">Volver atras</button></a>
-            </center>
+            <div class="iframe-container">
+                <iframe title="IndicadoresG"
+                        src="https://app.powerbi.com/view?r=eyJrIjoiMzUwNzMxNjEtNTBlYi00ZWY0LTg0ZmQtMjMzNzQ1Y2U0YjEwIiwidCI6IjM4YTFlMGExLWI2YjEtNDJlOS1iM2E5LTU5NzYyNjY3MGIxNyIsImMiOjR9"
+                        frameborder="0"
+                        allowFullScreen="true"></iframe>
+            </div>
+
+            <div class="dashboard">
+                <div class="dashboard-indicators">
+                    <div class="indicator-container">
+                        <div class="indicator reprocesos">
+                            <span class="indicator-title">Controles en reproceso</span>
+                            <div class="indicator-value">
+                                <span class="percentage">@Model.ReprocesadosMesAntiguo</span>
+                                <span class="arrow-up">↑</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="indicator-container">
+                        <div class="indicator rechazados">
+                            <span class="indicator-title">Controles rechazados</span>
+                            <div class="indicator-value">
+                                <span class="percentage">@Model.RechazadosMesAntiguo</span>
+                                <span class="arrow-down">↓</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="indicator-container">
+                        <div class="indicator aprobados">
+                            <span class="indicator-title">Controles aprobados</span>
+                            <div class="indicator-value">
+                                <span class="percentage">@Model.AprobadosMesAntiguo</span>
+                                <span class="arrow-up">↑</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="reference-text">Indicadores con referencia al mes anterior: @Model.MesAnterior @Model.AnioAnterior</p>
+
+            </div>
         </div>
     </div>
 </body>

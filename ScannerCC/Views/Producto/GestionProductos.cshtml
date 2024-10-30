@@ -1,0 +1,315 @@
+﻿@model ScannerCC.Models.Productos
+
+@{
+    Layout = null;
+    bool isEspecialista = User.IsInRole("Especialista");
+    bool isControlCalidad = User.IsInRole("Control de Calidad");
+}
+
+<style>
+    input.acc {
+        background-color: #BF6565;
+        width: 30%;
+        color: white; /* Color del texto */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
+        margin-bottom: 5px;
+    }
+
+    button.btn {
+        background-color: black;
+        width: 30%;
+        color: white; /* Color del texto */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
+    }
+
+    .modal {
+        display: none; /* Oculto por defecto */
+        position: fixed;
+        z-index: 100; /* Asegura que está por encima del contenido */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    }
+
+    /* El contenedor de contenido del modal */
+    .modal-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    /* Título de alerta */
+    .alerta {
+        color: #260202;
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    /* Texto dentro del modal */
+    .modal-content p {
+        font-size: 18px;
+        color: #333;
+    }
+
+    /* Botones del modal */
+    .modal-buttons {
+        margin-top: 20px;
+    }
+
+    /* Texto destacado en rojo */
+    .desactivar {
+        color: #f25757;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualityScoutNoLog</title>
+    <link rel="stylesheet" href="~/css/GestionProducto.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="nav-i">
+            <a href="">
+                <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo Quality Scout">
+            </a>
+            <div class="navstyle">
+                @if (isEspecialista)
+                {
+                    <div class="iconosnav">
+                        <a asp-action="Index" asp-controller="Especialista">
+                            <img src="~/Extras/home.png" alt="Inicio" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionUsuarios" asp-controller="Usuario">
+                            <img src="~/Extras/usuarios.png" alt="Usuarios" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="Controles" asp-controller="Controles">
+                            <img src="~/Extras/controles.png" alt="Controles" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionProductos" asp-controller="Producto">
+                            <img src="~/Extras/productos.png" alt="Productos" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionInformes" asp-controller="Informes">
+                            <img src="~/Extras/Informes.png" alt="Informes" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                            <img src="~/Extras/escaner.png" alt="Informes" />
+                        </a>
+                    </div>
+                }
+
+                @if (isControlCalidad)
+                {
+                    <div class="iconosnav">
+                        <a asp-action="Index" asp-controller="Controlcalidad">
+                            <img src="~/Extras/home.png" alt="Inicio" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="Controles" asp-controller="Controles">
+                            <img src="~/Extras/controles.png" alt="Controles" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionProductos" asp-controller="Producto">
+                            <img src="~/Extras/productos.png" alt="Productos" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionInformes" asp-controller="Informes">
+                            <img src="~/Extras/Informes.png" alt="Informes" />
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="login-btn">
+                <div class="div2">
+                    @if (isEspecialista)
+                    {
+                        <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
+                        <div class="welcome-container">
+                            <span class="welcome-text">Bienvenido!</span>
+                            <p>@ViewBag.trab.Nombre</p>
+                            <p>Especialista</p>
+                        </div>
+                    }
+
+                    @if (isControlCalidad)
+                    {
+                        <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
+                        <div class="welcome-container">
+                            <span class="welcome-text">Bienvenido!</span>
+                            <p>@ViewBag.trab.Nombre</p>
+                            <p>Control de Calidad</p>
+                        </div>
+                    }
+                </div>
+                <button id="showOptionUser" onclick="showOptionUser()">
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div id="opcionesUser" style="display: none">
+                    <ul>
+                        <li>
+                            <a style="color:white;" asp-action="Details" asp-controller="Usuario" asp-route-id="@ViewBag.trab.Id">
+                                Editar usuario
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="Auth" asp-action="LogOut" class="dropdown-item" style="color:red; text-decoration:none;">
+                                Cerrar sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+<div class="content">
+    <div class="content">
+        <h2 class="accesotitulo">Gestión de productos</h2>
+    </div>
+</div>
+
+    <div class="quick-access">
+        @if (isEspecialista)
+        {
+            <div class="icon-item">
+                <a asp-action="GestionProductosH" asp-controller="ProductoHistorial">
+                    <img src="~/Extras/proh.png" alt="PHistorial" />
+                </a>
+                <span>Productos historial</span>
+            </div>
+            <div class="icon-item">
+                <a asp-action="GestionProductosD" asp-controller="ProductoDetalles">
+                    <img src="~/Extras/prod.png" alt="PDetalles" />
+                </a>
+                <span>Productos detalles</span>
+            </div>
+            <div class="icon-item">
+                <a asp-action="GestionInformacion" asp-controller="InformacionQuimica">
+                    <img src="~/Extras/infq.png" alt="Informacion" />
+                </a>
+                <span>Información química</span>
+            </div>
+            <div class="icon-item">
+                <a asp-action="GestionBotellas" asp-controller="BotellaDetalles">
+                    <img src="~/Extras/botellad.png" alt="Botellas" />
+                </a>
+                <span>Botellas detalles</span>
+            </div>
+        }
+    </div>
+
+    <main>
+        <div class="search-add-container">
+            <form asp-action="GestionProductos" method="get" class="search-b" style="display:inline;">
+                <input type="text" placeholder="🔍 Busca por código de barra o nombre" class="search-bar" name="Busqueda" />
+                <button type="submit" style="border:none; background:none;">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+                </button>
+            </form>
+            @if (isEspecialista)
+            {
+                <a class="add-user-btn" asp-action="Create" asp-controller="Producto"><strong>+</strong> Añadir producto</a>
+            }
+        </div>
+
+        <section class="product-list">
+            <h2 class="titulo" style="margin-top: 5px;">Registros</h2>
+
+            <!-- Sección de productos en estilo de tarjeta -->
+            @if (ViewBag.Productos != null && ViewBag.Productos.Count > 0)
+            {
+                @foreach (var item in ViewBag.Productos)
+                {
+                    <div class="product-card">
+                        <div class="product-info">
+                        <img src="~/Extras/botellaicon.png" class="user-icon" />
+                            <p><strong>Cepa:</strong> @item.InformacionQuimica.Cepa</p>
+                            <p><strong>Codigo Barra:</strong> @item.CodigoBarra</p>
+                        </div>
+                        <div class="product-details">
+                            <p><strong>Pais Destino:</strong> @item.PaisDestino</p>
+                            <p><strong>Fecha Registro:</strong> @item.FechaRegistro.ToShortDateString()</p>
+                        </div>
+                        <div class="product-actions">
+                            @if (isEspecialista)
+                            {
+                                @if (item.Activo)
+                                {
+                                    <a class="edit-btn" asp-action="Edit" asp-controller="Producto" asp-route-id="@item.Id">
+                                        <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                    </a>
+                                    <a class="see-btn" asp-action="Details" asp-controller="Producto" asp-route-id="@item.Id">
+                                        <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="see-btn" asp-action="Details" asp-controller="Producto" asp-route-id="@item.Id">
+                                        <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
+                                    </a>
+                                }
+                            }
+
+                            @if (isControlCalidad)
+                            {
+                                @if (item.Activo)
+                                {
+                                    <a class="see-btn" asp-action="Details" asp-controller="Producto" asp-route-id="@item.Id">
+                                        <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p style="text-align: center;">No hay productos para mostrar</p>
+            }
+        </section>
+    </main>
+
+
+</body>
+<script src="~/js/quagga.min.js"></script>
+<script src="~/js/especialista.js"></script>
+
+</html>
+
+
+

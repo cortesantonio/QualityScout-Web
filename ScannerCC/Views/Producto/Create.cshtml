@@ -1,17 +1,58 @@
 ﻿@model ScannerCC.Models.Productos
+@{
+    Layout = null;
+}
 
 <style>
-    body {
-        background-color: #242424;
-        color: white;
-    }
-
     .container {
-        text-align: center;
+        position: relative;
+        z-index: 1; /* Asegura que el contenido esté por encima de las imágenes de fondo */
+        max-width: 500px; /* Ajusta el ancho máximo que desees */
+        margin: auto; /* Centra el contenedor en la pantalla */
     }
 
     .form-group {
         margin-bottom: 15px;
+    }
+
+    .form-groupp {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+
+    label {
+        color: #4B0404; /* Cambia este valor por el color que desees */
+        font-family: Arial;
+        border: none;
+        padding: 5px;
+    }
+
+    input {
+        color: black; /* Color del texto */
+        background-color: #DBD7D7; /* Color de fondo */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
+    }
+
+    select {
+        color: black; /* Color del texto */
+        background-color: #DBD7D7; /* Color de fondo */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
+    }
+
+    button {
+        color: black; /* Color del texto */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
     }
 
     input, select {
@@ -19,16 +60,19 @@
         margin: 5px;
     }
 
-        input[type="submit"] {
-            background-color: #20777A;
-            color: white;
-        }
-
-    .btn-dark:hover {
-        background-color: #62EBF0;
-        border-color: #20777A;
-        color: black;
+    button[type="submit"] {
+        background-color: #BF6565;
+        color: white;
+        width: 100%; /* Se asegura que el botón sea del mismo ancho que los inputs */
+        max-width: 150px;
     }
+
+        button[type="submit"]:hover {
+            background-color: #F25757;
+            color: white;
+            width: 100%; /* Se asegura que el botón sea del mismo ancho que los inputs */
+            max-width: 150px;
+        }
 
     a {
         color: white;
@@ -37,12 +81,103 @@
         a:hover {
             color: #62EBF0;
         }
+
+    .titulos {
+        font-family: Arial;
+        font-size: 10px;
+        padding-left: 5px;
+    }
 </style>
 
-<h4>Productos</h4>
-<hr />
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualityScoutNoLog</title>
+    <link rel="stylesheet" href="~/css/Nav.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="nav-i">
+            <a href="">
+                <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo Quality Scout">
+            </a>
+            <div class="navstyle">
+                <div class="iconosnav">
+                    <a asp-action="Index" asp-controller="Especialista">
+                        <img src="~/Extras/home.png" alt="Inicio" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionUsuarios" asp-controller="Usuario">
+                        <img src="~/Extras/usuarios.png" alt="Usuarios" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="Controles" asp-controller="Controles">
+                        <img src="~/Extras/controles.png" alt="Controles" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionProductos" asp-controller="Producto">
+                        <img src="~/Extras/productos.png" alt="Productos" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionInformes" asp-controller="Informes">
+                        <img src="~/Extras/Informes.png" alt="Informes" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                        <img src="~/Extras/escaner.png" alt="Informes" />
+                    </a>
+                </div>
+            </div>
+            <div class="login-btn">
+                <div class="div2">
+                    <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
+                    <div class="welcome-container">
+                        <span class="welcome-text">Bienvenido!</span>
+                        <p>@ViewBag.trab.Nombre</p>
+                        <p>Especialista</p>
+                    </div>
+                </div>
+                <button id="showOptionUser" onclick="showOptionUser()">
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div id="opcionesUser" style="display: none">
+                    <ul>
+                        <li>
+                            <a style="color:white;" asp-action="Details" asp-controller="Usuario" asp-route-id="@ViewBag.trab.Id">
+                                Editar usuario
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="Auth" asp-action="LogOut" class="dropdown-item" style="color:red; text-decoration:none;">
+                                Cerrar sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content">
+        <div class="content">
+            <h2 class="accesotitulo">Añadir producto</h2>
+        </div>
+    </div>
+    <div class="container">
 <div class="row">
-    <div class="col-md-4">
         <form asp-action="Create">
             <div class="form-group">
                 <label asp-for="IdInformacionQuimica" class="control-label">Informacion quimica</label>
@@ -51,55 +186,59 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="CodigoBarra" class="control-label"></label>
+                <label asp-for="CodigoBarra" class="control-label">Código de barra</label>
                 <input asp-for="CodigoBarra" name="CodigoBarra" class="form-control" />
                 <span asp-validation-for="CodigoBarra" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CodigoVE" class="control-label"></label>
+                <label asp-for="CodigoVE" class="control-label">Código VE</label>
                 <input asp-for="CodigoVE" name="CodigoVE" class="form-control" />
                 <span asp-validation-for="CodigoVE" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
+                <label asp-for="Nombre" class="control-label">Nombre del producto</label>
                 <input asp-for="Nombre" name="Nombre" class="form-control" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="URLImagen" class="control-label"></label>
+                <label asp-for="URLImagen" class="control-label">URL de la imagen</label>
                 <input asp-for="URLImagen" name="URLImagen" class="form-control" />
                 <span asp-validation-for="URLImagen" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PaisDestino" class="control-label"></label>
+                <label asp-for="PaisDestino" class="control-label">País de destino</label>
                 <input asp-for="PaisDestino" name="PaisDestino" class="form-control" />
                 <span asp-validation-for="PaisDestino" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Idioma" class="control-label"></label>
+                <label asp-for="Idioma" class="control-label">Idioma del producto</label>
                 <input asp-for="Idioma" name="Idioma" class="form-control" />
                 <span asp-validation-for="Idioma" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UnidadMedida" class="control-label"></label>
+                <label asp-for="UnidadMedida" class="control-label">Unidad de medida</label>
                 <input asp-for="UnidadMedida" name="UnidadMedida" class="form-control" />
                 <span asp-validation-for="UnidadMedida" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DescripcionCapsula" class="control-label"></label>
+                <label asp-for="DescripcionCapsula" class="control-label">Descripción de la cápsula</label>
                 <input asp-for="DescripcionCapsula" name="DescripcionCapsula" class="form-control" />
                 <span asp-validation-for="DescripcionCapsula" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Crear" class="btn btn-primary" />
-            </div>
+                <div class="form-groupp">
+                    <button type="submit" class="btnAccionForm" style="margin-bottom: 20px;">
+                        <i class="fa-solid fa-wine-bottle"></i> Agregar producto
+                    </button>
+                </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index" asp-controller="Home">Volver a la lista</a>
-</div>
+</body>
+<script src="~/js/quagga.min.js"></script>
+<script src="~/js/especialista.js"></script>
+
+</html>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

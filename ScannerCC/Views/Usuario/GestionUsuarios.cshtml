@@ -1,0 +1,177 @@
+﻿@model ScannerCC.Models.Usuarios
+
+@{
+    Layout = null;
+}
+
+<style>
+    input.acc {
+        background-color: #BF6565;
+        width: 30%;
+        color: white; /* Color del texto */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
+        margin-bottom: 5px;
+    }
+
+    button.btn {
+        background-color: black;
+        width: 30%;
+        color: white; /* Color del texto */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualityScoutNoLog</title>
+    <link rel="stylesheet" href="~/css/GestionUsuario.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="nav-i">
+            <a href="">
+                <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo Quality Scout">
+            </a>
+            <div class="navstyle">
+                <div class="iconosnav">
+                    <a asp-action="Index" asp-controller="Especialista">
+                        <img src="~/Extras/home.png" alt="Inicio" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionUsuarios" asp-controller="Usuario">
+                        <img src="~/Extras/usuarios.png" alt="Usuarios" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="Controles" asp-controller="Controles">
+                        <img src="~/Extras/controles.png" alt="Controles" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionProductos" asp-controller="Producto">
+                        <img src="~/Extras/productos.png" alt="Productos" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionInformes" asp-controller="Informes">
+                        <img src="~/Extras/Informes.png" alt="Informes" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                        <img src="~/Extras/escaner.png" alt="Informes" />
+                    </a>
+                </div>
+            </div>
+            <div class="login-btn">
+                <div class="div2">
+                    <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
+                    <div class="welcome-container">
+                        <span class="welcome-text">Bienvenido!</span>
+                        <p>@ViewBag.trab.Nombre</p>
+                        <p>Especialista</p>
+                    </div>
+                </div>
+                <button id="showOptionUser" onclick="showOptionUser()">
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div id="opcionesUser" style="display: none">
+                    <ul>
+                        <li>
+                            <a style="color:white;" asp-action="Details" asp-controller="Usuario" asp-route-id="@ViewBag.trab.Id">
+                                Editar usuario
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="Auth" asp-action="LogOut" class="dropdown-item" style="color:red; text-decoration:none;">
+                                Cerrar sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="content">
+        <h2 class="accesotitulo">Gestión de usuarios</h2>
+    </div>
+
+    <main>
+        <div class="search-add-container">
+            <form asp-action="GestionUsuarios" method="get" class="search-b" style="display:inline;">
+                <input type="text" placeholder="🔍 Busca por rut o nombre" class="search-bar" name="Busqueda" />
+                <button type="submit" style="border:none; background:none;">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+                </button>
+            </form>
+            <a class="add-user-btn" href="@Url.Action("Create", "Usuario")"><strong>+</strong> Añadir usuario</a>
+        </div>
+
+        <section class="user-list">
+            <h2 class="titulo">Registros</h2>
+
+            <!-- Sección de usuarios en estilo de tarjeta -->
+            @if (ViewBag.Usuario != null && ViewBag.Usuario.Count > 0)
+            {
+                @foreach (var item in ViewBag.Usuarios)
+                {
+                    <div class="user-card">
+                        <div class="user-info">
+                            <img src="~/Extras/iconUsuario.png" class="user-icon" />
+                            <div>
+                                <p><strong>@item.Nombre</strong></p>
+                                <p>RUT: @item.Rut</p>
+                            </div>
+                        </div>
+                        <div class="user-details">
+                            <p><strong>Rol: @item.Rol.Nombre</strong></p>
+                            <p>Email: @item.Email</p>
+                        </div>
+                        <div class="user-actions">
+                            @if (item.Activo)
+                            {
+                                <a class="edit-btn" href="@Url.Action("Edit", "Usuario", new { id = item.Id })">
+                                    <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                </a>
+                                <a class="see-btn" href="@Url.Action("Details", "Usuario", new { id = item.Id })">
+                                    <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
+                                </a>
+                            }
+                            else
+                            {
+
+                                <a class="see-btn" href="@Url.Action("Details", "Usuario", new { id = item.Id })">
+                                    <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p style="text-align: center;">No hay usuarios para mostrar</p>
+            }
+        </section>
+    </main>
+</body>
+<script src="~/js/quagga.min.js"></script>
+<script src="~/js/especialista.js"></script>
+
+</html>

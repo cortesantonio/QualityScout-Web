@@ -1,0 +1,193 @@
+﻿@{
+    Layout = null;
+    bool isEspecialista = User.IsInRole("Especialista");
+    bool isControlCalidad = User.IsInRole("Control de Calidad");
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualityScoutNoLog</title>
+    <link rel="stylesheet" href="~/css/Controles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="nav-i">
+            <a href="">
+                <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo Quality Scout">
+            </a>
+            <div class="navstyle">
+                @if (isEspecialista)
+                {
+                    <div class="iconosnav">
+                        <a asp-action="Index" asp-controller="Especialista">
+                            <img src="~/Extras/home.png" alt="Inicio" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionUsuarios" asp-controller="Usuario">
+                            <img src="~/Extras/usuarios.png" alt="Usuarios" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="Controles" asp-controller="Controles">
+                            <img src="~/Extras/controles.png" alt="Controles" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionProductos" asp-controller="Producto">
+                            <img src="~/Extras/productos.png" alt="Productos" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionInformes" asp-controller="Informes">
+                            <img src="~/Extras/Informes.png" alt="Informes" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                            <img src="~/Extras/escaner.png" alt="Informes" />
+                        </a>
+                    </div>
+                }
+
+                @if (isControlCalidad)
+                {
+                    <div class="iconosnav">
+                        <a asp-action="Index" asp-controller="Controlcalidad">
+                            <img src="~/Extras/home.png" alt="Inicio" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="Controles" asp-controller="Controles">
+                            <img src="~/Extras/controles.png" alt="Controles" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionProductos" asp-controller="Producto">
+                            <img src="~/Extras/productos.png" alt="Productos" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionInformes" asp-controller="Informes">
+                            <img src="~/Extras/Informes.png" alt="Informes" />
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="login-btn">
+                <div class="div2">
+                    @if (isEspecialista)
+                    {
+                        <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
+                        <div class="welcome-container">
+                            <span class="welcome-text">Bienvenido!</span>
+                            <p>@ViewBag.trab.Nombre</p>
+                            <p>Especialista</p>
+                        </div>
+                    }
+
+                    @if (isControlCalidad)
+                    {
+                        <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
+                        <div class="welcome-container">
+                            <span class="welcome-text">Bienvenido!</span>
+                            <p>@ViewBag.trab.Nombre</p>
+                            <p>Control de Calidad</p>
+                        </div>
+                    }
+                </div>
+                <button id="showOptionUser" onclick="showOptionUser()">
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div id="opcionesUser" style="display: none">
+                    <ul>
+                        <li>
+                            <a style="color:white;" asp-action="Details" asp-controller="Usuario" asp-route-id="@ViewBag.trab.Id">
+                                Editar usuario
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="Auth" asp-action="LogOut" class="dropdown-item" style="color:red; text-decoration:none;">
+                                Cerrar sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+<div class="content">
+    <div class="content">
+        <h2 class="accesotitulo"><strong>Controles</strong></h2>
+        <div class="container">
+            <div class="parent">
+                <div class="circle-container div1">
+                    <div class="circle">
+                        <img src="~/Extras/documentcheck.png" alt="Icono">
+                    </div>
+                    <p class="value">@Model.ControlesDiarios</p>
+                    <p class="label">Controles diarios</p>
+                </div>
+
+                <div class="circle-container div02">
+                    <div class="circle">
+                        <img src="~/Extras/documentcheck.png" alt="Icono">
+                    </div>
+                    <p class="value">@Model.ControlesSemanales</p>
+                    <p class="label">Controles semanales</p>
+                </div>
+
+                <div class="powerbi-container div7">
+                    <iframe title="ControlesG" width="600" height="400" src="https://app.powerbi.com/view?r=eyJrIjoiZTkxMjc3NzItNTY2MC00OTY4LTg1ZTgtYjg3NWYzMmQxNWM4IiwidCI6IjM4YTFlMGExLWI2YjEtNDJlOS1iM2E5LTU5NzYyNjY3MGIxNyIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
+                </div>
+
+                <div class="circle-container div3">
+                    <div class="circle">
+                        <img src="~/Extras/pulgar_abajo.png" alt="Icono">
+                    </div>
+                    <p class="value">@Model.ControlesRechazados</p>
+                    <p class="label">Controles rechazados</p>
+                </div>
+
+                <div class="circle-container div4">
+                    <div class="circle">
+                        <img src="~/Extras/flecha_redonda.png" alt="Icono">
+                    </div>
+                    <p class="value">@Model.ControlesPreventivos</p>
+                    <p class="label">Controles preventivos</p>
+                </div>
+
+                <div class="circle-container div5">
+                    <div class="circle">
+                        <img src="~/Extras/gestion_riesgos.png" alt="Icono">
+                    </div>
+                    <p class="value">@Model.ControlesReprocesados</p>
+                    <p class="label">Controles en reproceso</p>
+                </div>
+
+                <div class="circle-container div6">
+                    <a class="circle" asp-action="GestionControles" asp-controller="Controles">
+                        <img src="~/Extras/flecha.png" alt="Icono">
+                    </a>
+                    <p class="label">Ver controles</p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</body>
+<script src="~/js/quagga.min.js"></script>
+<script src="~/js/especialista.js"></script>
+
+</html>

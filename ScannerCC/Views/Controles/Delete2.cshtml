@@ -1,34 +1,82 @@
 ﻿@model ScannerCC.Models.Controles
 
+@{
+    Layout = null;
+}
+
 <style>
-    body {
-        background-color: #242424;
-        color: white;
-    }
-
     .container {
-        text-align: center;
+        position: relative;
+        z-index: 1; /* Asegura que el contenido esté por encima de las imágenes de fondo */
+        max-width: 500px; /* Ajusta el ancho máximo que desees */
+        margin: auto; /* Centra el contenedor en la pantalla */
     }
 
-    h4 {
-        margin-top: 20px;
+    .form-group {
+        margin-bottom: 15px;
     }
 
-    input {
-        width: 30%;
-        margin: 10px;
+    label, dt {
+        color: #4B0404; /* Cambia este valor por el color que desees */
+        font-family: Arial;
+        border: none;
+        padding: 5px;
     }
 
-        input[type="submit"] {
-            background-color: red;
-            color: white;
-            margin-bottom: 15px;
+    input, dd {
+        color: black; /* Color del texto */
+        padding: 5px; /* Espaciado interno */
+        background-color: #DBD7D7;
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
+    }
+
+        input.acc {
+            background-color: #BF6565;
+            width: 30%;
         }
 
-    .btn-danger:hover {
-        background-color: darkred;
-        border-color: red;
+    select {
+        color: black; /* Color del texto */
+        background-color: #DBD7D7; /* Color de fondo */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
     }
+
+    button {
+        color: white; /* Color del texto */
+        padding: 5px; /* Espaciado interno */
+        background-color: #BF6565;
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
+        width: 30%;
+    }
+
+        button.btn {
+            background-color: black;
+            width: 30%;
+        }
+
+    input, select, dd {
+        width: 100%;
+        margin: 5px;
+    }
+
+    button[type="submit"] {
+        background-color: #BF6565;
+        color: white;
+        width: 30%;
+    }
+
+        button[type="submit"]:hover {
+            background-color: #F25757;
+            color: white;
+            width: 30%;
+        }
 
     a {
         color: white;
@@ -38,57 +86,202 @@
             color: #62EBF0;
         }
 
-    .row dt,
-    .row dd {
-        margin-top: 5px;
-        margin-bottom: 5px;
+    h3 {
+        color: #4B0404;
     }
+
+    .titulos {
+        font-family: Arial;
+        font-size: 10px;
+        padding-left: 5px;
+    }
+
+    .profile-header {
+        display: flex;
+        align-items: center; /* Alinea verticalmente la imagen y el texto */
+        margin-bottom: 20px;
+    }
+
+    .profile-image {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background-color: #260202;
+        margin-top: 60px;
+        margin-left: 80px;
+    }
+
+    .info-left {
+        text-align: center;
+        margin-top: 80px;
+    }
+
+    .modal {
+        display: none; /* Oculto por defecto */
+        position: fixed;
+        z-index: 100; /* Asegura que está por encima del contenido */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    }
+
+    /* El contenedor de contenido del modal */
+    .modal-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    /* Título de alerta */
+    .alerta {
+        color: #260202;
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    /* Texto dentro del modal */
+    .modal-content p {
+        font-size: 18px;
+        color: #333;
+    }
+
+    /* Botones del modal */
+    .modal-buttons {
+        margin-top: 20px;
+    }
+
+    /* Texto destacado en rojo */
+    .desactivar {
+        color: #f25757;
+    }
+
 </style>
 
-<h1>Eliminar</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualityScoutNoLog</title>
+    <link rel="stylesheet" href="~/css/Nav.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="nav-i">
+            <a href="">
+                <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo Quality Scout">
+            </a>
+            <div class="navstyle">
+                <div class="iconosnav">
+                    <a asp-action="Index" asp-controller="Controlcalidad">
+                        <img src="~/Extras/home.png" alt="Inicio" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="Controles" asp-controller="Controles">
+                        <img src="~/Extras/controles.png" alt="Controles" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionProductos" asp-controller="Producto">
+                        <img src="~/Extras/productos.png" alt="Productos" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionInformes" asp-controller="Informes">
+                        <img src="~/Extras/Informes.png" alt="Informes" />
+                    </a>
+                </div>
+            </div>
+            <div class="login-btn">
+                <div class="div2">
+                    <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
+                    <div class="welcome-container">
+                        <span class="welcome-text">Bienvenido!</span>
+                        <p>@ViewBag.trab.Nombre</p>
+                        <p>Control de Calidad</p>
+                    </div>
+                </div>
+                <button id="showOptionUser" onclick="showOptionUser()">
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div id="opcionesUser" style="display: none">
+                    <ul>
+                        <li>
+                            <a style="color:white;" asp-action="Details" asp-controller="Usuario" asp-route-id="@ViewBag.trab.Id">
+                                Editar usuario
+                            </a>
+                        </li>
 
-<h3>¿Estás seguro de que quieres eliminar esto?</h3>
-<div>
-    <h4>Control</h4>
-    <hr />
+                        <li>
+                            <a asp-controller="Auth" asp-action="LogOut" class="dropdown-item" style="color:red; text-decoration:none;">
+                                Cerrar sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="content">
+        <div class="content">
+            <h2 class="accesotitulo">Eliminar control</h2>
+        </div>
+    </div>
+
+    <div class="container">
     <dl class="row justify-content-center">
-        <dt class = "col-sm-6">
-            Producto ID
+        <dt >
+            Producto 
         </dt>
-        <dd class = "col-sm-6">
+        <dd >
             @Html.DisplayFor(model => model.Productos.Nombre)
         </dd>
-        <dt class = "col-sm-6">
+        <dt >
             Linea
         </dt>
-        <dd class = "col-sm-6">
+        <dd >
             @Html.DisplayFor(model => model.Linea)
         </dd>
-        <dt class = "col-sm-6">
+        <dt >
             Pais de destino
         </dt>
-        <dd class = "col-sm-6">
+        <dd >
             @Html.DisplayFor(model => model.PaisDestino)
         </dd>
-        <dt class = "col-sm-6">
+        <dt >
             Comentario
         </dt>
-        <dd class = "col-sm-6">
+        <dd >
             @Html.DisplayFor(model => model.Comentario)
         </dd>
-        <dt class = "col-sm-6">
+        <dt >
             Tipo de control
         </dt>
-        <dd class="col-sm-6">
+        <dd >
             @Html.DisplayFor(model => model.Tipodecontrol)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" name="id" value="@Model.Id" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> 
-    </form>
+        <form asp-action="Delete">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <button type="submit" class="btnAccionForm" value="Eliminar" style="margin-top: 20px; margin-left: 350px;">
+                <i class="fa-solid fa-eraser"></i> Eliminar control
+            </button>
+        </form>
 </div>
-<div>
-    <a asp-action="Index" asp-controller="Home">Volver a la lista</a>
-</div>
+</body>
+<script src="~/js/quagga.min.js"></script>
+<script src="~/js/especialista.js"></script>
+
+</html>

@@ -16,10 +16,21 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
+        public IActionResult GestionInformacion()
+        {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
+            ViewBag.InformacionQuimica = _context.InformacionQuimica.ToList();
+            return View();
+        }
 
         // GET: Informacion/Details
         public async Task<IActionResult> Details(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             if (id == null || _context.InformacionQuimica == null)
             {
                 return NotFound();
@@ -39,6 +50,9 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             return View();
         }
 
@@ -48,6 +62,9 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string Cepa, float MinAzucar, float MaxAzucar, float MinSulfuroso, float MaxSulfuroso, float MinDensidad, float MaxDensidad, float MinGradoAlcohol, float MaxGradoAlcohol)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 if (ModelState.IsValid)
@@ -65,9 +82,9 @@ namespace ScannerCC.Controllers
 
                     _context.Add(infqui);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("GestionInformacion", "InformacionQuimica");
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionInformacion", "InformacionQuimica");
             }
             catch (Exception ex)
             {
@@ -78,6 +95,9 @@ namespace ScannerCC.Controllers
         // GET: Informacion/Edit
         public async Task<IActionResult> Edit(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             if (id == null || _context.InformacionQuimica == null)
             {
                 return NotFound();
@@ -97,6 +117,9 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, string Cepa, float MinAzucar, float MaxAzucar, float MinSulfuroso, float MaxSulfuroso, float MinDensidad, float MaxDensidad, float MinGradoAlcohol, float MaxGradoAlcohol)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 var infqui = await _context.InformacionQuimica.FindAsync(id);
@@ -117,7 +140,7 @@ namespace ScannerCC.Controllers
 
                 _context.Update(infqui);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionInformacion", "InformacionQuimica");
             }
             catch (Exception ex)
             {
@@ -129,6 +152,9 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             if (id == null || _context.InformacionQuimica == null)
             {
                 return NotFound();
@@ -149,6 +175,9 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 var infqui = await _context.InformacionQuimica.FindAsync(id);
@@ -159,7 +188,7 @@ namespace ScannerCC.Controllers
 
                 _context.InformacionQuimica.Remove(infqui);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionInformacion", "InformacionQuimica");
             }
             catch (Exception ex)
             {

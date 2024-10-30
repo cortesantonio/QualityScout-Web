@@ -1,21 +1,59 @@
 ﻿@model ScannerCC.Models.ProductoDetalles
 
 @{
-    ViewData["Title"] = "Create";
+    Layout = null;
 }
 
 <style>
-    body {
-        background-color: #242424;
-        color: white;
-    }
-
     .container {
-        text-align: center;
+        position: relative;
+        z-index: 1; /* Asegura que el contenido esté por encima de las imágenes de fondo */
+        max-width: 500px; /* Ajusta el ancho máximo que desees */
+        margin: auto; /* Centra el contenedor en la pantalla */
     }
 
     .form-group {
         margin-bottom: 15px;
+    }
+
+    .form-groupp {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+
+    label {
+        color: #4B0404; /* Cambia este valor por el color que desees */
+        font-family: Arial;
+        border: none;
+        padding: 5px;
+    }
+
+    input {
+        color: black; /* Color del texto */
+        background-color: #DBD7D7; /* Color de fondo */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
+    }
+
+    select {
+        color: black; /* Color del texto */
+        background-color: #DBD7D7; /* Color de fondo */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
+    }
+
+    button {
+        color: black; /* Color del texto */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
     }
 
     input, select {
@@ -23,16 +61,23 @@
         margin: 5px;
     }
 
-        input[type="submit"] {
-            background-color: #20777A;
-            color: white;
-        }
-
-    .btn-dark:hover {
-        background-color: #62EBF0;
-        border-color: #20777A;
-        color: black;
+    label.med {
+        margin-right: 30px;
     }
+
+    button[type="submit"] {
+        background-color: #BF6565;
+        color: white;
+        width: 100%; /* Se asegura que el botón sea del mismo ancho que los inputs */
+        max-width: 200px;
+    }
+
+        button[type="submit"]:hover {
+            background-color: #F25757;
+            color: white;
+            width: 100%; /* Se asegura que el botón sea del mismo ancho que los inputs */
+            max-width: 200px;
+        }
 
     a {
         color: white;
@@ -41,18 +86,135 @@
         a:hover {
             color: #62EBF0;
         }
+
+    .titulos {
+        font-family: Arial;
+        font-size: 10px;
+        padding-left: 5px;
+    }
+
+    .form-check-input[type="radio"] {
+        display: none; /* Oculta el radio button original */
+    }
+
+    .radio-circle {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border: 5px solid #260202;
+        border-radius: 50%;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    .form-check-input[type="radio"]:checked + .radio-circle {
+        background-color: #ff6666; /* Color de fondo cuando está seleccionado */
+    }
+
+    .option-text {
+        color: #260202;
+        margin-right: 5px;
+    }
+
+    .form-grouppp {
+        display: flex;
+        font-family: Arial;
+        margin-bottom: 15px;
+    }
 </style>
 
-<h1>Crear</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualityScoutNoLog</title>
+    <link rel="stylesheet" href="~/css/Nav.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="nav-i">
+            <a href="">
+                <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo Quality Scout">
+            </a>
+            <div class="navstyle">
+                <div class="iconosnav">
+                    <a asp-action="Index" asp-controller="Especialista">
+                        <img src="~/Extras/home.png" alt="Inicio" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionUsuarios" asp-controller="Usuario">
+                        <img src="~/Extras/usuarios.png" alt="Usuarios" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="Controles" asp-controller="Controles">
+                        <img src="~/Extras/controles.png" alt="Controles" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionProductos" asp-controller="Producto">
+                        <img src="~/Extras/productos.png" alt="Productos" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionInformes" asp-controller="Informes">
+                        <img src="~/Extras/Informes.png" alt="Informes" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                        <img src="~/Extras/escaner.png" alt="Informes" />
+                    </a>
+                </div>
+            </div>
+            <div class="login-btn">
+                <div class="div2">
+                    <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
+                    <div class="welcome-container">
+                        <span class="welcome-text">Bienvenido!</span>
+                        <p>@ViewBag.trab.Nombre</p>
+                        <p>Especialista</p>
+                    </div>
+                </div>
+                <button id="showOptionUser" onclick="showOptionUser()">
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div id="opcionesUser" style="display: none">
+                    <ul>
+                        <li>
+                            <a style="color:white;" asp-action="Details" asp-controller="Usuario" asp-route-id="@ViewBag.trab.Id">
+                                Editar usuario
+                            </a>
+                        </li>
 
-<h4>Producto detalles</h4>
-<hr />
+                        <li>
+                            <a asp-controller="Auth" asp-action="LogOut" class="dropdown-item" style="color:red; text-decoration:none;">
+                                Cerrar sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content">
+        <div class="content">
+            <h2 class="accesotitulo">Añadir producto detalle</h2>
+        </div>
+    </div>
+    <div class="container">
 <div class="row justify-content-center">
-    <div class="col-md-12">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
-                <div class="col-md-4">
                     <div class="form-group">
                         <label asp-for="IdProductos" class="control-label">Productos</label>
                         <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos">
@@ -124,9 +286,18 @@
                             <option value="Translúcido">Translúcido</option>
                         </select>
                     </div>
-                    <div class="form-group form-check d-flex justify-content-center align-items-center">
-                        <input asp-for="Medalla" class="form-check-input" type="checkbox" />
-                        <label asp-for="Medalla" class="form-check-label ms-2">Medalla</label>
+                    <div class="form-grouppp d-flex justify-content-center align-items-center">
+                        <label class="med me-3">Medalla</label>
+                        <div class="form-check form-check-inline">
+                            <input asp-for="Medalla" class="form-check-input" type="radio" name="Medalla" value="Sí" id="medallaSi" />
+                            <label class="form-check-label radio-circle" for="medallaSi"></label>
+                            <span class="option-text">Sí</span>
+                        </div>
+                        <div class="form-check form-check-inline" style="margin-left:10px;">
+                            <input asp-for="Medalla" class="form-check-input" type="radio" name="Medalla" value="No" id="medallaNo" />
+                            <label class="form-check-label radio-circle" for="medallaNo"></label>
+                            <span class="option-text">No</span>
+                        </div>
                         <span asp-validation-for="Medalla" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -175,18 +346,21 @@
                         <input asp-for="MedidaEtiquetaABase" class="form-control" />
                         <span asp-validation-for="MedidaEtiquetaABase" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" value="Crear" class="btn btn-dark" />
+                    <div class="form-groupp">
+                        <button type="submit" class="btnAccionForm" style="margin-bottom: 20px;">
+                            <i class="fa-solid fa-wine-bottle"></i> Agregar producto detalle
+                        </button>
                     </div>
                 </div>
-            </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index" asp-controller="Home">Volver a la lista</a>
-</div>
+</body>
+<script src="~/js/quagga.min.js"></script>
+<script src="~/js/especialista.js"></script>
+
+</html>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

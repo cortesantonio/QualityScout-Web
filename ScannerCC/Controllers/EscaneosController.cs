@@ -15,25 +15,15 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
-
-        // GET: Escaneos/Details
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult GestionEscaneos()
         {
-            if (id == null || _context.Escaneo == null)
-            {
-                return NotFound();
-            }
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
 
-            var escaneo = await _context.Escaneo
-                .Include(c => c.Productos)
-                .Include(c => c.Usuarios)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (escaneo == null)
-            {
-                return NotFound();
-            }
-
-            return View(escaneo);
+            ViewBag.Escaneos = _context.Escaneo.ToList();
+            ViewBag.Usuarios = _context.Usuario.Include(r => r.Rol).ToList();
+            ViewBag.Productos = _context.Producto.ToList();
+            return View();
         }
     }
 }

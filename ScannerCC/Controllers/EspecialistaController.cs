@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using QualityScout.Models;
 using ScannerCC.Models;
+using System.Globalization;
 using System.Linq;
 
 namespace ScannerCC.Controllers
@@ -15,90 +17,104 @@ namespace ScannerCC.Controllers
         {
             _context = context;
         }
-        // GET: AdministradorController
-        public ActionResult Index(string Busqueda, string BusquedaUsuarios, int paginaEscaneos = 1, int paginaControles = 1)
+
+        public IActionResult Dashboard()
         {
-            DateTime fechaHoy = DateTime.Now;
-            DateTime fechaMesAnterior = fechaHoy.AddMonths(-1);
-            DateTime fechaHaceUnAnio = fechaHoy.AddYears(-1);
-            DateTime fechaHaceDosAnio = fechaHoy.AddYears(-2);
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
+            return View();
+        }
+
+        private async Task<InfoViewModel> GetInfoStats()
+        {
+            // Cálculo de totales actuales para controles
+            var controlesAprobados = _context.Controles
+                .Where(c => c.Estado != null && c.Estado.Contains("Aprobado"))
+                .Count();
+
+            var controlesReprocesados = _context.Controles
+                .Where(c => c.Estado != null && c.Estado.Contains("Reproceso"))
+                .Count();
+
+            var controlesRechazados = _context.Controles
+                .Where(c => c.Estado != null && c.Estado.Contains("Rechazado"))
+                .Count();
+
+            // Obtener la fecha del mes más antiguo
+            DateTime fechaAntigua;
+
+            if (await _context.Controles.AnyAsync(c => c.FechaHoraPrimerControl != null))
+            {
+                fechaAntigua = await _context.Controles.MinAsync(c => c.FechaHoraPrimerControl);
+            }
+            else
+            {
+                fechaAntigua = DateTime.Now;  // O algún valor por defecto que prefieras
+            }
+
+
+            // Cálculo de controles en el mes más antiguo
+            var controlesAntiguoAprobados = await _context.Controles
+                .CountAsync(c => c.Estado == "Aprobado" &&
+                                 c.FechaHoraPrimerControl.Month == fechaAntigua.Month &&
+                                 c.FechaHoraPrimerControl.Year == fechaAntigua.Year);
+
+            var controlesAntiguoReprocesados = await _context.Controles
+                .CountAsync(c => c.Estado == "Reproceso" &&
+                                c.FechaHoraPrimerControl.Month == fechaAntigua.Month &&
+                                c.FechaHoraPrimerControl.Year == fechaAntigua.Year);
+
+            var controlesAntiguoRechazados = await _context.Controles
+                .CountAsync(c => c.Estado == "Rechazado" &&
+                                c.FechaHoraPrimerControl.Month == fechaAntigua.Month &&
+                                c.FechaHoraPrimerControl.Year == fechaAntigua.Year);
+
+            // Función para calcular porcentajes
+            string CalcularPorcentaje(int controlesAntiguo, int totalControles)
+            {
+                if (controlesAntiguo == 0 || totalControles == 0)
+                    return "0%";
+
+                var porcentaje = (decimal)controlesAntiguo / totalControles * 100;
+                return $"{Math.Round(porcentaje, 0)}%";
+            }
+
+            return new InfoViewModel
+            {
+                ControlesAprobados = controlesAprobados,
+                ControlesReprocesados = controlesReprocesados,
+                ControlesRechazados = controlesRechazados,
+                AprobadosMesAntiguo = CalcularPorcentaje(controlesAntiguoAprobados, controlesAprobados),
+                ReprocesadosMesAntiguo = CalcularPorcentaje(controlesAntiguoReprocesados, controlesReprocesados),
+                RechazadosMesAntiguo = CalcularPorcentaje(controlesAntiguoRechazados, controlesRechazados),
+                MesAnterior = fechaAntigua.ToString("MMMM", new CultureInfo("es-ES")),
+                AnioAnterior = fechaAntigua.Year
+            };
+        }
+
+        // GET: AdministradorController
+        public async Task<IActionResult> Index(string Busqueda, string BusquedaUsuarios)
+        {
+            var stats = new InfoViewModel();
 
             if (User.Identity.IsAuthenticated)
             {
+                DateTime fechaHoy = DateTime.Now;
+
                 // OBTENER INFORMACIOON DE USUARIO ACTIVO EN BASE DE DATOS.
                 var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
                 ViewBag.trab = TrabajadorActivo;
 
-                //Consulta de usuarios en base de datos de usuarios con rol'Control de calidad'.
-                var Controlcalidad = _context.Usuario
-                    .Include(x => x.Rol)
-                    .Where(r => r.Rol.Nombre == "Control de Calidad").ToList();
-                ViewBag.countUsuariosControlcalidad = Controlcalidad.Count;
-                
-                //Consulta de usuarios en base de datos de usuarios con rol'Especialista'.
-                var Especialista = _context.Usuario
-                    .Include(x => x.Rol)
-                    .Where(r => r.Rol.Nombre == "Especialista").ToList();
-                ViewBag.countUsuariosEspecialista = Especialista.Count;
-
-                //DATOS PARA GRAFICO DE TORTA DE TIPOS DE ETIQUETAS
-                var counts = _context.ProductoDetalle
-                    .GroupBy(r => r.TipoEtiqueta)
-                    .Select(g => new { Etiqueta = g.Key, Count = g.Count() })
-                    .ToList();
-                ViewBag.countRose = counts.FirstOrDefault(c => c.Etiqueta == "Rose")?.Count ?? 0;
-                ViewBag.countTinto = counts.FirstOrDefault(c => c.Etiqueta == "Tinto")?.Count ?? 0;
-                ViewBag.countBlanco = counts.FirstOrDefault(c => c.Etiqueta == "Blanco")?.Count ?? 0;
-
-                // COUNT REGISTROS 
-                ViewBag.countProductos = _context.Producto.ToList().Count;
-                ViewBag.countUsuarios = _context.Usuario.ToList().Count;
-                ViewBag.countEscaneos = _context.Escaneo.ToList().Count;
-
-                ViewBag.produccionDosAnio = _context.ProductoHistorial
-                .Where(e => e.FechaProduccion >= fechaHaceDosAnio && e.FechaProduccion <= fechaHaceUnAnio)
-                .ToList().Count;
-                if (ViewBag.produccionDosAnio == null)
-                {
-                    ViewBag.produccionDosAnio = 0;
-                }
                 ViewBag.Usuarios= _context.Usuario.Include(r => r.Rol).ToList();
                 ViewBag.Productos = _context.Producto.ToList();
-
-                //Datos para la tablaEscaneos
-                const int registrosPorPagina = 2;
-                var escaneos = _context.Escaneo
-                    .Include(e => e.Productos)
-                    .Include(e => e.Usuarios)
-                    .OrderByDescending(e => e.Fecha)
-                    .Skip((paginaEscaneos - 1) * registrosPorPagina)
-                    .Take(registrosPorPagina)
-                    .ToList();
-                ViewBag.Escaneos = escaneos;
-                ViewBag.PaginaActualEscaneos = paginaEscaneos;
-
-                //Datos adm. controles
-                var controles = _context.Controles
-                .Include(c => c.Productos)
-                .ToList();
-                ViewBag.Controles = controles;
                 ViewBag.BotellaDetalles = _context.BotellaDetalle.ToList();
                 ViewBag.InformacionQuimica = _context.InformacionQuimica.ToList();
+                ViewBag.Controles = _context.Controles.ToList();
                 ViewBag.Informes = _context.Informe.ToList();
                 ViewBag.ProductoHistorial = _context.ProductoHistorial.ToList();
                 ViewBag.ProductoDetalles = _context.ProductoDetalle.ToList();
                 ViewBag.Escaneos = _context.Escaneo.ToList();
-
-                //Datos para la tablaControl y sus count
-                int totalControles = _context.Controles.Count();
-                var controless = _context.Controles
-                    .Include(c => c.Productos)
-                    .Skip((paginaControles - 1) * registrosPorPagina)
-                    .Take(registrosPorPagina)
-                    .ToList();
-                ViewBag.Controless = controless;
-                ViewBag.PaginaActualControles = paginaControles;
-                ViewBag.TotalControles = totalControles;
 
                 //Si se realiza busqueda de productos evalua y filtra datos
                 if (Busqueda != null)
@@ -122,9 +138,10 @@ namespace ScannerCC.Controllers
                 {
                     ViewBag.Usuarios = _context.Usuario.Where(x => x.Rut == BusquedaUsuarios || x.Nombre == BusquedaUsuarios).ToList();
                 }
-                return View();
+
+                stats = await GetInfoStats();
             }
-            else { return RedirectToAction("Index", "Home"); }
+            return View(stats); 
         }
 
        

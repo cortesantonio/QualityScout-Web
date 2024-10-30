@@ -1,0 +1,250 @@
+﻿@{
+    Layout = null;
+    bool isEspecialista = User.IsInRole("Especialista");
+    bool isControlCalidad = User.IsInRole("Control de Calidad");
+}
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualityScoutNoLog</title>
+    <link rel="stylesheet" href="~/css/GestionControles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="nav-i">
+            <a href="">
+                <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo Quality Scout">
+            </a>
+            <div class="navstyle">
+                @if (isEspecialista)
+                {
+                    <div class="iconosnav">
+                        <a asp-action="Index" asp-controller="Especialista">
+                            <img src="~/Extras/home.png" alt="Inicio" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionUsuarios" asp-controller="Usuario">
+                            <img src="~/Extras/usuarios.png" alt="Usuarios" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="Controles" asp-controller="Controles">
+                            <img src="~/Extras/controles.png" alt="Controles" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionProductos" asp-controller="Producto">
+                            <img src="~/Extras/productos.png" alt="Productos" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionInformes" asp-controller="Informes">
+                            <img src="~/Extras/Informes.png" alt="Informes" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                            <img src="~/Extras/escaner.png" alt="Informes" />
+                        </a>
+                    </div>
+                }
+
+                @if (isControlCalidad)
+                {
+                    <div class="iconosnav">
+                        <a asp-action="Index" asp-controller="Controlcalidad">
+                            <img src="~/Extras/home.png" alt="Inicio" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="Controles" asp-controller="Controles">
+                            <img src="~/Extras/controles.png" alt="Controles" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionProductos" asp-controller="Producto">
+                            <img src="~/Extras/productos.png" alt="Productos" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionInformes" asp-controller="Informes">
+                            <img src="~/Extras/Informes.png" alt="Informes" />
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="login-btn">
+                <div class="div2">
+                    @if (isEspecialista)
+                    {
+                        <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
+                        <div class="welcome-container">
+                            <span class="welcome-text">Bienvenido!</span>
+                            <p>@ViewBag.trab.Nombre</p>
+                            <p>Especialista</p>
+                        </div>
+                    }
+
+                    @if (isControlCalidad)
+                    {
+                        <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
+                        <div class="welcome-container">
+                            <span class="welcome-text">Bienvenido!</span>
+                            <p>@ViewBag.trab.Nombre</p>
+                            <p>Control de Calidad</p>
+                        </div>
+                    }
+                </div>
+                <button id="showOptionUser" onclick="showOptionUser()">
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div id="opcionesUser" style="display: none">
+                    <ul>
+                        <li>
+                            <a style="color:white;" asp-action="Details" asp-controller="Usuario" asp-route-id="@ViewBag.trab.Id">
+                                Editar usuario
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="Auth" asp-action="LogOut" class="dropdown-item" style="color:red; text-decoration:none;">
+                                Cerrar sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+<div class="content">
+    <div class="content">
+            <h2 class="accesotitulo"><strong>Gestión de controles</strong></h2>
+    </div>
+</div>
+<main>
+    <div class="filter-order-container">
+        <div class="filter">
+            <span>&#x1F50D;</span> <!-- Icono de filtro -->
+            <span>Filtro</span>
+            <span class="dropdown">&#9660;</span> <!-- Flecha hacia abajo -->
+        </div>
+        <div class="order">
+            <span>Orden</span>
+            <span class="dropdown">&#9660;</span> <!-- Flecha hacia abajo -->
+        </div>
+        <div class="dropdown-menu" id="filterMenu" style="display: none;">
+            <p>Filtrar por fecha</p>
+            <p>Filtrar por categoría</p>
+        </div>
+
+        <div class="dropdown-menu" id="orderMenu" style="display: none;">
+            <p>Ordenar de A-Z</p>
+            <p>Ordenar de Z-A</p>
+        </div>
+    </div>
+
+        <section class="user-list">
+        <h2 class="titulo" style="margin-top: 5px;"><strong>Registros</strong></h2>
+
+            @if (ViewBag.Controles != null && ViewBag.Controles.Count > 0)
+        {
+            @foreach (var item in ViewBag.Controles)
+            {
+                <div class="user-card">
+                    <div class="user-info">
+                        <img src="~/Extras/iconControlCheck.png" class="user-icon" alt="Icono de control" />
+                        <div>
+                            <p>@item.Productos.Nombre</p>
+                            <p>Fecha: @item.FechaHoraPrimerControl.ToString("dd-MM-yyyy HH:mm")</p>
+                        </div>
+                    </div>
+                    <div class="user-details">
+                            @if (item.Estado == "Reproceso" && !string.IsNullOrEmpty(item.EstadoFinal))
+                            {
+                                <p>
+                                    Estado final:
+                                    <span class="@(item.EstadoFinal == "Aprobado" ? "aprobado" : item.EstadoFinal == "Rechazado" ? "rechazado" : "")">
+                                        @item.EstadoFinal
+                                    </span>
+                                </p>
+                            }
+                            else
+                            {
+                                <p>
+                                    Estado:
+                                    <span class="@(item.Estado == "Aprobado" ? "aprobado" : item.Estado == "Rechazado" ? "rechazado" : item.Estado == "Reproceso" ? "reproceso" : "")">
+                                        @item.Estado
+                                    </span>
+                                </p>
+                            }
+
+
+
+                    </div>
+                    <div class="user-actions">
+                            @if (isControlCalidad)
+                            {
+
+
+                                @if (item.Estado == "Reproceso" && string.IsNullOrEmpty(item.EstadoFinal))
+                                {
+                                    <a class="edit-btn" asp-action="Edit2" asp-controller="Controles" asp-route-id="@item.Id">
+                                        <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                    </a>
+
+                                }
+                                    <a class="see-btn" asp-action="Details2" asp-controller="Controles" asp-route-id="@item.Id">
+                                        <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                    </a>
+                                    <a class="see-btn" asp-action="Delete2" asp-controller="Controles" asp-route-id="@item.Id">
+                                        <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                    </a>
+                                
+                            }
+                            @if (isEspecialista)
+                            {
+                                    <a class="see-btn" asp-action="Details2" asp-controller="Controles" asp-route-id="@item.Id">
+                                        <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                    </a>
+
+                            }
+                    </div>
+                </div>
+                <div></div>
+            }
+            }
+            else
+            {
+                <p style="text-align: center;">No hay controles para mostrar</p>
+            }
+        </section>
+</main>
+
+</body>
+<script src="~/js/quagga.min.js"></script>
+<script src="~/js/especialista.js"></script>
+
+</html>
+
+<script>
+    document.querySelector('.filter').addEventListener('click', function () {
+        let filterMenu = document.getElementById('filterMenu');
+        filterMenu.style.display = filterMenu.style.display === 'none' ? 'block' : 'none';
+    });
+
+    document.querySelector('.order').addEventListener('click', function () {
+        let orderMenu = document.getElementById('orderMenu');
+        orderMenu.style.display = orderMenu.style.display === 'none' ? 'block' : 'none';
+    });
+</script>

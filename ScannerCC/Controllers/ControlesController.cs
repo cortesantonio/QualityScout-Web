@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using QualityScout.Models;
 using ScannerCC.Models;
 
 namespace ScannerCC.Controllers
@@ -19,9 +20,69 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
+        public IActionResult GestionControles()
+        {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
+            ViewBag.Controles = _context.Controles.ToList();
+            ViewBag.Productos = _context.Producto.ToList();
+            return View();
+        }
+
+        public IActionResult Controles()
+        {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
+            var today = DateTime.Today;
+            var startOfWeek = today.AddDays(-(int)today.DayOfWeek + 1); // Comienza la semana el lunes
+            var startOfMonth = new DateTime(today.Year, today.Month, 1);
+
+            // Calcular controles diarios
+            var controlesDiarios = _context.Controles
+                .Where(c => c.FechaHoraPrimerControl.Date == today)
+                .Count();
+
+            // Calcular controles semanales
+            var controlesSemanales = _context.Controles
+                .Where(c => c.FechaHoraPrimerControl.Date >= startOfWeek && c.FechaHoraPrimerControl.Date <= today)
+                .Count();
+
+            // Calcular controles rechazados
+            var controlesRechazados = _context.Controles
+                .Where(c => c.Estado != null && c.Estado.Contains("Rechazado"))
+                .Count();
+
+            // Calcular controles preventivos
+            var controlesPreventivos = _context.Controles
+                .Where(c => c.Tipodecontrol != null && c.Tipodecontrol.Contains("Preventivo"))
+                .Count();
+
+            // Calcular controles reprocesados
+            var controlesReprocesados = _context.Controles
+                .Where(c => c.Estado != null && c.Estado.Contains("Reproceso"))
+                .Count();
+
+            // Manejo de nulos: Asignar valor 0 si no hay datos
+            var model = new InfoViewModel
+            {
+                ControlesDiarios = controlesDiarios > 0 ? controlesDiarios : 0,
+                ControlesSemanales = controlesSemanales > 0 ? controlesSemanales : 0,
+                ControlesRechazados = controlesRechazados > 0 ? controlesRechazados : 0,
+                ControlesPreventivos = controlesPreventivos > 0 ? controlesPreventivos : 0,
+                ControlesReprocesados = controlesReprocesados > 0 ? controlesReprocesados : 0
+            };
+
+            return View(model);
+        }
+
         // GET: Controles
         public async Task<IActionResult> Index()
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             var appDbContext = _context.Controles.Include(c => c.Productos);
             return View(await appDbContext.ToListAsync());
         }
@@ -29,6 +90,9 @@ namespace ScannerCC.Controllers
         // GET: Controles/Details
         public async Task<IActionResult> Details2(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             if (id == null || _context.Controles == null)
             {
                 return NotFound();
@@ -48,6 +112,9 @@ namespace ScannerCC.Controllers
         // GET: Controles/Create
         public IActionResult CreateControl()
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             var productos = _context.Producto.Select(p => new { p.Id, p.Nombre }).ToList();
             ViewData["IdProductos"] = new SelectList(productos, "Id", "Nombre");
             return View();
@@ -58,6 +125,9 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateControl(int IdProductos, string Linea, string PaisDestino, string Comentario, string Tipodecontrol, string Estado)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 // Obtener el usuario logueado
@@ -79,7 +149,7 @@ namespace ScannerCC.Controllers
 
                 _context.Add(control);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionControles", "Controles");
             }
             catch (Exception ex)
             {
@@ -90,6 +160,9 @@ namespace ScannerCC.Controllers
         // GET: Controles/Edit
         public async Task<IActionResult> Edit2(int id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 var control = await _context.Controles
@@ -103,7 +176,7 @@ namespace ScannerCC.Controllers
                 // Verificar si el estado es "Reproceso"
                 if (control.Estado != "Reproceso")
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("GestionControles", "Controles");
                 }
 
                 return View(control); // Enviar el control a la vista
@@ -119,6 +192,9 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit2(int id, string Comentario, string EstadoFinal)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             if (id != id) 
             {
                 return NotFound();
@@ -142,7 +218,7 @@ namespace ScannerCC.Controllers
                     // Guardar cambios
                     _context.Update(control);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("GestionControles", "Controles");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -168,6 +244,9 @@ namespace ScannerCC.Controllers
         // GET: Controles/Delete
         public async Task<IActionResult> Delete2(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             if (id == null || _context.Controles == null)
             {
                 return NotFound();
@@ -189,6 +268,9 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 var control = await _context.Controles.FindAsync(id);
@@ -199,7 +281,7 @@ namespace ScannerCC.Controllers
 
                 _context.Controles.Remove(control);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionControles", "Controles");
             }
             catch (Exception ex)
             {
@@ -209,6 +291,9 @@ namespace ScannerCC.Controllers
 
         private bool ControlExists(int id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             return _context.Controles.Any(e => e.Id == id);
         }
 

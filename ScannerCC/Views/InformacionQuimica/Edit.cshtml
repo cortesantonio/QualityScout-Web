@@ -1,21 +1,59 @@
 ﻿@model ScannerCC.Models.InformacionQuimica
 
 @{
-    ViewData["Title"] = "Edit";
+    Layout = null;
 }
 
 <style>
-    body {
-        background-color: #242424;
-        color: white;
-    }
-
     .container {
-        text-align: center;
+        position: relative;
+        z-index: 1; /* Asegura que el contenido esté por encima de las imágenes de fondo */
+        max-width: 500px; /* Ajusta el ancho máximo que desees */
+        margin: auto; /* Centra el contenedor en la pantalla */
     }
 
     .form-group {
         margin-bottom: 15px;
+    }
+
+    .form-groupp {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+
+    label {
+        color: #4B0404; /* Cambia este valor por el color que desees */
+        font-family: Arial;
+        border: none;
+        padding: 5px;
+    }
+
+    input {
+        color: black; /* Color del texto */
+        background-color: #DBD7D7; /* Color de fondo */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
+    }
+
+    select {
+        color: black; /* Color del texto */
+        background-color: #DBD7D7; /* Color de fondo */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
+    }
+
+    button {
+        color: black; /* Color del texto */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
     }
 
     input, select {
@@ -23,37 +61,128 @@
         margin: 5px;
     }
 
-        input[type="submit"] {
-            background-color: #20777A;
-            color: white;
-        }
-
-    .btn-dark:hover {
-        background-color: #62EBF0;
-        border-color: #20777A;
-        color: black;
+    button[type="submit"] {
+        background-color: #BF6565;
+        color: white;
+        width: 100%; /* Se asegura que el botón sea del mismo ancho que los inputs */
+        max-width: 150px;
     }
+
+        button[type="submit"]:hover {
+            background-color: #F25757;
+            color: white;
+            width: 100%; /* Se asegura que el botón sea del mismo ancho que los inputs */
+            max-width: 150px;
+        }
 
     a {
         color: white;
     }
 
-    a:hover {
-        color: #62EBF0;
+        a:hover {
+            color: #62EBF0;
+        }
+
+    .titulos {
+        font-family: Arial;
+        font-size: 10px;
+        padding-left: 5px;
     }
 </style>
 
-<h1>Editar</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualityScoutNoLog</title>
+    <link rel="stylesheet" href="~/css/Nav.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="nav-i">
+            <a href="">
+                <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo Quality Scout">
+            </a>
+            <div class="navstyle">
+                <div class="iconosnav">
+                    <a asp-action="Index" asp-controller="Especialista">
+                        <img src="~/Extras/home.png" alt="Inicio" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionUsuarios" asp-controller="Usuario">
+                        <img src="~/Extras/usuarios.png" alt="Usuarios" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="Controles" asp-controller="Controles">
+                        <img src="~/Extras/controles.png" alt="Controles" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionProductos" asp-controller="Producto">
+                        <img src="~/Extras/productos.png" alt="Productos" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionInformes" asp-controller="Informes">
+                        <img src="~/Extras/Informes.png" alt="Informes" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                        <img src="~/Extras/escaner.png" alt="Informes" />
+                    </a>
+                </div>
+            </div>
+            <div class="login-btn">
+                <div class="div2">
+                    <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
+                    <div class="welcome-container">
+                        <span class="welcome-text">Bienvenido!</span>
+                        <p>@ViewBag.trab.Nombre</p>
+                        <p>Especialista</p>
+                    </div>
+                </div>
+                <button id="showOptionUser" onclick="showOptionUser()">
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div id="opcionesUser" style="display: none">
+                    <ul>
+                        <li>
+                            <a style="color:white;" asp-action="Details" asp-controller="Usuario" asp-route-id="@ViewBag.trab.Id">
+                                Editar usuario
+                            </a>
+                        </li>
 
-<h4>Informacion quimica</h4>
-<hr />
+                        <li>
+                            <a asp-controller="Auth" asp-action="LogOut" class="dropdown-item" style="color:red; text-decoration:none;">
+                                Cerrar sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content">
+        <div class="content">
+            <h2 class="accesotitulo">Editar información quimica</h2>
+        </div>
+    </div>
+    <div class="container">
 <div class="row justify-content-center">
-    <div class="col-md-12">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="row">
-                <div class="col-md-4">
                     <div class="form-group">
                         <label asp-for="Cepa" class="control-label">Cepa</label>
                         <input asp-for="Cepa" class="form-control" />
@@ -99,18 +228,21 @@
                         <input asp-for="MaxGradoAlcohol" step="any" class="form-control" type="number" />
                         <span asp-validation-for="MaxGradoAlcohol" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" value="Guardar" class="btn btn-dark" />
+                    <div class="form-groupp">
+                        <button type="submit" class="btnAccionForm" style="margin-bottom: 20px;">
+                            <i class="fa-solid fa-caret-right"></i> Guardar cambios
+                        </button>
                     </div>
                 </div>
-            </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index" asp-controller="Home" >Volver a la lista</a>
-</div>
+</body>
+<script src="~/js/quagga.min.js"></script>
+<script src="~/js/especialista.js"></script>
+
+</html>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

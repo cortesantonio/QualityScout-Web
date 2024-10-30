@@ -15,10 +15,29 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
+        public IActionResult GestionInformes(string Busqueda)
+        {
+            // Filtrar informes según el criterio de búsqueda
+            var inf = _context.Informe.AsQueryable();
+
+            if (!string.IsNullOrEmpty(Busqueda))
+            {
+                inf = inf.Where(p => p.Titulo.Contains(Busqueda) || p.Enfoque.Contains(Busqueda));
+            }
+
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
+            ViewBag.Informes = inf.ToList();
+            return View();
+        }
 
         // GET: Informes/Details
         public async Task<IActionResult> Details(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             if (id == null || _context.Informe == null)
             {
                 return NotFound();
@@ -38,6 +57,9 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             return View();
         }
 
@@ -47,6 +69,9 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string Titulo, string Enfoque, string Descripcion)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 var currentUser = await _context.Usuario.FirstOrDefaultAsync(u => u.Email == User.Identity.Name); 
@@ -65,7 +90,7 @@ namespace ScannerCC.Controllers
                 _context.Add(informes);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionInformes", "Informes");
             }
             catch (Exception ex)
             {
@@ -76,6 +101,9 @@ namespace ScannerCC.Controllers
         // GET: Informes/Edit
         public async Task<IActionResult> Edit(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             if (id == null || _context.Informe == null)
             {
                 return NotFound();
@@ -95,6 +123,9 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, string Titulo, string Enfoque, string Descripcion)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 var informes = await _context.Informe.FindAsync(id);
@@ -110,7 +141,7 @@ namespace ScannerCC.Controllers
                 _context.Update(informes);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionInformes", "Informes");
             }
             catch (Exception ex)
             {
@@ -123,6 +154,9 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             if (id == null || _context.Informe == null)
             {
                 return NotFound();
@@ -144,6 +178,9 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 var informes = await _context.Informe.FindAsync(id);
@@ -155,7 +192,7 @@ namespace ScannerCC.Controllers
                 _context.Informe.Remove(informes);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionInformes", "Informes");
             }
             catch (Exception ex)
             {

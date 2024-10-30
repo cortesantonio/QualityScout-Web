@@ -1,160 +1,117 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
 body {
-    background-color:  #445657;
-    
-}
-
-.presentacionLog {
-    background-color: #20777A;
-    background-image: linear-gradient(135deg, #62EBF0 0%, #20777A 100%);
-    padding: 25px;
-    height: 80vh;
-
-}
-
-.logcontenedor {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 70%;
-    margin: 50px auto;
-    background-color: white;
-    border-radius: 40px;
-    box-shadow: 10px 10px 20px rgba(161, 161, 161, 0.336);
-}
-
-.logcontenedor>* {
-    font-family: 'Rubik', sans-serif;
-
-}
-
-
-
-.nameApp {
-    font-size: 16px;
-    font-weight: 100;
     color: white;
-    margin-bottom: 200px;
+    font-family: Arial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #260202;
 }
 
-.bnvLog,
-.sisLog,
-.tituloLog,
-.infoLog {
-    color: white;
+
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url(../Extras/Copa_vino.png), url(../Extras/uvas.png);
+        background-position: left -5% top 100%, right -2% bottom 90%;
+        /* Uvas alineadas arriba a la izquierda, copa abajo a la derecha */
+        background-repeat: no-repeat;
+        background-size: 47%, 20%;
+        /* Ajusta el tamaño de las imágenes según sea necesario */
+        background-attachment: fixed;
+        /* El fondo se mantiene fijo al hacer scroll */
+        opacity: 0.17;
+        /* Ajusta la opacidad aquí */
+        z-index: -1;
+        /* Asegura que el pseudo-elemento esté detrás del contenido */
+    }
+
+
+
+.introduccion_qs_contenido {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.logo_qs {
+    width: 400px;
+    margin: auto;
+}
+
+.parrafo_qs {
+    font-size: 14px;
     text-align: center;
-
-}
-
-.tituloLog{
-    margin: 10px auto;
-    font-style: italic;
-
-}
-
-
-.sisLog {
-    font-size: 1.2rem;
     font-weight: 100;
+    color: white;
 }
 
-.line10 {
-    width: 15%;
-    height: 3px;
-    background-color: white;
-    margin:  auto;
-    margin-bottom: 50px;
-    border-radius: 20px;
-
+.acceso_qs {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    /*se utiliza align items porque se cambio el orden a column en caso de ser row se utiliza justify content*/
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.tituloLog {
-    font-size: 3.5rem;
+.acceso_qs_partes {
+    width: 80%;
+    height: 220px;
+    text-align: center;
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    background-color: #f2f2f2;
+    color: black;
+    justify-content: space-around;
 }
 
-.infoLog {
-    font-weight: 100;
+.opciones {
     font-size: 1rem;
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #bdbdbd;
 }
 
-.formularioLogin {
-    height: 80vh;
-    width: 100%;
-    background-color: white;
+.caja_acceso {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.formularioLogin form {
-    margin: 100px auto 20px;
-    text-align: center;
-    width: 100%;
-}
-
-.formularioLogin h2 {
-    text-align: center;
-    margin: 200px auto 0px;
-    color: #1E3233;
-}
-.alerta{
-    font-size: 0.8rem;
-    color: red;
-}
-form input {
-    display: block;
-    margin: 10px auto;
-    width: 50%;
-    padding: 10px;
-    border: none;
-    border-left: 3px solid #20777a;
-
-}
-
-form button {
-    width: 150px;
-    margin-top: 20px;
+.acceso {
+    background-color: #0d0d0d;
+    width: 85%;
+    font-size: 1.3rem;
+    text-transform: uppercase;
     color: white;
-    background-color: #20777A;
-    background-image: linear-gradient(135deg, #44898b 0%, #20777A 100%);
-    padding: 5px;
-    border: none;
-    border-radius: 3px;
-
-
-}
-form input:focus{
-    outline:#20777a 1px solid;
-
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
 }
 
-a button {
-    width: 100px;
-    margin-top: 0px;
-    color: #1E3233;
-    padding: 5px;
-    border: none;
-    border-radius: 3px;
-}
-
-.arrow {
-    display: none;
-    margin-top: 150px;
-    font-size: 20px;
-    color: rgba(255, 255, 255, 0.618);
-}
-
-@media screen and (max-width:490px) {
-    .logcontenedor {
-        grid-template-columns: 1fr;
-        width: 100%;
-        margin: auto;
-    }
-}
-
-@media screen and (max-width:960px) {
-    .logcontenedor {
-        grid-template-columns: 1fr;
-        margin: auto;
-
+    .acceso:hover {
+        background-color: #333;
     }
 
-    .arrow {
-        display: block;
-    }
+.parrafo_acceso {
+    font-size: 0.8rem;
+    color: #a6a6a6;
+    text-align: center;
 }

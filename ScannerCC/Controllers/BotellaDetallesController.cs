@@ -14,9 +14,21 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
+        public IActionResult GestionBotellas()
+        {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
+            ViewBag.BotellaDetalles = _context.BotellaDetalle.ToList();
+            return View();
+        }
+
         // GET: Botellas/Details
         public async Task<IActionResult> Details(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo; 
+
             if (id == null || _context.BotellaDetalle == null)
             {
                 return NotFound();
@@ -36,6 +48,8 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
             return View();
         }
 
@@ -45,6 +59,9 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string NombreBotella, int AlturaBotella, int AnchoBotella)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 BotellaDetalles botella = new BotellaDetalles();
@@ -55,7 +72,7 @@ namespace ScannerCC.Controllers
                 _context.Add(botella);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionBotellas", "BotellaDetalles");
             }
             catch (Exception ex)
             {
@@ -66,6 +83,9 @@ namespace ScannerCC.Controllers
         // GET: Botellas/Edit
         public async Task<IActionResult> Edit(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo; 
+
             if (id == null || _context.BotellaDetalle == null)
             {
                 return NotFound();
@@ -85,6 +105,9 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, string NombreBotella, int AlturaBotella, int AnchoBotella)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 var botella = await _context.BotellaDetalle.FindAsync(id);
@@ -100,7 +123,7 @@ namespace ScannerCC.Controllers
                 _context.Update(botella);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionBotellas", "BotellaDetalles");
             }
             catch (Exception ex)
             {
@@ -113,6 +136,9 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             if (id == null || _context.BotellaDetalle == null)
             {
                 return NotFound();
@@ -134,6 +160,9 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 var botella = await _context.BotellaDetalle.FindAsync(id);
@@ -145,7 +174,7 @@ namespace ScannerCC.Controllers
                 _context.BotellaDetalle.Remove(botella);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionBotellas", "BotellaDetalles");
             }
             catch (Exception ex)
             {

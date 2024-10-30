@@ -1260,3 +1260,8 @@ C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\bin\Debug\net6.0\Swash
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Debug\net6.0\QualityScout.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Alejandra\Downloads\QualityScout-Web\ScannerCC\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\Alejandra\Downloads\QualityScout-Web\ScannerCC\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Alejandra\Downloads\QualityScout-Web\ScannerCC\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Alejandra\Downloads\QualityScout-Web\ScannerCC\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Alejandra\Downloads\QualityScout-Web\ScannerCC\obj\Debug\net6.0\QualityScout.MvcApplicationPartsAssemblyInfo.cs

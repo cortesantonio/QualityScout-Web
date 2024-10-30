@@ -4,56 +4,46 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="~/css/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-      rel="stylesheet"
-    />
+<html lang="es">
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <title>Document</title>
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality Scout - Login</title>
+    <link rel="stylesheet" href="~/css/LoginD.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+          rel="stylesheet">
+</head>
 
-  <body class="body-login">
+<body>
     <div class="container">
-      <div class="info">
+        <a class="atrasbtn back-button" asp-action="Index1" asp-controller="Home">&#8592; Atrás</a>
         <div class="logo">
-          <img src="img/logo-cc.jpg" alt="" />
+            <img class="logoimg" src="~/Extras/QualityScoutLogo.png"></img>
         </div>
-        <div class="titulo">
-          <h1>ScannerApp</h1>
-          <p>Herramienta de Control de Calidad.</p>
-        </div>
-      </div>
-      <div class="login">
+        <div class="login-box">
+            <h2>ACCESO</h2>
+            <p>Inicie sesión para continuar.</p>
             <form asp-action="Login" asp-controller="Auth" method="post">
-          <div>
-            <label for=""><i class="fa-regular fa-user"></i></label>
-            <input type="text" name="user" id="" placeholder="RUT o Email" />
-          </div>
-          <div>
-            <label for=""><i class="fa-solid fa-key"></i></label>
-                    <input type="password" name="password" id="" placeholder="Password" />
-          </div>
-          <button type="submit">LOGIN</button>
-        </form>
-        <p>
-          Si no estas registrado u olvidaste tu contraseña, contacta con el
-          administrador.
-        </p>
-      </div>
+                <label for="email">RUT</label>
+                <input type="text" id="" name="user" placeholder="12.345.678-9" required>
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" placeholder="******" required>
+                <button type="submit">Inicar sesión</button>
+            </form>
+            <p style="margin-top: 20px; color: rgb(160, 160, 160) ;">
+                Si ha olvidado sus datos de inicio de sesión,
+                no dude en ponerse en contacto con su superior
+                para recibir asistencia.
+            </p>
+        </div>
     </div>
-  </body>
+</body>
+
 </html>
+

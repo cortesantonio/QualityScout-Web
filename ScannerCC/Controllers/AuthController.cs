@@ -142,45 +142,75 @@ namespace ScannerCC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(string Email, string Rut, string Nombre, string Password, int Rol)
+        public IActionResult Edit(int Id, string Email, string Rut, string Nombre, string Password, int Rol)
         {
-            var U = _context.Usuario.FirstOrDefault(u => u.RolId.Equals(Rol)); 
 
-            if (U != null)
-            {
-                if (U.RolId == Rol)
-                {
-                    U.Nombre = Nombre;
-                    U.Email = Email;
-                    U.Rut = Rut;
-                }
-                else
-                {
-                    U.Nombre = Nombre;
-                    U.Email = Email;
-                    U.Rut = Rut;
-                    U.RolId = Rol;
-                }
+            var usuario = _context.Usuario.FirstOrDefault(u => u.Id == Id);
 
-                if (!string.IsNullOrEmpty(Password))
-                {
-                    CreatePasswordHash(Password, out byte[] passwordHash, out byte[] passwordSalt);
-                    U.PasswordHash = passwordHash;
-                    U.PasswordSalt = passwordSalt;
-                }
-
-                _context.Usuario.Update(U);
-                _context.SaveChanges();
-
-                return RedirectToAction("Index", "Home");
-            }
-            else
+            if (usuario == null)
             {
                 ModelState.AddModelError("", "Usuario no encontrado.");
                 return RedirectToAction("Index", "Home");
             }
+
+            // Verificar si el RolId existe en la tabla Rol
+            var rolExiste = _context.Rol.Any(r => r.idRol == Rol);
+            if (!rolExiste)
+            {
+                ModelState.AddModelError("", "Rol no válido.");
+                return RedirectToAction("Index", "Home");
+            }
+
+            usuario.Nombre = Nombre;
+            usuario.Email = Email;
+            usuario.Rut = Rut;
+            usuario.RolId = Rol;
+
+            if (!string.IsNullOrEmpty(Password))
+            {
+                CreatePasswordHash(Password, out byte[] passwordHash, out byte[] passwordSalt);
+                usuario.PasswordHash = passwordHash;
+                usuario.PasswordSalt = passwordSalt;
+            }
+
+            _context.Usuario.Update(usuario);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
         }
 
+        [HttpPost]
+        public IActionResult EditC(int Id, string Password)
+        {
+
+            // Buscar el usuario por ID
+            var usuario = _context.Usuario.FirstOrDefault(u => u.Id == Id);
+
+            if (usuario == null)
+            {
+                ModelState.AddModelError("", "Usuario no encontrado.");
+                return RedirectToAction("Index", "Home");
+            }
+
+            // Si se proporciona una nueva contraseña, se procede a actualizarla
+            if (!string.IsNullOrEmpty(Password))
+            {
+                CreatePasswordHash(Password, out byte[] passwordHash, out byte[] passwordSalt);
+                usuario.PasswordHash = passwordHash;
+                usuario.PasswordSalt = passwordSalt;
+
+                // Guardar cambios en la base de datos
+                _context.Usuario.Update(usuario);
+                _context.SaveChanges();
+            }
+            else
+            {
+                ModelState.AddModelError("", "La contraseña no puede estar vacía.");
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
 
 
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

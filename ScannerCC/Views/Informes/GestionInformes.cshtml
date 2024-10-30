@@ -1,0 +1,318 @@
+﻿@{
+    Layout = null;
+    bool isEspecialista = User.IsInRole("Especialista");
+    bool isControlCalidad = User.IsInRole("Control de Calidad");
+}
+
+<style>
+    label, dt {
+        color: #4B0404; /* Cambia este valor por el color que desees */
+        font-family: Arial;
+        border: none;
+        padding: 5px;
+        font-size: 15px;
+        width:100%;
+    }
+
+    input, dd {
+        color: #DBD7D7; /* Color del texto */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        background-color: #DBD7D7;
+        padding: 5px;
+        border: none;
+        font-size: 15px;
+        width: 100%;
+    }
+
+        input.acc {
+            color: white;
+            background-color: #BF6565;
+            width: 30%;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        button.btn {
+        color: black;
+        background-color: #DBD7D7;
+        width: 30%;
+        padding: 5px;
+        font-size: 14px;
+        }
+
+    .modal {
+        display: none; /* Oculto por defecto */
+        position: fixed;
+        z-index: 100; /* Asegura que está por encima del contenido */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    }
+
+    /* El contenedor de contenido del modal */
+    .modal-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 8px;
+        width: 200px;
+        text-align: center;
+        font-family: Arial;
+    }
+
+    /* Título de alerta */
+    .alerta {
+        color: #260202;
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    /* Texto dentro del modal */
+    .modal-content p {
+        font-size: 18px;
+        color: #333;
+    }
+
+    /* Botones del modal */
+    .modal-buttons {
+        margin-top: 20px;
+    }
+
+    /* Texto destacado en rojo */
+    .desactivar {
+        color: #f25757;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualityScoutNoLog</title>
+    <link rel="stylesheet" href="~/css/GestionInformes.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="nav-i">
+            <a href="">
+                <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo Quality Scout">
+            </a>
+            <div class="navstyle">
+                @if (isEspecialista)
+                {
+                    <div class="iconosnav">
+                        <a asp-action="Index" asp-controller="Especialista">
+                            <img src="~/Extras/home.png" alt="Inicio" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionUsuarios" asp-controller="Usuario">
+                            <img src="~/Extras/usuarios.png" alt="Usuarios" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="Controles" asp-controller="Controles">
+                            <img src="~/Extras/controles.png" alt="Controles" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionProductos" asp-controller="Producto">
+                            <img src="~/Extras/productos.png" alt="Productos" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionInformes" asp-controller="Informes">
+                            <img src="~/Extras/Informes.png" alt="Informes" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                            <img src="~/Extras/escaner.png" alt="Informes" />
+                        </a>
+                    </div>
+                }
+
+                @if (isControlCalidad)
+                {
+                    <div class="iconosnav">
+                        <a asp-action="Index" asp-controller="Controlcalidad">
+                            <img src="~/Extras/home.png" alt="Inicio" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="Controles" asp-controller="Controles">
+                            <img src="~/Extras/controles.png" alt="Controles" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionProductos" asp-controller="Producto">
+                            <img src="~/Extras/productos.png" alt="Productos" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionInformes" asp-controller="Informes">
+                            <img src="~/Extras/Informes.png" alt="Informes" />
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="login-btn">
+                <div class="div2">
+                    @if (isEspecialista)
+                    {
+                        <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
+                        <div class="welcome-container">
+                            <span class="welcome-text">Bienvenido!</span>
+                            <p>@ViewBag.trab.Nombre</p>
+                            <p>Especialista</p>
+                        </div>
+                    }
+
+                    @if (isControlCalidad)
+                    {
+                        <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
+                        <div class="welcome-container">
+                            <span class="welcome-text">Bienvenido!</span>
+                            <p>@ViewBag.trab.Nombre</p>
+                            <p>Control de Calidad</p>
+                        </div>
+                    }
+                </div>
+                <button id="showOptionUser" onclick="showOptionUser()">
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div id="opcionesUser" style="display: none">
+                    <ul>
+                        <li>
+                            <a style="color:white;" asp-action="Details" asp-controller="Usuario" asp-route-id="@ViewBag.trab.Id">
+                                Editar usuario
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="Auth" asp-action="LogOut" class="dropdown-item" style="color:red; text-decoration:none;">
+                                Cerrar sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="content">
+        <div class="content">
+            <h2 class="accesotitulo">Gestion de informes</h2>
+        </div>
+    </div>
+
+<main>
+    <div class="search-add-container">
+            <form asp-action="GestionInformes" method="get" class="search-b" style="display:inline;">
+                <input type="text" placeholder="🔍 Busca por titulo o enfoque" class="search-bar" name="Busqueda" />
+                <button type="submit" style="border:none; background:none;">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+                </button>
+            </form>
+
+    </div>
+        <div class="search-add-container" style="margin-top: 10px; margin-left: 660px;">
+            @if (isEspecialista)
+            {
+                <button class="btn-deactivate" onclick="openModal()"><strong>+</strong> Generar informes con IA</button>
+            }
+
+    </div>
+
+    <section class="informes-list">
+            <h2 class="titulo" style="margin-top: 10px;">Registros</h2>
+
+        @if (ViewBag.Informes != null && ViewBag.Informes.Count > 0)
+        {
+            @foreach (var item in ViewBag.Informes)
+            {
+                <div class="informes-card">
+                    <div class="informes-info">
+                        <img src="~/Extras/Informes.png" class="user-icon" />
+                            <h3 class="titulo">@item.Titulo</h3>
+                            <p class="enfoque">Enfoque: @item.Enfoque</p>
+                    </div>
+                    <div class="informes-details">
+                            <p class="fecha">@item.Fecha.ToString("dd/MM/yyyy")</p>
+                    </div>
+                    <div class="informes-actions">
+                            @if (isEspecialista)
+                            {
+                                <a class="edit-btn" asp-action="Edit" asp-controller="Informes" asp-route-id="@item.Id">
+                                    <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                </a>
+                                <a class="see-btn" asp-action="Details" asp-controller="Informes" asp-route-id="@item.Id">
+                                    <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                </a>
+                                <a class="see-btn" asp-action="Delete" asp-controller="Informes" asp-route-id="@item.Id">
+                                    <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                </a>
+                            }
+
+                            @if (isControlCalidad)
+                            {
+                                <a class="see-btn" asp-action="Details" asp-controller="Informes" asp-route-id="@item.Id">
+                                    <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                </a>
+                            }
+
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p style="text-align: center;">No hay informes para mostrar</p>
+        }
+    </section>
+</main>
+    <div id="modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <dt class=>
+                Titulo
+            </dt>
+            <dd>
+            </dd>
+            <dt>
+                Caracteristicas a destacar
+            </dt>
+            <dd>
+            </dd>
+            <p style="font-size: 10px; margin-top: 10px;">Podrás encontrar los informes generados en registros.</p>
+            <div class="d-flex justify-content-between w-100" style="margin-left: 5px; margin-top: 15px;">
+                <input onclick="closeModal()" type="submit" value="Generar" class="acc btn btn-danger" />
+                <button onclick="closeModal()" class="btn btn-secondary">Cancelar</button>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script src="~/js/quagga.min.js"></script>
+<script src="~/js/especialista.js"></script>
+
+</html>
+
+<script>
+    // Función para abrir el modal
+    function openModal() {
+        document.getElementById('modal').style.display = 'block';
+    }
+
+    // Función para cerrar el modal
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+    }
+</script>

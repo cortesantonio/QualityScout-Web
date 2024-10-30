@@ -1,0 +1,150 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualityScoutNoLog</title>
+    <link rel="stylesheet" href="~/css/GestionProductoD.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="nav-i">
+            <a href="">
+                <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo Quality Scout">
+            </a>
+            <div class="navstyle">
+                <div class="iconosnav">
+                    <a asp-action="Index" asp-controller="Especialista">
+                        <img src="~/Extras/home.png" alt="Inicio" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionUsuarios" asp-controller="Usuario">
+                        <img src="~/Extras/usuarios.png" alt="Usuarios" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="Controles" asp-controller="Controles">
+                        <img src="~/Extras/controles.png" alt="Controles" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionProductos" asp-controller="Producto">
+                        <img src="~/Extras/productos.png" alt="Productos" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionInformes" asp-controller="Informes">
+                        <img src="~/Extras/Informes.png" alt="Informes" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                        <img src="~/Extras/escaner.png" alt="Informes" />
+                    </a>
+                </div>
+            </div>
+            <div class="login-btn">
+                <div class="div2">
+                    <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
+                    <div class="welcome-container">
+                        <span class="welcome-text">Bienvenido!</span>
+                        <p>@ViewBag.trab.Nombre</p>
+                        <p>Especialista</p>
+                    </div>
+                </div>
+                <button id="showOptionUser" onclick="showOptionUser()">
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div id="opcionesUser" style="display: none">
+                    <ul>
+                        <li>
+                            <a style="color:white;" asp-action="Details" asp-controller="Usuario" asp-route-id="@ViewBag.trab.Id">
+                                Editar usuario
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="Auth" asp-action="LogOut" class="dropdown-item" style="color:red; text-decoration:none;">
+                                Cerrar sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+<div class="content">
+    <div class="content">
+        <h2 class="accesotitulo">Gestión de productos detalles</h2>
+    </div>
+</div>
+<main>
+    <div class="search-add-container">
+
+        <a class="add-user-btn" style="margin-left: 430px;" asp-action="Create" asp-controller="ProductoDetalles"><strong>+</strong> Añadir producto detalle</a>
+    </div>
+
+    <section class="producto-list">
+            <h2 class="titulo" style="margin-top: 5px;">Registros</h2>
+
+        <!-- Sección de productos en estilo de tarjeta -->
+        @if (ViewBag.ProductoDetalles != null && ViewBag.ProductoDetalles.Count > 0)
+        {
+            @foreach (var item in ViewBag.ProductoDetalles)
+            {
+                <div class="producto-card">
+                    <div class="producto-info" style="margin-right: 5px;">
+                        <img src="~/Extras/botellaicon.png" class="user-icon" />
+                        <div>
+                            <p><strong>Capacidad:</strong> @item.Capacidad</p>
+                                <p>
+                                    <strong>Medalla:</strong>
+                                    @{
+                                        var medalla = item.Medalla ? "Sí" : "No";
+                                        var medallaStatus = item.Medalla ? "True" : "False";
+                                    }
+                                    <span class="@medallaStatus">@medalla</span>
+                                </p>
+                        </div>
+                        </div>
+                            <div class="producto-details" >
+                        <div>
+                            <p><strong>Tipo Cápsula:</strong> @item.TipoCapsula</p>
+                            <p><strong>Color Cápsula:</strong> @item.ColorCapsula</p>
+                        </div>
+                    </div>
+                    <div class="producto-actions">
+                        <a class="edit-btn" asp-action="Edit" asp-controller="ProductoDetalles" asp-route-id="@item.Id">
+                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                        </a>
+                        <a class="see-btn" asp-action="Details" asp-controller="ProductoDetalles" asp-route-id="@item.Id">
+                            <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                        </a>
+                        <a class="see-btn" asp-action="Delete" asp-controller="ProductoDetalles" asp-route-id="@item.Id">
+                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p style="text-align: center;">No hay productos para mostrar</p>
+        }
+    </section>
+</main>
+</body>
+<script src="~/js/quagga.min.js"></script>
+<script src="~/js/especialista.js"></script>
+
+</html>

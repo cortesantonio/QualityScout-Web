@@ -1,311 +1,153 @@
-@{
+ï»¿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="~/css/style.css" />
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualityScoutNoLog</title>
+    <link rel="stylesheet" href="~/css/Roles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
-
-<body>
-  <div class="container">
-    <aside class="menu">
-      <div class="logo">
-        <img src="img/Brand initial Simple Logo.png" alt="LOGO" />
-      </div>
-      <div class="line"></div>
-      <div class="links">
-        <ul>
-                    <li>
-                        <button onclick="switchViewControlcalidad('controles')" id="btnView">
-                            <i class="fa-solid fa-clipboard-list"></i> Adm. de controles
-                        </button>
-                    </li>
-                    <li>
-                        <button onclick="switchViewControlcalidad('productos')" id="btnView">
-                            <i class="fa-solid fa-clipboard-list"></i> Adm. de productos
-                        </button>
-                    </li>
-                    <li>
-                        <button onclick="switchViewControlcalidad('busqueda')" id="btnView">
-                            <i class="fa-solid fa-barcode"></i> Buscador
-                        </button>
-                    </li>
-        </ul>
-      </div>
-      <div class="line"></div>
-    </aside>
-
-<div class="main">
-
-      <nav class="navbar" style="justify-content:end;">
-
-        <div class="div2">
-
-          <div class="user">
-            <h3>@ViewBag.trab.Nombre</h3>
-            <p>Control de calidad</p>
-          </div>
-          <button id="showOptionUser" onclick="showOptionUser()">
-            <i class="fa-solid fa-caret-down"></i>
-          </button>
-          <div id="opcionesUser" style="display: none">
-            <ul>
-              <li><a asp-controller="Auth" style="color:red;" asp-action="LogOut" class="dropdown-item">Cerrar
-                  sesion</a></li>
-            </ul>
-          </div>
+<header>
+    <nav class="nav-i">
+        <a href="">
+            <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo Quality Scout">
+        </a>
+        <div class="navstyle">
+            <div class="iconosnav">
+                <a asp-action="Index" asp-controller="Controlcalidad">
+                    <img src="~/Extras/home.png" alt="Inicio" />
+                </a>
+            </div>
+            <div class="iconosnav">
+                <a asp-action="Controles" asp-controller="Controles">
+                    <img src="~/Extras/controles.png" alt="Controles" />
+                </a>
+            </div>
+            <div class="iconosnav">
+                <a asp-action="GestionProductos" asp-controller="Producto">
+                    <img src="~/Extras/productos.png" alt="Productos" />
+                </a>
+            </div>
+            <div class="iconosnav">
+                <a asp-action="GestionInformes" asp-controller="Informes">
+                    <img src="~/Extras/Informes.png" alt="Informes" />
+                </a>
+            </div>
         </div>
-      </nav>
-
-      <div class="view" id="busqueda">
-        <header>
-          <h1>Buscador</h1>
-          <p>
-                        Aqui puedes buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>) por nombre y codigo del producto para ver su informacion, y además ver detalladamente la informacion (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) con los iconos que salen más adelante.
-          </p>
-        </header>
-
-        <main class="productos-container">
-          <div class="head-producto">
-            <div class="busqueda" >
-              <form asp-action="Index" method="get" id="formularioBuscar">
-                <button type="submit">
-                  <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
-                </button>
-                <input type="text" name="Busqueda" id="Busqueda" placeholder="Busqueda por Codigo o Nombre" />
-              </form>
-            </div>
-          </div>
-
-          <table class="tableUsuarios">
-            <thead>
-              <tr>
-                <th>Codigo barra</th>
-                <th>Codigo VE</th>
-                <th>Nombre</th>
-                <th>Pais destino</th>
-                <th>Fecha de registro</th>
-
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach (var item in ViewBag.Productos)
-              {
-
-                <tr>
-                  <td>
-                    @item.CodigoBarra
-                  </td>
-                  <td>
-                    @item.CodigoVE
-                  </td>
-                  <td>
-                    @item.Nombre
-                  </td>
-                  <td>
-                    @item.PaisDestino
-                  </td>
-                  <td>
-                    @item.FechaRegistro
-                  </td>
-
-                  <td>
-                    <a asp-action="Details" asp-controller="Producto" asp-route-id="@item.Id"><i
-                        class="fa-solid fa-circle-info" style="color: #ffffff;"></i></a>
-
-                  </td>
-                </tr>
-
-              }
-            </tbody>
-          </table>
-        </main>
-      </div>
-
-      @*~~~~~~~~~~*@
-
-            <div class="view" id="controles" style="display: none">
-                <header>
-                    <h1>Adm. de Controles</h1>
-                    <p>
-                        Aqui puedes adminstrar los controles. Ver, buscar (<i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>), crear (<i class="fa-solid fa-notes-medical"></i>), editar (<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>), ver detalladamente la información (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>) y borrar (<i class="fa-solid fa-trash" style="color: #ffffff;"></i>)
-                        controles como estimes necesario con los iconos que salen más adelante.
-                    </p>
-                </header>
-
-                <main class="productos-container">
-                    <div class="head-producto">
-                        <div class="busqueda">
-                            <form asp-action="Index" method="get" id="formularioBuscar">
-                                <button type="submit">
-                                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
-                                </button>
-                                <input type="text" name="Busqueda" id="Busqueda" placeholder="Busqueda por Codigo o Nombre" />
-                            </form>
-                        </div>
-                        <div class="add">
-                            <a asp-action="CreateControl" asp-controller="Controles">
-                                <i class="fa-solid fa-notes-medical"></i>
-                                Agregar Control
-                            </a>
-                        </div>
-
-                    </div>
-
-                    <table class="tableUsuarios">
-                        <thead>
-                            <tr>
-                                <th>Nombre producto</th>
-                                <th>Linea</th>
-                                <th>Pais destino</th>
-                                <th>Comentario</th>
-                                <th>Tipo de control</th>
-
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in ViewBag.Controles)
-                            {
-
-                                <tr>
-                                    <td>
-                                        @item.Productos.Nombre
-                                    </td>
-                                    <td>
-                                        @item.Linea
-                                    </td>
-                                    <td>
-                                        @item.PaisDestino
-                                    </td>
-                                    <td>
-                                        @item.Comentario
-                                    </td>
-                                    <td>
-                                        @item.Tipodecontrol
-                                    </td>
-
-                                    <td>
-                                        <a asp-action="Details2" asp-controller="Controles" asp-route-id="@item.Id">
-                                            <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
-                                        </a>
-
-                                        @if (item.Estado == "Reproceso" && string.IsNullOrEmpty(item.EstadoFinal))
-                                        {
-                                            <a asp-action="Edit2" asp-controller="Controles" asp-route-id="@item.Id">
-                                                <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
-                                            </a>
-
-                                        }
-
-                                        <a asp-action="Delete2" asp-controller="Controles" asp-route-id="@item.Id">
-                                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
-                                        </a>
-
-                                    </td>
-                                </tr>
-
-                            }
-                        </tbody>
-                    </table>
-                </main>
+        <div class="login-btn">
+            <div class="div2">
+                <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="LÃ¡piz">
+                <div class="welcome-container">
+                    <span class="welcome-text">Bienvenido!</span>
+                    <p>@ViewBag.trab.Nombre</p>
+                    <p>Control de Calidad</p>
+                </div>
 
             </div>
+            <button id="showOptionUser" onclick="showOptionUser()">
+                <i class="fa-solid fa-caret-down"></i>
+            </button>
+            <div id="opcionesUser" style="display: none">
+                <ul>
+                    <li>
+                        <a style="color:white;" asp-action="Details" asp-controller="Usuario" asp-route-id="@ViewBag.trab.Id">
+                            Editar usuario
+                        </a>
+                    </li>
 
-            @*~~~~~~~~~~*@
+                    <li>
+                        <a asp-controller="Auth" style="color:red; text-decoration:none;" asp-action="LogOut"
+                           class="dropdown-item"> Cerrar sesion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<body>
+    <div class="content">
+        <div class="content">
+            <h2 class="accesotitulo">Accesos rÃ¡pidos</h2>
+            <div class="quick-access">
+                <div class="icon-item">
+                    <a asp-action="Controles" asp-controller="Controles">
+                        <img src="~/Extras/controles.png" alt="Controles" />
+                    </a>
+                    <span>Controles</span>
+                </div>
+                <div class="icon-item">
+                    <a asp-action="GestionProductos" asp-controller="Producto">
+                        <img src="~/Extras/productos.png" alt="Productos" />
+                    </a>
+                    <span>Productos</span>
+                </div>
+                <div class="icon-item">
+                    <a asp-action="GestionInformes" asp-controller="Informes">
+                        <img src="~/Extras/Informes.png" alt="Informes" />
+                    </a>
+                    <span>Informes</span>
+                </div>
+            </div>
 
-            <div class="view" id="productos" style="display: none">
-                <header>
-                    <h1>Adm. de Productos</h1>
-                    <p>
-                        Aqui puedes adminstrar los productos. Ver e ingresar a ver la información detalladamente (<i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>).
-                    </p>
-                </header>
+            <div class="iframe-container">
+                <iframe title="IndicadoresG"
+                        src="https://app.powerbi.com/view?r=eyJrIjoiMzUwNzMxNjEtNTBlYi00ZWY0LTg0ZmQtMjMzNzQ1Y2U0YjEwIiwidCI6IjM4YTFlMGExLWI2YjEtNDJlOS1iM2E5LTU5NzYyNjY3MGIxNyIsImMiOjR9"
+                        frameborder="0"
+                        allowFullScreen="true"></iframe>
+            </div>
 
-                <main class="productos-container">
-                    <div class="head-producto">
-                        <div class="busqueda">
-                            <form asp-action="Index" method="get">
-                                <button type="submit">
-                                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
-                                </button>
-                                <input name="Busqueda" type="text" placeholder="Busqueda por Codigo o Nombre" />
-                            </form>
+            <div class="dashboard">
+                <div class="dashboard-indicators">
+                    <div class="indicator-container">
+                        <div class="indicator reprocesos">
+                            <span class="indicator-title">Controles en reproceso</span>
+                            <div class="indicator-value">
+                                <span class="percentage">@Model.ReprocesadosMesAntiguo</span>
+                                <span class="arrow-up">â†‘</span>
+                            </div>
                         </div>
                     </div>
-                    <table class="tableUsuarios">
-                        <thead>
-                            <tr>
-                                <th>Codigo barra</th>
-                                <th>Codigo VE</th>
-                                <th>Nombre</th>
-                                <th>Pais destino</th>
-                                <th>Fecha registro</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in ViewBag.Productos)
-                            {
 
-                                <tr>
-                                    <td>
-                                        @item.CodigoBarra
-                                    </td>
-                                    <td>
-                                        @item.CodigoVE
-                                    </td>
+                    <div class="indicator-container">
+                        <div class="indicator rechazados">
+                            <span class="indicator-title">Controles rechazados</span>
+                            <div class="indicator-value">
+                                <span class="percentage">@Model.RechazadosMesAntiguo</span>
+                                <span class="arrow-down">â†“</span>
+                            </div>
+                        </div>
+                    </div>
 
-                                    <td>
-                                        @item.Nombre
-                                    </td>
-                                    <td>
-                                        @item.PaisDestino
-                                    </td>
-                                    <td>
-                                        @item.FechaRegistro
-                                    </td>
-                                    <td>
-                                            <a asp-action="Details" asp-controller="Producto" asp-route-id="@item.Id">
-                                                <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
-                                            </a>
-                                        
-                                    </td>
-                                </tr>
+                    <div class="indicator-container">
+                        <div class="indicator aprobados">
+                            <span class="indicator-title">Controles aprobados</span>
+                            <div class="indicator-value">
+                                <span class="percentage">@Model.AprobadosMesAntiguo</span>
+                                <span class="arrow-up">â†‘</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                            }
-                        </tbody>
-                    </table>
-                </main>
+                <p class="reference-text">Indicadores con referencia al mes anterior: @Model.MesAnterior @Model.AnioAnterior</p>
+
             </div>
-
-
-  </div>
-
-
-  <div id="myModal" class="modal">
-    <div class="modal-content">
-      <span class="close" id="closeModalBtn">&times;</span>
-      <div style="width:250px;" id="camera"></div>
-      <p>Resultado: <span id="resultado"></span></p>
+        </div>
     </div>
-  </div>
-
-
 </body>
-
-
 <script src="~/js/controlcalidad.js"></script>
 <script src="~/js/quagga.min.js"></script>
-
 </html>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+}
+

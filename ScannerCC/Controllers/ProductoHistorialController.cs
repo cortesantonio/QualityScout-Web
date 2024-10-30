@@ -15,9 +15,21 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
+        public IActionResult GestionProductosH()
+        {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
+            ViewBag.ProductoHistorial = _context.ProductoHistorial.ToList();
+            return View();
+        }
+
         // GET: ProductoH/Details
         public async Task<IActionResult> Details(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             if (id == null || _context.ProductoHistorial == null)
             {
                 return NotFound();
@@ -38,6 +50,9 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             var productosConHistorial = _context.ProductoHistorial
             .Select(pd => pd.IdProductos)
             .ToList(); 
@@ -57,6 +72,9 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int IdProductos, DateTime FechaCosecha, DateTime FechaProduccion, DateTime FechaEnvasado)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 ProductoHistorial productoh = new ProductoHistorial();
@@ -69,9 +87,9 @@ namespace ScannerCC.Controllers
                 {
                     _context.Add(productoh);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("GestionProductosH", "ProductoHistorial");
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionProductosH", "ProductoHistorial");
             }
             catch (Exception ex)
             {
@@ -82,6 +100,9 @@ namespace ScannerCC.Controllers
         // GET: ProductoH/Edit
         public async Task<IActionResult> Edit(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             if (id == null || _context.ProductoHistorial == null)
             {
                 return NotFound();
@@ -105,6 +126,9 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, int IdProductos, DateTime FechaCosecha, DateTime FechaProduccion, DateTime FechaEnvasado)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 var productoh = await _context.ProductoHistorial.FindAsync(id);
@@ -121,9 +145,9 @@ namespace ScannerCC.Controllers
                 {
                     _context.Update(productoh);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("GestionProductosH", "ProductoHistorial");
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionProductosH", "ProductoHistorial");
             }
             catch (Exception ex)
             {
@@ -135,6 +159,9 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             if (id == null || _context.ProductoHistorial == null)
             {
                 return NotFound();
@@ -156,6 +183,9 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 var productoh = await _context.ProductoHistorial.FindAsync(id);
@@ -167,7 +197,7 @@ namespace ScannerCC.Controllers
                 _context.ProductoHistorial.Remove(productoh);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionProductosH", "ProductoHistorial");
             }
             catch (Exception ex)
             {

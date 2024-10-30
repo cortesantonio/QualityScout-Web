@@ -16,10 +16,21 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
+        public IActionResult GestionProductosD()
+        {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
+            ViewBag.ProductoDetalles = _context.ProductoDetalle.ToList();
+            return View();
+        }
 
         // GET: ProductoD/Details
         public async Task<IActionResult> Details(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             if (id == null || _context.ProductoDetalle == null)
             {
                 return NotFound();
@@ -41,6 +52,9 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             var productosConDetalles = _context.ProductoDetalle
                 .Select(pd => pd.IdProductos)
                 .ToList(); 
@@ -67,6 +81,9 @@ namespace ScannerCC.Controllers
         public async Task<IActionResult> Create(int IdProductos, int IdBotellaDetalles, int Capacidad, string TipoCapsula, string TipoEtiqueta, string ColorBotella, bool Medalla, string ColorCapsula,
                                                 string TipoCorcho, int MedidaEtiquetaABoquete, int MedidaEtiquetaABase)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 ProductoDetalles productoDetalle = new ProductoDetalles();
@@ -83,8 +100,8 @@ namespace ScannerCC.Controllers
                 productoDetalle.MedidaEtiquetaABase = MedidaEtiquetaABase;
 
                 _context.ProductoDetalle.Add(productoDetalle);
-                await _context.SaveChangesAsync(); 
-                return RedirectToAction("Index", "Home");
+                await _context.SaveChangesAsync();
+                return RedirectToAction("GestionProductosD", "ProductoDetalles");
             }
             catch (Exception ex)
             {
@@ -96,6 +113,9 @@ namespace ScannerCC.Controllers
         // GET: ProductoD/Edit
         public async Task<IActionResult> Edit(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             if (id == null || _context.ProductoDetalle == null)
             {
                 return NotFound();
@@ -121,6 +141,9 @@ namespace ScannerCC.Controllers
         public async Task<IActionResult> Edit(int id, int IdProductos, int IdBotellaDetalles, int Capacidad, string TipoCapsula, string TipoEtiqueta, string ColorBotella, bool Medalla, string ColorCapsula,
                                         string TipoCorcho, int MedidaEtiquetaABoquete, int MedidaEtiquetaABase)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 var productoDetalle = await _context.ProductoDetalle.FindAsync(id);
@@ -144,7 +167,7 @@ namespace ScannerCC.Controllers
                 _context.ProductoDetalle.Update(productoDetalle);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionProductosD", "ProductoDetalles");
             }
             catch (Exception ex)
             {
@@ -156,6 +179,9 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int? id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             if (id == null || _context.ProductoDetalle == null)
             {
                 return NotFound();
@@ -177,6 +203,9 @@ namespace ScannerCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+
             try
             {
                 var productoDetalle = await _context.ProductoDetalle.FindAsync(id);
@@ -188,7 +217,7 @@ namespace ScannerCC.Controllers
                 _context.ProductoDetalle.Remove(productoDetalle);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionProductosD", "ProductoDetalles");
             }
             catch (Exception ex)
             {
