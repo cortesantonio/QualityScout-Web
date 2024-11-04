@@ -174,7 +174,7 @@
 
     <div class="content">
         <div class="content">
-            <h2 class="accesotitulo">Añadir producto historial</h2>
+            <h2 class="accesotitulo">Añadir historial del producto</h2>
         </div>
     </div>
     <div class="container">
@@ -183,7 +183,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
                     <div class="form-group">
-                        <label asp-for="IdProductos" class="control-label">Productos</label>
+                        <label asp-for="IdProductos" class="control-label">Producto</label>
                         <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos">
                             <option value="">Seleccione un producto</option>
                         </select>
@@ -194,7 +194,7 @@
                         <span asp-validation-for="FechaCosecha" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="FechaProduccion" class="control-label">Fecha de produccion</label>
+                        <label asp-for="FechaProduccion" class="control-label">Fecha de producción</label>
                         <input asp-for="FechaProduccion" class="form-control" type="date" />
                         <span asp-validation-for="FechaProduccion" class="text-danger"></span>
                     </div>
@@ -205,7 +205,7 @@
                     </div>
                     <div class="form-groupp">
                         <button type="submit" class="btnAccionForm" style="margin-bottom: 20px;">
-                            <i class="fa-solid fa-wine-bottle"></i> Agregar producto historial
+                            <i class="fa-solid fa-wine-bottle"></i> Agregar historial del producto
                         </button>
                     </div>
                 </div>

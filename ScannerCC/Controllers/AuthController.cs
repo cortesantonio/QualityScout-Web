@@ -191,7 +191,7 @@ namespace ScannerCC.Controllers
                 ModelState.AddModelError("", "Usuario no encontrado.");
                 return RedirectToAction("Index", "Home");
             }
-
+            
             // Si se proporciona una nueva contraseña, se procede a actualizarla
             if (!string.IsNullOrEmpty(Password))
             {

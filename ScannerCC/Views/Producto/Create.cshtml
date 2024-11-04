@@ -180,13 +180,13 @@
 <div class="row">
         <form asp-action="Create">
             <div class="form-group">
-                <label asp-for="IdInformacionQuimica" class="control-label">Informacion quimica</label>
+                <label asp-for="IdInformacionQuimica" class="control-label">Información química</label>
                 <select asp-for="IdInformacionQuimica" name="IdInformacionQuimica" class="form-control" asp-items="ViewBag.IdInformacionQuimica">
-                    <option value="">Seleccione un información quimica</option>
+                    <option value="">Seleccione un información química</option>
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="CodigoBarra" class="control-label">Código de barra</label>
+                <label asp-for="CodigoBarra" class="control-label">Código de barras</label>
                 <input asp-for="CodigoBarra" name="CodigoBarra" class="form-control" />
                 <span asp-validation-for="CodigoBarra" class="text-danger"></span>
             </div>
@@ -196,7 +196,7 @@
                 <span asp-validation-for="CodigoVE" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Nombre" class="control-label">Nombre del producto</label>
+                <label asp-for="Nombre" class="control-label">Nombre vino</label>
                 <input asp-for="Nombre" name="Nombre" class="form-control" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
@@ -207,18 +207,48 @@
             </div>
             <div class="form-group">
                 <label asp-for="PaisDestino" class="control-label">País de destino</label>
-                <input asp-for="PaisDestino" name="PaisDestino" class="form-control" />
-                <span asp-validation-for="PaisDestino" class="text-danger"></span>
+                    <select asp-for="PaisDestino" name="PaisDestino" id="PaisDestino" class="form-control">
+                        <option value="">Seleccione un país</option>
+                        <option value="Chile">Chile</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Francia">Francia</option>
+                        <option value="Italia">Italia</option>
+                        <option value="España">España</option>
+                        <option value="Estados Unidos">Estados Unidos</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Sudáfrica">Sudáfrica</option>
+                        <option value="Portugal">Portugal</option>
+                        <option value="Nueva Zelanda">Nueva Zelanda</option>
+                    </select>
             </div>
             <div class="form-group">
-                <label asp-for="Idioma" class="control-label">Idioma del producto</label>
-                <input asp-for="Idioma" name="Idioma" class="form-control" />
-                <span asp-validation-for="Idioma" class="text-danger"></span>
+                <label asp-for="Idioma" class="control-label">Idioma información</label>
+                    <select asp-for="Idioma" name="Idioma" id="Idioma" class="form-control">
+                        <option value="">Seleccione un idioma</option>
+                        <option value="Inglés">Inglés</option>
+                        <option value="Árabe">Árabe</option>
+                        <option value="Español">Español</option>
+                        <option value="Francés">Francés</option>
+                        <option value="Italiano">Italiano</option>
+                        <option value="Alemán">Alemán</option>
+                        <option value="Portugués">Portugués</option>
+                        <option value="Chino">Chino</option>
+                        <option value="Japonés">Japonés</option>
+                        <option value="Ruso">Ruso</option>
+                    </select>
             </div>
             <div class="form-group">
-                <label asp-for="UnidadMedida" class="control-label">Unidad de medida</label>
-                <input asp-for="UnidadMedida" name="UnidadMedida" class="form-control" />
-                <span asp-validation-for="UnidadMedida" class="text-danger"></span>
+                <label asp-for="UnidadMedida" class="control-label">Unidad de medida en etiqueta</label>
+                    <select asp-for="UnidadMedida" name="UnidadMedida" id="UnidadMedida" class="form-control">
+                        <option value="">Seleccione una unidad de medida</option>
+                        <option value="Incoloro">Onzas (oz)</option>
+                        <option value="Ámbar">Mililitros (ml)</option>
+                        <option value="Blanca">Litros (l)</option>
+                        <option value="Verde">Centilitros (cl)</option>
+                        <option value="Roja">Gramos (g9</option>
+                        <option value="Negra">Kilogramos (kg)</option>
+                        <option value="Gris">Galones (gal)</option>
+                    </select>
             </div>
             <div class="form-group">
                 <label asp-for="DescripcionCapsula" class="control-label">Descripción de la cápsula</label>

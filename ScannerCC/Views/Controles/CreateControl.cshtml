@@ -179,32 +179,47 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Linea" class="control-label">Linea</label>
+                        <label asp-for="Linea" class="control-label">Linea controlada</label>
                         <input asp-for="Linea" class="form-control" />
                         <span asp-validation-for="Linea" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="PaisDestino" class="control-label">Pais de destino</label>
-                        <input asp-for="PaisDestino" class="form-control" />
-                        <span asp-validation-for="PaisDestino" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Comentario" class="control-label">Comentario</label>
-                        <input asp-for="Comentario" class="form-control" />
-                        <span asp-validation-for="Comentario" class="text-danger"></span>
+                        <label asp-for="PaisDestino" class="control-label">País de destino</label>
+                        <select asp-for="PaisDestino" name="PaisDestino" id="PaisDestino" class="form-control">
+                            <option value="">Seleccione un país</option>
+                            <option value="Chile">Chile</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Francia">Francia</option>
+                            <option value="Italia">Italia</option>
+                            <option value="España">España</option>
+                            <option value="Estados Unidos">Estados Unidos</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Sudáfrica">Sudáfrica</option>
+                            <option value="Portugal">Portugal</option>
+                            <option value="Nueva Zelanda">Nueva Zelanda</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label asp-for="Tipodecontrol" class="control-label">Tipo de control</label>
-                        <input asp-for="Tipodecontrol" class="form-control" />
-                        <span asp-validation-for="Tipodecontrol" class="text-danger"></span>
+                        <select asp-for="Tipodecontrol" name="Tipodecontrol" id="Tipodecontrol" class="form-control">
+                            <option value="">Seleccione un tipo de control</option>
+                            <option value="Preventivo">Preventivo</option>
+                            <option value="Reproceso">Reproceso</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="Estado">Estado</label>
+                        <label for="Estado">Estado control inicial</label>
                         <select name="Estado" id="Estado" class="form-control" onchange="checkReproceso()">
+                            <option value="">Seleccione un estado de control</option>
                             <option value="Aprobado">Aprobado</option>
                             <option value="Reproceso">Reproceso</option>
                             <option value="Rechazado">Rechazado</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Comentario" class="control-label">Comentario sobre el control</label>
+                        <input asp-for="Comentario" class="form-control" />
+                        <span asp-validation-for="Comentario" class="text-danger"></span>
                     </div>
                     <div class="form-groupp">
                         <button type="submit" class="btnAccionForm" style="margin-bottom: 20px;">

@@ -246,66 +246,65 @@
     </header>
     <div class="content">
         <div class="content">
-            <h2 class="accesotitulo">Eliminar información quimica</h2>
+            <h2 class="accesotitulo">Eliminar información química</h2>
         </div>
     </div>
 
     <div class="container">
     <dl class="row justify-content-center">
             <div class="row justify-content-center">
-                <dt >
-                    Cepa
+                <dt>
+                    Cepa vino
                 </dt>
-                <dd >
+                <dd>
                     @Html.DisplayFor(model => model.Cepa)
                 </dd>
-                <dt >
-                    Minimo de azucar
+                <dt>
+                    Mínimo de azúcar (gr)
                 </dt>
-                <dd >
+                <dd>
                     @Html.DisplayFor(model => model.MinAzucar)
                 </dd>
                 <dt>
-                    Maximo de azucar
+                    Máximo de azúcar (gr)
                 </dt>
-                <dd >
+                <dd>
                     @Html.DisplayFor(model => model.MaxAzucar)
                 </dd>
-                <dt >
-                    Minimo de sulfuroso
+                <dt>
+                    Mínimo de sulfuroso (mg/l)
                 </dt>
-                <dd >
+                <dd>
                     @Html.DisplayFor(model => model.MinSulfuroso)
                 </dd>
-                <dt >
-                    Maximo de sulfuroso
+                <dt>
+                    Máximo de sulfuroso (mg/l)
                 </dt>
-                <dd >
+                <dd>
                     @Html.DisplayFor(model => model.MaxSulfuroso)
                 </dd>
-                <dt >
-                    Minimo de densidad
+                <dt>
+                    Mínimo de densidad (g/ml)
                 </dt>
-                <dd >
+                <dd>
                     @Html.DisplayFor(model => model.MinDensidad)
                 </dd>
-                <dt >
-                    Maximo de densidad
+                <dt>
+                    Máximo de densidad (g/ml)
                 </dt>
-                <dd >
+                <dd>
                     @Html.DisplayFor(model => model.MaxDensidad)
                 </dd>
-                <dt >
-                    Minimo de grado de alcohol
+                <dt>
+                    Mínimo de grado de alcohol
                 </dt>
-                <dd >
+                <dd>
                     @Html.DisplayFor(model => model.MinGradoAlcohol)
                 </dd>
-                </dd>
-                <dt >
-                    Maximo de grado de alcohol
+                <dt>
+                    Máximo de grado de alcohol
                 </dt>
-                <dd >
+                <dd>
                     @Html.DisplayFor(model => model.MaxGradoAlcohol)
                 </dd>
             </div>
@@ -314,7 +313,7 @@
         <form asp-action="Delete">
             <input type="hidden" asp-for="Id" />
             <button type="submit" class="btnAccionForm" value="Eliminar" style="margin-top: 20px; margin-left: 280px; margin-bottom: 20px;">
-                <i class="fa-solid fa-eraser"></i> Eliminar informacion quimica
+                <i class="fa-solid fa-eraser"></i> Eliminar informacion química
             </button>
         </form>
 </div>

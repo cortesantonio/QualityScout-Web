@@ -251,7 +251,7 @@
     </header>
     <div class="content">
         <div class="content">
-            <h2 class="accesotitulo">Eliminar botella detalle</h2>
+            <h2 class="accesotitulo">Eliminar detalles de la botella</h2>
         </div>
     </div>
 
@@ -259,19 +259,19 @@
     <dl class="row justify-content-center">
             <div class="row justify-content-center">
                 <dt >
-                    Nombre de la botella
+                    Nombre botella
                 </dt>
                 <dd >
                     @Html.DisplayFor(model => model.NombreBotella)
                 </dd>
                 <dt >
-                    Altura de la botella
+                    Altura de la botella (cm)
                 </dt>
                 <dd >
                     @Html.DisplayFor(model => model.AlturaBotella)
                 </dd>
                 <dt >
-                    Ancho de la botella
+                    Ancho de la botella (cm)
                 </dt> 
                 <dd >
                     @Html.DisplayFor(model => model.AnchoBotella)
@@ -282,7 +282,7 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
             <button type="submit" class="btnAccionForm" value="Eliminar" style="margin-top: 20px; margin-left: 350px;">
-                <i class="fa-solid fa-eraser"></i> Eliminar producto
+                <i class="fa-solid fa-eraser"></i> Eliminar detalles de la botella
             </button>
     </form>
 </div>

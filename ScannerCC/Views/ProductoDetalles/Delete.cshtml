@@ -28,6 +28,7 @@
         padding: 5px; /* Espaciado interno */
         border-radius: 5px; /* Bordes redondeados (opcional) */
         font-family: Arial;
+        font-size: 12px;
         background-color: #DBD7D7;
         border: none;
     }
@@ -69,13 +70,13 @@
     button[type="submit"] {
         background-color: #BF6565;
         color: white;
-        width: 30%;
+        width: 45%;
     }
 
         button[type="submit"]:hover {
             background-color: #F25757;
             color: white;
-            width: 30%;
+            width: 45%;
         }
 
     a {
@@ -246,7 +247,7 @@
     </header>
     <div class="content">
         <div class="content">
-            <h2 class="accesotitulo">Eliminar producto detalle</h2>
+            <h2 class="accesotitulo">Eliminar detalles del producto</h2>
         </div>
     </div>
 
@@ -254,16 +255,22 @@
     <dl class="row justify-content-center">
             <div class="row justify-content-center">
                 <dt>
-                    Capacidad
+                    Capacidad (ml)
                 </dt>
                 <dd >
                     @Html.DisplayFor(model => model.Capacidad)
                 </dd>
                 <dt >
-                    Tipo de capsula
+                    Tipo de cápsula
                 </dt>
                 <dd>
                     @Html.DisplayFor(model => model.TipoCapsula)
+                </dd>
+                <dt>
+                    Color de cápsula
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ColorCapsula)
                 </dd>
                 <dt >
                     Tipo de etiqueta
@@ -285,25 +292,19 @@
                     }
                 </dd>
                 <dt >
-                    ColorCapsula
-                </dt>
-                <dd >
-                    @Html.DisplayFor(model => model.ColorCapsula)
-                </dd>
-                <dt >
                     Tipo de corcho
                 </dt>
                 <dd >
                     @Html.DisplayFor(model => model.TipoCorcho)
                 </dd>
                 <dt >
-                    Medida de etiqueta a boquete
+                    Medida de etiqueta a boquete (cm)
                 </dt>
                 <dd >
                     @Html.DisplayFor(model => model.MedidaEtiquetaABoquete)
                 </dd>
                 <dt>
-                    Medida de etiqueta a base
+                    Medida de etiqueta a base (cm)
                 </dt>
                 <dd >
                     @Html.DisplayFor(model => model.MedidaEtiquetaABase)
@@ -313,8 +314,8 @@
 
         <form asp-action="Delete">
             <input type="hidden" asp-for="Id" />
-            <button type="submit" class="btnAccionForm" value="Eliminar" style="margin-top: 20px; margin-left: 350px; margin-bottom: 20px;">
-                <i class="fa-solid fa-eraser"></i> Eliminar producto detalle
+            <button type="submit" class="btnAccionForm" value="Eliminar" style="margin-top: 20px; margin-left: 280px; margin-bottom: 50px;">
+                <i class="fa-solid fa-eraser"></i> Eliminar detalles del producto
             </button>
         </form>
 </div>

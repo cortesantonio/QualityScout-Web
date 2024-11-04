@@ -243,28 +243,22 @@
     <div class="container">
     <dl class="row justify-content-center">
         <dt >
-            Producto 
+            Nombre producto 
         </dt>
         <dd >
             @Html.DisplayFor(model => model.Productos.Nombre)
         </dd>
         <dt >
-            Linea
+            Linea controlada
         </dt>
         <dd >
             @Html.DisplayFor(model => model.Linea)
         </dd>
         <dt >
-            Pais de destino
+            País de destino
         </dt>
         <dd >
             @Html.DisplayFor(model => model.PaisDestino)
-        </dd>
-        <dt >
-            Comentario
-        </dt>
-        <dd >
-            @Html.DisplayFor(model => model.Comentario)
         </dd>
         <dt >
             Tipo de control
@@ -272,6 +266,12 @@
         <dd >
             @Html.DisplayFor(model => model.Tipodecontrol)
         </dd>
+            <dt>
+                Comentario sobre el control
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Comentario)
+            </dd>
     </dl>
         <form asp-action="Delete">
             <input type="hidden" name="id" value="@Model.Id" />

@@ -23,11 +23,21 @@
         padding: 5px;
     }
 
+    dt.espacio {
+        margin-bottom: 50px;
+        padding: 0px;
+    }
+
+        dd.espacio {
+            background-color: white;
+        }
+
     input, dd {
         color: black; /* Color del texto */
         padding: 5px; /* Espaciado interno */
         border-radius: 5px; /* Bordes redondeados (opcional) */
         font-family: Arial;
+        font-size: 12px;
         background-color: #DBD7D7;
         border: none;
     }
@@ -86,79 +96,48 @@
             color: #62EBF0;
         }
 
-    h3 {
-        color: #4B0404;
-    }
-
-    .titulos {
-        font-family: Arial;
-        font-size: 10px;
-        padding-left: 5px;
-    }
-
-    .profile-header {
-        display: flex;
-        align-items: center; /* Alinea verticalmente la imagen y el texto */
-        margin-bottom: 20px;
-    }
-
-    .profile-image {
-        width: 180px;
-        height: 180px;
+    .radio-circle {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border: 4px solid #260202;
         border-radius: 50%;
-        background-color: #260202;
-        margin-top: 60px;
-        margin-left: 80px;
+        margin-right: 8px;
+        transition: background-color 0.3s, border-color 0.3s;
     }
 
-    .info-left {
-        text-align: center;
-        margin-top: 80px;
-    }
-
-    .modal {
-        display: none; /* Oculto por defecto */
-        position: fixed;
-        z-index: 100; /* Asegura que está por encima del contenido */
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
-    }
-
-    /* El contenedor de contenido del modal */
-    .modal-content {
-        background-color: #fff;
-        margin: 15% auto;
-        padding: 20px;
-        border-radius: 8px;
-        width: 400px;
-        text-align: center;
-        font-family: 'Open Sans', sans-serif;
-    }
-
-    /* Título de alerta */
-    .alerta {
+    .option-text {
         color: #260202;
-        font-size: 24px;
-        margin-bottom: 15px;
+        font-size: 14px;
+        font-weight: 500;
+        margin-right: 10px;
     }
 
-    /* Texto dentro del modal */
-    .modal-content p {
-        font-size: 18px;
-        color: #333;
+    .radio-checked {
+        background-color: #ff6666; /* Color cuando está seleccionado */
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border: 4px solid #260202;
+        border-radius: 50%;
+        margin-right: 8px;
+        transition: background-color 0.3s, border-color 0.3s;
     }
 
-    /* Botones del modal */
-    .modal-buttons {
-        margin-top: 20px;
+    .form-check {
+        margin-right: 20px;
     }
 
-    /* Texto destacado en rojo */
-    .desactivar {
-        color: #f25757;
+    .form-grouppp {
+        display: flex;
+        align-items: center; /* Alinea verticalmente los elementos al centro */
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        color: #260202;
+    }
+
+    .med {
+        margin-right: 15px; /* Ajusta el espacio entre el label y los radio buttons */
     }
 
 </style>
@@ -246,7 +225,7 @@
     </header>
     <div class="content">
         <div class="content">
-            <h2 class="accesotitulo">Ver producto detalle</h2>
+            <h2 class="accesotitulo">Ver detalles del producto</h2>
         </div>
     </div>
 
@@ -266,16 +245,22 @@
                     @Html.DisplayFor(model => model.BotellaDetalles.NombreBotella)
                 </dd>
                 <dt>
-                    Capacidad
+                    Capacidad (ml)
                 </dt>
                 <dd>
                     @Html.DisplayFor(model => model.Capacidad)
                 </dd>
                 <dt>
-                    Tipo de capsula
+                    Tipo de cápsula
                 </dt>
                 <dd>
                     @Html.DisplayFor(model => model.TipoCapsula)
+                </dd>
+                <dt>
+                    Color de cápsula
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ColorCapsula)
                 </dd>
                 <dt>
                     Tipo de etiqueta
@@ -283,25 +268,17 @@
                 <dd>
                     @Html.DisplayFor(model => model.TipoEtiqueta)
                 </dd>
-                <dt>
-                    Medalla
-                </dt>
-                <dd>
-                    @if (Model.Medalla)
-                    {
-                        <span>Sí</span>
-                    }
-                    else
-                    {
-                        <span>No</span>
-                    }
-                </dd>
-                <dt>
-                    ColorCapsula
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.ColorCapsula)
-                </dd>
+                <div class="form-grouppp d-flex justify-content-center align-items-center">
+                    <label class="med me-3 mb-0">Medalla</label>
+                    <div class="form-check form-check-inline align-items-center" style="margin-right: 20px;">
+                        <div class="radio-circle @(Model.Medalla ? "radio-checked" : "")"></div>
+                        <span class="option-text">Sí</span>
+                    </div>
+                    <div class="form-check form-check-inline align-items-center">
+                        <div class="radio-circle @(Model.Medalla ? "" : "radio-checked")"></div>
+                        <span class="option-text">No</span>
+                    </div>
+                </div>
                 <dt>
                     Tipo de corcho
                 </dt>
@@ -309,18 +286,19 @@
                     @Html.DisplayFor(model => model.TipoCorcho)
                 </dd>
                 <dt>
-                    Medida de etiqueta a boquete
+                    Medida de etiqueta a boquete (cm)
                 </dt>
                 <dd>
                     @Html.DisplayFor(model => model.MedidaEtiquetaABoquete)
                 </dd>
                 <dt>
-                    Medida de etiqueta a base
+                    Medida de etiqueta a base (cm)
                 </dt>
                 <dd>
                     @Html.DisplayFor(model => model.MedidaEtiquetaABase)
                 </dd>
-                <dt></dt>
+                <dt class="espacio"></dt>
+                <dd class="espacio"></dd>
             </div>
     </dl>
 </div>

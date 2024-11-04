@@ -85,16 +85,16 @@ nav {
 .navstyle {
     display: flex;
     gap: 20px;
-    /*justify-content: flex-start;  Cambia a 'flex-start' para alinear íconos a la izquierda
-        flex-grow: 1;*/
+    /*justify-content: flex-start;  Cambia a 'flex-start' para alinear íconos a la izquierda 
+    flex-grow: 1;*/
 }
 
 .iconosnav:hover {
-    background: #ec9f23; /*cambiar a uno que combine*/
+    transform: scale(110%);
 }
 
 .iconosnav {
-    margin: 2px 10px;
+    transition: 0.2s;
 }
 
 .iconosuser {

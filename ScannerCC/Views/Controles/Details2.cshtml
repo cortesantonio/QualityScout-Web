@@ -299,18 +299,14 @@
                 <dd >
                     @Html.DisplayFor(model => model.Productos.Nombre)
                 </dd>
-                <dt >Linea</dt>
+                <dt >Linea controlada</dt>
                 <dd >
                     @Html.DisplayFor(model => model.Linea)
                 </dd>
 
-                <dt >Pais de destino</dt>
+                <dt >País de destino</dt>
                 <dd >
                     @Html.DisplayFor(model => model.PaisDestino)
-                </dd>
-                <dt >Comentario</dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Comentario)
                 </dd>
                 <dt >Tipo de control</dt>
                 <dd>
@@ -323,7 +319,7 @@
                     <dd >
                         @Html.DisplayFor(model => model.FechaHoraControlFinal)
                     </dd>
-                    <dt >Estado final</dt>
+                    <dt >Estado control final</dt>
                     <dd >
                         @Html.DisplayFor(model => model.EstadoFinal)
                     </dd>
@@ -335,11 +331,15 @@
                     <dd >
                         @Html.DisplayFor(model => model.FechaHoraPrimerControl)
                     </dd>
-                    <dt >Estado inicial</dt>
+                    <dt >Estado control inicial</dt>
                     <dd >
                         @Html.DisplayFor(model => model.Estado)
                     </dd>
                 }
+                <dt>Comentario sobre el control</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Comentario)
+                </dd>
             </div>
     </dl>
 </div>

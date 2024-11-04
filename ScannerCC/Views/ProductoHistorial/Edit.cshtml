@@ -174,7 +174,7 @@
 
     <div class="content">
         <div class="content">
-            <h2 class="accesotitulo">Editar producto historial</h2>
+            <h2 class="accesotitulo">Editar historial del producto</h2>
         </div>
     </div>
     <div class="container">
@@ -184,7 +184,7 @@
             <input type="hidden" asp-for="Id" />
             <div class="row">
                     <div class="form-group">
-                        <label asp-for="IdProductos" class="control-label">Productos</label>
+                        <label asp-for="IdProductos" class="control-label">Producto</label>
                         <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos">
                             <option value="">Seleccione un producto</option>
                         </select>
@@ -195,7 +195,7 @@
                         <span asp-validation-for="FechaCosecha" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="FechaProduccion" class="control-label">Fecha de produccion</label>
+                        <label asp-for="FechaProduccion" class="control-label">Fecha de producción</label>
                         <input asp-for="FechaProduccion" class="form-control" type="date" />
                         <span asp-validation-for="FechaProduccion" class="text-danger"></span>
                     </div>

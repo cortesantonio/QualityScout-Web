@@ -71,6 +71,7 @@ namespace ScannerCC.Controllers
             ViewData["IdProductos"] = new SelectList(productosDisponibles, "Id", "Nombre");
             ViewData["IdBotellaDetalles"] = new SelectList(botellaDetalles, "Id", "NombreBotella");
 
+
             return View();
         }
 
@@ -86,18 +87,30 @@ namespace ScannerCC.Controllers
 
             try
             {
-                ProductoDetalles productoDetalle = new ProductoDetalles();
-                productoDetalle.IdProductos = IdProductos;
-                productoDetalle.IdBotellaDetalles = IdBotellaDetalles;
-                productoDetalle.Capacidad = Capacidad;
-                productoDetalle.TipoCapsula = TipoCapsula;
-                productoDetalle.TipoEtiqueta = TipoEtiqueta;
-                productoDetalle.ColorBotella = ColorBotella;
-                productoDetalle.Medalla = Medalla;
-                productoDetalle.ColorCapsula = ColorCapsula;
-                productoDetalle.TipoCorcho = TipoCorcho;
-                productoDetalle.MedidaEtiquetaABoquete = MedidaEtiquetaABoquete;
-                productoDetalle.MedidaEtiquetaABase = MedidaEtiquetaABase;
+                if (!ModelState.IsValid)
+                {
+                    var productos = _context.Producto.Select(p => new { p.Id, p.Nombre }).ToList();
+                    var botellaDetalles = _context.BotellaDetalle.Select(bd => new { bd.Id, bd.NombreBotella }).ToList();
+
+                    ViewData["IdProductos"] = new SelectList(productos, "Id", "Nombre", IdProductos);
+                    ViewData["IdBotellaDetalles"] = new SelectList(botellaDetalles, "Id", "NombreBotella", IdBotellaDetalles);
+                    return View();
+                }
+
+                ProductoDetalles productoDetalle = new ProductoDetalles
+                {
+                    IdProductos = IdProductos,
+                    IdBotellaDetalles = IdBotellaDetalles,
+                    Capacidad = Capacidad,
+                    TipoCapsula = TipoCapsula,
+                    TipoEtiqueta = TipoEtiqueta,
+                    ColorBotella = ColorBotella,
+                    Medalla = Medalla,
+                    ColorCapsula = ColorCapsula,
+                    TipoCorcho = TipoCorcho,
+                    MedidaEtiquetaABoquete = MedidaEtiquetaABoquete,
+                    MedidaEtiquetaABase = MedidaEtiquetaABase
+                };
 
                 _context.ProductoDetalle.Add(productoDetalle);
                 await _context.SaveChangesAsync();
@@ -108,7 +121,6 @@ namespace ScannerCC.Controllers
                 return Problem("Ocurrió un error al crear el detalle del producto: " + ex.Message);
             }
         }
-
 
         // GET: ProductoD/Edit
         public async Task<IActionResult> Edit(int? id)
@@ -139,7 +151,7 @@ namespace ScannerCC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, int IdProductos, int IdBotellaDetalles, int Capacidad, string TipoCapsula, string TipoEtiqueta, string ColorBotella, bool Medalla, string ColorCapsula,
-                                        string TipoCorcho, int MedidaEtiquetaABoquete, int MedidaEtiquetaABase)
+                                              string TipoCorcho, int MedidaEtiquetaABoquete, int MedidaEtiquetaABase)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo;
@@ -150,6 +162,16 @@ namespace ScannerCC.Controllers
                 if (productoDetalle == null)
                 {
                     return NotFound("Detalle del producto no encontrado.");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    var productos = _context.Producto.Select(p => new { p.Id, p.Nombre }).ToList();
+                    var botellaDetalles = _context.BotellaDetalle.Select(bd => new { bd.Id, bd.NombreBotella }).ToList();
+
+                    ViewData["IdProductos"] = new SelectList(productos, "Id", "Nombre", IdProductos);
+                    ViewData["IdBotellaDetalles"] = new SelectList(botellaDetalles, "Id", "NombreBotella", IdBotellaDetalles);
+                    return View(productoDetalle);
                 }
 
                 productoDetalle.IdProductos = IdProductos;
@@ -174,6 +196,7 @@ namespace ScannerCC.Controllers
                 return Problem("Ocurrió un error al editar el detalle del producto: " + ex.Message);
             }
         }
+
 
         // GET: Productoes/Delete/5
         [Authorize(Roles = "Especialista")]
