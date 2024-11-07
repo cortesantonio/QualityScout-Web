@@ -119,7 +119,7 @@
     <section class="producto-list">
             <div class="search-add-container">
                 <h2 class="titulo" style="margin-top: 5px;">Registros</h2>
-                <a class="add-user-btn" style="margin-left: 320px;" asp-action="Create" asp-controller="ProductoDetalles"><strong>+</strong> Añadir detalles de producto</a>
+                <a class="add-user-btn" style="margin-left: 490px;" asp-action="Create" asp-controller="ProductoDetalles"><strong>+</strong> Añadir detalles de producto</a>
             </div>
 
         <!-- Sección de productos en estilo de tarjeta -->
@@ -133,7 +133,7 @@
                         <div>
                             <p><strong>Capacidad:</strong> @item.Capacidad</p>
                                 <p>
-                                    <strong>Medalla:</strong>
+                                    Medalla:
                                     @{
                                         var medalla = item.Medalla ? "Sí" : "No";
                                         var medallaStatus = item.Medalla ? "True" : "False";
@@ -144,8 +144,8 @@
                         </div>
                             <div class="producto-details" >
                         <div>
-                            <p><strong>Tipo Cápsula:</strong> @item.TipoCapsula</p>
-                            <p><strong>Color Cápsula:</strong> @item.ColorCapsula</p>
+                            <p><strong>Tipo de cápsula:</strong> @item.TipoCapsula</p>
+                            <p>Color de cápsula: @item.ColorCapsula</p>
                         </div>
                     </div>
                     <div class="producto-actions">

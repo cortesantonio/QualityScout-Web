@@ -202,12 +202,11 @@ p {
 }
 
 .user-list {
-    width: 95%;
-    margin: 0 90px;
+    width: 100%;
+    margin: 0 auto;
     font-family: Arial;
     font-optical-sizing: auto;
     font-style: normal;
-    font-weight: 300;
 }
 
 .titulo {
@@ -216,7 +215,6 @@ p {
     font-family: Arial;
     font-optical-sizing: auto;
     font-style: normal;
-    font-weight: 300;
 }
 
 .user-list h2 {
@@ -226,7 +224,6 @@ p {
     font-family: Arial;
     font-optical-sizing: auto;
     font-style: normal;
-    font-weight: 300;
 }
 
 .user-card {
@@ -238,6 +235,8 @@ p {
     border-bottom: 1px solid #260202;
     margin-bottom: 15px;
     margin-left: 21%;
+    box-sizing: border-box;
+    background-color: transparent;
 }
 
 .estado-aprobado {
@@ -252,10 +251,10 @@ p {
     background-color: #E5E5EB;
 }
 
-
 .user-info {
     display: flex;
     align-items: center;
+    width: 35%;
 }
 
 .user-icon {
@@ -269,15 +268,25 @@ p {
     height: auto;
 }
 
+.user-info div {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .user-info p {
     margin: 0;
     font-size: 19px;
 }
 
 .user-details {
-    padding-left: 100px;
+    padding-left: 20px;
     border-left: 1px solid #260202;
     font-size: 19px;
+    width: 40%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
     .user-details p {
@@ -289,6 +298,8 @@ p {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    width: 15%;
+    text-align: center;
 }
 
 .edit-btn, .btn-deactivate, .see-btn {
@@ -298,6 +309,11 @@ p {
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
 }
 
     .edit-btn:hover, .delete-btn:hover {
@@ -308,6 +324,7 @@ p {
     font-size: 20px;
 }
 
+
 .filter-order-container {
     display: flex;
     align-items: center;
@@ -315,7 +332,7 @@ p {
     font-family: Arial;
     font-size: 16px;
     color: #333;
-    margin-left: 25%;
+    margin-left: 21%;
     position: relative;
 }
 
@@ -424,5 +441,5 @@ p {
             }
 
                 #opcionesUser ul li a:hover {
-                    background-color: #BF6565;
+                    transform: scale(110%);
                 }

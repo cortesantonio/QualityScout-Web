@@ -120,7 +120,7 @@
     <section class="bottle-list">
             <div class="search-add-container">
                 <h2 class="titulo" style="margin-top: 5px;">Registros</h2>
-                <a class="add-user-btn" style="margin-left: 320px;" asp-action="Create" asp-controller="BotellaDetalles"><strong>+</strong> Añadir detalles de la botella</a>
+                <a class="add-user-btn" style="margin-left: 490px;" asp-action="Create" asp-controller="BotellaDetalles"><strong>+</strong> Añadir detalles de la botella</a>
             </div>
 
         @if (ViewBag.BotellaDetalles != null && ViewBag.BotellaDetalles.Count > 0)
@@ -128,11 +128,13 @@
             @foreach (var item in ViewBag.BotellaDetalles)
             {
                 <div class="bottle-card">
-                    <img src="~/Extras/bdd.png" class="user-icon" />
-                    <h3 class="nombre-botella" style="font-family: Arial;">@item.NombreBotella</h3>
+                    <div class="bottle-info">
+                            <img src="~/Extras/bdd.png" class="user-icon" />
+                            <p class="nombre-botella" style="font-family: Arial; margin-left: 13px;"><strong>@item.NombreBotella</strong></p>
+                    </div>
                     <div class="bottle-details">
-                        <p><strong>Altura:</strong> @item.AlturaBotella</p>
-                        <p><strong>Ancho:</strong> @item.AnchoBotella</p>
+                        <p>Altura de la botella: @item.AlturaBotella</p>
+                        <p>Ancho de la botella: @item.AnchoBotella</p>
                     </div>
                     <div class="bottle-actions">
                             <a class="see-btn" asp-action="Delete" asp-controller="BotellaDetalles" asp-route-id="@item.Id">

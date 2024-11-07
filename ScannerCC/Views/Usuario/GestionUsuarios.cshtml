@@ -116,7 +116,7 @@
 
     <main>
         <div class="search-add-container">
-            <form asp-action="GestionUsuarios" method="get" class="search-b" style="display:inline;">
+            <form asp-action="GestionUsuarios" method="get" class="search-b" style="display:inline; margin-left: 328px;">
                 <input type="text" placeholder="🔍 Busca por rut o nombre" class="search-bar" name="Busqueda" />
             </form>
             <a class="add-user-btn" href="@Url.Action("Create", "Usuario")"><strong>+</strong> Añadir usuario</a>
@@ -140,7 +140,7 @@
                         </div>
                         <div class="user-details">
                             <p><strong>Rol: @item.Rol.Nombre</strong></p>
-                            <p>Email: @item.Email</p>
+                            <p>Correo: @item.Email</p>
                         </div>
                         <div class="user-actions">
                             @if (item.Activo)

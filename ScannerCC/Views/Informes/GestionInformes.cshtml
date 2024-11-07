@@ -85,6 +85,11 @@
     .desactivar {
         color: #f25757;
     }
+
+    .btn-deactivate {
+        background-color: #BF6565;
+        color: white;
+    }
 </style>
 
 <!DOCTYPE html>
@@ -216,12 +221,12 @@
 
 <main>
     <div class="search-add-container">
-            <form asp-action="GestionInformes" method="get" class="search-b" style="display:inline;">
+            <form asp-action="GestionInformes" method="get" class="search-b" style="display:inline; margin-left: 340px;">
                 <input type="text" placeholder="🔍 Busca por titulo o enfoque" class="search-bar" name="Busqueda" />
             </form>
 
     </div>
-        <div class="search-add-container" style="margin-top: 10px; margin-left: 660px;">
+        <div class="search-add" style="margin-top: 10px; margin-left: 650px;">
             @if (isEspecialista)
             {
                 <button class="btn-deactivate" onclick="openModal()"><strong>+</strong> Generar informes con IA</button>
@@ -239,11 +244,11 @@
                 <div class="informes-card">
                     <div class="informes-info">
                         <img src="~/Extras/Informes.png" class="user-icon" />
-                            <h3 class="titulo">@item.Titulo</h3>
+                            <p class="titulo"><strong>@item.Titulo</strong></p>
                             <p class="enfoque">Enfoque: @item.Enfoque</p>
                     </div>
                     <div class="informes-details">
-                            <p class="fecha">@item.Fecha.ToString("dd/MM/yyyy")</p>
+                            <p class="fecha"><strong>Fecha: </strong>@item.Fecha.ToString("dd/MM/yyyy")</p>
                     </div>
                     <div class="informes-actions">
                             @if (isEspecialista)

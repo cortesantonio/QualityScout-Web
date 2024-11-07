@@ -184,13 +184,17 @@ p {
 
 .search-add-container {
     display: flex;
-    margin: 0% 27.5%;
     width: 100%;
     align-items: center;
 }
 
+.search-add {
+    display: flex;
+    align-items: center;
+}
+
 .search-bar {
-    width: 170%;
+    width: 215%;
     padding: 10px;
     background-color: transparent;
     border: 1px solid #260202;
@@ -216,7 +220,7 @@ p {
 }
 
 .informes-list {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -239,15 +243,16 @@ p {
     align-items: center;
     background-color: transparent;
     padding: 15px;
-    border-bottom: #260202;
+    border-bottom: 1px solid #260202;
     margin-bottom: 15px;
     margin-left: 21%;
-    border-bottom: 1px solid #260202;
+    box-sizing: border-box;
 }
 
 .informes-info {
     display: flex;
     align-items: center;
+    width: 35%;
 }
 
 .user-icon {
@@ -261,15 +266,25 @@ p {
     height: auto;
 }
 
+.informes-info div {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .informes-info p {
     margin: 0;
     font-size: 19px;
 }
 
 .informes-details {
-    padding-left: 100px;
+    padding-left: 20px;
     border-left: 1px solid #260202;
     font-size: 19px;
+    width: 40%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
     .informes-details p {
@@ -281,18 +296,25 @@ p {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    width: 15%;
+    text-align: center;
 }
 
-.edit-btn, .btn-deactivate, .see-btn {
+.edit-btn, .see-btn {
     background-color: #bf6565;
     color: white;
     border: none;
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
 }
 
-    .edit-btn:hover, .delete-btn:hover {
+    .edit-btn:hover, .see-btn:hover {
         background-color: #bf6565;
     }
 
@@ -423,7 +445,7 @@ button {
             }
 
                 #opcionesUser ul li a:hover {
-                    background-color: #BF6565;
+                    transform: scale(110%);
                 }
 
 /*span {

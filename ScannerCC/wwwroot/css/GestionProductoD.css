@@ -200,17 +200,17 @@ p {
 
 .add-user-btn {
     color: #4b0404;
-    padding: 10px 20px;
+    padding: 10px 0px;
     border: none;
     border-radius: 8px;
     font-size: 18px;
     cursor: pointer;
-    margin-left: 3.5%;
+    margin-left: 5%;
     font-family: Arial;
 }
 
 .producto-list {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
 }
 
@@ -228,20 +228,21 @@ p {
 
 .producto-card {
     display: flex;
-    width: 55%;
+    width: 60%;
     justify-content: space-between;
     align-items: center;
     background-color: transparent;
     padding: 15px;
-    border-bottom: #260202;
+    border-bottom: 1px solid #260202;
     margin-bottom: 15px;
     margin-left: 21%;
-    border-bottom: 1px solid #260202;
+    box-sizing: border-box;
 }
 
 .producto-info {
     display: flex;
     align-items: center;
+    width: 35%;
 }
 
 .user-icon {
@@ -255,15 +256,25 @@ p {
     height: auto;
 }
 
+.producto-info div {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .producto-info p {
     margin: 0;
     font-size: 19px;
 }
 
 .producto-details {
-    padding-left: 100px;
+    padding-left: 20px;
     border-left: 1px solid #260202;
     font-size: 19px;
+    width: 40%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
     .producto-details p {
@@ -275,24 +286,33 @@ p {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    width: 15%;
+    text-align: center;
 }
 
-.edit-btn, .btn-deactivate, .see-btn {
+.edit-btn, .see-btn {
     background-color: #bf6565;
     color: white;
     border: none;
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
 }
 
-    .edit-btn:hover, .delete-btn:hover {
+    .edit-btn:hover, .see-btn:hover {
         background-color: #bf6565;
     }
 
 .producto-actions i {
     font-size: 20px;
 }
+
+
 
 .modal {
     display: none; /* Oculto por defecto */
@@ -424,5 +444,5 @@ span {
             }
 
                 #opcionesUser ul li a:hover {
-                    background-color: #BF6565;
+                    transform: scale(110%);
                 }

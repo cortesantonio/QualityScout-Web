@@ -134,7 +134,7 @@
 </div>
 <main>
     <div class="filter-order-container">
-            <div class="filter" onclick="toggleFilter()" style="margin-left: 10px;">
+            <div class="filter" onclick="toggleFilter()" style="margin-left: 0px;">
                 <span><i class="fa-solid fa-filter"></i></span> <!-- Icono de filtro -->
                 <span>Filtro</span>
             </div>
@@ -170,7 +170,7 @@
                     <div class="user-info">
                         <img src="~/Extras/iconControlCheck.png" class="user-icon" alt="Icono de control" />
                         <div>
-                            <p>@item.Productos.Nombre</p>
+                            <p><strong>@item.Productos.Nombre</strong></p>
                             <p>Fecha: @item.FechaHoraPrimerControl.ToString("dd-MM-yyyy HH:mm")</p>
                         </div>
                     </div>

@@ -119,7 +119,7 @@
         <section class="historial-list">
             <div class="search-add-container">
                 <h2 class="titulo" style="margin-top: 5px;">Registros</h2>
-                <a class="add-user-btn" style="margin-left: 320px;" asp-action="Create" asp-controller="ProductoHistorial"><strong>+</strong> Añadir historial de producto</a>
+                <a class="add-user-btn" style="margin-left: 520px;" asp-action="Create" asp-controller="ProductoHistorial"><strong>+</strong> Añadir historial de producto</a>
             </div>
 
             <!-- Sección de productos en estilo de tarjeta -->
@@ -131,16 +131,16 @@
                         <div class="product-info">
                             <img src="~/Extras/botellaicon.png" class="user-icon" />
                             <div>
-                                <p><strong>Fecha de cosecha:</strong> @item.FechaCosecha</p>
+                                <p style="margin-left: 6px;"><strong>Fecha de cosecha:</strong> @item.FechaCosecha.ToShortDateString()</p>
                             </div>
                         </div>
                         <div class="product-details">
                             <div>
-                                <p><strong>Fecha de producción:</strong> @item.FechaProduccion</p>
-                                <p><strong>Fecha de envasado:</strong> @item.FechaEnvasado</p>
+                                <p><strong>Fecha de producción:</strong> @item.FechaProduccion.ToShortDateString()</p>
+                                <p>Fecha de envasado: @item.FechaEnvasado.ToShortDateString()</p>
                             </div>
                         </div>
-                        <div class="product-actions">
+                        <div class="product-actions" style="margin-left: 10px;">
                             <a class="see-btn" href="@Url.Action("Delete", "ProductoHistorial", new { id = item.Id })">
                                 <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                             </a>

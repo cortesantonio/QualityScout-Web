@@ -117,7 +117,7 @@
     </div>
 
     <section class="scan-list">
-            <h2 class="titulo" style="margin-top: 5px; margin-left: 390px;">Registros</h2>
+            <h2 class="titulo" style="margin-top: 5px;">Registros</h2>
 
         @if (ViewBag.Escaneos != null && ViewBag.Escaneos.Count > 0)
         {
@@ -128,12 +128,12 @@
                         <img src="~/Extras/escaner.png" class="scan-icon" />
                         <div>
                             <p><strong>Producto:</strong> @item.Producto.Nombre</p>
-                            <p><strong>Usuario:</strong> @item.Usuario.Nombre</p>
+                            <p>Usuario: @item.Usuario.Nombre</p>
                         </div>
                     </div>
                     <div class="scan-details">
                         <p><strong>Fecha:</strong> @item.Fecha</p>
-                        <p><strong>Hora:</strong> @item.Hora</p>
+                        <p>Hora: @item.Hora</p>
                     </div>
                     <div class="scan-actions">
                     </div>

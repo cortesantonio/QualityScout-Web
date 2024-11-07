@@ -234,7 +234,7 @@
 
     <main>
         <div class="search-add-container">
-            <form asp-action="GestionProductos" method="get" class="search-b" style="display:inline;">
+            <form asp-action="GestionProductos" method="get" class="search-b" style="display:inline; margin-left: 328px;">
                 <input type="text" placeholder="🔍 Busca por código de barra o nombre" class="search-bar" name="Busqueda" />
             </form>
             @if (isEspecialista)
@@ -253,13 +253,15 @@
                 {
                     <div class="product-card">
                         <div class="product-info">
-                        <img src="~/Extras/botellaicon.png" class="user-icon" />
-                            <p><strong>Cepa:</strong> @item.InformacionQuimica.Cepa</p>
-                            <p><strong>Codigo Barra:</strong> @item.CodigoBarra</p>
+                            <img src="~/Extras/botellaicon.png" class="user-icon" />
+                            <div class="text-content" style="margin-left: 12px;">
+                                <p><strong>@item.Nombre</strong></p>
+                                <p>Código de barras: @item.CodigoBarra</p>
+                            </div>
                         </div>
                         <div class="product-details">
-                            <p><strong>Pais Destino:</strong> @item.PaisDestino</p>
-                            <p><strong>Fecha Registro:</strong> @item.FechaRegistro.ToShortDateString()</p>
+                            <p><strong>País de destino:</strong> @item.PaisDestino</p>
+                            <p>Fecha de registro: @item.FechaRegistro.ToShortDateString()</p>
                         </div>
                         <div class="product-actions">
                             @if (isEspecialista)

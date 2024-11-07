@@ -120,7 +120,7 @@
     <section class="info-list">
             <div class="search-add-container">
                 <h2 class="titulo" style="margin-top: 5px;">Registros</h2>
-                <a class="add-user-btn" style="margin-left: 320px;" asp-action="Create" asp-controller="InformacionQuimica"><strong>+</strong> Añadir información química</a>
+                <a class="add-user-btn" style="margin-left: 490px;" asp-action="Create" asp-controller="InformacionQuimica"><strong>+</strong> Añadir información química</a>
             </div>
         @if (ViewBag.InformacionQuimica != null && ViewBag.InformacionQuimica.Count > 0)
         {
@@ -129,11 +129,11 @@
                 <div class="info-card">
                     <div class="info-info">
                         <img src="~/Extras/infqu.png" class="user-icon" />
-                        <h3>@item.Cepa</h3>
+                            <p><strong>@item.Cepa</strong></p>
                     </div>
-                        <div class="info-details" style="padding:3px;">
-                        <p><strong>Mínimo de Azúcar:</strong> @item.MinAzucar</p>
-                        <p><strong>Máximo de Azúcar:</strong> @item.MaxAzucar</p>
+                    <div class="info-details" style="margin-left:13px;">
+                        <p>Mínimo de grado de alcohol: @item.MinGradoAlcohol</p>
+                        <p>Máximo de grado de alcohol: @item.MaxGradoAlcohol</p>
                     </div>
                     <div class="info-actions" >
                             <a class="see-btn" asp-action="Delete" asp-controller="InformacionQuimica" asp-route-id="@item.Id">

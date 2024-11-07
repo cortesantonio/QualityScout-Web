@@ -329,6 +329,6 @@ iframe {
             }
 
                 #opcionesUser ul li a:hover {
-                    background-color: #BF6565;
+                    transform: scale(110%);
                 }
 
