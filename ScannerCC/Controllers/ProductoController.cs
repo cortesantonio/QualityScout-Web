@@ -25,7 +25,7 @@ namespace ScannerCC.Controllers
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo;
 
-            // Filtrar productos según el criterio de búsqueda
+            // Filtrar productos según el criterio de búsqueda 
             var productos = _context.Producto.AsQueryable();
 
             if (!string.IsNullOrEmpty(Busqueda))
@@ -39,7 +39,6 @@ namespace ScannerCC.Controllers
 
             return View();
         }
-
 
         // GET: Productos/Details
         public async Task<IActionResult> Details(int? id)

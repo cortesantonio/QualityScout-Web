@@ -20,13 +20,26 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
-        public IActionResult GestionControles()
+        public IActionResult GestionControles(string orderByDate)
         {
-            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
-            ViewBag.trab = TrabajadorActivo;
+            var trabajadorActivo = _context.Usuario.FirstOrDefault(t => t.Rut.Equals(User.Identity.Name));
+            ViewBag.Trab = trabajadorActivo;
 
-            ViewBag.Controles = _context.Controles.ToList();
+            // Obtén la lista de controles y ordénala según el valor de orderByDate
+            var controles = _context.Controles.AsQueryable();
+
+            if (orderByDate == "asc")
+            {
+                controles = controles.OrderBy(c => c.FechaHoraPrimerControl);
+            }
+            else if (orderByDate == "desc")
+            {
+                controles = controles.OrderByDescending(c => c.FechaHoraPrimerControl);
+            }
+
+            ViewBag.Controles = controles.ToList();
             ViewBag.Productos = _context.Producto.ToList();
+
             return View();
         }
 
@@ -110,15 +123,20 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Controles/Create
-        public IActionResult CreateControl()
+        public IActionResult CreateControl(int? idProducto)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo;
 
+            // Obtener los productos disponibles
             var productos = _context.Producto.Select(p => new { p.Id, p.Nombre }).ToList();
-            ViewData["IdProductos"] = new SelectList(productos, "Id", "Nombre");
+
+            // Pasar los productos y el idProducto a la vista usando ViewBag
+            ViewBag.IdProductos = new SelectList(productos, "Id", "Nombre", idProducto);
+
             return View();
         }
+
 
         // POST: Controles/Create
         [HttpPost]

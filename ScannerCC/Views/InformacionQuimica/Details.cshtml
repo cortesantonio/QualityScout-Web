@@ -16,6 +16,15 @@
         margin-bottom: 15px;
     }
 
+    dt.espacio {
+        margin-bottom: 50px;
+        padding: 0px;
+    }
+
+    dd.espacio {
+        background-color: white;
+    }
+
     label, dt {
         color: #4B0404; /* Cambia este valor por el color que desees */
         font-family: Arial;
@@ -29,6 +38,7 @@
         background-color: #DBD7D7;
         border-radius: 5px; /* Bordes redondeados (opcional) */
         font-family: Arial;
+        font-size: 12px;
         border: none;
     }
 
@@ -307,9 +317,8 @@
                 <dd >
                     @Html.DisplayFor(model => model.MaxGradoAlcohol)
                 </dd>
-                <dt>
-
-                </dt>
+                <dt class="espacio"></dt>
+                <dd class="espacio"></dd>
             </div>
     </dl>
 </div>

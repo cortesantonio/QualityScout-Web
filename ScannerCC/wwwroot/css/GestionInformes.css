@@ -32,7 +32,7 @@ body {
 .content {
     position: relative;
     z-index: 1; /* Asegura que el contenido esté por encima de las imágenes de fondo */
-    padding: 20px;
+    padding: 15px;
 }
 
 header {
@@ -160,16 +160,12 @@ nav {
     margin-top: -4%;
 }
 
-.content {
-    padding: 15px;
-}
-
 .accesotitulo {
     display: flex;
     justify-content: start;
     margin-left: 9%;
-    margin-bottom: 30px;
-    font-size: 200%;
+    margin-bottom: 15px;
+    font-size: 190%;
     font-family: Arial;
 }
 
@@ -189,12 +185,12 @@ p {
 .search-add-container {
     display: flex;
     margin: 0% 27.5%;
-    width: 60%;
+    width: 100%;
     align-items: center;
 }
 
 .search-bar {
-    width: 65%;
+    width: 170%;
     padding: 10px;
     background-color: transparent;
     border: 1px solid #260202;
@@ -203,7 +199,7 @@ p {
 }
 
 .search-b {
-    width: 55%;
+    width: 25%;
     background-color: transparent;
 }
 

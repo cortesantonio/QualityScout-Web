@@ -7,9 +7,17 @@
 <style>
     .container {
         position: relative;
-        z-index: 1; /* Asegura que el contenido esté por encima de las imágenes de fondo */
-        max-width: 500px; /* Ajusta el ancho máximo que desees */
-        margin: auto; /* Centra el contenedor en la pantalla */
+        z-index: 1;
+        margin-left: 320px;
+        max-width: 1000px;
+        display: flex; /* Coloca los contenedores en una sola fila */
+        justify-content: space-between; /* Espacio entre los contenedores */
+        gap: 20px; /* Ajusta el espacio entre los contenedores */
+    }
+
+    .con {
+        z-index: 1;
+        margin: 0; /* Quita el margen automático */
     }
 
     .form-group {
@@ -36,6 +44,17 @@
         padding: 5px; /* Espaciado interno */
         border-radius: 5px; /* Bordes redondeados (opcional) */
         font-family: Arial;
+        font-size: 12px;
+        border: none;
+    }
+
+    textarea {
+        color: black; /* Color del texto */
+        background-color: #DBD7D7; /* Color de fondo */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        font-size: 12px;
         border: none;
     }
 
@@ -88,6 +107,137 @@
         font-size: 10px;
         padding-left: 5px;
     }
+
+    button.a {
+        background-color: #BE6464;
+        border-radius: 50%;
+        width: 30px; /* Establece un ancho y alto iguales para que el botón sea circular */
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        border: none; /* Opcional: elimina el borde */
+        cursor: pointer; /* Muestra el puntero de mano al pasar sobre el botón */
+    }
+
+        button.a i {
+            color: white;
+        }
+
+    .modal {
+        display: none; /* Oculto por defecto */
+        position: fixed;
+        z-index: 100; /* Asegura que está por encima del contenido */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    }
+
+    /* El contenedor de contenido del modal */
+    .modal-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    /* Título de alerta */
+    .alerta {
+        color: #260202;
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    /* Texto dentro del modal */
+    .modal-content p {
+        font-size: 18px;
+        color: #333;
+    }
+
+    /* Botones del modal */
+    .modal-buttons {
+        margin-top: 20px;
+    }
+
+    /* Texto destacado en rojo */
+    .desactivar {
+        color: #f25757;
+    }
+
+    .modall {
+        display: none; /* Oculto por defecto */
+        position: fixed;
+        z-index: 100; /* Asegura que está por encima del contenido */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    }
+
+    /* El contenedor de contenido del modal */
+    .modall-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+        /* Texto dentro del modal */
+        .modall-content p {
+            font-size: 18px;
+            color: #333;
+        }
+
+    /* Botones del modal */
+    .modall-buttons {
+        margin-top: 20px;
+    }
+
+    .activar {
+        color: #f25757;
+    }
+
+    button {
+        color: white; /* Color del texto */
+        padding: 5px; /* Espaciado interno */
+        background-color: #BF6565;
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        border: none;
+        width: 30%;
+    }
+            button.btn {
+            background-color: black;
+            width: 30%;
+        }
+
+    input {
+        color: black; /* Color del texto */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        background-color: #DBD7D7;
+        padding: 5px;
+        border: none;
+        font-size: 12px;
+    }
+
+    input.acc {
+        color: white;
+        background-color: #BF6565;
+        width: 30%;
+        padding: 5px;
+        font-size: 14px;
+    }
 </style>
 
 <!DOCTYPE html>
@@ -97,6 +247,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QualityScoutNoLog</title>
     <link rel="stylesheet" href="~/css/Nav.css">
+    <link rel="stylesheet" href="~/css/ImgP.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -177,99 +328,135 @@
             <h2 class="accesotitulo">Editar producto</h2>
         </div>
     </div>
-    <div class="container">
-<div class="row justify-content-center">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="row">
-                    <div class="form-group">
-                        <label asp-for="IdInformacionQuimica" class="control-label">Información química</label>
-                        <select asp-for="IdInformacionQuimica" name="IdInformacionQuimica" class="form-control" asp-items="ViewBag.IdInformacionQuimica">
-                            <option value="">Seleccione un información química</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="CodigoBarra" class="control-label">Código de barras</label>
-                        <input asp-for="CodigoBarra" name="CodigoBarra" class="form-control" />
-                        <span asp-validation-for="CodigoBarra" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="CodigoVE" class="control-label">Código VE</label>
-                        <input asp-for="CodigoVE" name="CodigoVE" class="form-control" />
-                        <span asp-validation-for="CodigoVE" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Nombre" class="control-label">Nombre vino</label>
-                        <input asp-for="Nombre" name="Nombre" class="form-control" />
-                        <span asp-validation-for="Nombre" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="URLImagen" class="control-label">URL de la imagen</label>
-                        <input asp-for="URLImagen" name="URLImagen" class="form-control" />
-                        <span asp-validation-for="URLImagen" class="text-danger"></span>
-                        <img src="@Model.URLImagen" alt="Imagen de @Model.Nombre" style="width:100%; max-width:600px;">
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="PaisDestino" class="control-label">País de destino</label>
-                        <select asp-for="PaisDestino" name="PaisDestino" id="PaisDestino" class="form-control">
-                            <option value="">Seleccione un país</option>
-                            <option value="Chile">Chile</option>
-                            <option value="Argentina">Argentina</option>
-                            <option value="Francia">Francia</option>
-                            <option value="Italia">Italia</option>
-                            <option value="España">España</option>
-                            <option value="Estados Unidos">Estados Unidos</option>
-                            <option value="Australia">Australia</option>
-                            <option value="Sudáfrica">Sudáfrica</option>
-                            <option value="Portugal">Portugal</option>
-                            <option value="Nueva Zelanda">Nueva Zelanda</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Idioma" class="control-label">Idioma información</label>
-                        <select asp-for="Idioma" name="Idioma" id="Idioma" class="form-control">
-                            <option value="">Seleccione un idioma</option>
-                            <option value="Inglés">Inglés</option>
-                            <option value="Árabe">Árabe</option>
-                            <option value="Español">Español</option>
-                            <option value="Francés">Francés</option>
-                            <option value="Italiano">Italiano</option>
-                            <option value="Alemán">Alemán</option>
-                            <option value="Portugués">Portugués</option>
-                            <option value="Chino">Chino</option>
-                            <option value="Japonés">Japonés</option>
-                            <option value="Ruso">Ruso</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="UnidadMedida" class="control-label">Unidad de medida en etiqueta</label>
-                        <select asp-for="UnidadMedida" name="UnidadMedida" id="UnidadMedida" class="form-control">
-                            <option value="">Seleccione una unidad de medida</option>
-                            <option value="Incoloro">Onzas (oz)</option>
-                            <option value="Ámbar">Mililitros (ml)</option>
-                            <option value="Blanca">Litros (l)</option>
-                            <option value="Verde">Centilitros (cl)</option>
-                            <option value="Roja">Gramos (g9</option>
-                            <option value="Negra">Kilogramos (kg)</option>
-                            <option value="Gris">Galones (gal)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="DescripcionCapsula" class="control-label">Descripción de la cápsula</label>
-                        <input asp-for="DescripcionCapsula" name="DescripcionCapsula" class="form-control" />
-                        <span asp-validation-for="DescripcionCapsula" class="text-danger"></span>
-                    </div>
-                    <div class="form-groupp">
-                        <button type="submit" class="btnAccionForm" style="margin-bottom: 20px;">
-                            <i class="fa-solid fa-caret-right"></i> Guardar cambios
-                        </button>
+<div class="container">
+    <div class="con">
+            <div class="row justify-content-center">
+                    <div class="row justify-content-center">
+                        <div class="doc">
+                            <div class="box">
+                                <img src="@Model.URLImagen" alt="Imagen de @Model.Nombre" style= "border-radius: 10px;">
+                            </div>
+                        </div>
+                    @if (Model.Activo)
+                    {
+                        <button class="a" style="color:white; margin-top: 10px; margin-left: 120px;" onclick="openModal()"><i class="fa-solid fa-pause"></i></button>
+                        <p style="color:black; margin-top:5px; margin-left: 105px; font-size: 13px;">Desactivar</p>
+                        <p style="color:black; margin-left: 92px; font-size: 13px;">temporalmente</p>
+                    }
+                    else
+                    {
+                        <button class="a" style="color:white; margin-top: 10px; margin-left: 120px;" onclick="openModall()"><i class="fa-solid fa-play"></i></button>
+                        <p style="color:black; margin-top:5px; margin-left: 115px; font-size: 13px;">Activar</p>
+                        <p style="color:black; margin-left: 92px; font-size: 13px;">temporalmente</p>
+                    }
                     </div>
             </div>
-        </form>
+    </div>
+    <div class="con" style="margin-left: 30px; margin-right: 120px;">
+            <div class="row justify-content-center">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="row">
+                        <div class="form-group">
+                            <label asp-for="IdInformacionQuimica" class="control-label">Información química</label>
+                            <select asp-for="IdInformacionQuimica" name="IdInformacionQuimica" class="form-control" asp-items="ViewBag.IdInformacionQuimica">
+                                <option value="">Seleccione un información química</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CodigoBarra" class="control-label">Código de barras</label>
+                            <input asp-for="CodigoBarra" name="CodigoBarra" class="form-control" />
+                            <span asp-validation-for="CodigoBarra" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CodigoVE" class="control-label">Código VE</label>
+                            <input asp-for="CodigoVE" name="CodigoVE" class="form-control" />
+                            <span asp-validation-for="CodigoVE" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Nombre" class="control-label">Nombre vino</label>
+                            <input asp-for="Nombre" name="Nombre" class="form-control" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="URLImagen" class="control-label">URL de la imagen</label>
+                            <input asp-for="URLImagen" name="URLImagen" class="form-control" />
+                            <span asp-validation-for="URLImagen" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PaisDestino" class="control-label">País de destino</label>
+                            <select asp-for="PaisDestino" name="PaisDestino" id="PaisDestino" class="form-control">
+                                <option value="">Seleccione un país</option>
+                                <option value="Chile">Chile</option>
+                                <option value="Argentina">Argentina</option>
+                                <option value="Francia">Francia</option>
+                                <option value="Italia">Italia</option>
+                                <option value="España">España</option>
+                                <option value="Estados Unidos">Estados Unidos</option>
+                                <option value="Australia">Australia</option>
+                                <option value="Sudáfrica">Sudáfrica</option>
+                                <option value="Portugal">Portugal</option>
+                                <option value="Nueva Zelanda">Nueva Zelanda</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Idioma" class="control-label">Idioma información</label>
+                            <select asp-for="Idioma" name="Idioma" id="Idioma" class="form-control">
+                                <option value="">Seleccione un idioma</option>
+                                <option value="Inglés">Inglés</option>
+                                <option value="Árabe">Árabe</option>
+                                <option value="Español">Español</option>
+                                <option value="Francés">Francés</option>
+                                <option value="Italiano">Italiano</option>
+                                <option value="Alemán">Alemán</option>
+                                <option value="Portugués">Portugués</option>
+                                <option value="Chino">Chino</option>
+                                <option value="Japonés">Japonés</option>
+                                <option value="Ruso">Ruso</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="UnidadMedida" class="control-label">Unidad de medida en etiqueta</label>
+                            <select asp-for="UnidadMedida" name="UnidadMedida" id="UnidadMedida" class="form-control">
+                                <option value="">Seleccione una unidad de medida</option>
+                                <option value="Onzas (oz)">Onzas (oz)</option>
+                                <option value="Mililitros (ml)">Mililitros (ml)</option>
+                                <option value="Blanca">Litros (l)</option>
+                                <option value="Centilitros (cl)">Centilitros (cl)</option>
+                                <option value="Gramos (g)">Gramos (g)</option>
+                                <option value="Kilogramos (kg)">Kilogramos (kg)</option>
+                                <option value="Galones (gal)">Galones (gal)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DescripcionCapsula" class="control-label">Descripción de la cápsula</label>
+                            <textarea asp-for="DescripcionCapsula" name="DescripcionCapsula" class="form-control" style=" margin-left:5px; margin-top:5px; width: 570px; height:60px;"></textarea>
+                            <span asp-validation-for="DescripcionCapsula" class="text-danger"></span>
+                        </div>
+                        <div class="form-groupp">
+                            <button type="submit" class="btnAccionForm" style="margin-bottom: 50px;">
+                                <i class="fa-solid fa-caret-right"></i> Guardar cambios
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
     </div>
 </div>
-
+    <div id="modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2 class="alerta">ALERTA</h2>
+            <p>¿Está seguro que desea <span class="desactivar">desactivar</span> este producto?</p>
+            <div class="d-flex justify-content-between w-100" style="margin-left: 5px; margin-top: 15px;">
+                <form asp-action="Desactivar">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Aceptar" class="acc btn btn-danger" />
+                </form>
+                <button onclick="window.location.href='@Url.Action("Edit", "Producto")'" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </div>
+    </div>
 </body>
 <script src="~/js/quagga.min.js"></script>
 <script src="~/js/especialista.js"></script>
@@ -279,3 +466,34 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+
+
+<script>
+    // Función para abrir el modal
+    function openModal() {
+        document.getElementById('modal').style.display = 'block';
+    }
+
+    // Función para cerrar el modal
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+    }
+
+    // Función para abrir el modal
+    function openModall() {
+        document.getElementById('modall').style.display = 'block';
+    }
+
+    // Función para cerrar el modal
+    function closeModall() {
+        document.getElementById('modall').style.display = 'none';
+    }
+
+    var btn = document.querySelector('.btn');
+    var box = document.querySelector('.box')
+    btn.addEventListener('click', function () {
+        box.style.width = (100 + Math.round(Math.random() * 300)) + 'px';
+        box.style.height = (100 + Math.round(Math.random() * 300)) + 'px';
+    });
+</script>

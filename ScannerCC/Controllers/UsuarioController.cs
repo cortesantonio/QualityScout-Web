@@ -23,6 +23,7 @@ namespace ScannerCC.Controllers
         {
             // Filtrar usuarios por Rut o Nombre
             var usuarios = _context.Usuario.AsQueryable();
+
             if (!string.IsNullOrEmpty(Busqueda))
             {
                 usuarios = usuarios.Where(u => u.Rut.Contains(Busqueda) || u.Nombre.Contains(Busqueda));
@@ -42,16 +43,17 @@ namespace ScannerCC.Controllers
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo;
 
-            var usuarios = _context.Usuario.FirstOrDefault(u => u.Id == id); 
-            ViewBag.UsuarioId = usuarios.Id;
-
             if (id == null || _context.Usuario == null)
             {
                 return NotFound();
             }
 
-            // Ya no se filtra por Activo
-            var usuario = await _context.Usuario.FirstOrDefaultAsync(m => m.Id == id);
+            // Aquí incluimos el Rol en la consulta que se envía a la vista
+            var usuario = await _context.Usuario
+                                        .Include(u => u.Rol) // Incluye el Rol para que esté disponible en la vista
+                                        .FirstOrDefaultAsync(u => u.Id == id);
+            ViewBag.UsuarioId = usuario?.Id;
+
             if (usuario == null)
             {
                 return NotFound();
@@ -59,6 +61,7 @@ namespace ScannerCC.Controllers
 
             return View(usuario);
         }
+
 
         // GET: Usuarios/Create
         public IActionResult Create()

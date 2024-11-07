@@ -201,6 +201,10 @@
       "PackagePath": "staticwebassets\\css\\GestionUsuario.css"
     },
     {
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\ImgP.css",
+      "PackagePath": "staticwebassets\\css\\ImgP.css"
+    },
+    {
       "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\IndicadorHome.css",
       "PackagePath": "staticwebassets\\css\\IndicadorHome.css"
     },

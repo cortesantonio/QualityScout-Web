@@ -7,23 +7,34 @@
 }
 
 <style>
-    .container {
-        position: relative;
-        z-index: 1; /* Asegura que el contenido esté por encima de las imágenes de fondo */
-        max-width: 500px; /* Ajusta el ancho máximo que desees */
-        margin: auto; /* Centra el contenedor en la pantalla */
-    }
 
     .form-group {
         margin-bottom: 15px;
     }
 
+    button.a {
+        background-color: #BE6464;
+        border-radius: 50%;
+        width: 30px; /* Establece un ancho y alto iguales para que el botón sea circular */
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        border: none; /* Opcional: elimina el borde */
+        cursor: pointer; /* Muestra el puntero de mano al pasar sobre el botón */
+    }
+
+        button.a i {
+            color: white;
+        }
+
     label, dt {
         color: #4B0404; /* Cambia este valor por el color que desees */
         font-family: Arial;
         border: none;
-        padding: 5px;
-        font-size: 14px;
+        font-size: 12px;
+        margin-left: 4px;
     }
 
     input, dd {
@@ -31,24 +42,23 @@
         border-radius: 5px; /* Bordes redondeados (opcional) */
         font-family: Arial;
         background-color: #DBD7D7;
-        padding: 5px;
         border: none;
-        font-size: 12px;
+        padding: 3px;
+        font-size: 10px;
     }
 
-        input.acc {
-            color: white;
-            background-color: #BF6565;
-            width: 30%;
-            padding: 5px;
-            font-size: 14px;
-        }
-
     h5 {
-        margin-top: 15px;
         color: #4B0404;
         font-family: Arial;
-        font-size: 15px;
+        font-size: 14px;
+    }
+
+    input.acc {
+        color: white;
+        background-color: #BF6565;
+        width: 30%;
+        padding: 5px;
+        font-size: 14px;
     }
 
     select {
@@ -74,9 +84,6 @@
             background-color: black;
             width: 30%;
         }
-        button.a {
-            background-color: none;
-        }
 
         a.btn {
         color: white; /* Color del texto */
@@ -89,8 +96,8 @@
         }
 
     input, select, dd {
-        width: 100%;
-        margin: 5px;
+        width: 300px;
+        margin: 3px;
     }
 
     button[type="submit"] {
@@ -108,16 +115,16 @@
     a.a {
         color: #F25C5C;
         text-decoration: none;
-        margin: 15px;
         font-family: Arial;
-        font-size: 13px;
+        font-size: 11px;
+        font-weight: bold;
     }
 
         a.a:hover {
             color: #260202;
-            margin: 15px;
             font-family: Arial;
-            font-size: 13px;
+            font-size: 11px;
+            font-weight: bold;
         }
 
     h3 {
@@ -134,15 +141,6 @@
         display: flex;
         align-items: center; /* Alinea verticalmente la imagen y el texto */
         margin-bottom: 20px;
-    }
-
-    .profile-image {
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        background-color: #260202;
-        margin-top: 60px;
-        margin-left: 80px;
     }
 
     .info-left {
@@ -234,29 +232,29 @@
 
     .radio-circle {
         display: inline-block;
-        width: 15px;
-        height: 15px;
-        border: 4px solid #260202;
+        width: 10px;
+        height: 10px;
+        border: 2.5px solid #260202;
         border-radius: 50%;
-        margin-right: 8px;
+        margin-right: 4px;
         transition: background-color 0.3s, border-color 0.3s;
     }
 
     .option-text {
         color: #260202;
-        font-size: 14px;
+        font-size: 10.5px;
         font-weight: 500;
-        margin-right: 10px;
+        margin-right: 5px;
     }
 
     .radio-checked {
         background-color: #ff6666; /* Color cuando está seleccionado */
         display: inline-block;
-        width: 15px;
-        height: 15px;
-        border: 4px solid #260202;
+        width: 10px;
+        height: 10px;
+        border: 2.5px solid #260202;
         border-radius: 50%;
-        margin-right: 8px;
+        margin-right: 4px;
         transition: background-color 0.3s, border-color 0.3s;
     }
 
@@ -275,6 +273,15 @@
     .med {
         margin-right: 15px; /* Ajusta el espacio entre el label y los radio buttons */
     }
+
+    dt.espacio {
+        margin-bottom: 50px;
+        padding: 0px;
+    }
+
+    dd.espacio {
+        background-color: white;
+    }
 </style>
 
 <!DOCTYPE html>
@@ -284,6 +291,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QualityScoutNoLog</title>
     <link rel="stylesheet" href="~/css/Nav.css">
+    <link rel="stylesheet" href="~/css/ImgP.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -404,268 +412,265 @@
         </div>
     </div>
 
-    <div class=" container">
-        <h5 style="margin-left: 160px;">Información del producto</h5>
-            <hr/>
-            <div class="row"  >
-                <dt class="col-sm-6">Nombre del usuario</dt>
-                <dd class="col-sm-6">@Html.DisplayFor(model => model.Usuarios.Nombre)</dd>
-
-                <dt class="col-sm-6">Nombre vino</dt>
-                <dd class="col-sm-6">@Html.DisplayFor(model => model.Nombre)</dd>
-
-                <dt class="col-sm-6">Código de barras</dt>
-                <dd class="col-sm-6">@Html.DisplayFor(model => model.CodigoBarra)</dd>
-
-                <dt class="col-sm-6">Código VE</dt>
-                <dd class="col-sm-6">@Html.DisplayFor(model => model.CodigoVE)</dd>
-
-                <dt class="col-sm-6">País de destino</dt>
-                <dd class="col-sm-6">@Html.DisplayFor(model => model.PaisDestino)</dd>
-
-                <dt class="col-sm-6">Fecha de registro</dt>
-                <dd class="col-sm-6">@Html.DisplayFor(model => model.FechaRegistro)</dd>
-
-                <dt class="col-sm-6">Idioma información</dt>
-                <dd class="col-sm-6">@Html.DisplayFor(model => model.Idioma)</dd>
-
-                <dt class="col-sm-6">Unidad de medida en etiqueta</dt>
-                <dd class="col-sm-6">@Html.DisplayFor(model => model.UnidadMedida)</dd>
-
-            <div class="form-grouppp d-flex justify-content-center align-items-center">
-                <label class="med me-3 mb-0">Activo</label>
-                <div class="form-check form-check-inline align-items-center" style="margin-right: 20px;">
-                    <div class="radio-circle @(Model.Activo ? "radio-checked" : "")"></div>
-                    <span class="option-text">Sí</span>
-                </div>
-                <div class="form-check form-check-inline align-items-center">
-                    <div class="radio-circle @(Model.Activo ? "" : "radio-checked")"></div>
-                    <span class="option-text">No</span>
-                </div>
+    <div class="main-container">
+        <div class="image-container">
+            <div class="box">
+                <img src="@Model.URLImagen" alt="Imagen de @Model.Nombre" style="border-radius: 10px; font-family: Arial;">
             </div>
 
-                <dt>URL de la imagen</dt>
-                <dd>
-                <img src="@Model.URLImagen" alt="Imagen de @Model.Nombre" style="width:100%; max-width:600px;">
-                </dd>
-
-
-                <dt class="col-sm-6">Descripción de la cápsula</dt>
-                <dd class="col-sm-6">@Html.DisplayFor(model => model.DescripcionCapsula)</dd>
-            </div>
-            <div class="mt-3">
             @if (isEspecialista)
-                {
-                    <a class="a" style="margin-left: 200px;" asp-action="Edit" asp-route-id="@Model?.Id">Editar producto</a>
-                }
-            </div>
-        </div>
-
-        <!-- Columna 2 -->
-        <div class=" container">
-        <h5 style="margin-left: 130px; margin-top: 15px;">Detalles de la información química</h5>
-            <hr />
-            <div class="row">
-            @if (Model.InformacionQuimica != null)
             {
-                <dt class="col-sm-6">Cepa vino</dt>
-                <dd class="col-sm-6">@Model.InformacionQuimica.Cepa</dd>
-
-                <dt class="col-sm-6">Azúcar (gr)</dt>
-                <dd class="col-sm-6">
-                    <div>
-                        <span>Máximo: @Model.InformacionQuimica.MaxAzucar</span><br />
-                        <span>Mínimo: @Model.InformacionQuimica.MinAzucar</span>
-                    </div>
-                </dd>
-
-                <dt class="col-sm-6">Sulfuroso (mg/l)</dt>
-                <dd class="col-sm-6">
-                    <div>
-                        <span>Máximo: @Model.InformacionQuimica.MaxSulfuroso</span><br />
-                        <span>Mínimo: @Model.InformacionQuimica.MinSulfuroso</span>
-                    </div>
-                </dd>
-
-                <dt class="col-sm-6">Densidad (g/ml)</dt>
-                <dd class="col-sm-6">
-                    <div>
-                        <span>Máximo: @Model.InformacionQuimica.MaxDensidad</span><br />
-                        <span>Mínimo: @Model.InformacionQuimica.MinDensidad</span>
-                    </div>
-                </dd>
-
-                <dt class="col-sm-6">Grado de alcohol</dt>
-                <dd class="col-sm-6">
-                    <div>
-                        <span>Máximo: @Model.InformacionQuimica.MaxGradoAlcohol</span><br />
-                        <span>Mínimo: @Model.InformacionQuimica.MinGradoAlcohol</span>
-                    </div>
-                </dd>
-            }
-            </div>
-            <div class="mt-3">
-            @if (isEspecialista)
+                @if (Model.Activo)
                 {
-                <a class="a" style="margin-left: 160px;" asp-action="Edit" asp-controller="InformacionQuimica" asp-route-id="@Model?.Id">Editar la información quimica</a>
+                    <button class="a" style="color:white; margin-top: 10px; margin-left: 120px;" onclick="openModal()"><i class="fa-solid fa-pause"></i></button>
+                    <p style="color:black; margin-top:5px; margin-left: 105px; font-size: 13px;">Desactivar</p>
+                    <p style="color:black; margin-left: 92px; font-size: 13px;">temporalmente</p>
                 }
-            </div>
-        </div>
-
-        <!-- Columna 3 -->
-    <div class=" container">
-        <h5 style="margin-left: 180px; margin-top: 15px;">Detalles de la botella</h5>
-            <hr />
-            <div class="row">
-            @if (Model.ProductoDetalles != null && Model.ProductoDetalles.Any())
-            {
-                foreach (var detalleB in Model.ProductoDetalles)
-                {
-                    <dt class="col-sm-6">Nombre de la botella</dt>
-                    <dd class="col-sm-6">@detalleB.BotellaDetalles.NombreBotella</dd>
-
-                    <dt class="col-sm-6">Altura de la botella (cm)</dt>
-                    <dd class="col-sm-6">@detalleB.BotellaDetalles.AlturaBotella</dd>
-
-                    <dt class="col-sm-6">Ancho de la botella (cm)</dt>
-                    <dd class="col-sm-6">@detalleB.BotellaDetalles.AnchoBotella</dd>
-                }
-            }
                 else
                 {
-                    <dd class="col-sm-6">No hay detalles de la botella disponible.</dd>
+                    <button class="a" style="color:white; margin-top: 10px; margin-left: 120px;" onclick="openModall()"><i class="fa-solid fa-forward"></i></button>
+                    <p style="color:black; margin-top:5px; margin-left: 115px; font-size: 13px;">Activar</p>
+                    <p style="color:black; margin-left: 92px; font-size: 13px;">temporalmente</p>
                 }
-            </div>
-            <div class="mt-3">
-            @if (isEspecialista)
+
+
+            }
+
+            @if (isControlCalidad)
+            {
+                @if (Model.Activo)
                 {
-                <a class="a" style="margin-left: 200px;" asp-action="Edit" asp-controller="BotellaDetalles" asp-route-id="@Model?.Id">Editar detalles de la botella</a>
+                    <button class="a" style="color:white; margin-top: 10px; margin-left: 120px;" onclick="window.location.href='@Url.Action("CreateControl", "Controles", new { idProducto = Model.Id })'">
+                        <i class="fa-solid fa-file-medical"></i> 
+                    </button>
+                    <p style="color:black; margin-top:5px; margin-left: 110px; font-size: 13px;">Agregar</p>
+                    <p style="color:black; margin-left: 113.5px; font-size: 13px;">control</p>
                 }
-            </div>
+
+            }
         </div>
 
-        <!-- Columna 4 -->
-    <div class=" container">
-        <h5 style="margin-left: 180px; margin-top: 15px;">Detalles del producto</h5>
-            <hr />
-            <div class="row">
-            @if (Model.ProductoDetalles != null && Model.ProductoDetalles.Any())
-            {
-                foreach (var detalle in Model.ProductoDetalles)
-                {
-                        <dt class="col-sm-6">Color de la botella</dt>
-                        <dd class="col-sm-6">@detalle.ColorBotella</dd>
 
-                        <dt class="col-sm-6">Capacidad (ml)</dt>
-                        <dd class="col-sm-6">@detalle.Capacidad</dd>
+        <div class="details-container">
+            <div class="ner con">
+                <h5 style="margin-left: 80px;">Información del producto</h5>
+                <hr />
+                <div class="row" style="margin-left: 13px;">
+                    <dt class="col-sm-6">Nombre del usuario</dt>
+                    <dd class="col-sm-6">@Html.DisplayFor(model => model.Usuarios.Nombre)</dd>
 
-                        <dt class="col-sm-6">Tipo de cápsula</dt>
-                        <dd class="col-sm-6">@detalle.TipoCapsula</dd>
+                    <dt class="col-sm-6">Nombre vino</dt>
+                    <dd class="col-sm-6">@Html.DisplayFor(model => model.Nombre)</dd>
 
-                        <dt class="col-sm-6">Color de la cápsula</dt>
-                        <dd class="col-sm-6">@detalle.ColorCapsula</dd>
+                    <dt class="col-sm-6">Código de barras</dt>
+                    <dd class="col-sm-6">@Html.DisplayFor(model => model.CodigoBarra)</dd>
+
+                    <dt class="col-sm-6">Código VE</dt>
+                    <dd class="col-sm-6">@Html.DisplayFor(model => model.CodigoVE)</dd>
+
+                    <dt class="col-sm-6">País de destino</dt>
+                    <dd class="col-sm-6">@Html.DisplayFor(model => model.PaisDestino)</dd>
+
+                    <dt class="col-sm-6">Fecha de registro</dt>
+                    <dd class="col-sm-6">@Html.DisplayFor(model => model.FechaRegistro)</dd>
+
+                    <dt class="col-sm-6">Idioma información</dt>
+                    <dd class="col-sm-6">@Html.DisplayFor(model => model.Idioma)</dd>
+
+                    <dt class="col-sm-6">Unidad de medida en etiqueta</dt>
+                    <dd class="col-sm-6">@Html.DisplayFor(model => model.UnidadMedida)</dd>
 
                     <div class="form-grouppp d-flex justify-content-center align-items-center">
-                        <label class="med me-3 mb-0">Medalla</label>
-                        <div class="form-check form-check-inline align-items-center" style="margin-right: 20px;">
-                            <div class="radio-circle @(detalle.Medalla ? "radio-checked" : "")"></div>
+                        <label class="med me-3 mb-0">Activo</label>
+                        <div class="form-check form-check-inline align-items-center" style="margin-right: 10px;">
+                            <div class="radio-circle @(Model.Activo ? "radio-checked" : "")"></div>
                             <span class="option-text">Sí</span>
                         </div>
                         <div class="form-check form-check-inline align-items-center">
-                            <div class="radio-circle @(detalle.Medalla ? "" : "radio-checked")"></div>
+                            <div class="radio-circle @(Model.Activo ? "" : "radio-checked")"></div>
                             <span class="option-text">No</span>
                         </div>
                     </div>
 
-                        <dt class="col-sm-6">Tipo de etiqueta</dt>
-                        <dd class="col-sm-6">@detalle.TipoEtiqueta</dd>
+                    <dt class="col-sm-6">Descripción de la cápsula</dt>
+                    <dd class="col-sm-6">@Html.DisplayFor(model => model.DescripcionCapsula)</dd>
 
-                        <dt class="col-sm-6">Medida de etiqueta a boquete (cm)</dt>
-                        <dd class="col-sm-6">@detalle.MedidaEtiquetaABoquete</dd>
-
-                        <dt class="col-sm-6">Medida de etiqueta a base (cm)</dt>
-                        <dd class="col-sm-6">@detalle.MedidaEtiquetaABase</dd>
-
-                        <dt class="col-sm-6">Tipo de corcho</dt>
-                        <dd class="col-sm-6">@detalle.TipoCorcho</dd>
-                }
-            }
-                else
-                {
-                    <dd class="col-sm-6">No hay detalles del producto disponible.</dd>
-                }
+                    @if (isEspecialista)
+                    {
+                        <a class="a" style="margin-left: 115px;" asp-action="Edit" asp-route-id="@Model?.Id">Editar producto</a>
+                    }
+                </div>
             </div>
-            <div class="mt-3">
-            @if (isEspecialista)
-                {
-                <a class="a" style="margin-left: 170px;" asp-action="Edit" asp-controller="ProductoDetalles" asp-route-id="@Model?.Id">Editar detalles del producto</a>
-                }
+
+            <!-- Columna 2 -->
+            <div class="ner con">
+                <h5 style="margin-left: 50px;">Detalles de la información química</h5>
+                <hr />
+                <div class="row" style="margin-left: 13px;">
+                    @if (Model.InformacionQuimica != null)
+                    {
+
+                        <dt class="col-sm-6">Cepa vino</dt>
+                        <dd class="col-sm-6">@Model.InformacionQuimica.Cepa</dd>
+
+                        <dt class="col-sm-6">Azúcar (gr)</dt>
+                        <dd class="col-sm-6">
+                            <div>
+                                <span>Máximo: @Model.InformacionQuimica.MaxAzucar</span> <span style="margin-left: 5px; margin-right: 5px;">||</span>
+                                <span>Mínimo: @Model.InformacionQuimica.MinAzucar</span>
+                            </div>
+                        </dd>
+
+                        <dt class="col-sm-6">Sulfuroso (mg/l)</dt>
+                        <dd class="col-sm-6">
+                            <div>
+                                <span>Máximo: @Model.InformacionQuimica.MaxSulfuroso</span> <span style="margin-left: 5px; margin-right: 5px;">||</span>
+                                <span>Mínimo: @Model.InformacionQuimica.MinSulfuroso</span>
+                            </div>
+                        </dd>
+
+                        <dt class="col-sm-6">Densidad (g/ml)</dt>
+                        <dd class="col-sm-6">
+                            <div>
+                                <span>Máximo: @Model.InformacionQuimica.MaxDensidad</span> <span style="margin-left: 5px; margin-right: 5px;">||</span>
+                                <span>Mínimo: @Model.InformacionQuimica.MinDensidad</span>
+                            </div>
+                        </dd>
+
+                        <dt class="col-sm-6">Grado de alcohol</dt>
+                        <dd class="col-sm-6">
+                            <div>
+                                <span>Máximo: @Model.InformacionQuimica.MaxGradoAlcohol</span> <span style="margin-left: 5px; margin-right: 5px;">||</span>
+                                <span>Mínimo: @Model.InformacionQuimica.MinGradoAlcohol</span>
+                            </div>
+                        </dd>
+                        @if (isEspecialista)
+                        {
+                            <a class="a" style="margin-left: 80px;" asp-action="Edit" asp-controller="InformacionQuimica" asp-route-id="@Model.InformacionQuimica.Id">Editar la información quimica</a>
+                        }
+                    }
+                </div>
+            </div>
+
+            <!-- Columna 4 -->
+            <div class="ner con">
+                <h5 style="margin-left: 90px;">Detalles del producto</h5>
+                <hr />
+                <div class="row" style="margin-left: 13px;">
+                    @if (Model.ProductoDetalles != null && Model.ProductoDetalles.Any())
+                    {
+                        foreach (var detalle in Model.ProductoDetalles)
+                        {
+                            <dt class="col-sm-6">Color de la botella</dt>
+                            <dd class="col-sm-6">@detalle.ColorBotella</dd>
+
+                            <dt class="col-sm-6">Capacidad (ml)</dt>
+                            <dd class="col-sm-6">@detalle.Capacidad</dd>
+
+                            <dt class="col-sm-6">Tipo de cápsula</dt>
+                            <dd class="col-sm-6">@detalle.TipoCapsula</dd>
+
+                            <dt class="col-sm-6">Color de la cápsula</dt>
+                            <dd class="col-sm-6">@detalle.ColorCapsula</dd>
+
+                            <div class="form-grouppp d-flex justify-content-center align-items-center">
+                                <label class="med me-3 mb-0">Medalla</label>
+                                <div class="form-check form-check-inline align-items-center" style="margin-right: 10px;">
+                                    <div class="radio-circle @(detalle.Medalla ? "radio-checked" : "")"></div>
+                                    <span class="option-text">Sí</span>
+                                </div>
+                                <div class="form-check form-check-inline align-items-center">
+                                    <div class="radio-circle @(detalle.Medalla ? "" : "radio-checked")"></div>
+                                    <span class="option-text">No</span>
+                                </div>
+                            </div>
+
+                            <dt class="col-sm-6">Tipo de etiqueta</dt>
+                            <dd class="col-sm-6">@detalle.TipoEtiqueta</dd>
+
+                            <dt class="col-sm-6">Medida de etiqueta a boquete (cm)</dt>
+                            <dd class="col-sm-6">@detalle.MedidaEtiquetaABoquete</dd>
+
+                            <dt class="col-sm-6">Medida de etiqueta a base (cm)</dt>
+                            <dd class="col-sm-6">@detalle.MedidaEtiquetaABase</dd>
+
+                            <dt class="col-sm-6">Tipo de corcho</dt>
+                            <dd class="col-sm-6">@detalle.TipoCorcho</dd>
+
+                            @if (isEspecialista)
+                            {
+                                <a class="a" style="margin-left: 90px;" asp-action="Edit" asp-controller="ProductoDetalles" asp-route-id="@detalle.Id">Editar detalles del producto</a>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <dd class="col-sm-6">No hay detalles del producto disponible.</dd>
+                    }
+                </div>
+            </div>
+
+            <!-- Columna 3 -->
+            <div class="ner con">
+                <h5 style="margin-left: 95px;">Detalles de la botella</h5>
+                <hr />
+                <div class="row" style="margin-left: 13px;">
+                    @if (Model.ProductoDetalles != null && Model.ProductoDetalles.Any())
+                    {
+                        foreach (var detalleB in Model.ProductoDetalles)
+                        {
+                            <dt class="col-sm-6">Nombre de la botella</dt>
+                            <dd class="col-sm-6">@detalleB.BotellaDetalles.NombreBotella</dd>
+
+                            <dt class="col-sm-6">Altura de la botella (cm)</dt>
+                            <dd class="col-sm-6">@detalleB.BotellaDetalles.AlturaBotella</dd>
+
+                            <dt class="col-sm-6">Ancho de la botella (cm)</dt>
+                            <dd class="col-sm-6">@detalleB.BotellaDetalles.AnchoBotella</dd>
+
+                            @if (isEspecialista)
+                            {
+                                <a class="a" style="margin-left: 80px;" asp-action="Edit" asp-controller="BotellaDetalles" asp-route-id="@detalleB.BotellaDetalles.Id">Editar detalles de la botella</a>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <dd class="col-sm-6">No hay detalles de la botella disponible.</dd>
+                    }
+                </div>
+            </div>
+            <!-- Columna 5 -->
+            <div class="ner con">
+                <h5 style="margin-left: 90px;">Historial del producto</h5>
+                <hr />
+                <div class="row" style="margin-left: 13px;">
+                    @if (Model.ProductoHistorial != null && Model.ProductoHistorial.Any())
+                    {
+                        foreach (var historial in Model.ProductoHistorial)
+                        {
+                            <dt class="col-sm-6">Fecha de cosecha</dt>
+                            <dd class="col-sm-6">@historial.FechaCosecha.ToShortDateString()</dd>
+
+                            <dt class="col-sm-6">Fecha de producción</dt>
+                            <dd class="col-sm-6">@historial.FechaProduccion.ToShortDateString()</dd>
+
+                            <dt class="col-sm-6">Fecha de envasado</dt>
+                            <dd class="col-sm-6">@historial.FechaEnvasado.ToShortDateString()</dd>
+
+                            @if (isEspecialista)
+                            {
+                                <a class="a" style="margin-left: 80px;" asp-action="Edit" asp-controller="ProductoHistorial" asp-route-id="@historial.Id">Editar historial del producto</a>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <dd class="col-sm-6">No hay un historial del producto disponible.</dd>
+                    }
+                </div>
             </div>
         </div>
-
-        <!-- Columna 5 -->
-    <div class=" container">
-        <h5 style="margin-left: 180px; margin-top: 15px;">Historial del producto</h5>
-            <hr />
-            <div class="row">
-            @if (Model.ProductoHistorial != null && Model.ProductoHistorial.Any())
-            {
-                foreach (var historial in Model.ProductoHistorial)
-                {
-                    <dt class="col-sm-6">Fecha de cosecha</dt>
-                    <dd class="col-sm-6">@historial.FechaCosecha.ToShortDateString()</dd>
-
-                    <dt class="col-sm-6">Fecha de producción</dt>
-                    <dd class="col-sm-6">@historial.FechaProduccion.ToShortDateString()</dd>
-
-                    <dt class="col-sm-6">Fecha de envasado</dt>
-                    <dd class="col-sm-6">@historial.FechaEnvasado.ToShortDateString()</dd>
-                }
-            }
-                else
-                {
-                    <dd class="col-sm-6">No hay un historial del producto disponible.</dd>
-                }
-            </div>
-            <div class="mt-3">
-            @if (isEspecialista)
-                {
-                <a class="a" style="margin-left: 165px;" asp-action="Edit" asp-controller="ProductoHistorial" asp-route-id="@Model?.Id">Editar historial del producto</a>
-                }
-            </div>
-        </div>
-    <div class="container">
-        @if (isEspecialista)
-        {
-            @if (Model.Activo)
-            {
-                <button class="btn-deactivate" style="color:white; margin-left: 400px; margin-top: 20px; margin-bottom: 15px;" onclick="openModal()"><i class="fa-solid fa-trash-can"></i> Desactivar producto</button>
-            }
-            else
-            {
-                <button class="btn-activate" style="color:white; margin-left: 400px; margin-top: 20px; margin-bottom: 15px;" onclick="openModall()">
-                    <i class="fa-solid fa-check"></i> Activar producto
-                </button>
-            }
-
-
-        }
-
-        @if (isControlCalidad)
-        {
-            @if (Model.Activo)
-            {
-                <button class="a" style="color:white; margin-left: 400px; margin-top: 20px; margin-bottom: 15px;">
-                    <a class="btn" style="color:white; text-decoration: none; font-family: Arial;" asp-action="CreateControl" asp-controller="Controles">
-                        <strong>+</strong> Agregar control
-
-                    </a>
-                </button>
-
-            }
-
-        }
-
     </div>
     <div id="modal" class="modal" style="display: none;">
         <div class="modal-content">
@@ -719,4 +724,11 @@
     function closeModall() {
         document.getElementById('modall').style.display = 'none';
     }
+
+    var btn = document.querySelector('.btn');
+    var box = document.querySelector('.box')
+    btn.addEventListener('click', function () {
+        box.style.width = (100 + Math.round(Math.random() * 300)) + 'px';
+        box.style.height = (100 + Math.round(Math.random() * 300)) + 'px';
+    });
 </script>

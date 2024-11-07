@@ -31,6 +31,7 @@
         background-color: #DBD7D7;
         border-radius: 5px; /* Bordes redondeados (opcional) */
         font-family: Arial;
+        font-size: 12px;
         border: none;
     }
 
@@ -163,6 +164,14 @@
         color: #f25757;
     }
 
+    dt.espacio {
+        margin-bottom: 50px;
+        padding: 0px;
+    }
+
+    dd.espacio {
+        background-color: white;
+    }
 </style>
 
 <!DOCTYPE html>
@@ -340,6 +349,8 @@
                 <dd>
                     @Html.DisplayFor(model => model.Comentario)
                 </dd>
+                <dt class="espacio"></dt>
+                <dd class="espacio"></dd>
             </div>
     </dl>
 </div>

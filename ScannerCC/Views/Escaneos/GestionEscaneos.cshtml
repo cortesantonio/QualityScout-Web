@@ -92,24 +92,28 @@
 </div>
 <main>
     <div class="filter-order-container">
-        <div class="filter">
-            <span>&#x1F50D;</span> <!-- Icono de filtro -->
-            <span>Filtro</span>
-            <span class="dropdown">&#9660;</span> <!-- Flecha hacia abajo -->
-        </div>
-        <div class="order">
-            <span>Orden</span>
-            <span class="dropdown">&#9660;</span> <!-- Flecha hacia abajo -->
-        </div>
-        <div class="dropdown-menu" id="filterMenu" style="display: none;">
-            <p>Filtrar por fecha</p>
-            <p>Filtrar por categoría</p>
-        </div>
-
-        <div class="dropdown-menu" id="orderMenu" style="display: none;">
-            <p>Ordenar de A-Z</p>
-            <p>Ordenar de Z-A</p>
-        </div>
+            <div class="order" onclick="toggleOrderOptions()">
+                <span>Orden por producto</span>
+                <span class="dropdown"><i class="fa-solid fa-arrow-down-a-z"></i></span>
+            </div>
+            <div id="orderOptions" class="order-options">
+                <select id="productoOrden" onchange="orderByProductoNombre()">
+                    <option value="">Ordenar por nombre de producto</option>
+                    <option value="asc">A-Z</option>
+                    <option value="desc">Z-A</option>
+                </select>
+            </div>
+            <div class="orden" onclick="toggleOrderOption()">
+                <span>Orden por fecha</span>
+                <span class="dropdown"><i class="fa-solid fa-sort-down"></i></span>
+            </div>
+            <div id="orderOption" class="order-option">
+                <select id="fechaOrden" onchange="orderByFecha()">
+                    <option value="">Ordenar por fecha</option>
+                    <option value="asc">Más antigua</option>
+                    <option value="desc">Más reciente</option>
+                </select>
+            </div>
     </div>
 
     <section class="scan-list">
@@ -149,13 +153,43 @@
 </html>
 
 <script>
-    document.querySelector('.filter').addEventListener('click', function () {
-        let filterMenu = document.getElementById('filterMenu');
-        filterMenu.style.display = filterMenu.style.display === 'none' ? 'block' : 'none';
+    function toggleOrderOptions() {
+        const orderOptions = document.getElementById("orderOptions");
+        orderOptions.style.display = orderOptions.style.display === "none" || orderOptions.style.display === "" ? "block" : "none";
+    }
+
+    function orderByProductoNombre() {
+        var selectedOrder = document.getElementById("productoOrden").value;
+        window.location.href = '@Url.Action("GestionEscaneos", "Escaneos")?orderByProductName=' + selectedOrder;
+    }
+
+    document.addEventListener("click", function (event) {
+        const orderOptions = document.getElementById("orderOptions");
+        const order = document.querySelector(".order");
+
+        // Solo cerrar el menú si el clic se hace fuera de .order y #orderOptions
+        if (!order.contains(event.target) && !orderOptions.contains(event.target)) {
+            orderOptions.style.display = "none";
+        }
     });
 
-    document.querySelector('.order').addEventListener('click', function () {
-        let orderMenu = document.getElementById('orderMenu');
-        orderMenu.style.display = orderMenu.style.display === 'none' ? 'block' : 'none';
+    function toggleOrderOption() {
+        const orderOption = document.getElementById("orderOption");
+        orderOption.style.display = orderOption.style.display === "none" || orderOption.style.display === "" ? "block" : "none";
+    }
+
+    function orderByFecha() {
+        var selectedOrder = document.getElementById("fechaOrden").value;
+        window.location.href = '@Url.Action("GestionEscaneos", "Escaneos")?orderByDate=' + selectedOrder;
+    }
+
+    document.addEventListener("click", function (event) {
+        const orderOption = document.getElementById("orderOption");
+        const orden = document.querySelector(".orden");
+
+        // Solo cerrar el menú si el clic se hace fuera de .order y #orderOptions
+        if (!orden.contains(event.target) && !orderOption.contains(event.target)) {
+            orderOption.style.display = "none";
+        }
     });
 </script>

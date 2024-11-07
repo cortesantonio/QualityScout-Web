@@ -29,6 +29,7 @@
         border-radius: 5px; /* Bordes redondeados (opcional) */
         font-family: Arial;
         background-color: #DBD7D7;
+        font-size: 12px;
         border: none;
     }
 
@@ -69,13 +70,13 @@
     button[type="submit"] {
         background-color: #BF6565;
         color: white;
-        width: 30%;
+        width: 45%;
     }
 
         button[type="submit"]:hover {
             background-color: #F25757;
             color: white;
-            width: 30%;
+            width: 45%;
         }
 
     a {
@@ -276,7 +277,7 @@
 
         <form asp-action="Delete">
             <input type="hidden" asp-for="Id" />
-            <button type="submit" class="btnAccionForm" value="Eliminar" style="margin-top: 20px; margin-left: 350px; margin-bottom: 20px;">
+            <button type="submit" class="btnAccionForm" value="Eliminar" style="margin-top: 20px; margin-left: 280px; margin-bottom: 50px;">
                 <i class="fa-solid fa-eraser"></i> Eliminar historial del producto
             </button>
         </form>

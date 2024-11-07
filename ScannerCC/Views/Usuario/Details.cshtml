@@ -30,6 +30,7 @@
         padding: 5px; /* Espaciado interno */
         border-radius: 5px; /* Bordes redondeados (opcional) */
         font-family: Arial;
+                font-size: 12px;
         border: none;
     }
 
@@ -56,6 +57,19 @@
         border: none;
         width: 30%;
     }
+
+    a.btn-a {
+        padding: 5.5px; /* Espaciado interno */
+        background-color: #BF6565;
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        font-size: 13px;
+        border: none;
+        margin-right: 40px;
+        width: 30%;
+
+    }
+
 
     button.btn {
             background-color: black;
@@ -99,7 +113,7 @@
 
     .profile-header {
         display: flex;
-        align-items: center; /* Alinea verticalmente la imagen y el texto */
+        align-items: center; 
         margin-bottom: 20px;
     }
 
@@ -109,7 +123,9 @@
         border-radius: 50%;
         background-color: #260202;
         margin-top: 60px;
-        margin-left: 80px;
+        margin-left: 60px;
+        overflow: hidden;
+        padding: 5px;
     }
 
     .info-left {
@@ -286,19 +302,35 @@
     <dl class="row justify-content-center">
             <div class="profile-header">
                 <div class="info-left" style="margin-left: 50px;">
-                    @if (isEspecialista)
+                    @if (Model.Rol != null && Model.Rol.Nombre != null)
                     {
-                        <h1 style="font-family: Arial;">Especialista</h1>
-                    } else
-                    {
-                        <h1 style="font-family: Arial; font-size: 20px;">Control de calidad</h1>
+                        if (Model.Rol.Nombre == "Especialista")
+                        {
+                            <h1 style="font-family: Arial; font-size: 13px; color:gray;">ESPECIALISTA</h1>
+                        }
+                        else if (Model.Rol.Nombre == "Control de Calidad")
+                        {
+                            <h1 style="font-family: Arial; font-size: 13px; color:gray;">CONTROL DE CALIDAD</h1>
+                        }
                     }
-                    <h2 style="font-family: Arial; font-size: 18px;">@Html.DisplayFor(model => model.Nombre)</h2>
-                    <p>@Html.DisplayFor(model => model.Rut)</p>
+                    <h2 style="font-family: Arial; font-size: 35px; color: #4B0404">@Html.DisplayFor(model => model.Nombre)</h2>
+                    <p style="color:gray; font-size: 13px;">@Html.DisplayFor(model => model.Rut)</p>
                 </div>
 
+
+
                 <div class="profile-image-container">
-                    <img class="profile-image" src="~/Extras/iconUsuario.png" alt="Imagen de Perfil">
+                    @if (Model.Rol != null && Model.Rol.Nombre != null)
+                    {
+                        if (Model.Rol.Nombre == "Especialista")
+                        {
+                            <img class="profile-image" src="~/Extras/especialista.png" alt="Imagen de Perfil">
+                        }
+                        else if (Model.Rol.Nombre == "Control de Calidad")
+                        {
+                            <img class="profile-image" src="~/Extras/controldecalidad.png" alt="Imagen de Perfil">
+                        }
+                    }
                 </div>
             </div>
             <h3 style="font-family: Arial; margin-bottom: 15px;"><strong>Información personal</strong></h3>
@@ -316,31 +348,37 @@
                 </div>
             @if (isEspecialista)
             {
-                <div class="d-flex justify-content-between w-100" style="margin-left: 5px;">
+                <div class="d-flex justify-content-between align-items-center w-100" style="gap: 20px; margin-top: 50px;">
 
-                    <a style="color:black; text-decoration: none; font-family: Arial;"
-                       asp-action="Edit"
-                       asp-controller="Usuario"
-                       asp-route-id="@ViewBag.UsuarioId">
-                        <i class="fa-solid fa-pen-to-square"></i> Editar información
-                    </a>
-                    <a style="color:black; text-decoration: none; font-family: Arial; margin-left: 195px;" asp-action="EditC" asp-controller="Usuario" asp-route-id="@ViewBag.UsuarioId">
-                            <i class="fa-solid fa-lock me-2"></i> Editar contraseña
 
+                        <a class="btn-a" style="color:white; text-decoration: none; font-family: Arial;"
+                           asp-action="Edit"
+                           asp-controller="Usuario"
+                           asp-route-id="@ViewBag.UsuarioId">
+                            <i class="fa-solid fa-pen-to-square"></i> Editar información
                         </a>
+
+                        <a class="btn-a" style="color:white; text-decoration: none; font-family: Arial;"
+                           asp-action="EditC"
+                           asp-controller="Usuario"
+                           asp-route-id="@ViewBag.UsuarioId">
+                            <i class="fa-solid fa-lock me-2"></i> Editar contraseña
+                        </a>
+
+                        @if (Model.Activo)
+                        {
+                            <button class="btn-deactivate" style="color: white;" onclick="openModal()">
+                                <i class="fa-solid fa-trash-can"></i> Desactivar usuario
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn-activate" onclick="openModall()">
+                                <i class="fa-solid fa-user-check" style="color: #ffffff;"></i> Activar usuario
+                            </button>
+                        }
+
                     
-                </div>
-                <div class="d-flex justify-content-between w-100" style="margin-left: 5px; margin-top: 15px;">
-                    @if (Model.Activo)
-                    {
-                        <button class="btn-deactivate" style="color:white;" onclick="openModal()"><i class="fa-solid fa-trash-can"></i> Desactivar usuario</button>
-                    }
-                    else
-                    {
-                        <button class="btn-activate" onclick="openModall()">
-                            <i class="fa-solid fa-user-check" style="color: #ffffff;"></i> Activar usuario
-                        </button>
-                    }
                 </div>
             }
             else

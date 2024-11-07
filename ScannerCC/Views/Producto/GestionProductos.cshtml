@@ -206,18 +206,6 @@
         @if (isEspecialista)
         {
             <div class="icon-item">
-                <a asp-action="GestionProductosH" asp-controller="ProductoHistorial">
-                    <img src="~/Extras/proh.png" alt="PHistorial" />
-                </a>
-                <span>Productos historial</span>
-            </div>
-            <div class="icon-item">
-                <a asp-action="GestionProductosD" asp-controller="ProductoDetalles">
-                    <img src="~/Extras/prod.png" alt="PDetalles" />
-                </a>
-                <span>Productos detalles</span>
-            </div>
-            <div class="icon-item">
                 <a asp-action="GestionInformacion" asp-controller="InformacionQuimica">
                     <img src="~/Extras/infq.png" alt="Informacion" />
                 </a>
@@ -227,7 +215,19 @@
                 <a asp-action="GestionBotellas" asp-controller="BotellaDetalles">
                     <img src="~/Extras/botellad.png" alt="Botellas" />
                 </a>
-                <span>Botellas detalles</span>
+                <span>Botellas</span>
+            </div>
+            <div class="icon-item">
+                <a asp-action="GestionProductosD" asp-controller="ProductoDetalles">
+                    <img src="~/Extras/prod.png" alt="PDetalles" />
+                </a>
+                <span>Detalles de productos</span>
+            </div>
+            <div class="icon-item">
+                <a asp-action="GestionProductosH" asp-controller="ProductoHistorial">
+                    <img src="~/Extras/proh.png" alt="PHistorial" />
+                </a>
+                <span>Historiales de productos</span>
             </div>
         }
     </div>
@@ -236,9 +236,6 @@
         <div class="search-add-container">
             <form asp-action="GestionProductos" method="get" class="search-b" style="display:inline;">
                 <input type="text" placeholder="🔍 Busca por código de barra o nombre" class="search-bar" name="Busqueda" />
-                <button type="submit" style="border:none; background:none;">
-                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
-                </button>
             </form>
             @if (isEspecialista)
             {

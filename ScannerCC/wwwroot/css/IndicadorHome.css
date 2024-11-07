@@ -32,7 +32,7 @@ body {
 .content {
     position: relative;
     z-index: 1; /* Asegura que el contenido esté por encima de las imágenes de fondo */
-    padding: 20px;
+    padding: 15px;
 }
 
 header {
@@ -154,16 +154,12 @@ nav {
     text-decoration: none;
 }
 
-.content {
-    padding: 15px;
-}
-
 .accesotitulo {
     display: flex;
     justify-content: center;
-    margin-right: 16%;
+    margin-right: 22%;
     margin-bottom: 30px;
-    font-size: 200%;
+    font-size: 190%;
     font-family: Arial;
 }
 

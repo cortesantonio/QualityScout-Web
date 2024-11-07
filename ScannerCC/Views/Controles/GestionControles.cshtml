@@ -134,24 +134,29 @@
 </div>
 <main>
     <div class="filter-order-container">
-        <div class="filter">
-            <span>&#x1F50D;</span> <!-- Icono de filtro -->
-            <span>Filtro</span>
-            <span class="dropdown">&#9660;</span> <!-- Flecha hacia abajo -->
-        </div>
-        <div class="order">
-            <span>Orden</span>
-            <span class="dropdown">&#9660;</span> <!-- Flecha hacia abajo -->
-        </div>
-        <div class="dropdown-menu" id="filterMenu" style="display: none;">
-            <p>Filtrar por fecha</p>
-            <p>Filtrar por categoría</p>
-        </div>
-
-        <div class="dropdown-menu" id="orderMenu" style="display: none;">
-            <p>Ordenar de A-Z</p>
-            <p>Ordenar de Z-A</p>
-        </div>
+            <div class="filter" onclick="toggleFilter()" style="margin-left: 10px;">
+                <span><i class="fa-solid fa-filter"></i></span> <!-- Icono de filtro -->
+                <span>Filtro</span>
+            </div>
+            <div id="filterOptions" class="filter-options">
+                <select id="estadoFilter" onchange="filterByEstado()">
+                    <option value="">Filtrar por estado inicial</option>
+                    <option value="Aprobado">Aprobado</option>
+                    <option value="Rechazado">Rechazado</option>
+                    <option value="Reproceso">Reproceso</option>
+                </select>
+            </div>
+            <div class="order" onclick="toggleOrderOptions()">
+                <span>Orden</span>
+                <span class="dropdown"><i class="fa-solid fa-sort-down"></i></span>
+            </div>
+            <div id="orderOptions" class="order-options">
+                <select id="fechaOrden" onchange="orderByFecha()">
+                    <option value="">Ordenar por fecha</option>
+                    <option value="asc">Más antigua</option>
+                    <option value="desc">Más reciente</option>
+                </select>
+            </div>
     </div>
 
         <section class="user-list">
@@ -161,7 +166,7 @@
         {
             @foreach (var item in ViewBag.Controles)
             {
-                <div class="user-card">
+                <div class="user-card @(item.Estado == "Aprobado" ? "estado-aprobado" : item.Estado == "Rechazado" ? "estado-rechazado" : item.Estado == "Reproceso" ? "estado-reproceso" : "")">
                     <div class="user-info">
                         <img src="~/Extras/iconControlCheck.png" class="user-icon" alt="Icono de control" />
                         <div>
@@ -170,33 +175,20 @@
                         </div>
                     </div>
                     <div class="user-details">
-                            @if (item.Estado == "Reproceso" && !string.IsNullOrEmpty(item.EstadoFinal))
-                            {
-                                <p>
-                                    Estado final:
-                                    <span class="@(item.EstadoFinal == "Aprobado" ? "aprobado" : item.EstadoFinal == "Rechazado" ? "rechazado" : "")">
-                                        @item.EstadoFinal
-                                    </span>
-                                </p>
-                            }
-                            else
-                            {
-                                <p>
-                                    Estado:
-                                    <span class="@(item.Estado == "Aprobado" ? "aprobado" : item.Estado == "Rechazado" ? "rechazado" : item.Estado == "Reproceso" ? "reproceso" : "")">
-                                        @item.Estado
-                                    </span>
-                                </p>
-                            }
-
-
-
+                            <p>
+                                Estado:
+                                <span class="@(item.Estado == "Aprobado" ? "aprobado" : item.Estado == "Rechazado" ? "rechazado" : item.Estado == "Reproceso" ? "reproceso" : "")">
+                                    @item.Estado
+                                </span>
+                            </p>
                     </div>
                     <div class="user-actions">
                             @if (isControlCalidad)
                             {
 
-
+                                <a class="see-btn" asp-action="Delete2" asp-controller="Controles" asp-route-id="@item.Id">
+                                    <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                </a>
                                 @if (item.Estado == "Reproceso" && string.IsNullOrEmpty(item.EstadoFinal))
                                 {
                                     <a class="edit-btn" asp-action="Edit2" asp-controller="Controles" asp-route-id="@item.Id">
@@ -204,24 +196,20 @@
                                     </a>
 
                                 }
-                                    <a class="see-btn" asp-action="Details2" asp-controller="Controles" asp-route-id="@item.Id">
-                                        <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
-                                    </a>
-                                    <a class="see-btn" asp-action="Delete2" asp-controller="Controles" asp-route-id="@item.Id">
-                                        <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
-                                    </a>
+                                <a class="see-btn" asp-action="Details2" asp-controller="Controles" asp-route-id="@item.Id">
+                                    <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
+                                </a>
                                 
                             }
                             @if (isEspecialista)
                             {
                                     <a class="see-btn" asp-action="Details2" asp-controller="Controles" asp-route-id="@item.Id">
-                                        <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                    <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
                                     </a>
 
                             }
                     </div>
                 </div>
-                <div></div>
             }
             }
             else
@@ -238,13 +226,61 @@
 </html>
 
 <script>
-    document.querySelector('.filter').addEventListener('click', function () {
-        let filterMenu = document.getElementById('filterMenu');
-        filterMenu.style.display = filterMenu.style.display === 'none' ? 'block' : 'none';
+    function toggleFilter() {
+        const filterOptions = document.getElementById("filterOptions");
+        filterOptions.style.display = filterOptions.style.display === "none" || filterOptions.style.display === "" ? "block" : "none";
+    }
+
+    // Filtrado por estado
+    function filterByEstado() {
+        const selectedEstado = document.getElementById("estadoFilter").value;
+        const userCards = document.querySelectorAll(".user-card");
+
+        userCards.forEach(card => {
+            const estado = card.querySelector(".user-details span").textContent.trim();
+
+            // Mostrar u ocultar según el estado seleccionado
+            if (selectedEstado === "" || estado === selectedEstado) {
+                card.style.display = "flex"; // Mostrar si coincide o si se selecciona "Todos"
+            } else {
+                card.style.display = "none"; // Ocultar si no coincide
+            }
+        });
+
+        // Ocultar el filtro después de seleccionar una opción
+        document.getElementById("filterOptions").style.display = "none";
+    }
+
+    // Cerrar el menú al hacer clic fuera
+    document.addEventListener("click", function(event) {
+        const filterOptions = document.getElementById("filterOptions");
+        const filter = document.querySelector(".filter");
+
+        // Verificar si el clic se hizo fuera del filtro o del menú desplegable
+        if (!filter.contains(event.target) && !filterOptions.contains(event.target)) {
+            filterOptions.style.display = "none";
+        }
     });
 
-    document.querySelector('.order').addEventListener('click', function () {
-        let orderMenu = document.getElementById('orderMenu');
-        orderMenu.style.display = orderMenu.style.display === 'none' ? 'block' : 'none';
+    ////////////////////////////////////////////////////////////////
+    function toggleOrderOptions() {
+        const orderOptions = document.getElementById("orderOptions");
+        orderOptions.style.display = orderOptions.style.display === "none" || orderOptions.style.display === "" ? "block" : "none";
+    }
+
+    function orderByFecha() {
+        var selectedOrder = document.getElementById("fechaOrden").value;
+        // Redirige a la acción GestionControles con el parámetro orderByDate
+        window.location.href = '@Url.Action("GestionControles", "Controles")?orderByDate=' + selectedOrder;
+    }
+
+    document.addEventListener("click", function(event) {
+        const orderOptions = document.getElementById("orderOptions");
+        const order = document.querySelector(".order");
+
+        // Solo cerrar el menú si el clic se hace fuera de .order y #orderOptions
+        if (!order.contains(event.target) && !orderOptions.contains(event.target)) {
+            orderOptions.style.display = "none";
+        }
     });
 </script>

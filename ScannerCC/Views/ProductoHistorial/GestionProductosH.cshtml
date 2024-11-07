@@ -89,12 +89,38 @@
         </div>
     </div>
     <main>
-        <div class="search-add-container">
-            <a class="add-user-btn" style="margin-left: 430px;" asp-action="Create" asp-controller="ProductoHistorial"><strong>+</strong> Añadir historial de producto</a>
+        <div class="quick-access">
+            <div class="icon-item">
+                <a asp-action="GestionProductos" asp-controller="Producto">
+                    <img src="~/Extras/productos.png" alt="PHistorial" />
+                </a>
+                <span>Productos</span>
+            </div>
+            <div class="icon-item">
+                <a asp-action="GestionInformacion" asp-controller="InformacionQuimica">
+                    <img src="~/Extras/infq.png" alt="Informacion" />
+                </a>
+                <span>Información química</span>
+            </div>
+            <div class="icon-item">
+                <a asp-action="GestionBotellas" asp-controller="BotellaDetalles">
+                    <img src="~/Extras/botellad.png" alt="Botellas" />
+                </a>
+                <span>Botellas</span>
+            </div>
+            <div class="icon-item">
+                <a asp-action="GestionProductosD" asp-controller="ProductoDetalles">
+                    <img src="~/Extras/prod.png" alt="PDetalles" />
+                </a>
+                <span>Detalles de productos</span>
+            </div>
         </div>
 
         <section class="historial-list">
-            <h2 class="titulo" style="margin-top: 5px;">Registros</h2>
+            <div class="search-add-container">
+                <h2 class="titulo" style="margin-top: 5px;">Registros</h2>
+                <a class="add-user-btn" style="margin-left: 320px;" asp-action="Create" asp-controller="ProductoHistorial"><strong>+</strong> Añadir historial de producto</a>
+            </div>
 
             <!-- Sección de productos en estilo de tarjeta -->
             @if (ViewBag.ProductoHistorial != null && ViewBag.ProductoHistorial.Count > 0)
@@ -115,14 +141,14 @@
                             </div>
                         </div>
                         <div class="product-actions">
+                            <a class="see-btn" href="@Url.Action("Delete", "ProductoHistorial", new { id = item.Id })">
+                                <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                            </a>
                             <a class="edit-btn" href="@Url.Action("Edit", "ProductoHistorial", new { id = item.Id })">
                                 <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
                             </a>
                             <a class="see-btn" href="@Url.Action("Details", "ProductoHistorial", new { id = item.Id })">
-                                <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
-                            </a>
-                            <a class="see-btn" href="@Url.Action("Delete", "ProductoHistorial", new { id = item.Id })">
-                                <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
                             </a>
                         </div>
                     </div>

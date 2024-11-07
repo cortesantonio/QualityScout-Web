@@ -32,7 +32,7 @@ body {
 .content {
     position: relative;
     z-index: 1; /* Asegura que el contenido esté por encima de las imágenes de fondo */
-    padding: 20px;
+    padding: 15px;
 }
 
 header {
@@ -64,6 +64,7 @@ nav {
     padding: 5px 10px;
     border-radius: 5px;
     margin-right: 10px;
+    font-family: Arial;
     /*font-size: 1.2rem;*/
 }
 
@@ -120,10 +121,6 @@ nav {
     text-align: left;
 }
 
-p {
-    font-family: Arial;
-}
-
 .welcome-text {
     color: #fff;
     font-family: Arial;
@@ -164,20 +161,15 @@ p {
     margin-top: -4%;
 }
 
-.content {
-    padding: 15px;
-}
-
 .accesotitulo {
     display: flex;
     justify-content: start;
     margin-left: 9%;
-    margin-bottom: 30px;
-    font-size: 200%;
+    margin-bottom: 15px;
+    font-size: 190%;
     font-family: Arial;
     font-optical-sizing: auto;
-    font-style: normal;
-    font-weight: 300;
+    font-weight: bold;
 }
 
 .user-card {
@@ -239,15 +231,6 @@ select {
     border-radius: 5px;
     padding: 5px;
     color: #605e5e;
-}
-
-p {
-    color: #605e5e;
-    font-size: 8px;
-    font-family: Arial;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-weight: 300;
 }
 
 #showOptionUser {

@@ -89,13 +89,39 @@
         </div>
     </div>
 <main>
-    <div class="search-add-container">
-            <a class="add-user-btn" style="margin-left: 400px;" asp-action="Create" asp-controller="InformacionQuimica"><strong>+</strong> Añadir información química</a>
-    </div>
+        <div class="quick-access">
+            <div class="icon-item">
+                <a asp-action="GestionProductos" asp-controller="Producto">
+                    <img src="~/Extras/productos.png" alt="PHistorial" />
+                </a>
+                <span>Productos</span>
+            </div>
+            <div class="icon-item">
+                <a asp-action="GestionBotellas" asp-controller="BotellaDetalles">
+                    <img src="~/Extras/botellad.png" alt="Botellas" />
+                </a>
+                <span>Botellas</span>
+            </div>
+            <div class="icon-item">
+                <a asp-action="GestionProductosD" asp-controller="ProductoDetalles">
+                    <img src="~/Extras/prod.png" alt="PDetalles" />
+                </a>
+                <span>Detalles de productos</span>
+            </div>
+            <div class="icon-item">
+                <a asp-action="GestionProductosH" asp-controller="ProductoHistorial">
+                    <img src="~/Extras/proh.png" alt="PHistorial" />
+                </a>
+                <span>Historiales de productos</span>
+            </div>
+        </div>
+
 
     <section class="info-list">
-            <h2 class="titulo" style="margin-top: 5px;">Registros</h2>
-
+            <div class="search-add-container">
+                <h2 class="titulo" style="margin-top: 5px;">Registros</h2>
+                <a class="add-user-btn" style="margin-left: 320px;" asp-action="Create" asp-controller="InformacionQuimica"><strong>+</strong> Añadir información química</a>
+            </div>
         @if (ViewBag.InformacionQuimica != null && ViewBag.InformacionQuimica.Count > 0)
         {
             @foreach (var item in ViewBag.InformacionQuimica)
@@ -110,15 +136,15 @@
                         <p><strong>Máximo de Azúcar:</strong> @item.MaxAzucar</p>
                     </div>
                     <div class="info-actions" >
+                            <a class="see-btn" asp-action="Delete" asp-controller="InformacionQuimica" asp-route-id="@item.Id">
+                                <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                            </a>
                         <a class="edit-btn" style="margin-left: 5px;" asp-action="Edit" asp-controller="InformacionQuimica" asp-route-id="@item.Id">
                             <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
                         </a>
-                        <a class="see-btn" asp-action="Details" asp-controller="InformacionQuimica" asp-route-id="@item.Id">
-                            <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
-                        </a>
-                        <a class="see-btn" asp-action="Delete" asp-controller="InformacionQuimica" asp-route-id="@item.Id">
-                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
-                        </a>
+                            <a class="see-btn" asp-action="Details" asp-controller="InformacionQuimica" asp-route-id="@item.Id">
+                                <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
+                            </a>
                     </div>
                 </div>
             }

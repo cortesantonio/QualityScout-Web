@@ -35,6 +35,7 @@
         padding: 5px; /* Espaciado interno */
         border-radius: 5px; /* Bordes redondeados (opcional) */
         font-family: Arial;
+        font-size: 12px;
         border: none;
     }
 
@@ -241,13 +242,13 @@
                 <label asp-for="UnidadMedida" class="control-label">Unidad de medida en etiqueta</label>
                     <select asp-for="UnidadMedida" name="UnidadMedida" id="UnidadMedida" class="form-control">
                         <option value="">Seleccione una unidad de medida</option>
-                        <option value="Incoloro">Onzas (oz)</option>
-                        <option value="Ámbar">Mililitros (ml)</option>
-                        <option value="Blanca">Litros (l)</option>
-                        <option value="Verde">Centilitros (cl)</option>
-                        <option value="Roja">Gramos (g9</option>
-                        <option value="Negra">Kilogramos (kg)</option>
-                        <option value="Gris">Galones (gal)</option>
+                        <option value="Onzas (oz)">Onzas (oz)</option>
+                        <option value="Mililitros (ml)">Mililitros (ml)</option>
+                        <option value="Litros (l)">Litros (l)</option>
+                        <option value="Centilitros (cl)">Centilitros (cl)</option>
+                        <option value="Gramos (g)">Gramos (g)</option>
+                        <option value="Kilogramos (kg)">Kilogramos (kg)</option>
+                        <option value="Galones (gal)">Galones (gal)</option>
                     </select>
             </div>
             <div class="form-group">
@@ -256,7 +257,7 @@
                 <span asp-validation-for="DescripcionCapsula" class="text-danger"></span>
             </div>
                 <div class="form-groupp">
-                    <button type="submit" class="btnAccionForm" style="margin-bottom: 20px;">
+                    <button type="submit" class="btnAccionForm" style="margin-bottom: 50px;">
                         <i class="fa-solid fa-wine-bottle"></i> Agregar producto
                     </button>
                 </div>

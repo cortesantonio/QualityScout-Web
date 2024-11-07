@@ -1,0 +1,76 @@
+﻿/* CSS para la estructura general y layout */
+.main-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1300px;
+    margin: auto;
+}
+
+.image-container {
+    width: 300px;
+}
+
+.box {
+    width: 100%;
+    overflow: hidden;
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+.details-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 20px;
+    width: 100%;
+}
+
+@media (max-width: 992px) {
+    .details-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .details-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* CSS de estilos específicos para .ner y .con */
+.ner {
+    z-index: 1;
+    max-width: 700px;
+    margin: 0;
+}
+
+.con {
+    z-index: 1;
+    margin: 0;
+    /* Evita establecer un ancho aquí para no interferir con el grid */
+}
+
+
+.box {
+    width: 255px;
+    height: 372px;
+    overflow: hidden;
+}
+
+.box img {
+    width: 100%;
+    height: auto;
+}
+
+@supports(object-fit: cover) {
+    .box img {
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+}

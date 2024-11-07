@@ -32,7 +32,7 @@ body {
 .content {
     position: relative;
     z-index: 1; /* Asegura que el contenido esté por encima de las imágenes de fondo */
-    padding: 20px;
+    padding: 15px;
 }
 
 header {
@@ -160,16 +160,12 @@ nav {
     margin-top: -4%;
 }
 
-.content {
-    padding: 15px;
-}
-
 .accesotitulo {
     display: flex;
     justify-content: start;
     margin-left: 9%;
-    margin-bottom: 30px;
-    font-size: 200%;
+    margin-bottom: 15px;
+    font-size: 190%;
     font-family: Arial;
     font-optical-sizing: auto;
     font-style: normal;
@@ -233,69 +229,29 @@ p {
     font-weight: 300;
 }
 
-.user-cardA {
-    display: flex;
-    width: 55%;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #17890014;
-    padding: 15px;
-    border-bottom: #260202;
-    margin-bottom: 15px;
-    margin-left: 21%;
-    border-bottom: 1px solid #260202;
-    font-family: Arial;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-weight: 300;
-}
-
-.user-cardB {
-    display: flex;
-    width: 55%;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ff000013;
-    padding: 15px;
-    border-bottom: #260202;
-    margin-bottom: 15px;
-    margin-left: 21%;
-    border-bottom: 1px solid #260202;
-    font-family: Arial;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-weight: 300;
-}
-
-.user-cardC {
-    display: flex;
-    width: 55%;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #00007d17;
-    padding: 15px;
-    border-bottom: #260202;
-    margin-bottom: 15px;
-    margin-left: 21%;
-    border-bottom: 1px solid #260202;
-    font-family: Arial;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-weight: 300;
-}
-
 .user-card {
     display: flex;
     width: 55%;
     justify-content: space-between;
     align-items: center;
-    background-color: transparent;
     padding: 15px;
-    border-bottom: #260202;
+    border-bottom: 1px solid #260202;
     margin-bottom: 15px;
     margin-left: 21%;
-    border-bottom: 1px solid #260202;
 }
+
+.estado-aprobado {
+    background-color: #E0E9DE;
+}
+
+.estado-rechazado {
+    background-color: #F2E5E5;
+}
+
+.estado-reproceso {
+    background-color: #E5E5EB;
+}
+
 
 .user-info {
     display: flex;
@@ -363,40 +319,60 @@ p {
     position: relative;
 }
 
-.filter, .order {
+.filter {
     display: flex;
     align-items: center;
+    gap: 8px;
     cursor: pointer;
     position: relative;
 }
 
-    .filter span, .order span {
-        margin-right: 5px;
-    }
-
-.dropdown {
-    font-size: 12px;
-}
-
-.dropdown-menu {
+#filterOptions {
+    display: none; /* Oculto por defecto */
     position: absolute;
+    top: 100%;
+    left: 0;
     background-color: white;
     border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    top: 100%;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 1;
+    width: 180px;
 }
 
-    .dropdown-menu p {
-        margin: 0;
-        padding: 5px 0;
-        cursor: pointer;
+#filterOptions select {
+    width: 100%;
+    padding: 2px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.order {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    position: relative;
+}
+
+#orderOptions {
+    display: none; /* Oculto por defecto */
+    position: absolute;
+    top: 100%; /* Alineado justo debajo de "Orden" */
+    left: 10%;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1;
+    width: 150px;
+}
+
+    #orderOptions select {
+        width: 100%;
+        padding: 2px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
     }
 
-        .dropdown-menu p:hover {
-            background-color: #f0f0f0;
-        }
 
 .aprobado {
     color: green;

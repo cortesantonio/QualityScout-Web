@@ -218,9 +218,6 @@
     <div class="search-add-container">
             <form asp-action="GestionInformes" method="get" class="search-b" style="display:inline;">
                 <input type="text" placeholder="🔍 Busca por titulo o enfoque" class="search-bar" name="Busqueda" />
-                <button type="submit" style="border:none; background:none;">
-                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
-                </button>
             </form>
 
     </div>
@@ -255,7 +252,7 @@
                                     <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
                                 </a>
                                 <a class="see-btn" asp-action="Details" asp-controller="Informes" asp-route-id="@item.Id">
-                                    <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                    <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
                                 </a>
                                 <a class="see-btn" asp-action="Delete" asp-controller="Informes" asp-route-id="@item.Id">
                                     <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
@@ -265,7 +262,7 @@
                             @if (isControlCalidad)
                             {
                                 <a class="see-btn" asp-action="Details" asp-controller="Informes" asp-route-id="@item.Id">
-                                    <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+                                    <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
                                 </a>
                             }
 
@@ -291,9 +288,9 @@
             </dt>
             <dd>
             </dd>
-            <p style="font-size: 10px; margin-top: 10px; font-weight: lighter;">Podrás encontrar los informes generados en registros.</p>
+            <p style="font-size: 10px; margin-top: 10px; font-style:italic;">Podrás encontrar los informes generados en registros.</p>
             <div class="d-flex justify-content-between w-100" style="margin-left: 5px; margin-top: 15px;">
-                <input onclick="closeModal()" type="submit" value="Generar" class="acc btn btn-danger" />
+                <input onclick="closeModal()" type="submit" value="Generar" class="acc btn btn-danger"/>
                 <button onclick="closeModal()" class="btn btn-secondary">Cancelar</button>
             </div>
 

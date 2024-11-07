@@ -32,7 +32,7 @@ body {
 .content {
     position: relative;
     z-index: 1; /* Asegura que el contenido esté por encima de las imágenes de fondo */
-    padding: 20px;
+    padding: 15px;
 }
 
 header {
@@ -160,16 +160,12 @@ nav {
     margin-top: -4%;
 }
 
-.content {
-    padding: 15px;
-}
-
 .accesotitulo {
     display: flex;
     justify-content: start;
     margin-left: 9%;
-    margin-bottom: 30px;
-    font-size: 200%;
+    margin-bottom: 15px;
+    font-size: 190%;
     font-family: Arial;
 }
 
@@ -188,9 +184,8 @@ p {
 
 .search-add-container {
     display: flex;
-    margin: 0% 27.5%;
+    margin: 0% 21%;
     width: 60%;
-    align-items: center;
 }
 
 .search-bar {
@@ -219,9 +214,9 @@ p {
 }
 
 .titulo {
-    margin-left: 22%;
     font-size: 17px;
     font-family: Arial;
+    color: black;
 }
 
 .info-list h2 {
@@ -241,6 +236,7 @@ p {
     margin-bottom: 15px;
     margin-left: 21%;
     border-bottom: 1px solid #260202;
+    font-family: Arial;
 }
 
 .info-info {
@@ -360,6 +356,34 @@ button {
 /* Texto destacado en rojo */
 .desactivar {
     color: #f25757;
+}
+
+.quick-access {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-family: Arial;
+}
+
+.icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+}
+
+    .icon-item img {
+        width: 50px;
+        height: 50px;
+        background-color: #260202;
+        border-radius: 50%;
+        padding: 5px;
+    }
+
+
+span {
+    margin-top: 5px;
+    font-size: 85%;
 }
 
 #showOptionUser {

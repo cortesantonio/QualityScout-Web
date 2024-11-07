@@ -109,16 +109,15 @@
         </nav>
     </header>
     <div class="content">
-        <h2 class="accesotitulo">Gestión de usuarios</h2>
+        <div class="content">
+            <h2 class="accesotitulo">Gestión de usuarios</h2>
+        </div>
     </div>
 
     <main>
         <div class="search-add-container">
             <form asp-action="GestionUsuarios" method="get" class="search-b" style="display:inline;">
                 <input type="text" placeholder="🔍 Busca por rut o nombre" class="search-bar" name="Busqueda" />
-                <button type="submit" style="border:none; background:none;">
-                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
-                </button>
             </form>
             <a class="add-user-btn" href="@Url.Action("Create", "Usuario")"><strong>+</strong> Añadir usuario</a>
         </div>

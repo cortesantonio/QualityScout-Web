@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "a9fxsx1CiqXZUXcdyU73m52Y0GMht7EslC5dNZmMBHI=",
+  "Hash": "12HNrKpF1Kr3EPyFfRpSDu8BxB0jAj3MzpmjTfIwCWg=",
   "Source": "QualityScout",
   "BasePath": "_content/QualityScout",
   "Mode": "Default",
@@ -262,6 +262,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\GestionUsuario.css"
+    },
+    {
+      "Identity": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\ImgP.css",
+      "SourceId": "QualityScout",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\",
+      "BasePath": "_content/QualityScout",
+      "RelativePath": "css/ImgP.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\ImgP.css"
     },
     {
       "Identity": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\IndicadorHome.css",
