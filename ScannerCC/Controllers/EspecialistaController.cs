@@ -29,30 +29,28 @@ namespace ScannerCC.Controllers
         private async Task<InfoViewModel> GetInfoStats()
         {
             // Cálculo de totales actuales para controles
-            var controlesAprobados = _context.Controles
+            var controlesAprobados = await _context.Controles
                 .Where(c => c.Estado != null && c.Estado.Contains("Aprobado"))
-                .Count();
+                .CountAsync();
 
-            var controlesReprocesados = _context.Controles
+            var controlesReprocesados = await _context.Controles
                 .Where(c => c.Estado != null && c.Estado.Contains("Reproceso"))
-                .Count();
+                .CountAsync();
 
-            var controlesRechazados = _context.Controles
+            var controlesRechazados = await _context.Controles
                 .Where(c => c.Estado != null && c.Estado.Contains("Rechazado"))
-                .Count();
+                .CountAsync();
 
             // Obtener la fecha del mes más antiguo
             DateTime fechaAntigua;
-
             if (await _context.Controles.AnyAsync(c => c.FechaHoraPrimerControl != null))
             {
                 fechaAntigua = await _context.Controles.MinAsync(c => c.FechaHoraPrimerControl);
             }
             else
             {
-                fechaAntigua = DateTime.Now;  // O algún valor por defecto que prefieras
+                fechaAntigua = DateTime.Now;  // Valor por defecto
             }
-
 
             // Cálculo de controles en el mes más antiguo
             var controlesAntiguoAprobados = await _context.Controles
@@ -62,21 +60,24 @@ namespace ScannerCC.Controllers
 
             var controlesAntiguoReprocesados = await _context.Controles
                 .CountAsync(c => c.Estado == "Reproceso" &&
-                                c.FechaHoraPrimerControl.Month == fechaAntigua.Month &&
-                                c.FechaHoraPrimerControl.Year == fechaAntigua.Year);
+                                 c.FechaHoraPrimerControl.Month == fechaAntigua.Month &&
+                                 c.FechaHoraPrimerControl.Year == fechaAntigua.Year);
 
             var controlesAntiguoRechazados = await _context.Controles
                 .CountAsync(c => c.Estado == "Rechazado" &&
-                                c.FechaHoraPrimerControl.Month == fechaAntigua.Month &&
-                                c.FechaHoraPrimerControl.Year == fechaAntigua.Year);
+                                 c.FechaHoraPrimerControl.Month == fechaAntigua.Month &&
+                                 c.FechaHoraPrimerControl.Year == fechaAntigua.Year);
+
+            // Calcular el total de controles en el mes antiguo
+            var totalControlesMesAntiguo = controlesAntiguoAprobados + controlesAntiguoReprocesados + controlesAntiguoRechazados;
 
             // Función para calcular porcentajes
-            string CalcularPorcentaje(int controlesAntiguo, int totalControles)
+            string CalcularPorcentaje(int controlesAntiguo, int totalControlesMesAntiguo)
             {
-                if (controlesAntiguo == 0 || totalControles == 0)
+                if (controlesAntiguo == 0 || totalControlesMesAntiguo == 0)
                     return "0%";
 
-                var porcentaje = (decimal)controlesAntiguo / totalControles * 100;
+                var porcentaje = (decimal)controlesAntiguo / totalControlesMesAntiguo * 100;
                 return $"{Math.Round(porcentaje, 0)}%";
             }
 
@@ -85,13 +86,14 @@ namespace ScannerCC.Controllers
                 ControlesAprobados = controlesAprobados,
                 ControlesReprocesados = controlesReprocesados,
                 ControlesRechazados = controlesRechazados,
-                AprobadosMesAntiguo = CalcularPorcentaje(controlesAntiguoAprobados, controlesAprobados),
-                ReprocesadosMesAntiguo = CalcularPorcentaje(controlesAntiguoReprocesados, controlesReprocesados),
-                RechazadosMesAntiguo = CalcularPorcentaje(controlesAntiguoRechazados, controlesRechazados),
+                AprobadosMesAntiguo = CalcularPorcentaje(controlesAntiguoAprobados, totalControlesMesAntiguo),
+                ReprocesadosMesAntiguo = CalcularPorcentaje(controlesAntiguoReprocesados, totalControlesMesAntiguo),
+                RechazadosMesAntiguo = CalcularPorcentaje(controlesAntiguoRechazados, totalControlesMesAntiguo),
                 MesAnterior = fechaAntigua.ToString("MMMM", new CultureInfo("es-ES")),
                 AnioAnterior = fechaAntigua.Year
             };
         }
+
 
         // GET: AdministradorController
         public async Task<IActionResult> Index(string Busqueda, string BusquedaUsuarios)

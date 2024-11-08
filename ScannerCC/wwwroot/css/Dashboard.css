@@ -233,6 +233,85 @@ select {
     color: #605e5e;
 }
 
+.iframe-text {
+    position: absolute;
+    text-align: center;
+    left: 19%;
+    top: 5%;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-family:Arial;
+}
+
+.iframe-text1 {
+    position: absolute;
+    text-align: center;
+    left: 62%;
+    top: 5%;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-family: Arial;
+}
+
+.iframe-text2 {
+    position: absolute;
+    text-align: center;
+    left: 55%;
+    top: 26%;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-family: Arial;
+}
+
+.iframe-text3 {
+    position: absolute;
+    text-align: center;
+    left:25%;
+    top: 51%;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-family: Arial;
+}
+
+.iframe-text4 {
+    position: absolute;
+    text-align: center;
+    left: 60%;
+    top: 51%;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-family: Arial;
+}
+
+.iframe-text5 {
+    position: absolute;
+    text-align: center;
+    left: 59%;
+    top: 73%;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-family: Arial;
+}
+
+
 #showOptionUser {
     background: none;
     border: none;

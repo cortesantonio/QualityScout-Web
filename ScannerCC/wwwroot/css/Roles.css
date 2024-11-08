@@ -291,6 +291,19 @@ iframe {
     border: none; /* Quita el borde del iframe */
 }
 
+.iframe-text {
+    position: absolute;
+    text-align: center;
+    left: 38%;
+    top: 22%;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-family: Arial;
+}
+
 #showOptionUser {
     background: none;
     border: none;
