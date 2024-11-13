@@ -72,15 +72,15 @@ namespace ScannerCC.Controllers
                 else
                 {
                     //Usuario correcto pero contraseña mala
-                    ModelState.AddModelError("", "Contraseña Incorrecta");
-                    return RedirectToAction("Index", "Home");
+                    ModelState.AddModelError("", "Contraseña incorrecta");
+                    return RedirectToAction("Index2", "Home");
                 }
             }
             else
             {
                 //Usuario No Existe
-                ModelState.AddModelError("", "Usuario no Encontrado!");
-                return RedirectToAction("Index", "Home");
+                ModelState.AddModelError("", "Usuario no encontrado!");
+                return RedirectToAction("Index2", "Home");
             }
         }
 
@@ -117,7 +117,7 @@ namespace ScannerCC.Controllers
             {
                 //el usuario ya esta registrado con el Rut ingresado
                 ModelState.AddModelError("", "RUT ya rgistrado!");
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionUsuarios", "Usuario");
                 
             }
             else
@@ -137,7 +137,7 @@ namespace ScannerCC.Controllers
                 U.PasswordSalt = passwordSalt;
                 _context.Usuario.Add(U);
                 _context.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionUsuarios", "Usuario");
             }
         }
 
@@ -150,7 +150,7 @@ namespace ScannerCC.Controllers
             if (usuario == null)
             {
                 ModelState.AddModelError("", "Usuario no encontrado.");
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionUsuarios", "Usuario");
             }
 
             // Verificar si el RolId existe en la tabla Rol
@@ -158,7 +158,7 @@ namespace ScannerCC.Controllers
             if (!rolExiste)
             {
                 ModelState.AddModelError("", "Rol no válido.");
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionUsuarios", "Usuario");
             }
 
             usuario.Nombre = Nombre;
@@ -176,7 +176,7 @@ namespace ScannerCC.Controllers
             _context.Usuario.Update(usuario);
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GestionUsuarios", "Usuario");
         }
 
         [HttpPost]
@@ -189,7 +189,7 @@ namespace ScannerCC.Controllers
             if (usuario == null)
             {
                 ModelState.AddModelError("", "Usuario no encontrado.");
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionUsuarios", "Usuario");
             }
             
             // Si se proporciona una nueva contraseña, se procede a actualizarla
@@ -206,10 +206,10 @@ namespace ScannerCC.Controllers
             else
             {
                 ModelState.AddModelError("", "La contraseña no puede estar vacía.");
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionUsuarios", "Usuario");
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GestionUsuarios", "Usuario");
         }
 
 

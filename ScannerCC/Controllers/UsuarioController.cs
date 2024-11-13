@@ -96,7 +96,7 @@ namespace ScannerCC.Controllers
 
                     _context.Add(usuario);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("GestionUsuarios", "Usuario");
                 }
                 return View();
             }
@@ -161,7 +161,7 @@ namespace ScannerCC.Controllers
                     _context.Update(usuario);
                     await _context.SaveChangesAsync();
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("GestionUsuarios", "Usuario");
                 }
                 return View();
             }
@@ -219,7 +219,7 @@ namespace ScannerCC.Controllers
                     _context.Update(usuario);
                     await _context.SaveChangesAsync();
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("GestionUsuarios", "Usuario");
                 }
                 return View();
             }
@@ -270,8 +270,7 @@ namespace ScannerCC.Controllers
 
                 _context.Update(usuario);
                 await _context.SaveChangesAsync();
-
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionUsuarios", "Usuario");
             }
             catch (Exception ex)
             {
@@ -321,7 +320,7 @@ namespace ScannerCC.Controllers
                 _context.Update(usuario);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GestionUsuarios", "Usuario");
             }
             catch (Exception ex)
             {

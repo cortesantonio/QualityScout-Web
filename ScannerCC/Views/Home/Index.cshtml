@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QualityScoutNoLog</title>
+    <title>QualityScout</title>
     <link rel="stylesheet" href="~/css/IndicadorHome.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -19,8 +19,8 @@
     <header>
         <nav class="nav-i">
             <div>
-                <a href="./QSLogin.html">
-                    <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="">
+                <a href="@Url.Action("Index", "Home")">
+                    <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo de Quality Scout">
                 </a>
             </div>
             <div class="login-btn">
@@ -38,7 +38,9 @@
             <h2 class="accesotitulo">Accesos rápidos</h2>
             <div class="quick-access">
                 <div class="icon-item">
-                    <img src="~/Extras/dashboardc.png" href="./QSLogin.html" alt="Dashboard">
+                    <a asp-action="Index2" asp-controller="Home">
+                        <img src="~/Extras/dashboardc.png" alt="Dashboard">
+                    </a>
                     <span>Dashboard</span>
                 </div>
                 <div class="icon-item">
@@ -48,19 +50,27 @@
                     <span>Usuarios</span>
                 </div>
                 <div class="icon-item">
-                    <img src="~/Extras/controles.png" href="./QSLogin.html" alt="Dashboard">
+                    <a asp-action="Index2" asp-controller="Home">
+                        <img src="~/Extras/controles.png" alt="Controles">
+                    </a>
                     <span>Controles</span>
                 </div>
                 <div class="icon-item">
-                    <img src="~/Extras/productos.png" href="./QSLogin.html" alt="Dashboard">
+                    <a asp-action="Index2" asp-controller="Home">
+                        <img src="~/Extras/productos.png" alt="Productos" />
+                    </a>
                     <span>Productos</span>
                 </div>
                 <div class="icon-item">
-                    <img src="~/Extras/informes.png" href="./QSLogin.html" alt="Dashboard">
+                    <a asp-action="Index2" asp-controller="Home">
+                        <img src="~/Extras/Informes.png" alt="Informes" />
+                    </a>
                     <span>Informes</span>
                 </div>
                 <div class="icon-item">
-                    <img src="~/Extras/escanera.png" alt="Informes" />
+                    <a asp-action="Index2" asp-controller="Home">
+                        <img src="~/Extras/escanera.png" alt="Escaner" />
+                    </a>
                     <span>Escaneos</span>
                 </div>
             </div>

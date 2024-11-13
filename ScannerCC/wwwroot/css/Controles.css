@@ -246,14 +246,14 @@ p {
 }
 
 .value {
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
     color: black;
     margin-bottom: 5px;
 }
 
 .label {
-    font-size: 14px;
+    font-size: 20px;
     color: black;
 }
 
