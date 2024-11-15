@@ -96,6 +96,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/Extras/favicon.png" type="image/x-icon">
     <title>QS - Registrar nueva botella</title>
     <link rel="stylesheet" href="~/css/Nav.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -185,8 +186,16 @@
             <div class="row">
                     <div class="form-group">
                         <label asp-for="NombreBotella" class="control-label">Nombre botella</label>
-                        <input asp-for="NombreBotella" class="form-control" />
-                        <span asp-validation-for="NombreBotella" class="text-danger"></span>
+                        <select asp-for="NombreBotella" name="NombreBotella" id="NombreBotella" class="form-control">
+                            <option value="">Seleccione una opción</option>
+                            <option value="Borgoña">Borgoña</option>
+                            <option value="Botellín">Botellín</option>
+                            <option value="Botellón">Botellón</option>
+                            <option value="Cónica alta">Cónica alta</option>
+                            <option value="Cónica baja">Cónica baja</option>
+                            <option value="Maule">Maule</option>
+                            <option value="Rapel">Rapel</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label asp-for="AlturaBotella" class="control-label">Altura de la botella (cm)</label>

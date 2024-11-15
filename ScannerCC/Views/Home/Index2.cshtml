@@ -9,6 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/Extras/favicon.png" type="image/x-icon">
     <title>QS - Login</title>
     <link rel="stylesheet" href="~/css/LoginD.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -29,11 +30,25 @@
         <div class="login-box">
             <h2>ACCESO</h2>
             <p>Inicie sesión para continuar.</p>
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger" style="color: #92000A; margin-bottom: 15px; font-family: Arial; font-size: 14px;">
+                    @TempData["ErrorMessage"]
+                </div>
+            }
+
             <form asp-action="Login" asp-controller="Auth" method="post">
                 <label for="email">RUT</label>
-                <input type="text" id="" name="user" placeholder="12.345.678-9" required>
+                <input type="text" id="" name="user" placeholder="X.XXX.XXX-X" maxlength="12" oninput="formatRut(this)" required>
                 <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" placeholder="******" required>
+                <div class="input-container" style="position: relative;">
+                    <input type="password" id="password" name="password" placeholder="********" required />
+                    <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()"
+                            style="position: absolute; left: 270px; top: 10%; transform: translateY(-50%); background: transparent; border: none; color: #000; width: 30px; height: 30px; padding: 0;">
+                        <i id="toggleIcon" class="fa fa-eye-slash"></i>
+                    </button>
+                </div>
                 <button type="submit">Iniciar sesión</button>
             </form>
             <p style="margin-top: 20px; color: rgb(160, 160, 160) ;">
@@ -46,4 +61,40 @@
 </body>
 
 </html>
+
+<script>
+    function formatRut(input) {
+        // Eliminar cualquier carácter que no sea dígito o 'K/k'
+        let rut = input.value.replace(/[^\dKk]/g, '').toUpperCase();
+
+        // Formatear el RUT en función de la longitud y agregar el guion al final
+        if (rut.length <= 2) {
+            input.value = rut; // Para 1 o 2 dígitos sin puntos ni guion
+        } else if (rut.length <= 5) {
+            input.value = rut.slice(0, rut.length - 3) + '.' + rut.slice(-3); 
+        } else if (rut.length <= 7) {
+            input.value = rut.slice(0, rut.length - 6) + '.' + rut.slice(-6, -3) + '.' + rut.slice(-3); 
+        } else if (rut.length === 8) {
+            input.value = rut.slice(0, rut.length - 7) + '.' + rut.slice(-7, -4) + '.' + rut.slice(-4, -1) + '-' + rut.slice(-1); 
+        } else {
+            // Mantener el formato completo con puntos y guion si hay más de 8 caracteres
+            input.value = rut.slice(0, 2) + '.' + rut.slice(2, 5) + '.' + rut.slice(5, 8) + '-' + rut.slice(8);
+        }
+    }
+
+    function togglePassword() {
+        const passwordField = document.getElementById("password");
+        const toggleIcon = document.getElementById("toggleIcon");
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleIcon.classList.remove("fa-eye-slash");
+            toggleIcon.classList.add("fa-eye");  // Cambiar a ojo abierto
+        } else {
+            passwordField.type = "password";
+            toggleIcon.classList.remove("fa-eye");
+            toggleIcon.classList.add("fa-eye-slash");  // Cambiar a ojo cerrado
+        }
+    }
+</script>
 

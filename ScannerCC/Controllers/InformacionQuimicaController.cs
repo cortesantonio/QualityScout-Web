@@ -16,6 +16,7 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Especialista")]
         public IActionResult GestionInformacion()
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -26,6 +27,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Informacion/Details
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Details(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -93,6 +95,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Informacion/Edit
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();

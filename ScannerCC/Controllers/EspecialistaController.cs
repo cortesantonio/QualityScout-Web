@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QualityScout.Models;
@@ -18,6 +19,7 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Especialista")]
         public IActionResult Dashboard()
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -26,6 +28,7 @@ namespace ScannerCC.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Especialista")]
         private async Task<InfoViewModel> GetInfoStats()
         {
             // Cálculo de totales actuales para controles
@@ -96,6 +99,7 @@ namespace ScannerCC.Controllers
 
 
         // GET: AdministradorController
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Index(string Busqueda, string BusquedaUsuarios)
         {
             var stats = new InfoViewModel();

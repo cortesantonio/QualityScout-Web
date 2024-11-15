@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QualityScout.Models;
@@ -16,6 +17,7 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Control de Calidad")]
         private async Task<InfoViewModel> GetInfoStats()
         {
             // Cálculo de totales actuales para controles
@@ -86,6 +88,7 @@ namespace ScannerCC.Controllers
 
 
         // GET: ControlcalidadController
+        [Authorize(Roles = "Control de Calidad")]
         public async Task<IActionResult> Index(string Busqueda)
         {
             var stats = new InfoViewModel();

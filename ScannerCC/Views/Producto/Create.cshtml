@@ -95,6 +95,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/Extras/favicon.png" type="image/x-icon">
     <title>QS - Resgistar nuevo producto</title>
     <link rel="stylesheet" href="~/css/Nav.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -210,30 +211,29 @@
                 <label asp-for="PaisDestino" class="control-label">País de destino</label>
                     <select asp-for="PaisDestino" name="PaisDestino" id="PaisDestino" class="form-control">
                         <option value="">Seleccione un país</option>
+                        <option value="Brasil">Brasil</option>
+                        <option value="Canadá">Canadá</option>
                         <option value="Chile">Chile</option>
-                        <option value="Argentina">Argentina</option>
-                        <option value="Francia">Francia</option>
-                        <option value="Italia">Italia</option>
+                        <option value="Colombia">Colombia</option>
                         <option value="España">España</option>
                         <option value="Estados Unidos">Estados Unidos</option>
-                        <option value="Australia">Australia</option>
-                        <option value="Sudáfrica">Sudáfrica</option>
-                        <option value="Portugal">Portugal</option>
-                        <option value="Nueva Zelanda">Nueva Zelanda</option>
+                        <option value="Japón">Japón</option>
+                        <option value="México">México</option>
+                        <option value="Perú">Perú</option>
+                        <option value="República Checa">República Checa</option>
+                        <option value="Rusia">Rusia</option>
+                        <option value="Turquía">Turquía</option>
+                        <option value="Ucrania">Ucrania</option>
+                        <option value="Venezuela">Venezuela</option>
                     </select>
             </div>
             <div class="form-group">
                 <label asp-for="Idioma" class="control-label">Idioma información</label>
                     <select asp-for="Idioma" name="Idioma" id="Idioma" class="form-control">
                         <option value="">Seleccione un idioma</option>
-                        <option value="Inglés">Inglés</option>
-                        <option value="Árabe">Árabe</option>
-                        <option value="Español">Español</option>
-                        <option value="Francés">Francés</option>
-                        <option value="Italiano">Italiano</option>
-                        <option value="Alemán">Alemán</option>
-                        <option value="Portugués">Portugués</option>
                         <option value="Chino">Chino</option>
+                        <option value="Español">Español</option>
+                        <option value="Inglés">Inglés</option>
                         <option value="Japonés">Japonés</option>
                         <option value="Ruso">Ruso</option>
                     </select>
@@ -242,13 +242,8 @@
                 <label asp-for="UnidadMedida" class="control-label">Unidad de medida en etiqueta</label>
                     <select asp-for="UnidadMedida" name="UnidadMedida" id="UnidadMedida" class="form-control">
                         <option value="">Seleccione una unidad de medida</option>
-                        <option value="Onzas (oz)">Onzas (oz)</option>
+                        <option value="Centímetro cúbico (cc)">Centímetro cúbico (cc)</option>
                         <option value="Mililitros (ml)">Mililitros (ml)</option>
-                        <option value="Litros (l)">Litros (l)</option>
-                        <option value="Centilitros (cl)">Centilitros (cl)</option>
-                        <option value="Gramos (g)">Gramos (g)</option>
-                        <option value="Kilogramos (kg)">Kilogramos (kg)</option>
-                        <option value="Galones (gal)">Galones (gal)</option>
                     </select>
             </div>
             <div class="form-group">

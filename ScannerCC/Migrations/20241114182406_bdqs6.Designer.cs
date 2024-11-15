@@ -12,8 +12,8 @@ using ScannerCC.Models;
 namespace QualityScout.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241029061705_bdqs05")]
-    partial class bdqs05
+    [Migration("20241114182406_bdqs6")]
+    partial class bdqs6
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -15,6 +15,7 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Especialista, Control de Calidad")]
         public IActionResult GestionInformes(string Busqueda)
         {
             // Filtrar informes según el criterio de búsqueda
@@ -33,6 +34,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Informes/Details
+        [Authorize(Roles = "Especialista, Control de Calidad")]
         public async Task<IActionResult> Details(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -99,6 +101,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Informes/Edit
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();

@@ -97,7 +97,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QualityScoutNoLog</title>
+    <link rel="icon" href="~/Extras/favicon.png" type="image/x-icon">
+    <title>QS - Registrar nuevo usuario</title>
     <link rel="stylesheet" href="~/css/Nav.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -185,8 +186,8 @@
             <div class="row justify-content-center">
                     <div class="form-group">
                         <label asp-for="Rut" class="control-label">RUT</label>
-                        <input asp-for="Rut" name="Rut" class="form-control" placeholder="Rut 1.111.111-1"
-                               pattern="^\d{1,2}\.\d{3}\.\d{3}-[0-9K]$" title="Formato esperado: 1.111.111-1" />
+                        <input asp-for="Rut" name="Rut" class="form-control" placeholder="X.XXX.XXX-X"
+                               maxlength="12" oninput="formatRut(this)" />
                         <span asp-validation-for="Rut" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -204,7 +205,14 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Contraseña</label>
-                        <input name="Password" class="form-control" type="password" placeholder="***********" />
+                        <div class="input-container" style="position: relative;">
+                            <input id="password" name="Password" class="form-control" type="password" placeholder="**********"
+                                   minlength="8" title="Debe tener al menos 8 caracteres." />
+                            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()"
+                                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: #000; width: 30px; height: 30px; padding: 0;">
+                                <i id="toggleIcon" class="fa fa-eye-slash"></i>
+                            </button>
+                        </div>
                         <p class="titulos">CONTRASEÑA TEMPORAL*</p>
                     </div>
                     <div class="form-groupp">
@@ -222,6 +230,42 @@
 <script src="~/js/especialista.js"></script>
 
 </html>
+
+<script>
+    function formatRut(input) {
+        // Eliminar cualquier carácter que no sea dígito o 'K/k'
+        let rut = input.value.replace(/[^\dKk]/g, '').toUpperCase();
+
+        // Formatear el RUT en función de la longitud y agregar el guion al final
+        if (rut.length <= 2) {
+            input.value = rut; // Para 1 o 2 dígitos sin puntos ni guion
+        } else if (rut.length <= 5) {
+            input.value = rut.slice(0, rut.length - 3) + '.' + rut.slice(-3); 
+        } else if (rut.length <= 7) {
+            input.value = rut.slice(0, rut.length - 6) + '.' + rut.slice(-6, -3) + '.' + rut.slice(-3); 
+        } else if (rut.length === 8) {
+            input.value = rut.slice(0, rut.length - 7) + '.' + rut.slice(-7, -4) + '.' + rut.slice(-4, -1) + '-' + rut.slice(-1); 
+        } else {
+            // Asegurarse de mantener el formato completo si es mayor a 8 caracteres
+            input.value = rut.slice(0, 2) + '.' + rut.slice(2, 5) + '.' + rut.slice(5, 8) + '-' + rut.slice(8);
+        }
+    }
+
+    function togglePassword() {
+        const passwordField = document.getElementById("password");
+        const toggleIcon = document.getElementById("toggleIcon");
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleIcon.classList.remove("fa-eye-slash");
+            toggleIcon.classList.add("fa-eye");  // Cambiar a ojo abierto
+        } else {
+            passwordField.type = "password";
+            toggleIcon.classList.remove("fa-eye");
+            toggleIcon.classList.add("fa-eye-slash");  // Cambiar a ojo cerrado
+        }
+    }
+</script>
 
 @section Scripts {
     @{

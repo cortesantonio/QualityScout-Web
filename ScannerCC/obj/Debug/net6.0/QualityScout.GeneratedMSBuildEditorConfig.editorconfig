@@ -174,16 +174,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9IaXN0b3JpYWxcR2VzdGlvblByb2R1Y3Rvc0guY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Producto/Activar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cQWN0aXZhci5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Producto/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Producto/Desactivar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cRGVzYWN0aXZhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Producto/Details.cshtml]
@@ -206,16 +198,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Usuario/Activar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xBY3RpdmFyLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Usuario/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Usuario/Desactivar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xEZXNhY3RpdmFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Usuario/Details.cshtml]
@@ -232,10 +216,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Usuario/GestionUsuarios.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xHZXN0aW9uVXN1YXJpb3MuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/Usuario/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Alejandra/Downloads/QualityScout-Web/ScannerCC/Views/_ViewImports.cshtml]

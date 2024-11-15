@@ -81,6 +81,10 @@
       "PackagePath": "staticwebassets\\Extras\\especialista.png"
     },
     {
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\favicon.png",
+      "PackagePath": "staticwebassets\\Extras\\favicon.png"
+    },
+    {
       "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\flecha.png",
       "PackagePath": "staticwebassets\\Extras\\flecha.png"
     },
@@ -227,14 +231,6 @@
     {
       "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
-    },
-    {
-      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\img\\Brand initial Simple Logo.png",
-      "PackagePath": "staticwebassets\\img\\Brand initial Simple Logo.png"
-    },
-    {
-      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\img\\logo-cc.jpg",
-      "PackagePath": "staticwebassets\\img\\logo-cc.jpg"
     },
     {
       "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\js\\controlcalidad.js",

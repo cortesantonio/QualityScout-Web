@@ -15,6 +15,7 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Especialista")]
         public IActionResult GestionProductosH()
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -24,6 +25,7 @@ namespace ScannerCC.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Especialista")]
         // GET: ProductoH/Details
         public async Task<IActionResult> Details(int? id)
         {
@@ -98,6 +100,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: ProductoH/Edit
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();

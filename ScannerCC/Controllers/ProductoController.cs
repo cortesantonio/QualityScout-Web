@@ -20,6 +20,7 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Especialista, Control de Calidad")]
         public IActionResult GestionProductos(string Busqueda)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -41,6 +42,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Productos/Details
+        [Authorize(Roles = "Especialista, Control de Calidad")]
         public async Task<IActionResult> Details(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -139,6 +141,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Productos/Edit
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();

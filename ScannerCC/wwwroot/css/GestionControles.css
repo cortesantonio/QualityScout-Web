@@ -4,13 +4,16 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-color: white;
-    position: relative;
 }
 
     body::before {
@@ -21,12 +24,13 @@ body {
         right: 0;
         bottom: 0;
         background-image: url(../Extras/uvas.png), url(../Extras/copavinoservido.png);
-        background-position: left -1% top 41%, right bottom; /* Uvas alineadas arriba a la izquierda, copa abajo a la derecha */
+        background-position: left -1% top 41%, right bottom;
         background-repeat: no-repeat;
-        background-size: 20%, 25%; /* Ajusta el tamaño de las imágenes según sea necesario */
-        background-attachment: fixed; /* El fondo se mantiene fijo al hacer scroll */
-        opacity: 0.17; /* Ajusta la opacidad aquí */
-        z-index: -1; /* Asegura que el pseudo-elemento esté detrás del contenido */
+        background-size: 20%, 25%;
+        background-attachment: local;
+        opacity: 0.17;
+        z-index: -1;
+        pointer-events: none;
     }
 
 .content {

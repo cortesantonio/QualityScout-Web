@@ -14,6 +14,7 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Especialista")]
         public IActionResult GestionBotellas()
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -24,6 +25,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Botellas/Details
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Details(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -81,6 +83,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Botellas/Edit
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();

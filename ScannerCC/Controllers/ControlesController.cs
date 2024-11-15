@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -20,6 +21,7 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Especialista, Control de Calidad")]
         public IActionResult GestionControles(string orderByDate)
         {
             var trabajadorActivo = _context.Usuario.FirstOrDefault(t => t.Rut.Equals(User.Identity.Name));
@@ -43,6 +45,7 @@ namespace ScannerCC.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Especialista, Control de Calidad")]
         public IActionResult Controles()
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -91,6 +94,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Controles
+        [Authorize(Roles = "Control de Calidad")]
         public async Task<IActionResult> Index()
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -101,6 +105,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Controles/Details
+        [Authorize(Roles = "Especialista, Control de Calidad")]
         public async Task<IActionResult> Details2(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -123,6 +128,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Controles/Create
+        [Authorize(Roles = "Control de Calidad")]
         public IActionResult CreateControl(int? idProducto)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -139,6 +145,7 @@ namespace ScannerCC.Controllers
 
 
         // POST: Controles/Create
+        [Authorize(Roles = "Control de Calidad")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateControl(int IdProductos, string Linea, string PaisDestino, string Comentario, string Tipodecontrol, string Estado)
@@ -176,6 +183,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Controles/Edit
+        [Authorize(Roles = "Control de Calidad")]
         public async Task<IActionResult> Edit2(int id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -206,6 +214,7 @@ namespace ScannerCC.Controllers
         }
 
         // POST: Controles/Edit
+        [Authorize(Roles = "Control de Calidad")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit2(int id, string Comentario, string EstadoFinal)
@@ -260,6 +269,7 @@ namespace ScannerCC.Controllers
 
 
         // GET: Controles/Delete
+        [Authorize(Roles = "Control de Calidad")]
         public async Task<IActionResult> Delete2(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -282,6 +292,7 @@ namespace ScannerCC.Controllers
         }
 
         // POST: Controles/Delete
+        [Authorize(Roles = "Control de Calidad")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)

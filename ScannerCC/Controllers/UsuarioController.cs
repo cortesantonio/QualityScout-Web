@@ -19,6 +19,7 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Especialista")]
         public IActionResult GestionUsuarios(string Busqueda)
         {
             // Filtrar usuarios por Rut o Nombre
@@ -38,6 +39,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Usuarios/Details
+        [Authorize(Roles = "Especialista, Control de Calidad")]
         public async Task<IActionResult> Details(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -64,6 +66,7 @@ namespace ScannerCC.Controllers
 
 
         // GET: Usuarios/Create
+        [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -107,6 +110,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Usuarios/Edit
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -172,6 +176,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Usuarios/Edit
+        [Authorize(Roles = "Especialista, Control de Calidad")]
         public async Task<IActionResult> EditC(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -195,6 +200,7 @@ namespace ScannerCC.Controllers
         }
 
         // POST: Usuarios/Edit
+        [Authorize(Roles = "Especialista, Control de Calidad")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditC(int id, int Rol)
@@ -230,6 +236,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Usuarios/Desactivar
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Desactivar(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
@@ -279,6 +286,7 @@ namespace ScannerCC.Controllers
         }
 
         // GET: Usuarios/Activar
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Activar(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();

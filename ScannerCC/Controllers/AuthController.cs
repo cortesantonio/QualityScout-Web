@@ -72,14 +72,14 @@ namespace ScannerCC.Controllers
                 else
                 {
                     //Usuario correcto pero contraseña mala
-                    ModelState.AddModelError("", "Contraseña incorrecta");
+                    TempData["ErrorMessage"] = "Contraseña incorrecta. Escriba la contraseña correcta e inténtelo de nuevo.";
                     return RedirectToAction("Index2", "Home");
                 }
             }
             else
             {
                 //Usuario No Existe
-                ModelState.AddModelError("", "Usuario no encontrado!");
+                TempData["ErrorMessage"] = "Usuario no encontrado. Escriba las credenciales correctas e inténtelo de nuevo.";
                 return RedirectToAction("Index2", "Home");
             }
         }
@@ -93,9 +93,9 @@ namespace ScannerCC.Controllers
         public IActionResult CreateAdminUser()
         {
             Usuarios U = new Usuarios();
-            U.Rut = "espe";
+            U.Rut = "1.111.111-1";
             U.Email = "espe";
-            U.Nombre = "espe";
+            U.Nombre = "Espe";
             U.Token = Guid.NewGuid().ToString();
             CreatePasswordHash("espe", out byte[] passwordHash, out byte[] passwordSalt);
 
@@ -184,14 +184,17 @@ namespace ScannerCC.Controllers
         {
 
             // Buscar el usuario por ID
-            var usuario = _context.Usuario.FirstOrDefault(u => u.Id == Id);
+            var usuario = _context.Usuario
+                          .Include(u => u.Rol) 
+                          .FirstOrDefault(u => u.Id == Id);
+
 
             if (usuario == null)
             {
                 ModelState.AddModelError("", "Usuario no encontrado.");
-                return RedirectToAction("GestionUsuarios", "Usuario");
+                return RedirectToAction("Index", "Home");
             }
-            
+
             // Si se proporciona una nueva contraseña, se procede a actualizarla
             if (!string.IsNullOrEmpty(Password))
             {
@@ -206,10 +209,14 @@ namespace ScannerCC.Controllers
             else
             {
                 ModelState.AddModelError("", "La contraseña no puede estar vacía.");
-                return RedirectToAction("GestionUsuarios", "Usuario");
+                return usuario.Rol?.Nombre == "Especialista"
+                    ? RedirectToAction("Index", "Especialista")
+                    : RedirectToAction("Index", "Controlcalidad");
             }
 
-            return RedirectToAction("GestionUsuarios", "Usuario");
+            return usuario.Rol?.Nombre == "Especialista"
+                ? RedirectToAction("Index", "Especialista")
+                : RedirectToAction("Index", "Controlcalidad");
         }
 
 
