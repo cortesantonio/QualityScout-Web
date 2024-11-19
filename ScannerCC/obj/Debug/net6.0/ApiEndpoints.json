@@ -314,6 +314,115 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "QualityScout.MobileEndpoints.InformesApi",
+    "Method": "GetInformes",
+    "RelativePath": "api/InformesApi",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.InformesApi",
+    "Method": "PostInformes",
+    "RelativePath": "api/InformesApi",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "InformeReciveDTO",
+        "Type": "QualityScout.MobileEndpoints.InformesApi\u002BInformeReciveDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ScannerCC.Models.Informes",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.InformesApi",
+    "Method": "GetInformes",
+    "RelativePath": "api/InformesApi/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ScannerCC.Models.Informes",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.InformesApi",
+    "Method": "PutInformes",
+    "RelativePath": "api/InformesApi/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "informes",
+        "Type": "ScannerCC.Models.Informes",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.InformesApi",
+    "Method": "DeleteInformes",
+    "RelativePath": "api/InformesApi/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.InformesApi",
+    "Method": "GetInfoToInforme",
+    "RelativePath": "api/InformesApi/GetInfoToInforme",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "QualityScout.MobileEndpoints.ProductosApi",
     "Method": "GetProducto",
     "RelativePath": "api/ProductosApi",

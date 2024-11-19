@@ -1265,3 +1265,7 @@ C:\Users\Alejandra\Downloads\QualityScout-Web\ScannerCC\bin\Debug\net6.0\Swashbu
 C:\Users\Alejandra\Downloads\QualityScout-Web\ScannerCC\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Alejandra\Downloads\QualityScout-Web\ScannerCC\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Alejandra\Downloads\QualityScout-Web\ScannerCC\obj\Debug\net6.0\QualityScout.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\bin\Debug\net6.0\QualityScout.staticwebassets.endpoints.json
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Debug\net6.0\staticwebassets.build.endpoints.json
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Debug\net6.0\staticwebassets\msbuild.QualityScout.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Debug\net6.0\staticwebassets.upToDateCheck.txt
