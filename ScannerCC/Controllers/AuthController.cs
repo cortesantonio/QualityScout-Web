@@ -209,14 +209,39 @@ namespace ScannerCC.Controllers
             else
             {
                 ModelState.AddModelError("", "La contraseña no puede estar vacía.");
-                return usuario.Rol?.Nombre == "Especialista"
-                    ? RedirectToAction("Index", "Especialista")
-                    : RedirectToAction("Index", "Controlcalidad");
+                if (usuario.Id == Id)
+                {
+                    if (User.IsInRole("Especialista"))
+                    {
+                        return RedirectToAction("Index", "Especialista");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Controlcalidad");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
-            return usuario.Rol?.Nombre == "Especialista"
-                ? RedirectToAction("Index", "Especialista")
-                : RedirectToAction("Index", "Controlcalidad");
+            if (usuario.Id == Id) 
+            {
+                if (User.IsInRole("Especialista"))
+                {
+                    return RedirectToAction("Index", "Especialista");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Controlcalidad");
+                }
+            }
+            else 
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
         }
 
 

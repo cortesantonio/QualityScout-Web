@@ -16,11 +16,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
+<body>
 <header>
     <nav class="nav-i">
-        <a href="@Url.Action("Index", "Home")">
-            <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo de Quality Scout">
-        </a>
+            <a href="@Url.Action("RedirigirSegunRol", "Home")">
+                <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo de Quality Scout">
+            </a>
         <div class="navstyle">
             <div class="iconosnav">
                 <a asp-action="Index" asp-controller="Controlcalidad">
@@ -73,7 +74,6 @@
         </div>
     </nav>
 </header>
-<body>
     <div class="content">
         <div class="content">
             <h2 class="accesotitulo">Accesos rápidos</h2>

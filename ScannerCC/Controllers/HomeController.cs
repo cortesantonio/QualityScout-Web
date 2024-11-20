@@ -4,6 +4,7 @@ using QualityScout.Models;
 using ScannerCC.Models;
 using System.Diagnostics;
 using System.Globalization;
+using System.Security.Claims;
 
 
 namespace ScannerCC.Controllers
@@ -15,6 +16,26 @@ namespace ScannerCC.Controllers
         public HomeController(AppDbContext context)
         {
             _context = context;
+        }
+
+        public IActionResult RedirigirSegunRol()
+        {
+            if (User.Identity.IsAuthenticated) 
+            {
+                var roles = User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value);
+
+                if (roles.Contains("Especialista"))
+                {
+                    return RedirectToAction("Index", "Especialista");
+                }
+                else if (roles.Contains("Control de Calidad"))
+                {
+                    return RedirectToAction("Index", "ControlCalidad");
+                }
+            }
+
+            // Si no tiene sesión activa o no tiene un rol válido
+            return RedirectToAction("Index2", "Home");
         }
 
         private async Task<InfoViewModel> GetInfoStats()
