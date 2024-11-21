@@ -14,8 +14,7 @@
         width:100%;
     }
 
-    input, dd {
-        color: #DBD7D7; /* Color del texto */
+    input {
         border-radius: 5px; /* Bordes redondeados (opcional) */
         font-family: Arial;
         background-color: #DBD7D7;
@@ -25,7 +24,7 @@
         width: 100%;
     }
 
-        input.acc {
+        .acc {
             color: white;
             background-color: #BF6565;
             width: 30%;
@@ -40,6 +39,7 @@
         padding: 5px;
         font-size: 14px;
         }
+
 
     .modal {
         display: none; /* Oculto por defecto */
@@ -282,26 +282,41 @@
         }
     </section>
 </main>
+
+
     <div id="modal" class="modal" style="display: none;">
         <div class="modal-content">
+
+            <form asp-action="Previsualizar" method="post">
             <dt class=>
                 Titulo de informe
             </dt>
-            <dd>
-            </dd>
+
+            <input type="type" name="Titulo" value="" />
+
             <dt>
                 Características a destacar
             </dt>
-            <dd>
-            </dd>
+            <input type="type" name="enfoque" value="" />
+
             <p style="font-size: 10px; margin-top: 10px; font-style:italic;">Podrás encontrar los informes generados en registros.</p>
+
+
             <div class="d-flex justify-content-between w-100" style="margin-left: 5px; margin-top: 15px;">
-                <input onclick="closeModal()" type="submit" value="Generar" class="acc btn btn-danger"/>
-                <button onclick="closeModal()" class="btn btn-secondary">Cancelar</button>
+
+                <input type="submit" value="Generar" class="acc btn btn-danger" />
+
             </div>
 
+            </form>
+            <button onclick="closeModal()" class="btn btn-secondary">Cancelar</button>
+
+           
         </div>
     </div>
+
+
+
 </body>
 <script src="~/js/quagga.min.js"></script>
 <script src="~/js/especialista.js"></script>
@@ -318,4 +333,9 @@
     function closeModal() {
         document.getElementById('modal').style.display = 'none';
     }
+        
+
+
+
+
 </script>

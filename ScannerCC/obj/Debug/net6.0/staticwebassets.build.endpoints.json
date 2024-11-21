@@ -4513,6 +4513,88 @@
       ]
     },
     {
+      "Route": "css/PrevisualizarInforme.8w6yrr8s8a.css",
+      "AssetFile": "css/PrevisualizarInforme.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9193"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aB7THlUOlbFO/kmMmXRupltiBIe9+hUgBeekv4D33fg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 21 Nov 2024 21:28:15 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8w6yrr8s8a"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aB7THlUOlbFO/kmMmXRupltiBIe9+hUgBeekv4D33fg="
+        },
+        {
+          "Name": "label",
+          "Value": "css/PrevisualizarInforme.css"
+        }
+      ]
+    },
+    {
+      "Route": "css/PrevisualizarInforme.css",
+      "AssetFile": "css/PrevisualizarInforme.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9193"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aB7THlUOlbFO/kmMmXRupltiBIe9+hUgBeekv4D33fg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 21 Nov 2024 21:28:15 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aB7THlUOlbFO/kmMmXRupltiBIe9+hUgBeekv4D33fg="
+        }
+      ]
+    },
+    {
       "Route": "css/Roles.css",
       "AssetFile": "css/Roles.css",
       "Selectors": [],

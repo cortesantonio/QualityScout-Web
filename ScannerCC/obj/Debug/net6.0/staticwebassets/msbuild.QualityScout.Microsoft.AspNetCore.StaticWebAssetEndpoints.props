@@ -192,6 +192,18 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-ynD53TWj/8GtcngMMRUuCuAa1L/7DEB86ixJxg\u002Bty3E="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4155"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022ynD53TWj/8GtcngMMRUuCuAa1L/7DEB86ixJxg\u002Bty3E=\u0022"},{"Name":"Last-Modified","Value":"Thu, 21 Nov 2024 13:10:55 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/QualityScout/css/PrevisualizarInforme.8w6yrr8s8a.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\PrevisualizarInforme.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"8w6yrr8s8a"},{"Name":"integrity","Value":"sha256-aB7THlUOlbFO/kmMmXRupltiBIe9\u002BhUgBeekv4D33fg="},{"Name":"label","Value":"_content/QualityScout/css/PrevisualizarInforme.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"9193"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022aB7THlUOlbFO/kmMmXRupltiBIe9\u002BhUgBeekv4D33fg=\u0022"},{"Name":"Last-Modified","Value":"Thu, 21 Nov 2024 21:28:15 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/QualityScout/css/PrevisualizarInforme.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\PrevisualizarInforme.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-aB7THlUOlbFO/kmMmXRupltiBIe9\u002BhUgBeekv4D33fg="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"9193"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022aB7THlUOlbFO/kmMmXRupltiBIe9\u002BhUgBeekv4D33fg=\u0022"},{"Name":"Last-Modified","Value":"Thu, 21 Nov 2024 21:28:15 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/QualityScout/css/Roles.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\Roles.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>

@@ -14,6 +14,7 @@ wwwroot\css\IndicadorHome.css
 wwwroot\css\login.css
 wwwroot\css\LoginD.css
 wwwroot\css\Nav.css
+wwwroot\css\PrevisualizarInforme.css
 wwwroot\css\Roles.css
 wwwroot\Extras\ajustes.png
 wwwroot\Extras\bdd.png

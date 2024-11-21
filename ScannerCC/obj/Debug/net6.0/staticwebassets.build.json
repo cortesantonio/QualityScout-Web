@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "qtJkXPjnoeFZELmeKLMFZ+jLzfElSidYaxUqNTNNFOo=",
+  "Hash": "EGloY/4gsdf3cDa6pqIr1WNVFK8KVDLoqAGy1qK65nc=",
   "Source": "QualityScout",
   "BasePath": "_content/QualityScout",
   "Mode": "Default",
@@ -393,6 +393,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\Nav.css"
+    },
+    {
+      "Identity": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\PrevisualizarInforme.css",
+      "SourceId": "QualityScout",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\",
+      "BasePath": "_content/QualityScout",
+      "RelativePath": "css/PrevisualizarInforme#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "8w6yrr8s8a",
+      "Integrity": "aB7THlUOlbFO/kmMmXRupltiBIe9+hUgBeekv4D33fg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\PrevisualizarInforme.css"
     },
     {
       "Identity": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\Roles.css",
@@ -3847,6 +3868,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-ynD53TWj/8GtcngMMRUuCuAa1L/7DEB86ixJxg+ty3E="
+        }
+      ]
+    },
+    {
+      "Route": "css/PrevisualizarInforme.8w6yrr8s8a.css",
+      "AssetFile": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\PrevisualizarInforme.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9193"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aB7THlUOlbFO/kmMmXRupltiBIe9+hUgBeekv4D33fg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 21 Nov 2024 21:28:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8w6yrr8s8a"
+        },
+        {
+          "Name": "label",
+          "Value": "css/PrevisualizarInforme.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aB7THlUOlbFO/kmMmXRupltiBIe9+hUgBeekv4D33fg="
+        }
+      ]
+    },
+    {
+      "Route": "css/PrevisualizarInforme.css",
+      "AssetFile": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\PrevisualizarInforme.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9193"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aB7THlUOlbFO/kmMmXRupltiBIe9+hUgBeekv4D33fg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 21 Nov 2024 21:28:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aB7THlUOlbFO/kmMmXRupltiBIe9+hUgBeekv4D33fg="
         }
       ]
     },

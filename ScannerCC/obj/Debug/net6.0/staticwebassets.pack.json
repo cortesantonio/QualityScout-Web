@@ -221,6 +221,10 @@
       "PackagePath": "staticwebassets\\css\\Nav.css"
     },
     {
+      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\PrevisualizarInforme.css",
+      "PackagePath": "staticwebassets\\css\\PrevisualizarInforme.css"
+    },
+    {
       "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\Roles.css",
       "PackagePath": "staticwebassets\\css\\Roles.css"
     },
