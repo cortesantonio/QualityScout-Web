@@ -1,0 +1,142 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/Extras/favicon.png" type="image/x-icon">
+    <title>QS - Gestión escaneos</title>
+    <link rel="stylesheet" href="~/css/GestionEscaneos.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        .drawingBuffer{
+            display:none;
+        }
+
+        .scan-list{
+            width: 80%;
+            display: flex;
+            margin: 0 auto;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #scanner{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <nav class="nav-i">
+            <a href="@Url.Action("RedirigirSegunRol", "Home")">
+                <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo de Quality Scout">
+            </a>
+            <div class="navstyle">
+                <div class="iconosnav">
+                    <a asp-action="Index" asp-controller="Especialista">
+                        <img src="~/Extras/home.png" alt="Inicio" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionUsuarios" asp-controller="Usuario">
+                        <img src="~/Extras/usuarios.png" alt="Usuarios" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="Controles" asp-controller="Controles">
+                        <img src="~/Extras/controles.png" alt="Controles" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionProductos" asp-controller="Producto">
+                        <img src="~/Extras/productos.png" alt="Productos" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionInformes" asp-controller="Informes">
+                        <img src="~/Extras/Informes.png" alt="Informes" />
+                    </a>
+                </div>
+                <div class="iconosnav">
+                    <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                        <img src="~/Extras/escaner.png" alt="Informes" />
+                    </a>
+                </div>
+            </div>
+            
+        </nav>
+    </header>
+
+    <div class="content">
+        <div class="content">
+            <h2 class="accesotitulo">Escáner</h2>
+        </div>
+    </div>
+    <main>
+        <section class="scan-list">
+            <div id="scanner"></div>
+            <h3>Resultado:</h3>
+            <p id="result">Esperando código de barras...</p>
+        </section>
+        <form action="/" method="post"></form>
+    </main>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const resultOutput = document.getElementById("result");
+
+        function startScanner() {
+            Quagga.init({
+                inputStream: {
+                    name: "Live",
+                    type: "LiveStream",
+                    target: document.getElementById("scanner"), // Elemento donde se renderiza el escáner
+                    constraints: {
+                        width: 640,
+                        height: 480,
+                        facingMode: "environment" // Cámara trasera
+                    }
+                },
+                decoder: {
+                    readers: ["ean_reader"] // Escáner para EAN-13
+                }
+            }, function(err) {
+                if (err) {
+                    console.error("Error al iniciar el escáner:", err);
+                    return;
+                }
+                Quagga.start();
+
+            });
+
+            Quagga.onDetected((data) => {
+                const code = data.codeResult.code;
+                resultOutput.textContent = `Código detectado: ${code}`;
+                window.location.href = `/Producto/GestionProductos?Busqueda=${encodeURIComponent(code)}&flag=scanner`;
+
+                stopScanner();
+            });
+        }
+
+        function stopScanner() {
+            Quagga.stop();
+        }
+
+        // Iniciar el escáner al cargar la página
+        startScanner();
+    });
+</script>
+</html>

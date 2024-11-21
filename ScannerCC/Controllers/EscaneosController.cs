@@ -20,30 +20,46 @@ namespace ScannerCC.Controllers
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo;
-            // Obtén la lista de escaneos y aplica las condiciones de ordenamiento
-            var escaneos = _context.Escaneo
-                .Include(e => e.Productos) // Incluye la relación con Productos
-                .AsQueryable();
+
+            ViewBag.Escaneos = _context.Escaneo.Include(x => x.Productos).Include(x => x.Usuarios).ToList();
 
             // Ordenar por nombre de producto
             if (!string.IsNullOrEmpty(orderByProductName))
             {
-                escaneos = orderByProductName == "asc"
-                    ? escaneos.OrderBy(e => e.Productos.Nombre)
-                    : escaneos.OrderByDescending(e => e.Productos.Nombre);
+                if(orderByProductName == "asc")
+                {
+                    ViewBag.Escaneos = _context.Escaneo.Include(x => x.Productos).Include(x => x.Usuarios).OrderBy(e => e.Productos.Nombre).ToList();
+                }
+                else
+                {
+                    ViewBag.Escaneos = _context.Escaneo.Include(x => x.Productos).Include(x => x.Usuarios).OrderByDescending(e => e.Productos.Nombre).ToList();
+                }
             }
             // Ordenar por fecha
             else if (!string.IsNullOrEmpty(orderByDate))
             {
-                escaneos = orderByDate == "asc"
-                    ? escaneos.OrderBy(e => e.Fecha)
-                    : escaneos.OrderByDescending(e => e.Fecha);
+                if (orderByProductName == "asc")
+                {
+                    ViewBag.Escaneos= _context.Escaneo.Include(x => x.Productos).Include(x => x.Usuarios).OrderBy(e => e.Productos.FechaRegistro).ToList();
+                }
+                else
+                {
+                    ViewBag.Escaneos= _context.Escaneo.Include(x => x.Productos).Include(x => x.Usuarios).OrderByDescending(e => e.Productos.FechaRegistro).ToList();
+                }
             }
 
-            ViewBag.Escaneos = escaneos.ToList();
             ViewBag.Usuarios = _context.Usuario.Include(r => r.Rol).ToList();
             ViewBag.Productos = _context.Producto.ToList();
             return View();
         }
+
+        public IActionResult Scanner()
+        {
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.trab = TrabajadorActivo;
+            return View();
+        }
+
     }
+
 }

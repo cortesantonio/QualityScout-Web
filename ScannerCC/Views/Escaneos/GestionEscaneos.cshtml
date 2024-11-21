@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
-}
 
+}
 
 <!DOCTYPE html>
 <html lang="es">
@@ -92,65 +92,68 @@
     </div>
 </div>
 <main>
-    <div class="filter-order-container">
-            <div class="order" onclick="toggleOrderOptions()">
-                <span>Orden por producto</span>
-                <span class="dropdown"><i class="fa-solid fa-arrow-down-a-z"></i></span>
-            </div>
-            <div id="orderOptions" class="order-options">
-                <select id="productoOrden" onchange="orderByProductoNombre()">
-                    <option value="">Ordenar por nombre de producto</option>
-                    <option value="asc">A-Z</option>
-                    <option value="desc">Z-A</option>
-                </select>
-            </div>
-            <div class="orden" onclick="toggleOrderOption()">
-                <span>Orden por fecha</span>
-                <span class="dropdown"><i class="fa-solid fa-sort-down"></i></span>
-            </div>
-            <div id="orderOption" class="order-option">
-                <select id="fechaOrden" onchange="orderByFecha()">
-                    <option value="">Ordenar por fecha</option>
-                    <option value="asc">Más antigua</option>
-                    <option value="desc">Más reciente</option>
-                </select>
-            </div>
-    </div>
-
+    
     <section class="scan-list">
-            <h2 class="titulo" style="margin-top: 5px;">Registros</h2>
+        <div style="display:flex; flex-direction:row; justify-content:space-between;width:100%;">
+                <h2 class="titulo" style="margin-top: 5px;">Registros </h2>
+                <a asp-action="Scanner" class="btnAbrirCamara"> <i class="fa-solid fa-camera"></i> Abrir Escaner/Buscador</a>
 
-        @if (ViewBag.Escaneos != null && ViewBag.Escaneos.Count > 0)
-        {
+
+        </div>
+            <div class="filter-order-container">
+                <div class="order" onclick="toggleOrderOptions()">
+                    <span>Orden por producto</span>
+                    <span class="dropdown"><i class="fa-solid fa-arrow-down-a-z"></i></span>
+                </div>
+                <div id="orderOptions" class="order-options">
+                    <select id="productoOrden" onchange="orderByProductoNombre()">
+                        <option value="">Ordenar por nombre de producto</option>
+                        <option value="asc">A-Z</option>
+                        <option value="desc">Z-A</option>
+                    </select>
+                </div>
+                <div class="orden" onclick="toggleOrderOption()">
+                    <span>Orden por fecha</span>
+                    <span class="dropdown"><i class="fa-solid fa-sort-down"></i></span>
+                </div>
+                <div id="orderOption" class="order-option">
+                    <select id="fechaOrden" onchange="orderByFecha()">
+                        <option value="">Ordenar por fecha</option>
+                        <option value="asc">Más antigua</option>
+                        <option value="desc">Más reciente</option>
+                    </select>
+                </div>
+            </div>
+
+
+
             @foreach (var item in ViewBag.Escaneos)
             {
                 <div class="scan-card">
                     <div class="scan-info">
                         <img src="~/Extras/escaner.png" class="scan-icon" />
                         <div>
-                            <p><strong>Producto:</strong> @item.Producto.Nombre</p>
-                            <p>Usuario: @item.Usuario.Nombre</p>
+                            <p><strong>Producto:</strong> @item.Productos.Nombre</p> <p><strong>Codigo:</strong> @item.Productos.CodigoBarra</p>
+                            <p>Usuario: @item.Usuarios.Nombre</p>
                         </div>
                     </div>
                     <div class="scan-details">
                         <p><strong>Fecha:</strong> @item.Fecha</p>
-                        <p>Hora: @item.Hora</p>
+                        <p>Rut: @item.Usuarios.Rut</p>
+
                     </div>
                     <div class="scan-actions">
+                        <a class="see-btn" asp-action="Details" asp-controller="Producto" asp-route-id="@item.Productos.Id">
+                            <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
+                        </a>
                     </div>
                 </div>
             }
-        }
-        else
-        {
-            <p style="text-align: center;">No hay escaneos para mostrar</p>
-        }
     </section>
 </main>
 </body>
 <script src="~/js/quagga.min.js"></script>
 <script src="~/js/especialista.js"></script>
-
 </html>
 
 <script>

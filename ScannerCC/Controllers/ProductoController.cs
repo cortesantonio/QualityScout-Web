@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using ScannerCC.Models;
 
 namespace ScannerCC.Controllers
@@ -21,7 +22,7 @@ namespace ScannerCC.Controllers
         }
 
         [Authorize(Roles = "Especialista, Control de Calidad")]
-        public IActionResult GestionProductos(string Busqueda)
+        public IActionResult GestionProductos(string Busqueda, string flag)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo;
@@ -34,8 +35,25 @@ namespace ScannerCC.Controllers
                 productos = productos.Where(p => p.Nombre.Contains(Busqueda) || p.CodigoBarra.Contains(Busqueda));
             }
 
-            // Pasar los datos filtrados a la vista
-            ViewBag.Productos = productos.ToList();
+            if (flag == "scanner")
+            {
+                var existeProducto = _context.Producto.Where(x => x.CodigoBarra == Busqueda).FirstOrDefault();
+                if (existeProducto != null)
+                {
+                    Escaneos escaneos = new Escaneos
+                    {
+                        IdProductos = existeProducto.Id,
+                        IdUsuarios = TrabajadorActivo.Id,
+                        Fecha = DateTime.Now,
+                        Hora = DateTime.Now.TimeOfDay
+                    };
+                    _context.Escaneo.Add(escaneos);
+                    _context.SaveChanges();
+
+                }
+            }
+                // Pasar los datos filtrados a la vista
+                ViewBag.Productos = productos.ToList();
             ViewBag.InformacionQuimica = _context.InformacionQuimica.ToList();
 
             return View();
