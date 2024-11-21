@@ -38,7 +38,7 @@ namespace ScannerCC.Controllers
             // Ordenar por fecha
             else if (!string.IsNullOrEmpty(orderByDate))
             {
-                if (orderByProductName == "asc")
+                if (orderByDate == "asc")
                 {
                     ViewBag.Escaneos= _context.Escaneo.Include(x => x.Productos).Include(x => x.Usuarios).OrderBy(e => e.Productos.FechaRegistro).ToList();
                 }

@@ -84,8 +84,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>ihny6kltfp</Fingerprint>
-      <Integrity>mi4s9fkcq1CvL0YOyYlWYti3hVJkUpTtjGvqwlC3tXU=</Integrity>
+      <Fingerprint>4ny8159ubl</Fingerprint>
+      <Integrity>oLmYcLl6G73vmpSSfz1NFSNHj9C6s0Ycy3GIfUYKhX4=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\GestionEscaneos.css'))</OriginalItemSpec>

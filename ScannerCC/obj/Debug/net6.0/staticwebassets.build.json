@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "giEjXh+UmgfGzlHo7yQlT2WK3LRoEcmAVy56h3azNy4=",
+  "Hash": "qtJkXPjnoeFZELmeKLMFZ+jLzfElSidYaxUqNTNNFOo=",
   "Source": "QualityScout",
   "BasePath": "_content/QualityScout",
   "Mode": "Default",
@@ -157,8 +157,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "ihny6kltfp",
-      "Integrity": "mi4s9fkcq1CvL0YOyYlWYti3hVJkUpTtjGvqwlC3tXU=",
+      "Fingerprint": "4ny8159ubl",
+      "Integrity": "oLmYcLl6G73vmpSSfz1NFSNHj9C6s0Ycy3GIfUYKhX4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\GestionEscaneos.css"
@@ -2867,6 +2867,51 @@
       ]
     },
     {
+      "Route": "css/GestionEscaneos.4ny8159ubl.css",
+      "AssetFile": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionEscaneos.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9502"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"oLmYcLl6G73vmpSSfz1NFSNHj9C6s0Ycy3GIfUYKhX4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 21 Nov 2024 17:47:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4ny8159ubl"
+        },
+        {
+          "Name": "label",
+          "Value": "css/GestionEscaneos.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-oLmYcLl6G73vmpSSfz1NFSNHj9C6s0Ycy3GIfUYKhX4="
+        }
+      ]
+    },
+    {
       "Route": "css/GestionEscaneos.css",
       "AssetFile": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionEscaneos.css",
       "Selectors": [],
@@ -2877,7 +2922,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "9376"
+          "Value": "9502"
         },
         {
           "Name": "Content-Type",
@@ -2885,11 +2930,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"mi4s9fkcq1CvL0YOyYlWYti3hVJkUpTtjGvqwlC3tXU=\""
+          "Value": "\"oLmYcLl6G73vmpSSfz1NFSNHj9C6s0Ycy3GIfUYKhX4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 21 Nov 2024 17:40:17 GMT"
+          "Value": "Thu, 21 Nov 2024 17:47:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2899,52 +2944,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-mi4s9fkcq1CvL0YOyYlWYti3hVJkUpTtjGvqwlC3tXU="
-        }
-      ]
-    },
-    {
-      "Route": "css/GestionEscaneos.ihny6kltfp.css",
-      "AssetFile": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionEscaneos.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "9376"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"mi4s9fkcq1CvL0YOyYlWYti3hVJkUpTtjGvqwlC3tXU=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 21 Nov 2024 17:40:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ihny6kltfp"
-        },
-        {
-          "Name": "label",
-          "Value": "css/GestionEscaneos.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-mi4s9fkcq1CvL0YOyYlWYti3hVJkUpTtjGvqwlC3tXU="
+          "Value": "sha256-oLmYcLl6G73vmpSSfz1NFSNHj9C6s0Ycy3GIfUYKhX4="
         }
       ]
     },
