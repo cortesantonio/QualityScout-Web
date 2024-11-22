@@ -15,7 +15,7 @@ namespace ScannerCC.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Especialista")]
+        [Authorize(Roles = "Especialista, Control de Calidad")]
         public IActionResult GestionEscaneos(string orderByDate, string orderByProductName)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();

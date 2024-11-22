@@ -1,5 +1,7 @@
 ﻿@{
     Layout = null;
+    bool isEspecialista = User.IsInRole("Especialista");
+    bool isControlCalidad = User.IsInRole("Control de Calidad");
 }
 
 <!DOCTYPE html>
@@ -43,36 +45,68 @@
                 <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo de Quality Scout">
             </a>
             <div class="navstyle">
-                <div class="iconosnav">
-                    <a asp-action="Index" asp-controller="Especialista">
-                        <img src="~/Extras/home.png" alt="Inicio" />
-                    </a>
-                </div>
-                <div class="iconosnav">
-                    <a asp-action="GestionUsuarios" asp-controller="Usuario">
-                        <img src="~/Extras/usuarios.png" alt="Usuarios" />
-                    </a>
-                </div>
-                <div class="iconosnav">
-                    <a asp-action="Controles" asp-controller="Controles">
-                        <img src="~/Extras/controles.png" alt="Controles" />
-                    </a>
-                </div>
-                <div class="iconosnav">
-                    <a asp-action="GestionProductos" asp-controller="Producto">
-                        <img src="~/Extras/productos.png" alt="Productos" />
-                    </a>
-                </div>
-                <div class="iconosnav">
-                    <a asp-action="GestionInformes" asp-controller="Informes">
-                        <img src="~/Extras/Informes.png" alt="Informes" />
-                    </a>
-                </div>
-                <div class="iconosnav">
-                    <a asp-action="GestionEscaneos" asp-controller="Escaneos">
-                        <img src="~/Extras/escaner.png" alt="Informes" />
-                    </a>
-                </div>
+                @if (isEspecialista)
+                {
+                    <div class="iconosnav">
+                        <a asp-action="Index" asp-controller="Especialista">
+                            <img src="~/Extras/home.png" alt="Inicio" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionUsuarios" asp-controller="Usuario">
+                            <img src="~/Extras/usuarios.png" alt="Usuarios" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="Controles" asp-controller="Controles">
+                            <img src="~/Extras/controles.png" alt="Controles" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionProductos" asp-controller="Producto">
+                            <img src="~/Extras/productos.png" alt="Productos" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionInformes" asp-controller="Informes">
+                            <img src="~/Extras/Informes.png" alt="Informes" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                            <img src="~/Extras/escaner.png" alt="Informes" />
+                        </a>
+                    </div>
+                }
+
+                @if (isControlCalidad)
+                {
+                    <div class="iconosnav">
+                        <a asp-action="Index" asp-controller="Controlcalidad">
+                            <img src="~/Extras/home.png" alt="Inicio" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="Controles" asp-controller="Controles">
+                            <img src="~/Extras/controles.png" alt="Controles" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionProductos" asp-controller="Producto">
+                            <img src="~/Extras/productos.png" alt="Productos" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionInformes" asp-controller="Informes">
+                            <img src="~/Extras/Informes.png" alt="Informes" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                            <img src="~/Extras/escaner.png" alt="Informes" />
+                        </a>
+                    </div>
+                }
             </div>
             
         </nav>

@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
-
+    bool isEspecialista = User.IsInRole("Especialista");
+    bool isControlCalidad = User.IsInRole("Control de Calidad");
 }
 
 <!DOCTYPE html>
@@ -24,45 +25,90 @@
                 <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo de Quality Scout">
             </a>
             <div class="navstyle">
-                <div class="iconosnav">
-                    <a asp-action="Index" asp-controller="Especialista">
-                        <img src="~/Extras/home.png" alt="Inicio" />
-                    </a>
-                </div>
-                <div class="iconosnav">
-                    <a asp-action="GestionUsuarios" asp-controller="Usuario">
-                        <img src="~/Extras/usuarios.png" alt="Usuarios" />
-                    </a>
-                </div>
-                <div class="iconosnav">
-                    <a asp-action="Controles" asp-controller="Controles">
-                        <img src="~/Extras/controles.png" alt="Controles" />
-                    </a>
-                </div>
-                <div class="iconosnav">
-                    <a asp-action="GestionProductos" asp-controller="Producto">
-                        <img src="~/Extras/productos.png" alt="Productos" />
-                    </a>
-                </div>
-                <div class="iconosnav">
-                    <a asp-action="GestionInformes" asp-controller="Informes">
-                        <img src="~/Extras/Informes.png" alt="Informes" />
-                    </a>
-                </div>
-                <div class="iconosnav">
-                    <a asp-action="GestionEscaneos" asp-controller="Escaneos">
-                        <img src="~/Extras/escaner.png" alt="Informes" />
-                    </a>
-                </div>
+                @if (isEspecialista)
+                {
+                    <div class="iconosnav">
+                        <a asp-action="Index" asp-controller="Especialista">
+                            <img src="~/Extras/home.png" alt="Inicio" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionUsuarios" asp-controller="Usuario">
+                            <img src="~/Extras/usuarios.png" alt="Usuarios" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="Controles" asp-controller="Controles">
+                            <img src="~/Extras/controles.png" alt="Controles" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionProductos" asp-controller="Producto">
+                            <img src="~/Extras/productos.png" alt="Productos" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionInformes" asp-controller="Informes">
+                            <img src="~/Extras/Informes.png" alt="Informes" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                            <img src="~/Extras/escaner.png" alt="Informes" />
+                        </a>
+                    </div>
+                }
+
+                @if (isControlCalidad)
+                {
+                    <div class="iconosnav">
+                        <a asp-action="Index" asp-controller="Controlcalidad">
+                            <img src="~/Extras/home.png" alt="Inicio" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="Controles" asp-controller="Controles">
+                            <img src="~/Extras/controles.png" alt="Controles" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionProductos" asp-controller="Producto">
+                            <img src="~/Extras/productos.png" alt="Productos" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionInformes" asp-controller="Informes">
+                            <img src="~/Extras/Informes.png" alt="Informes" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                            <img src="~/Extras/escaner.png" alt="Informes" />
+                        </a>
+                    </div>
+                }
             </div>
             <div class="login-btn">
                 <div class="div2">
-                    <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
-                    <div class="welcome-container">
-                        <span class="welcome-text">Bienvenido!</span>
-                        <p>@ViewBag.trab.Nombre</p>
-                        <p>Especialista</p>
-                    </div>
+                    @if (isEspecialista)
+                    {
+                        <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
+                        <div class="welcome-container">
+                            <span class="welcome-text">Bienvenido!</span>
+                            <p>@ViewBag.trab.Nombre</p>
+                            <p>Especialista</p>
+                        </div>
+                    }
+
+                    @if (isControlCalidad)
+                    {
+                        <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
+                        <div class="welcome-container">
+                            <span class="welcome-text">Bienvenido!</span>
+                            <p>@ViewBag.trab.Nombre</p>
+                            <p>Control de Calidad</p>
+                        </div>
+                    }
                 </div>
                 <button id="showOptionUser" onclick="showOptionUser()">
                     <i class="fa-solid fa-caret-down"></i>
@@ -96,7 +142,7 @@
     <section class="scan-list">
         <div style="display:flex; flex-direction:row; justify-content:space-between;width:100%;">
                 <h2 class="titulo" style="margin-top: 5px;">Registros </h2>
-                <a asp-action="Scanner" class="btnAbrirCamara"> <i class="fa-solid fa-camera"></i> Abrir Escaner/Buscador</a>
+                <a asp-action="Scanner" class="btnAbrirCamara"> <i class="fa-solid fa-camera"></i> Abrir Escáner/Buscador</a>
 
 
         </div>

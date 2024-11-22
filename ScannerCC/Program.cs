@@ -174,6 +174,12 @@ app.MapControllerRoute(
     defaults: new { controller = "Escaneos", action = "GestionEscaneos" }
 );
 
+app.MapControllerRoute(
+    name: "Escaner",
+    pattern: "Escaner",
+    defaults: new { controller = "Escaneos", action = "Scanner" }
+);
+
 // Rutas personalizadas para "InformacionQuimica"
 app.MapControllerRoute(
     name: "Gestion-informaciones-quimicas",
