@@ -30,7 +30,7 @@ namespace ScannerCC.Controllers
 
             if (!string.IsNullOrEmpty(Busqueda))
             {
-                ViewBag.Informes = _context.Informe.Where(p => p.Titulo.Contains(Busqueda) || p.Enfoque.Contains(Busqueda));
+                ViewBag.Informes = _context.Informe.Where(p => p.Titulo.Contains(Busqueda) || p.Enfoque.Contains(Busqueda)).ToList();
             }
             else
             {

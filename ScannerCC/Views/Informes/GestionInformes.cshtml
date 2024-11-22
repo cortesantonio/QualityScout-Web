@@ -169,11 +169,6 @@
                             <img src="~/Extras/Informes.png" alt="Informes" />
                         </a>
                     </div>
-                    <div class="iconosnav">
-                        <a asp-action="GestionEscaneos" asp-controller="Escaneos">
-                            <img src="~/Extras/escaner.png" alt="Informes" />
-                        </a>
-                    </div>
                 }
             </div>
             <div class="login-btn">
@@ -227,12 +222,12 @@
 
 <main>
     <div class="search-add-container">
-            <form asp-action="GestionInformes" method="get" class="search-b" style="display:inline; margin-left: 340px;">
+            <form asp-action="GestionInformes" method="get" class="search-b" >
                 <input type="text" placeholder="🔍 Busca por titulo o enfoque" class="search-bar" name="Busqueda" />
             </form>
 
     </div>
-        <div class="search-add" style="margin-top: 10px; margin-left: 650px;">
+        <div class="search-add">
             @if (isEspecialista)
             {
                 <button class="btn-deactivate" onclick="openModal()"><strong>+</strong> Generar informes con IA</button>
@@ -248,13 +243,15 @@
             @foreach (var item in ViewBag.Informes)
             {
                 <div class="informes-card">
-                    <div class="informes-info">
                         <img src="~/Extras/Informes.png" class="user-icon" />
-                            <p class="titulo"><strong>@item.Titulo</strong></p>
-                            <p class="enfoque">Enfoque: @item.Enfoque</p>
-                    </div>
-                    <div class="informes-details">
+
+                    <div class="informes-info">
+                       
+                            <p>Titulo: <br /> <strong>@item.Titulo</strong>
+                            </p>
+                            <p class="enfoque" style="max-width:200px">Enfoque: <br /> <strong> @item.Enfoque</strong></p>
                             <p class="fecha"><strong>Fecha: </strong>@item.Fecha.ToString("dd/MM/yyyy")</p>
+
                     </div>
                     <div class="informes-actions">
                             @if (isEspecialista)
@@ -323,7 +320,6 @@
 
 
 </body>
-<script src="~/js/quagga.min.js"></script>
 <script src="~/js/especialista.js"></script>
 
 </html>
