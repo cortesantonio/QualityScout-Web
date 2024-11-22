@@ -39,6 +39,16 @@
         border: none;
     }
 
+    textarea {
+        color: black; /* Color del texto */
+        background-color: #DBD7D7; /* Color de fondo */
+        padding: 5px; /* Espaciado interno */
+        border-radius: 5px; /* Bordes redondeados (opcional) */
+        font-family: Arial;
+        font-size: 12px;
+        border: none;
+    }
+
     select {
         color: black; /* Color del texto */
         background-color: #DBD7D7; /* Color de fondo */
@@ -183,7 +193,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Comentario" class="control-label">Comentario sobre el control</label>
-                        <input asp-for="Comentario" class="form-control" />
+                        <textarea asp-for="Comentario" name="Comentario" class="form-control" style=" margin-left:5px; margin-top:5px; width: 500px; height:60px;"></textarea>
                         <span asp-validation-for="Comentario" class="text-danger"></span>
                     </div>
                     <div class="form-groupp">

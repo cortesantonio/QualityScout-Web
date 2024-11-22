@@ -170,7 +170,7 @@
     }
 
     dd.espacio {
-        background-color: white;
+        background-color: transparent;
     }
 </style>
 
@@ -331,7 +331,7 @@
                         @Html.DisplayFor(model => model.Estado)
                     </dd>
                 <dt>Comentario sobre el control</dt>
-                <dd>
+                <dd style="word-wrap: break-word;">
                     @Html.DisplayFor(model => model.Comentario)
                 </dd>
                 <dt class="espacio"></dt>

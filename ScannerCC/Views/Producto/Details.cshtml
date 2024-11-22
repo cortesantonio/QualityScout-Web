@@ -280,7 +280,7 @@
     }
 
     dd.espacio {
-        background-color: white;
+        background-color: transparent;
     }
 </style>
 
@@ -494,7 +494,7 @@
                     </div>
 
                     <dt class="col-sm-6">Descripción de la cápsula</dt>
-                    <dd class="col-sm-6">@Html.DisplayFor(model => model.DescripcionCapsula)</dd>
+                    <dd class="col-sm-6" style="word-wrap: break-word;">@Html.DisplayFor(model => model.DescripcionCapsula)</dd>
 
                     @if (isEspecialista)
                     {
