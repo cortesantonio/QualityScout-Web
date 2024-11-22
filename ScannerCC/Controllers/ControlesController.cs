@@ -93,6 +93,13 @@ namespace ScannerCC.Controllers
             return View(model);
         }
 
+
+        public IActionResult Reconocimiento()
+        {
+            return View();
+        }
+
+
         // GET: Controles
         [Authorize(Roles = "Control de Calidad")]
         public async Task<IActionResult> Index()

@@ -1,5 +1,5 @@
 function switchViewControlcalidad(view) {
-    views = ["busqueda", "controles"];
+    views = ["busqueda", "controles", "productos"];
     for (i = 0; i < views.length; i++) {
         pagina = document.getElementById(views[i]);
         pagina.style.display = "none";

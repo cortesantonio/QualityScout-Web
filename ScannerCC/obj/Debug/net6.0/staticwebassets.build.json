@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uX5Maw9tZkVSKkdjaJDt+De3YegTNnG1b+IWT8FEiBQ=",
+  "Hash": "WFOtaKvp0HTw6wvCsVaEQ0I9i2CPm78booWRgoO0Euo=",
   "Source": "QualityScout",
   "BasePath": "_content/QualityScout",
   "Mode": "Default",
@@ -1338,6 +1338,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\quagga.min.js"
+    },
+    {
+      "Identity": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\js\\reconocimiento.js",
+      "SourceId": "QualityScout",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\",
+      "BasePath": "_content/QualityScout",
+      "RelativePath": "js/reconocimiento#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7af8rcgwk9",
+      "Integrity": "X6qqVd+9a1FjjsyUmH3fL1p4kByhIsFod3rPoTH9hMY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\reconocimiento.js"
     },
     {
       "Identity": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\js\\site.js",
@@ -7558,6 +7579,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-JDVyLQRqvRSTL/6WaPud93JXpfEdW11zwjqhoNgkGXc="
+        }
+      ]
+    },
+    {
+      "Route": "js/reconocimiento.7af8rcgwk9.js",
+      "AssetFile": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\js\\reconocimiento.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3996"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"X6qqVd+9a1FjjsyUmH3fL1p4kByhIsFod3rPoTH9hMY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 22 Nov 2024 03:23:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7af8rcgwk9"
+        },
+        {
+          "Name": "label",
+          "Value": "js/reconocimiento.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-X6qqVd+9a1FjjsyUmH3fL1p4kByhIsFod3rPoTH9hMY="
+        }
+      ]
+    },
+    {
+      "Route": "js/reconocimiento.js",
+      "AssetFile": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\js\\reconocimiento.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3996"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"X6qqVd+9a1FjjsyUmH3fL1p4kByhIsFod3rPoTH9hMY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 22 Nov 2024 03:23:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-X6qqVd+9a1FjjsyUmH3fL1p4kByhIsFod3rPoTH9hMY="
         }
       ]
     },

@@ -68,8 +68,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGVzXEdlc3Rpb25Db250cm9sZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Controles/Reconocimiento.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGVzXFJlY29ub2NpbWllbnRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Escaneos/GestionEscaneos.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXNjYW5lb3NcR2VzdGlvbkVzY2FuZW9zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Escaneos/Scanner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXNjYW5lb3NcU2Nhbm5lci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Especialista/Dashboard.cshtml]
@@ -134,6 +142,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Informes/GestionInformes.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5mb3JtZXNcR2VzdGlvbkluZm9ybWVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/Informes/Previsualizar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5mb3JtZXNcUHJldmlzdWFsaXphci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Antonio/Desktop/TESIS/QualityScout-Web/ScannerCC/Views/ProductoDetalles/Create.cshtml]

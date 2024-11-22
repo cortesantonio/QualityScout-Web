@@ -5087,6 +5087,88 @@
       ]
     },
     {
+      "Route": "js/reconocimiento.7af8rcgwk9.js",
+      "AssetFile": "js/reconocimiento.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3996"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"X6qqVd+9a1FjjsyUmH3fL1p4kByhIsFod3rPoTH9hMY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 22 Nov 2024 03:23:53 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7af8rcgwk9"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-X6qqVd+9a1FjjsyUmH3fL1p4kByhIsFod3rPoTH9hMY="
+        },
+        {
+          "Name": "label",
+          "Value": "js/reconocimiento.js"
+        }
+      ]
+    },
+    {
+      "Route": "js/reconocimiento.js",
+      "AssetFile": "js/reconocimiento.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3996"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"X6qqVd+9a1FjjsyUmH3fL1p4kByhIsFod3rPoTH9hMY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 22 Nov 2024 03:23:53 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-X6qqVd+9a1FjjsyUmH3fL1p4kByhIsFod3rPoTH9hMY="
+        }
+      ]
+    },
+    {
       "Route": "js/site.6b9nfc4n3r.js",
       "AssetFile": "js/site.js",
       "Selectors": [],

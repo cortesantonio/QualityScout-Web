@@ -1,0 +1,351 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: white;
+}
+
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url(../Extras/uvas.png), url(../Extras/copavinoservido.png);
+        background-position: left -1% top 41%, right bottom;
+        background-repeat: no-repeat;
+        background-size: 20%, 25%;
+        background-attachment: local;
+        opacity: 0.17;
+        z-index: -1;
+        pointer-events: none;
+    }
+
+.content {
+    position: relative;
+    z-index: 1; /* Asegura que el contenido esté por encima de las imágenes de fondo */
+    padding: 15px;
+}
+
+header {
+    background: #260202;
+    width: 100%;
+    z-index: 100;
+}
+
+.nav-i {
+    display: flex;
+    align-items: center;
+    background-color: #260202;
+    padding: 30px;
+    color: white;
+    gap: 20px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    padding: 8px 20px;
+    height: 52px;
+}
+
+.div2 {
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    /*font-size: 1.2rem;*/
+}
+
+.logoqs {
+    width: 100px; /* Reduce el ancho del logo */
+    height: auto;
+    /*margin-right: 20px;  Elimina el margen para alinear mejor */
+}
+
+.nav-container {
+    flex: 1;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.navstyle {
+    display: flex;
+    gap: 20px;
+    /*justify-content: flex-start;  Cambia a 'flex-start' para alinear íconos a la izquierda 
+    flex-grow: 1;*/
+}
+
+.iconosnav:hover {
+    transform: scale(110%);
+}
+
+.iconosnav {
+    transition: 0.2s;
+}
+
+.iconosuser {
+    margin: 2px 10px;
+}
+
+    .iconosuser img {
+        width: 50px; /* Ajusta el tamaño de los íconos */
+        height: 50px;
+        padding: 5px;
+    }
+
+.iconosnav img {
+    width: 30px; /* Ajusta el tamaño de los íconos */
+    height: 30px;
+    /*padding: 5px;*/
+}
+
+.welcome-container {
+    display: flex;
+    /*align-items: center;  Alinea verticalmente el texto y el ícono */
+    flex-direction: column;
+    text-align: left;
+}
+
+.welcome-text {
+    color: #fff;
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 15px;
+    /*margin-right: 56px;*/
+}
+
+.user-name {
+    color: #fff;
+    font-family: Arial;
+    font-size: 110%;
+    margin-right: 10px;
+}
+
+.icono-lapiz {
+    width: 35px;
+    height: 35px;
+    margin-right: 8px;
+}
+
+.login-btn {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    position: relative;
+}
+
+.btn-login {
+    font-family: Arial;
+    font-size: 22px;
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin-right: 9.9%;
+    display: inline-block;
+    margin-top: -4%;
+}
+
+.accesotitulo {
+    display: flex;
+    justify-content: center;
+    margin-right: 22%;
+    margin-bottom: 30px;
+    font-size: 190%;
+    font-family: Arial;
+}
+
+.quick-access {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-family: Arial;
+}
+
+.icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+
+    .icon-item img {
+        width: 65px;
+        height: 65px;
+        background-color: #260202;
+        border-radius: 50%;
+        padding: 15px;
+    }
+
+p {
+    font-family: Arial;
+}
+
+span {
+    font-size: 110%;
+}
+
+.dashboard {
+    max-width: 600px;
+    margin: 2% auto;
+}
+
+.dashboard-indicators {
+    display: flex; /* Permite que los elementos secundarios se alineen en una fila */
+    justify-content: space-around; /* Espacia los indicadores de manera uniforme */
+    padding: 20px;
+    flex-wrap: nowrap; /* Evita que los indicadores se muevan a la siguiente línea */
+    overflow-x: auto; /* Permite desplazamiento horizontal si el espacio es limitado */
+}
+
+.indicator-container {
+    background-color: #f2f2f2;
+    border-radius: 15px;
+    width: 120px; /* Ajusta el ancho según tus necesidades */
+    padding: 15px;
+    text-align: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 10px; /* Agrega márgenes laterales para separación */
+}
+
+.indicator {
+    font-family: Arial;
+}
+
+.indicator-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.indicator-value {
+    font-size: 28px;
+    font-weight: bold;
+    position: relative;
+}
+
+.percentage {
+    display: block;
+    color: #fff;
+}
+
+.arrow-up,
+.arrow-down {
+    font-size: 20px; /* Ajusta el tamaño de las flechas */
+    position: absolute;
+    top: 5px; /* Ajusta la posición vertical de las flechas */
+    right: -20px; /* Mantiene la posición horizontal de las flechas */
+}
+
+.arrow-up {
+    color: #e03c31;
+}
+
+.arrow-down {
+    color: #3c3c3c;
+}
+
+.reprocesos {
+    background-color: #BF6565;
+}
+
+.rechazados {
+    background-color: #260202;
+}
+
+.aprobados {
+    background-color: #F25757;
+}
+
+.reference-text {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 12px;
+    color: #666;
+}
+
+.iframe-container {
+    width: 100%; /* Ajusta el ancho al 100% del contenedor */
+    max-width: 600px; /* Establece un ancho máximo */
+    margin: 0 auto; /* Centra el iframe en su contenedor */
+}
+
+iframe {
+    width: 100%; /* El iframe ocupa el 100% del contenedor */
+    height: 370px; /* Establece la altura según tus necesidades */
+    border: none; /* Quita el borde del iframe */
+}
+
+.iframe-text {
+    position: absolute;
+    text-align: center;
+    left: 38%;
+    top: 22%;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-family: Arial;
+}
+
+#showOptionUser {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#opcionesUser {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #260202;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+    #opcionesUser ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        #opcionesUser ul li {
+            padding: 8px;
+        }
+
+            #opcionesUser ul li a {
+                color: white;
+                text-decoration: none;
+                display: block;
+                font-family: Arial;
+            }
+
+                #opcionesUser ul li a:hover {
+                    transform: scale(110%);
+                }
+

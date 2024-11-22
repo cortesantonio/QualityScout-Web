@@ -1,0 +1,82 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reconocimiento de Objetos</title>
+</head>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: rgb(49, 0, 0);
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        flex-direction: column;
+        gap: 0;
+    }
+
+
+    canvas {
+        position: absolute;
+    }
+
+    #deteccion {
+        position: absolute;
+        width: 300px;
+        height: 100px;
+        background-color: rgb(49, 0, 0);
+        border-radius: 10px;
+        padding: 5px;
+        left: 50% - 150;
+        bottom: 30px;
+        color: white;
+    }
+
+</style>
+
+<body>
+
+    <div class="container">
+        <div>
+            <img src="~/Extras/Brand initial Simple Logo.png" width="150px">
+
+        </div>
+
+
+        <div class="camara">
+            <canvas id="canvas" width="640" height="480"></canvas>
+
+            <video id="video" width="640" height="480" playsinline muted autoplay>
+            </video>
+        </div>
+        <div style="text-align:center;" id="deteccion">
+            Elementos encontrados
+            <div id="informacion"></div>
+
+            <button onclick="TerminarBusqueda()" id='boton'>Terminar Busqueda</button>
+        </div>
+
+
+
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/@@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@@tensorflow-models/coco-ssd"></script>
+
+<script src="~/js/reconocimiento.js"></script>
+
+</html>

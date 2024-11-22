@@ -60,6 +60,7 @@ C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\Microsoft.IdentityModel.Protocols.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\Microsoft.OpenApi.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\Microsoft.SqlServer.Server.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\Microsoft.VisualStudio.Debugger.Contracts.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\Microsoft.VisualStudio.Web.CodeGeneration.dll
@@ -90,6 +91,9 @@ C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\SQLitePCLRaw.provider.e_sqlite3.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\Renci.SshNet.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\SshNet.Security.Cryptography.dll
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\System.Composition.AttributedModel.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\System.Composition.Convention.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\System.Composition.Hosting.dll
@@ -97,6 +101,7 @@ C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\System.Composition.TypedParts.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\System.Configuration.ConfigurationManager.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\System.Drawing.Common.dll
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\System.Formats.Asn1.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\System.Memory.Data.dll
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\PubTmp\Out\System.Runtime.Caching.dll

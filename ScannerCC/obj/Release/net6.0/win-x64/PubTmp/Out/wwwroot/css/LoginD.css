@@ -1,0 +1,156 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+    font-family: Arial;
+}
+
+
+body {
+    color: white;
+    font-family: Arial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background-color: #260202;
+    overflow: hidden;
+}
+
+
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url(../Extras/Copa_vino.png), url(../Extras/uvas.png);
+        background-position: left -5% top 100%, right -2% bottom 90%;
+        /* Uvas alineadas arriba a la izquierda, copa abajo a la derecha */
+        background-repeat: no-repeat;
+        background-size: 47%, 20%;
+        /* Ajusta el tamaño de las imágenes según sea necesario */
+        background-attachment: fixed;
+        /* El fondo se mantiene fijo al hacer scroll */
+        opacity: 0.17;
+        /* Ajusta la opacidad aquí */
+        z-index: -1;
+        /* Asegura que el pseudo-elemento esté detrás del contenido */
+    }
+
+.container {
+    position: absolute;
+    text-align: center;
+}
+
+.back-button {
+    position: absolute;
+    top: -100px;
+    /* Ajusta según sea necesario */
+    left: 100px;
+    width: 200px;
+    height: 200px;
+    background-color: #080808;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .back-button a {
+        text-decoration: none;
+        /* Tamaño de texto más pequeño */
+        color: #fff;
+        text-align: center;
+        display: flex;
+        align-items: center;
+    }
+
+.atrasbtn {
+    color: white;
+    text-decoration: none;
+    font-size: 2rem;
+}
+
+
+.logo {
+    margin-bottom: 20px;
+}
+
+.logoimg {
+    width: 30%;
+    margin-left: 36%;
+}
+
+
+.logo span {
+    color: #fff;
+    font-size: 2.5rem;
+    font-style: italic;
+}
+
+.login-box {
+    background-color: #fff;
+    padding: 70px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    max-width: 450px;
+    max-height: 550px;
+    margin: auto;
+}
+
+    .login-box h2 {
+        font-size: 2.8rem;
+        color: #000;
+    }
+
+    .login-box p {
+        color: #000;
+        margin-bottom: 30px;
+    }
+
+    .login-box form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .login-box label {
+        margin-bottom: 5px;
+        color: #000;
+        font-weight: 600;
+        text-align: start;
+        text-transform: uppercase;
+    }
+
+    .login-box input {
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 7px;
+        font-size: 16px;
+        color: #000;
+        background-color: #d3d3d3;
+        width: 100%;
+        outline: none;
+    }
+
+    .login-box button {
+        margin-top: 15px;
+        padding: 10px;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 7px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        text-transform: uppercase;
+    }
+
+        .login-box button:hover {
+            background-color: #333;
+        }

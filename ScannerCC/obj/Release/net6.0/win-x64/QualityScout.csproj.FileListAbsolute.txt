@@ -278,3 +278,13 @@ C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\QualityScout.pdb
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\QualityScout.genruntimeconfig.cache
 C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\ref\QualityScout.dll
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\bin\Release\net6.0\win-x64\QualityScout.staticwebassets.endpoints.json
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\bin\Release\net6.0\win-x64\Microsoft.OpenApi.dll
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\bin\Release\net6.0\win-x64\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\bin\Release\net6.0\win-x64\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\bin\Release\net6.0\win-x64\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\bin\Release\net6.0\win-x64\System.Formats.Asn1.dll
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\QualityScout.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\staticwebassets.build.endpoints.json
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\staticwebassets\msbuild.QualityScout.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\Antonio\Desktop\TESIS\QualityScout-Web\ScannerCC\obj\Release\net6.0\win-x64\staticwebassets.upToDateCheck.txt

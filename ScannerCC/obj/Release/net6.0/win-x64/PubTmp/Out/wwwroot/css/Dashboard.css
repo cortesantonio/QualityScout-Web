@@ -1,0 +1,358 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: white;
+}
+
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url(../Extras/uvas.png), url(../Extras/copavinoservido.png);
+        background-position: left -1% top 41%, right bottom;
+        background-repeat: no-repeat;
+        background-size: 20%, 25%;
+        background-attachment: local;
+        opacity: 0.17;
+        z-index: -1;
+        pointer-events: none;
+    }
+
+.content {
+    position: relative;
+    z-index: 1; /* Asegura que el contenido esté por encima de las imágenes de fondo */
+    padding: 15px;
+}
+
+header {
+    background: #260202;
+    width: 100%;
+    z-index: 100;
+}
+
+.nav-i {
+    display: flex;
+    align-items: center;
+    background-color: #260202;
+    padding: 30px;
+    color: white;
+    gap: 20px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    padding: 8px 20px;
+    height: 52px;
+}
+
+.div2 {
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-family: Arial;
+    /*font-size: 1.2rem;*/
+}
+
+.logoqs {
+    width: 100px; /* Reduce el ancho del logo */
+    height: auto;
+    /*margin-right: 20px;  Elimina el margen para alinear mejor */
+}
+
+.nav-container {
+    flex: 1;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.navstyle {
+    display: flex;
+    gap: 20px;
+    /*justify-content: flex-start;  Cambia a 'flex-start' para alinear íconos a la izquierda 
+    flex-grow: 1;*/
+}
+
+.iconosnav:hover {
+    transform: scale(110%);
+}
+
+.iconosnav {
+    transition: 0.2s;
+}
+
+.iconosuser {
+    margin: 2px 10px;
+}
+
+    .iconosuser img {
+        width: 50px; /* Ajusta el tamaño de los íconos */
+        height: 50px;
+        padding: 5px;
+    }
+
+.iconosnav img {
+    width: 30px; /* Ajusta el tamaño de los íconos */
+    height: 30px;
+    /*padding: 5px;*/
+}
+
+.welcome-container {
+    display: flex;
+    /*align-items: center;  Alinea verticalmente el texto y el ícono */
+    flex-direction: column;
+    text-align: left;
+}
+
+.welcome-text {
+    color: #fff;
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 15px;
+    /*margin-right: 56px;*/
+}
+
+.user-name {
+    color: #fff;
+    font-family: Arial;
+    font-size: 110%;
+    margin-right: 10px;
+}
+
+.icono-lapiz {
+    width: 35px;
+    height: 35px;
+    margin-right: 8px;
+}
+
+.login-btn {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    position: relative;
+}
+
+.btn-login {
+    font-family: Arial;
+    font-size: 22px;
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin-right: 9.9%;
+    display: inline-block;
+    margin-top: -4%;
+}
+
+.accesotitulo {
+    display: flex;
+    justify-content: start;
+    margin-left: 9%;
+    margin-bottom: 15px;
+    font-size: 190%;
+    font-family: Arial;
+    font-optical-sizing: auto;
+    font-weight: bold;
+}
+
+.user-card {
+    display: flex;
+    width: 55%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    padding: 15px;
+    border-bottom: #260202;
+    margin-left: 33%;
+    margin-top: -3%;
+}
+
+input {
+    width: 250%;
+    height: 30px;
+    background-color: #dbd7d7;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    color: #605e5e;
+    font-family: Arial;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 300;
+}
+
+.titulos {
+    margin-bottom: 2%;
+    font-family: Arial;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 22px;
+}
+
+.btnAccionForm {
+    margin-top: 10%;
+    width: 180px;
+    margin-left: 180%;
+    background-color: #bf6565;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: Arial;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 300;
+}
+
+select {
+    height: 30px;
+    width: 254%;
+    background-color: #dbd7d7;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    color: #605e5e;
+}
+
+.iframe-text {
+    position: absolute;
+    text-align: center;
+    left: 19%;
+    top: 5%;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-family:Arial;
+}
+
+.iframe-text1 {
+    position: absolute;
+    text-align: center;
+    left: 62%;
+    top: 5%;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-family: Arial;
+}
+
+.iframe-text2 {
+    position: absolute;
+    text-align: center;
+    left: 55%;
+    top: 26%;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-family: Arial;
+}
+
+.iframe-text3 {
+    position: absolute;
+    text-align: center;
+    left:25%;
+    top: 51%;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-family: Arial;
+}
+
+.iframe-text4 {
+    position: absolute;
+    text-align: center;
+    left: 60%;
+    top: 51%;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-family: Arial;
+}
+
+.iframe-text5 {
+    position: absolute;
+    text-align: center;
+    left: 59%;
+    top: 73%;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-family: Arial;
+}
+
+
+#showOptionUser {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#opcionesUser {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #260202;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+    #opcionesUser ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        #opcionesUser ul li {
+            padding: 8px;
+        }
+
+            #opcionesUser ul li a {
+                color: white;
+                text-decoration: none;
+                display: block;
+                font-family: Arial;
+            }
+
+                #opcionesUser ul li a:hover {
+                    transform: scale(110%);
+                }
