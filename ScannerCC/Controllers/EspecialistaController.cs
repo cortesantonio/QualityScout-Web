@@ -25,6 +25,79 @@ namespace ScannerCC.Controllers
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo;
 
+            // Gráfico de barras - Productos por país de destino
+            var productosPorPais = _context.Producto
+                .GroupBy(p => p.PaisDestino)
+                .Select(g => new { Pais = g.Key, Cantidad = g.Count() })
+                .ToList();
+            ViewBag.ProductosPorPais = productosPorPais;
+
+            // Gráfico de líneas - Rechazos mensuales
+            var rechazosMensuales = _context.Controles
+                .Where(c => c.Estado == "Rechazado")
+                .GroupBy(c => c.FechaHoraPrimerControl.Month)
+                .Select(g => new { Mes = g.Key, Rechazos = g.Count() })
+                .OrderBy(x => x.Mes)
+                .ToList();
+            var mesesNombres = rechazosMensuales.Select(r => new
+            {
+                Mes = new DateTime(2024, r.Mes, 1).ToString("MMMM", new System.Globalization.CultureInfo("es-ES")),
+                Rechazos = r.Rechazos
+            }).ToList();
+            ViewBag.RechazosMensuales = mesesNombres;
+
+            // Gráfico de pastel - Variedad de productos
+            var variedades = _context.Producto
+                .GroupBy(p => p.Nombre)
+                .Select(g => new
+                {
+                    Nombre = g.Key,
+                    Cantidad = g.Count()
+                })
+                .ToList();
+            int totalProductos = variedades.Sum(v => v.Cantidad);
+            var variedadesConPorcentaje = variedades.Select(v => new
+            {
+                v.Nombre,
+                Porcentaje = (double)v.Cantidad / totalProductos * 100
+            }).ToList();
+            ViewBag.Variedades = variedadesConPorcentaje;
+
+            // Gráfico de barras - Rechazos por país
+            var rechazosPorPais = _context.Controles
+                .Where(c => c.Estado == "Rechazado")
+                .GroupBy(c => c.PaisDestino)
+                .Select(g => new { Pais = g.Key, Cantidad = g.Count() })
+                .ToList();
+
+            ViewBag.RechazosPorPais = rechazosPorPais;
+
+            // Gráfico de líneas - Producción mensual
+            var produccionMensual = _context.Controles
+                .Where(c => c.FechaHoraPrimerControl != null)
+                .GroupBy(c => c.FechaHoraPrimerControl.Month)
+                .Select(g => new { Mes = g.Key, Produccion = g.Count() })
+                .OrderBy(x => x.Mes)
+                .ToList();
+            var mesesNombresProduccion = produccionMensual.Select(p => new
+            {
+                Mes = new DateTime(2024, p.Mes, 1).ToString("MMMM", new System.Globalization.CultureInfo("es-ES")),
+                Produccion = p.Produccion
+            }).ToList();
+            ViewBag.ProduccionMensual = mesesNombresProduccion;
+
+            // Obtener países de destino
+            var paisesDestino = _context.Producto
+                .Where(p => p.PaisDestino != null)
+                .GroupBy(p => p.PaisDestino)
+                .Select(g => new
+                {
+                    Pais = g.Key,
+                    Cantidad = g.Count()
+                })
+                .ToList();
+            ViewBag.PaisesDestino = paisesDestino;
+
             return View();
         }
 
@@ -121,6 +194,18 @@ namespace ScannerCC.Controllers
                 ViewBag.ProductoHistorial = _context.ProductoHistorial.ToList();
                 ViewBag.ProductoDetalles = _context.ProductoDetalle.ToList();
                 ViewBag.Escaneos = _context.Escaneo.ToList();
+
+                // Indicadores de rendimiento (rechazados, aprobados, reprocesos)
+                var totalControles = _context.Controles.Count();
+                var indicadoresRendimiento = _context.Controles
+                    .GroupBy(c => c.Estado)
+                    .Select(g => new
+                    {
+                        Estado = g.Key,
+                        Porcentaje = (double)g.Count() / totalControles * 100
+                    })
+                    .ToList();
+                ViewBag.IndicadoresRendimiento = indicadoresRendimiento;
 
                 //Si se realiza busqueda de productos evalua y filtra datos
                 if (Busqueda != null)

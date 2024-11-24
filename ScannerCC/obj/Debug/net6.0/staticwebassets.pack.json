@@ -1,492 +1,488 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\QualityScout.bundle.scp.css",
-      "PackagePath": "staticwebassets\\QualityScout.6bszcxfiie.bundle.scp.css"
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\QualityScout.bundle.scp.css",
+      "PackagePath": "staticwebassets\\QualityScout.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\Brand initial Simple Logo.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\Brand initial Simple Logo.png",
       "PackagePath": "staticwebassets\\Extras\\Brand initial Simple Logo.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\Copa_vino.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\Copa_vino.png",
       "PackagePath": "staticwebassets\\Extras\\Copa_vino.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\Informes.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\Informes.png",
       "PackagePath": "staticwebassets\\Extras\\Informes.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\Logo.webp",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\Logo.webp",
       "PackagePath": "staticwebassets\\Extras\\Logo.webp"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\QualityScout Web.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\QualityScout Web.png",
       "PackagePath": "staticwebassets\\Extras\\QualityScout Web.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\QualityScoutLogo.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\QualityScoutLogo.png",
       "PackagePath": "staticwebassets\\Extras\\QualityScoutLogo.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\ajustes.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\ajustes.png",
       "PackagePath": "staticwebassets\\Extras\\ajustes.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\bdd.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\bdd.png",
       "PackagePath": "staticwebassets\\Extras\\bdd.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\botellad.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\botellad.png",
       "PackagePath": "staticwebassets\\Extras\\botellad.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\botellaicon.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\botellaicon.png",
       "PackagePath": "staticwebassets\\Extras\\botellaicon.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\buscador.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\buscador.png",
       "PackagePath": "staticwebassets\\Extras\\buscador.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\controldecalidad.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\controldecalidad.png",
       "PackagePath": "staticwebassets\\Extras\\controldecalidad.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\controles.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\controles.png",
       "PackagePath": "staticwebassets\\Extras\\controles.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\copavinoservido.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\copavinoservido.png",
       "PackagePath": "staticwebassets\\Extras\\copavinoservido.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\dashboardc.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\dashboardc.png",
       "PackagePath": "staticwebassets\\Extras\\dashboardc.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\documentcheck.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\documentcheck.png",
       "PackagePath": "staticwebassets\\Extras\\documentcheck.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\escaner.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\escaner.png",
       "PackagePath": "staticwebassets\\Extras\\escaner.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\escanera.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\escanera.png",
       "PackagePath": "staticwebassets\\Extras\\escanera.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\especialista.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\especialista.png",
       "PackagePath": "staticwebassets\\Extras\\especialista.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\favicon.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\favicon.png",
       "PackagePath": "staticwebassets\\Extras\\favicon.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\flecha.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\flecha.png",
       "PackagePath": "staticwebassets\\Extras\\flecha.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\flecha_redonda.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\flecha_redonda.png",
       "PackagePath": "staticwebassets\\Extras\\flecha_redonda.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\gestion_riesgos.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\gestion_riesgos.png",
       "PackagePath": "staticwebassets\\Extras\\gestion_riesgos.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\home.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\home.png",
       "PackagePath": "staticwebassets\\Extras\\home.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\iconControlCheck.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\iconControlCheck.png",
       "PackagePath": "staticwebassets\\Extras\\iconControlCheck.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\iconUsuario.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\iconUsuario.png",
       "PackagePath": "staticwebassets\\Extras\\iconUsuario.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\infq.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\infq.png",
       "PackagePath": "staticwebassets\\Extras\\infq.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\infqu.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\infqu.png",
       "PackagePath": "staticwebassets\\Extras\\infqu.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\logo-cc.jpg",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\logo-cc.jpg",
       "PackagePath": "staticwebassets\\Extras\\logo-cc.jpg"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\prod.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\prod.png",
       "PackagePath": "staticwebassets\\Extras\\prod.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\productos.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\productos.png",
       "PackagePath": "staticwebassets\\Extras\\productos.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\proh.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\proh.png",
       "PackagePath": "staticwebassets\\Extras\\proh.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\pulgar_abajo.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\pulgar_abajo.png",
       "PackagePath": "staticwebassets\\Extras\\pulgar_abajo.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\pulgar_arriba.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\pulgar_arriba.png",
       "PackagePath": "staticwebassets\\Extras\\pulgar_arriba.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\usuarios.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\usuarios.png",
       "PackagePath": "staticwebassets\\Extras\\usuarios.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\uvas.jpg",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\uvas.jpg",
       "PackagePath": "staticwebassets\\Extras\\uvas.jpg"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\uvas.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\uvas.png",
       "PackagePath": "staticwebassets\\Extras\\uvas.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\uvas.webp",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\uvas.webp",
       "PackagePath": "staticwebassets\\Extras\\uvas.webp"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\uvasb.png",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\Extras\\uvasb.png",
       "PackagePath": "staticwebassets\\Extras\\uvasb.png"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\Controles.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\Controles.css",
       "PackagePath": "staticwebassets\\css\\Controles.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\Dashboard.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\Dashboard.css",
       "PackagePath": "staticwebassets\\css\\Dashboard.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionBotellas.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionBotellas.css",
       "PackagePath": "staticwebassets\\css\\GestionBotellas.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionControles.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionControles.css",
       "PackagePath": "staticwebassets\\css\\GestionControles.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionEscaneos.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionEscaneos.css",
       "PackagePath": "staticwebassets\\css\\GestionEscaneos.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionInformacion.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionInformacion.css",
       "PackagePath": "staticwebassets\\css\\GestionInformacion.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionInformes.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionInformes.css",
       "PackagePath": "staticwebassets\\css\\GestionInformes.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionProducto.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionProducto.css",
       "PackagePath": "staticwebassets\\css\\GestionProducto.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionProductoD.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionProductoD.css",
       "PackagePath": "staticwebassets\\css\\GestionProductoD.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionProductoH.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionProductoH.css",
       "PackagePath": "staticwebassets\\css\\GestionProductoH.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionUsuario.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\GestionUsuario.css",
       "PackagePath": "staticwebassets\\css\\GestionUsuario.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\ImgP.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\ImgP.css",
       "PackagePath": "staticwebassets\\css\\ImgP.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\IndicadorHome.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\IndicadorHome.css",
       "PackagePath": "staticwebassets\\css\\IndicadorHome.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\LoginD.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\LoginD.css",
       "PackagePath": "staticwebassets\\css\\LoginD.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\Nav.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\Nav.css",
       "PackagePath": "staticwebassets\\css\\Nav.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\PrevisualizarInforme.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\PrevisualizarInforme.css",
       "PackagePath": "staticwebassets\\css\\PrevisualizarInforme.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\Roles.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\Roles.css",
       "PackagePath": "staticwebassets\\css\\Roles.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\login.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\login.css",
       "PackagePath": "staticwebassets\\css\\login.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\favicon.ico",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\js\\controlcalidad.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\js\\controlcalidad.js",
       "PackagePath": "staticwebassets\\js\\controlcalidad.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\js\\especialista.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\js\\especialista.js",
       "PackagePath": "staticwebassets\\js\\especialista.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\js\\quagga.min.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\js\\quagga.min.js",
       "PackagePath": "staticwebassets\\js\\quagga.min.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\js\\reconocimiento.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\js\\reconocimiento.js",
       "PackagePath": "staticwebassets\\js\\reconocimiento.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\js\\site.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Id": "C:\\Users\\Antonio\\Desktop\\TESIS\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Id": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
-    },
-    {
-      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.QualityScout.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
-      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.QualityScout.Microsoft.AspNetCore.StaticWebAssets.props",

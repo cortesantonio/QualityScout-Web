@@ -104,6 +104,18 @@ namespace ScannerCC.Controllers
                 ViewBag.Productos = _context.Producto.ToList();
                 ViewBag.Controles = _context.Controles.Include(c => c.Productos);
 
+                // Indicadores de rendimiento (rechazados, aprobados, reprocesos)
+                var totalControles = _context.Controles.Count();
+                var indicadoresRendimiento = _context.Controles
+                    .GroupBy(c => c.Estado)
+                    .Select(g => new
+                    {
+                        Estado = g.Key,
+                        Porcentaje = (double)g.Count() / totalControles * 100
+                    })
+                    .ToList();
+                ViewBag.IndicadoresRendimiento = indicadoresRendimiento;
+
                 //Si se realiza busqueda de productos evalua y filtra datos
                 if (Busqueda != null)
                 {

@@ -109,6 +109,19 @@ namespace ScannerCC.Controllers
         public async Task<IActionResult> Index()
         {
             var stats = await GetInfoStats();
+
+            // Indicadores de rendimiento (rechazados, aprobados, reprocesos)
+            var totalControles = _context.Controles.Count();
+            var indicadoresRendimiento = _context.Controles
+                .GroupBy(c => c.Estado)
+                .Select(g => new
+                {
+                    Estado = g.Key,
+                    Porcentaje = (double)g.Count() / totalControles * 100
+                })
+                .ToList();
+            ViewBag.IndicadoresRendimiento = indicadoresRendimiento;
+
             return View(stats);
         }
 

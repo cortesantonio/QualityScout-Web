@@ -2,6 +2,35 @@
     Layout = null;
 }
 
+<style>
+    .dashboard-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        justify-content: center;
+    }
+
+    .chart-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    canvas {
+        width: 100% !important;
+        height: 400px !important;
+        object-fit: contain;
+    }
+
+    h3 {
+        font-family: Arial;
+    }
+</style>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,6 +40,8 @@
     <title>QualityScout</title>
     <link rel="stylesheet" href="~/css/IndicadorHome.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-piechart-outlabels"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,10 +107,10 @@
                 </div>
             </div>
 
-            <div class="iframe-container">
-                <div class="iframe-overlay">
-                    <p class="iframe-text">INDICADORES DE RENDIMIENTO ACTUALES</p>
-                    <iframe title="IndicadoresA" src="https://app.powerbi.com/view?r=eyJrIjoiYzdiMTFmOTItOGFkNS00ZDNlLWI1MjctMTY0OWQzZGZmOWMxIiwidCI6IjM4YTFlMGExLWI2YjEtNDJlOS1iM2E5LTU5NzYyNjY3MGIxNyIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
+            <div class="dashboard-container">
+                <div class="chart-container">
+                    <h3>INDICADORES DE RENDIMIENTO ACTUALES</h3>
+                    <canvas id="indicadoresRendimiento"></canvas>
                 </div>
             </div>
 
@@ -121,5 +152,69 @@
             </div>
         </div>
     </div>
+    <script>
+        var indicadoresRendimiento = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.IndicadoresRendimiento));
+
+        var labels = indicadoresRendimiento.map(i => i.Estado);
+        var data = indicadoresRendimiento.map(i => i.Porcentaje);
+
+        new Chart(document.getElementById('indicadoresRendimiento'), {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Indicadores de Rendimiento (%)',
+                    data: data,
+                    backgroundColor: [
+                        '#F25757',
+                        '#260202',
+                        '#BF6565'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw.toFixed(2) + '%';
+                            }
+                        }
+                    },
+                    datalabels: {
+                        color: '#FFFFFF',
+                        formatter: (value, context) => {
+                            const label = context.chart.data.labels[context.dataIndex];
+                            return `${label}\n${value.toFixed(2)}%`;
+                        },
+                        align: 'start',
+                        anchor: 'start',
+                        offset: -85,
+                        clamp: false,
+                        font: {
+                            size: 14,
+                            weight: 'bold',
+                            color: '#FFFFFF'
+                        },
+                    }
+                },
+                cutout: '50%',
+                layout: {
+                    padding: {
+                        top: 8,
+                        right: 30,
+                        bottom: 8,
+                        left: 30
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+    </script>
 </body>
 </html>

@@ -2,6 +2,42 @@
     Layout = null;
 }
 
+<style>
+    .dashboard-container {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .chart-container {
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+        .chart-container.large {
+            grid-row: span 2;
+        }
+
+        .chart-container.small {
+            height: 100%;
+        }
+
+    #mapaPaises {
+        height: 100%;
+        width: 100%;
+        border-radius: 8px;
+    }
+
+    h3 {
+        font-family: Arial;
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+</style>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,10 +47,14 @@
     <title>QS - Dashboard</title>
     <link rel="stylesheet" href="~/css/Dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-piechart-outlabels"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
     <header>
@@ -87,26 +127,353 @@
     <div class="content">
         <div class="content">
             <h2 class="accesotitulo">Dashboard</h2>
-            <div class="iframe-container" style="display: flex; flex-direction: column; align-items: center; gap: 20px; max-width: 800px; margin: 0 auto;">
-                <!-- Primer iframe con sus textos -->
-                <div class="iframe-overlay">
-                    <p class="iframe-text">PRODUCTOS POR PAÍS DE DESTINO</p>
-                    <p class="iframe-text1">DESTINOS</p>
-                    <p class="iframe-text2">RECHAZOS DE CONTROLES MENSUALES</p>
-                    <iframe title="DashboardA" width="1200" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiNWQxOTgyNWItMGQ4NS00NGU1LWEyYWEtZGM3ZGJiMTAzMjBkIiwidCI6IjM4YTFlMGExLWI2YjEtNDJlOS1iM2E5LTU5NzYyNjY3MGIxNyIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
+            <div class="dashboard-container">
+                <div class="chart-container large">
+                    <h3>PRODUCTOS POR PAÍS DE DESTINO</h3>
+                    <canvas id="productosPorPais" style="width: 500px; height: 450px; "></canvas>
                 </div>
-
-                <!-- Segundo iframe con sus textos -->
-                <div class="iframe-overlay">
-                    <p class="iframe-text3">VARIEDAD DE PRODUCTOS</p>
-                    <p class="iframe-text4">RECHAZOS POR PAÍS</p>
-                    <p class="iframe-text5">PRODUCCIÓN MENSUAL</p>
-                    <iframe title="DashboardB" width="1200" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiNTM0YWYxYjctODJmMS00ZTA0LThiZjktZTE4OTk5NWIyYTFkIiwidCI6IjM4YTFlMGExLWI2YjEtNDJlOS1iM2E5LTU5NzYyNjY3MGIxNyIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
+                <div class="chart-container small">
+                    <h3>DESTINOS</h3>
+                    <div id="mapaPaises" style="height: 300px; "></div>
+                </div>
+                <div class="chart-container small">
+                    <h3>RECHAZOS DE CONTROLES MENSUALES</h3>
+                    <canvas id="rechazosMensuales" style="height: 300px; "></canvas>
+                </div>
+                <div class="chart-container large">
+                    <h3>VARIEDAD DE PRODUCTOS</h3>
+                    <canvas id="variedades" style="width: 500px; height: 400px; "></canvas>
+                </div>
+                <div class="chart-container small">
+                    <h3>RECHAZOS POR PAÍS</h3>
+                    <canvas id="rechazosPorPais" style="height: 300px; "></canvas>
+                </div>
+                <div class="chart-container small">
+                    <h3>PRODUCCIÓN MENSUAL</h3>
+                    <canvas id="produccionMensual" style="height: 300px; "></canvas>
                 </div>
             </div>
-
         </div>
     </div>
+    <script>
+        // Datos para Productos por país
+        var productosPorPais = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.ProductosPorPais));
+        var paises = productosPorPais.map(p => p.Pais);
+        var cantidades = productosPorPais.map(p => p.Cantidad);
+
+        new Chart(document.getElementById('productosPorPais'), {
+            type: 'bar',
+            data: {
+                labels: paises,
+                datasets: [{
+                    label: 'Productos',
+                    data: cantidades,
+                    backgroundColor: [
+                        '#BF6565',
+                        '#F25757',
+                        '#260202'
+                    ],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return `${context.dataset.label}: ${context.raw}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: false,
+                        },
+                        ticks: {
+                            font: {
+                                weight: 'bold',
+                                size: 13
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'BOTELLAS/PRODUCTOS',
+                            font: {
+                                weight: 'bold',
+                                size: 20
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+
+        // Datos para Rechazos mensuales con el nombre del mes
+        var rechazosMensuales = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.RechazosMensuales));
+        function capitalizarMes(mes) {
+            return mes.charAt(0).toUpperCase() + mes.slice(1).toLowerCase();
+        }
+        var mesesRechazos = rechazosMensuales.map(r => capitalizarMes(r.Mes));
+        var rechazos = rechazosMensuales.map(r => r.Rechazos);
+
+        new Chart(document.getElementById('rechazosMensuales'), {
+            type: 'line',
+            data: {
+                labels: mesesRechazos,
+                datasets: [{
+                    label: 'Rechazos',
+                    data: rechazos,
+                    borderColor: '#F25757',
+                    fill: false,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#F25757',
+                    pointBorderWidth: 3,
+                    pointHoverRadius: 6,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            padding: 10
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            padding: 10,
+                            autoSkip: false,
+                            font: {
+                                weight: 'bold',
+                                size: 13
+                            }
+                        },
+                        offset: true
+                    }
+                }
+            }
+        });
+
+        // Datos para Variedades
+        var variedades = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Variedades));
+        var nombres = variedades.map(v => v.Nombre);
+        var porcentajesVariedades = variedades.map(v => v.Porcentaje);
+
+        new Chart(document.getElementById('variedades'), {
+            type: 'doughnut',
+            data: {
+                labels: nombres,
+                datasets: [{
+                    label: 'Variedades (%)',
+                    data: porcentajesVariedades,
+                    backgroundColor: [
+                        '#F25757',
+                        '#260202',
+                        '#BF6565'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw.toFixed(2) + '%';
+                            }
+                        }
+                    },
+                    datalabels: {
+                        color: '#FFFFFF',
+                        formatter: (value, context) => {
+                            const label = context.chart.data.labels[context.dataIndex];
+                            return `${label}\n${value.toFixed(2)}%`;
+                        },
+                        align: 'start',
+                        anchor: 'start',
+                        offset: -120,
+                        clamp: false,
+                        font: {
+                            size: 16,
+                            weight: 'bold',
+                            color: '#FFFFFF'
+                        }
+                    }
+                },
+                cutout: '50%',
+                layout: {
+                    padding: {
+                        top: 8,
+                        right: 30,
+                        bottom: 8,
+                        left: 30
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+
+        // Datos para Rechazos por país
+        var rechazosPorPais = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.RechazosPorPais));
+        var paisesRechazos = rechazosPorPais.map(r => r.Pais);
+        var cantidadesRechazos = rechazosPorPais.map(r => r.Cantidad);
+        new Chart(document.getElementById('rechazosPorPais'), {
+            type: 'bar',
+            data: {
+                labels: paisesRechazos,
+                datasets: [{
+                    label: 'Rechazos',
+                    data: cantidadesRechazos,
+                    backgroundColor: [
+                        '#BF6565',
+                        '#F25757',
+                        '#260202'
+                    ],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return `${context.dataset.label}: ${context.raw}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            padding: 10,
+                            font: {
+                                weight: 'bold',
+                                size: 13
+                            }
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'RECHAZOS',
+                            font: {
+                                weight: 'bold',
+                                size: 20
+                            }
+                        },
+                        beginAtZero: true,
+                        ticks: {
+                            padding: 10
+                        }
+                    }
+                }
+            }
+        });
+
+        // Datos para Producción mensual con el nombre del mes
+        var produccionMensual = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.ProduccionMensual));
+        function capitalizarMes(mes) {
+            return mes.charAt(0).toUpperCase() + mes.slice(1).toLowerCase();
+        }
+        var mesesProduccion = produccionMensual.map(p => capitalizarMes(p.Mes));
+        var produccion = produccionMensual.map(p => p.Produccion);
+
+        new Chart(document.getElementById('produccionMensual'), {
+            type: 'line',
+            data: {
+                labels: mesesProduccion,
+                datasets: [{
+                    label: 'Producción',
+                    data: produccion,
+                    borderColor: '#F25757',
+                    fill: false,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#F25757',
+                    pointBorderWidth: 3,
+                    pointHoverRadius: 6,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            padding: 10
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            padding: 10,
+                            autoSkip: false,
+                            font: {
+                                weight: 'bold',
+                                size: 13
+                            }
+                        },
+                        offset: true
+                    }
+                }
+            }
+        });
+
+
+
+        // Datos para el Mapa - Paises de destino
+        const paisesDestino = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.PaisesDestino));
+        const mapa = L.map('mapaPaises').setView([0, 0], 1);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: 'Mapa de destinos',
+            subdomains: 'abcd',
+            maxZoom: 15
+        }).addTo(mapa);
+        paisesDestino.forEach(pais => {
+            const nombrePais = pais.Pais;
+
+            fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(nombrePais)}&format=json`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const { lat, lon } = data[0];
+                        L.marker([lat, lon])
+                            .addTo(mapa)
+                            .bindPopup(`<strong>${nombrePais}</strong><br>Cantidad: ${pais.Cantidad}`);
+                    }
+                })
+                .catch(err => console.error(`Error al buscar la ubicación para ${nombrePais}:`, err));
+        });
+
+    </script>
 </body>
 <script src="~/js/quagga.min.js"></script>
 <script src="~/js/especialista.js"></script>

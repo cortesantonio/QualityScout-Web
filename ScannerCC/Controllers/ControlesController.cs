@@ -90,6 +90,34 @@ namespace ScannerCC.Controllers
                 ControlesReprocesados = controlesReprocesados > 0 ? controlesReprocesados : 0
             };
 
+            // Procesar datos para el gráfico de exportaciones por país 
+            var datosGrafico = _context.Controles
+                .Where(c => c.PaisDestino != null)
+                .GroupBy(c => new { c.PaisDestino, Mes = c.FechaHoraPrimerControl.Month })
+                .Select(g => new
+                {
+                    PaisDestino = g.Key.PaisDestino,
+                    Mes = g.Key.Mes,
+                    Cantidad = g.Count()
+                })
+                .ToList();
+            var paises = datosGrafico.Select(d => d.PaisDestino).Distinct().ToList();
+            var mesesNumericos = datosGrafico.Select(d => d.Mes).Distinct().OrderBy(m => m).ToList();
+            var mesesTexto = mesesNumericos
+                .Select(m => new DateTime(1, m, 1).ToString("MMMM"))
+                .Select(nombreMes => char.ToUpper(nombreMes[0]) + nombreMes.Substring(1))
+                .ToList();
+            var exportacionesPorMes = mesesNumericos.Select(mes =>
+                datosGrafico
+                    .Where(d => d.Mes == mes)
+                    .OrderBy(d => d.PaisDestino)
+                    .Select(d => d.Cantidad)
+                    .ToList()
+            ).ToList();
+            ViewBag.Paises = paises;
+            ViewBag.Meses = mesesTexto;
+            ViewBag.Exportaciones = exportacionesPorMes;
+
             return View(model);
         }
 

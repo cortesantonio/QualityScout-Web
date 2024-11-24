@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QualityScout")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+60769015ae14cf95671b98a1d254c8cf99075a98")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c31fc4f7d4c5f0d1b630aa8879d1df6df4ac372")]
 [assembly: System.Reflection.AssemblyProductAttribute("QualityScout")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QualityScout")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

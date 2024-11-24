@@ -152,12 +152,12 @@
                     <p class="label">Controles semanales</p>
                 </div>
 
-                <div class="powerbi-container div7">
+                    <div class="powerbi-container div7">
                         <div class="iframe-overlay">
-                            <p class="iframe-text">EXPORTACIONES POR PAÍS</p>
-                            <iframe title="ControlesA" width="950" height="410" src="https://app.powerbi.com/view?r=eyJrIjoiYWVhMjU1ZmYtNjhkZS00N2UzLWE1NjctZTAzMDg4ZDE5MDMxIiwidCI6IjM4YTFlMGExLWI2YjEtNDJlOS1iM2E5LTU5NzYyNjY3MGIxNyIsImMiOjR9" frameborder="0" allowfullscreen="true"></iframe>
+                            <h3 class="chart-title">EXPORTACIONES POR PAÍS</h3>
+                            <canvas id="exportacionesChart"></canvas>
                         </div>
-                </div>
+                    </div>
 
                 <div class="circle-container div3">
                     <div class="circle">
@@ -195,6 +195,72 @@
 
     </div>
 </div>
+    <script>
+        // Datos enviados desde el controlador
+        const paises = @Html.Raw(Json.Serialize(ViewBag.Paises));
+        const meses = @Html.Raw(Json.Serialize(ViewBag.Meses));
+        const exportaciones = @Html.Raw(Json.Serialize(ViewBag.Exportaciones));
+
+        const ctx = document.getElementById('exportacionesChart').getContext('2d');
+        const colors = ['#BF6565', '#F25757', '#4B0404'];
+        const datasets = exportaciones.map((mesData, index) => ({
+            label: meses[index],
+            data: mesData,
+            backgroundColor: colors[index % colors.length],
+            borderWidth: 1
+        }));
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: paises,
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return `${context.dataset.label}: ${context.raw}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: false,
+                        },
+                        ticks: {
+                            autoSkip: false,
+                            maxRotation: 0,
+                            minRotation: 0,
+                            font: {
+                                size: 13,
+                                weight: 'bold',
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'EXPORTACIONES',
+                            font: {
+                                size: 20,
+                                weight: 'bold',
+                            },
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 <script src="~/js/quagga.min.js"></script>
 <script src="~/js/especialista.js"></script>
