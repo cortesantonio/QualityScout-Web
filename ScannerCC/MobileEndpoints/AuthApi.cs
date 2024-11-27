@@ -37,14 +37,7 @@ namespace QualityScout.MobileEndpoints
             _context = context;
         }
 
-        // GET: api/<AuthApi>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-
+       
 
         [HttpPost("login")]
         public IActionResult AuthLogin([FromBody] LoginRequest request)

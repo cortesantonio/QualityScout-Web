@@ -21,6 +21,8 @@ namespace QualityScout.MobileEndpoints
         public string Idioma { get; set; }
         public string UnidadMedida { get; set; }
         public string DescripcionCapsula { get; set; }
+        public string? UrlImagen { get; set; }
+
 
         public int? Capacidad { get; set; }
         public string? TipoCapsula { get; set; }
@@ -500,9 +502,9 @@ namespace QualityScout.MobileEndpoints
             producto.UnidadMedida = pr.UnidadMedida;
             producto.DescripcionCapsula = pr.DescripcionCapsula;
             producto.IdUsuarios = usuarioPeticion.Id;
+            producto.URLImagen = pr.UrlImagen;
 
             // datos de temporal de prueba
-            producto.URLImagen = "https://www.monteswines.com/images/botella/icons.png";
 
 
             producto.FechaRegistro = DateTime.Now;
@@ -603,6 +605,55 @@ namespace QualityScout.MobileEndpoints
 
 
 
+        [HttpPost("EstaRegistrado")]
+        public async Task<ActionResult> EstaRegistrado([FromHeader(Name = "Authorization")] string authorization, string codigo)
+        {
+            // Validar el token en la cabecera
+            if (string.IsNullOrEmpty(authorization) || !authorization.StartsWith("Bearer "))
+            {
+                return Unauthorized("Token no válido o ausente.");
+            }
+
+            string token = authorization.Substring("Bearer ".Length).Trim();
+            var usuarioPeticion = await _context.Usuario.FirstOrDefaultAsync(u => u.Token == token);
+            if (usuarioPeticion == null)
+            {
+                return Unauthorized("Token no válido.");
+            }
+
+            // Obtener el código desde el cuerpo de la solicitud
+            if (string.IsNullOrEmpty(codigo))
+            {
+                return BadRequest("El código no puede estar vacío.");
+            }
+
+            // Buscar el producto en la base de datos
+            var producto = await _context.Producto.FirstOrDefaultAsync(p => p.CodigoBarra == codigo);
+
+            if (producto == null)
+            {
+                return NotFound(new { mensaje = "El producto no está registrado." });
+            }
+
+
+            DateTime fechaHoy = DateTime.Now;
+
+
+            Escaneos E = new Escaneos();
+            E.IdProductos = producto.Id;
+            E.IdUsuarios = usuarioPeticion.Id;
+            E.Fecha = fechaHoy.Date;
+            E.Hora = fechaHoy.TimeOfDay;
+            _context.Escaneo.Add(E);
+            _context.SaveChanges();
+
+            // Devolver la información del producto si existe
+            return Ok(new
+            {
+                id = producto.Id,
+                codigoBarra = producto.CodigoBarra,
+            });
+        }
 
 
 

@@ -114,16 +114,16 @@
     ]
   },
   {
-    "ContainingType": "QualityScout.MobileEndpoints.AuthApi",
-    "Method": "Get",
-    "RelativePath": "api/AuthApi",
-    "HttpMethod": "GET",
+    "ContainingType": "QualityScout.MobileEndpoints.ApiDashboard",
+    "Method": "CantidadPorEstado",
+    "RelativePath": "api/ApiDashboard/CantidadPorEstado",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "ScannerCC.Models.Controles",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -132,6 +132,86 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.ApiDashboard",
+    "Method": "ComparacionControles",
+    "RelativePath": "api/ApiDashboard/ComparacionControles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.ApiDashboard",
+    "Method": "ProductosPais",
+    "RelativePath": "api/ApiDashboard/ProductosPais",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ScannerCC.Models.Controles",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.ApiDashboard",
+    "Method": "RechazadosMensuales",
+    "RelativePath": "api/ApiDashboard/RechazadosMensuales",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.ApiDashboard",
+    "Method": "RechazadosPais",
+    "RelativePath": "api/ApiDashboard/RechazadosPais",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ScannerCC.Models.Controles",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.ApiDashboard",
+    "Method": "ReprocesosMensuales",
+    "RelativePath": "api/ApiDashboard/ReprocesosMensuales",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.ApiDashboard",
+    "Method": "ResumenControles",
+    "RelativePath": "api/ApiDashboard/ResumenControles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "QualityScout.MobileEndpoints.AuthApi",
@@ -516,6 +596,27 @@
         "Name": "IdOriginalProducto",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QualityScout.MobileEndpoints.ProductosApi",
+    "Method": "EstaRegistrado",
+    "RelativePath": "api/ProductosApi/EstaRegistrado",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "codigo",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
