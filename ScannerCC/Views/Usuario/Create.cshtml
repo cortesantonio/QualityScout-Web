@@ -149,8 +149,27 @@
                     <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                     <div class="welcome-container">
                         <span class="welcome-text">Bienvenido!</span>
-                        <p>@ViewBag.trab.Nombre</p>
-                        <p>Especialista</p>
+                        <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                        @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:12px;">Especialista</p>
                     </div>
                 </div>
                 <button id="showOptionUser" onclick="showOptionUser()">
@@ -187,27 +206,27 @@
                     <div class="form-group">
                         <label asp-for="Rut" class="control-label">RUT</label>
                         <input asp-for="Rut" name="Rut" class="form-control" placeholder="X.XXX.XXX-X"
-                               maxlength="12" oninput="formatRut(this)" />
+                               maxlength="12" oninput="formatRut(this)" required />
                         <span asp-validation-for="Rut" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Nombre" class="control-label">Nombre completo</label>
-                        <input asp-for="Nombre" name="Nombre" class="form-control" placeholder="Antonio Angel Cortes Silva" />
+                        <input asp-for="Nombre" name="Nombre" class="form-control" placeholder="Antonio Angel Cortes Silva" required />
                     </div>
                     <div class="form-group">
                         <label asp-for="Email" class="control-label">Correo</label>
-                        <input asp-for="Email" name="Email" type="email" class="form-control" placeholder="email@mail.cl" />
+                        <input asp-for="Email" name="Email" type="email" class="form-control" placeholder="email@mail.cl" required />
                     </div>
                     <div class="form-group">
                         <label for="Rol">Rol</label>
-                        <select asp-items=@ViewBag.Roles name="Rol" id="Rol" class="form-control">
+                        <select asp-items=@ViewBag.Roles name="Rol" id="Rol" class="form-control" required>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Contraseña</label>
                         <div class="input-container" style="position: relative;">
                             <input id="password" name="Password" class="form-control" type="password" placeholder="**********"
-                                   minlength="8" title="Debe tener al menos 8 caracteres." />
+                                   minlength="8" title="Debe tener al menos 8 caracteres." required />
                             <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()"
                                     style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: #000; width: 30px; height: 30px; padding: 0;">
                                 <i id="toggleIcon" class="fa fa-eye-slash"></i>

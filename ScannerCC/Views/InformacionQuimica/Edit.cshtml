@@ -148,8 +148,27 @@
                     <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                     <div class="welcome-container">
                         <span class="welcome-text">Bienvenido!</span>
-                        <p>@ViewBag.trab.Nombre</p>
-                        <p>Especialista</p>
+                        <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                        @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:12px;">Especialista</p>
                     </div>
                 </div>
                 <button id="showOptionUser" onclick="showOptionUser()">
@@ -187,47 +206,47 @@
             <div class="row">
                     <div class="form-group">
                         <label asp-for="Cepa" class="control-label">Cepa vino</label>
-                        <input asp-for="Cepa" class="form-control" />
+                        <input asp-for="Cepa" class="form-control" required />
                         <span asp-validation-for="Cepa" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="MinAzucar" class="control-label">Mínimo de azúcar (gr)</label>
-                        <input asp-for="MinAzucar" step="any" class="form-control" type="number" />
+                        <input asp-for="MinAzucar" step="any" class="form-control" type="number" required />
                         <span asp-validation-for="MinAzucar" step="any" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="MaxAzucar" class="control-label">Máximo de azúcar (gr)</label>
-                        <input asp-for="MaxAzucar" step="any" class="form-control" type="number" />
+                        <input asp-for="MaxAzucar" step="any" class="form-control" type="number" required />
                         <span asp-validation-for="MaxAzucar" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="MinSulfuroso" class="control-label">Mínimo de sulfuroso (mg/l)</label>
-                        <input asp-for="MinSulfuroso" step="any" class="form-control" type="number" />
+                        <input asp-for="MinSulfuroso" step="any" class="form-control" type="number" required />
                         <span asp-validation-for="MinSulfuroso" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="MaxSulfuroso" class="control-label">Máximo de sulfuroso (mg/l)</label>
-                        <input asp-for="MaxSulfuroso" step="any" class="form-control" type="number" />
+                        <input asp-for="MaxSulfuroso" step="any" class="form-control" type="number" required />
                         <span asp-validation-for="MaxSulfuroso" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="MinDensidad" class="control-label">Mínimo de densidad (g/ml)</label>
-                        <input asp-for="MinDensidad" step="any" class="form-control" type="number" />
+                        <input asp-for="MinDensidad" step="any" class="form-control" type="number" required />
                         <span asp-validation-for="MinDensidad" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="MaxDensidad" class="control-label">Máximo de densidad (g/ml)</label>
-                        <input asp-for="MaxDensidad" step="any" class="form-control" type="number" />
+                        <input asp-for="MaxDensidad" step="any" class="form-control" type="number" required />
                         <span asp-validation-for="MaxDensidad" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="MinGradoAlcohol" class="control-label">Mínimo de grado de alcohol</label>
-                        <input asp-for="MinGradoAlcohol" step="any" class="form-control" type="number" />
+                        <input asp-for="MinGradoAlcohol" step="any" class="form-control" type="number" required />
                         <span asp-validation-for="MinGradoAlcohol" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="MaxGradoAlcohol" class="control-label">Máximo de grado de alcohol</label>
-                        <input asp-for="MaxGradoAlcohol" step="any" class="form-control" type="number" />
+                        <input asp-for="MaxGradoAlcohol" step="any" class="form-control" type="number" required />
                         <span asp-validation-for="MaxGradoAlcohol" class="text-danger"></span>
                     </div>
                     <div class="form-groupp">

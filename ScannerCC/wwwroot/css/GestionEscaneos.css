@@ -248,7 +248,7 @@ p {
 .scan-info {
     display: flex;
     align-items: center;
-    width: 35%; /* Limita el ancho de la sección de la información del usuario */
+    width: 40%; /* Limita el ancho de la sección de la información del usuario */
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -263,6 +263,12 @@ p {
     margin-right: 10px;
     width: 40px;
     height: auto;
+}
+
+.scan-info div {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .scan-info p {

@@ -63,20 +63,23 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista, Control de Calidad")]
         public async Task<IActionResult> Details(int? id)
         {
-            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            var TrabajadorActivo = _context.Usuario
+                .FirstOrDefault(t => t.Rut.Equals(User.Identity.Name));
             ViewBag.trab = TrabajadorActivo;
 
             if (id == null || _context.Producto == null)
             {
                 return NotFound();
             }
+
             ViewBag.Controles = _context.Controles.ToList();
+
             var producto = await _context.Producto
-                .Include(p => p.InformacionQuimica) 
-                .Include(p => p.ProductoDetalles)      
-                    .ThenInclude(pd => pd.BotellaDetalles) 
-                .Include(p => p.ProductoHistorial)   
-                .Include(p => p.Usuarios)            
+                .Include(p => p.InformacionQuimica)
+                .Include(p => p.ProductoDetalles)
+                    .ThenInclude(pd => pd.BotellaDetalles)
+                .Include(p => p.ProductoHistorial)
+                .Include(p => p.Usuarios)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (producto == null)
@@ -84,8 +87,13 @@ namespace ScannerCC.Controllers
                 return NotFound();
             }
 
+            // Verificar si el producto tiene controles asociados
+            var tieneControl = _context.Controles.Any(c => c.IdProductos == id);
+            ViewBag.TieneControl = tieneControl;
+
             return View(producto);
         }
+
 
         // GET: Productos/Create
         [Authorize(Roles = "Especialista")]

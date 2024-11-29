@@ -167,6 +167,12 @@ app.MapControllerRoute(
     defaults: new { controller = "Controles", action = "Delete2" }
 );
 
+app.MapControllerRoute(
+    name: "Reconocimiento-de-objetos",
+    pattern: "Reconocimiento-de-objetos/{id?}",
+    defaults: new { controller = "Controles", action = "Reconocimiento" }
+);
+
 // Rutas personalizadas para "Escaneos"
 app.MapControllerRoute(
     name: "Gestion-escaneos",
@@ -240,6 +246,12 @@ app.MapControllerRoute(
     name: "Eliminar-informe",
     pattern: "Eliminar-informe/{id?}",
     defaults: new { controller = "Informes", action = "Delete" }
+);
+
+app.MapControllerRoute(
+    name: "Previsualizar-informe",
+    pattern: "Previsualizar-informe/{id?}",
+    defaults: new { controller = "Informes", action = "Previsualizar" }
 );
 
 // Rutas personalizadas para "Producto"

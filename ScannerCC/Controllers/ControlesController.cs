@@ -166,17 +166,20 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Control de Calidad")]
         public IActionResult CreateControl(int? idProducto)
         {
-            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            var TrabajadorActivo = _context.Usuario
+                .FirstOrDefault(t => t.Rut.Equals(User.Identity.Name));
             ViewBag.trab = TrabajadorActivo;
 
-            // Obtener los productos disponibles
-            var productos = _context.Producto.Select(p => new { p.Id, p.Nombre }).ToList();
+            var productosDisponibles = _context.Producto
+                .Where(p => !_context.Controles.Any(c => c.IdProductos == p.Id)) 
+                .Select(p => new { p.Id, p.Nombre })
+                .ToList();
 
-            // Pasar los productos y el idProducto a la vista usando ViewBag
-            ViewBag.IdProductos = new SelectList(productos, "Id", "Nombre", idProducto);
+            ViewBag.IdProductos = new SelectList(productosDisponibles, "Id", "Nombre", idProducto);
 
             return View();
         }
+
 
 
         // POST: Controles/Create

@@ -376,8 +376,27 @@
                         <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@ViewBag.trab.Nombre</p>
-                            <p>Especialista</p>
+                            <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:12px;">Especialista</p>
                         </div>
                     }
 
@@ -386,8 +405,27 @@
                         <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@ViewBag.trab.Nombre</p>
-                            <p style="font-size: 10px;">Control de Calidad</p>
+                            <p style="font-size:12px;">@GetFirstNameAndSurnameBC(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameBC(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:10px;">Control de Calidad</p>
                         </div>
                     }
                 </div>
@@ -444,15 +482,15 @@
 
             @if (isControlCalidad)
             {
-                @if (Model.Activo)
+                if (Model.Activo && !(bool)ViewBag.TieneControl) 
                 {
-                    <button class="a" style="color:white; margin-top: 10px; margin-left: 120px;" onclick="window.location.href='@Url.Action("CreateControl", "Controles", new { idProducto = Model.Id })'">
-                        <i class="fa-solid fa-file-medical"></i> 
+                    <button class="a" style="color:white; margin-top: 10px; margin-left: 120px;"
+                            onclick="window.location.href='@Url.Action("CreateControl", "Controles", new { idProducto = Model.Id })'">
+                        <i class="fa-solid fa-file-medical"></i>
                     </button>
                     <p style="color:black; margin-top:5px; margin-left: 110px; font-size: 13px;">Agregar</p>
                     <p style="color:black; margin-left: 113.5px; font-size: 13px;">control</p>
                 }
-
             }
         </div>
 

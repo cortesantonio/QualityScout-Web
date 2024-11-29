@@ -95,8 +95,27 @@
                         <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@ViewBag.trab.Nombre</p>
-                            <p>Especialista</p>
+                            <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:12px;">Especialista</p>
                         </div>
                     }
 
@@ -105,8 +124,27 @@
                         <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@ViewBag.trab.Nombre</p>
-                            <p>Control de Calidad</p>
+                            <p style="font-size:12px;">@GetFirstNameAndSurnameBC(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameBC(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:12px;">Control de Calidad</p>
                         </div>
                     }
                 </div>
@@ -179,12 +217,31 @@
                     <div class="scan-info">
                         <img src="~/Extras/escaner.png" class="scan-icon" />
                         <div>
-                            <p><strong>Producto:</strong> @item.Productos.Nombre</p> <p><strong>Codigo:</strong> @item.Productos.CodigoBarra</p>
-                            <p>Usuario: @item.Usuarios.Nombre</p>
+                            <p><strong>Producto:</strong> @item.Productos.Nombre</p> <p>Código de barras: @item.Productos.CodigoBarra</p>
+
                         </div>
                     </div>
                     <div class="scan-details">
                         <p><strong>Fecha:</strong> @item.Fecha</p>
+                        <p>Usuario: @GetFirstNameAndSurname(item.Usuarios.Nombre)</p>
+                        @functions {
+                        public string GetFirstNameAndSurname(string fullName)
+                        {
+                            if (string.IsNullOrEmpty(fullName))
+                            {
+                                return string.Empty;
+                            }
+
+                            var nameParts = fullName.Split(' ');
+
+                            if (nameParts.Length >= 2)
+                            {
+                                return nameParts[0] + " " + nameParts[2];
+                            }
+
+                            return nameParts[0];
+                        }
+                    }
                         <p>Rut: @item.Usuarios.Rut</p>
 
                     </div>

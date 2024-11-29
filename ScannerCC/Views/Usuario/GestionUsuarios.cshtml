@@ -84,8 +84,28 @@
                     <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                     <div class="welcome-container">
                         <span class="welcome-text">Bienvenido!</span>
-                        <p>@ViewBag.trab.Nombre</p>
-                        <p>Especialista</p>
+                        <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                        @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2]; 
+                                }
+
+                                return nameParts[0]; 
+                            }
+                        }
+
+                        <p style ="font-size:12px;">Especialista</p>
                     </div>
                 </div>
                 <button id="showOptionUser" onclick="showOptionUser()">
@@ -135,7 +155,27 @@
                         <div class="user-info">
                             <img src="~/Extras/iconUsuario.png" class="user-icon" />
                             <div>
-                                <p><strong>@item.Nombre</strong></p>
+                                <p><strong>@GetFirstNameAndSurname(item.Nombre)</strong></p>
+
+                        @functions {
+                            public string GetFirstNameAndSurname(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2]; 
+                                }
+
+                                return nameParts[0]; 
+                            }
+                        }
+
                                 <p>RUT: @item.Rut</p>
                             </div>
                         </div>

@@ -265,8 +265,27 @@
                         <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@ViewBag.trab.Nombre</p>
-                            <p>Especialista</p>
+                            <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:12px;">Especialista</p>
                         </div>
                     }
 
@@ -275,7 +294,26 @@
                         <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@ViewBag.trab.Nombre</p>
+                            <p style="font-size:12px;">@GetFirstNameAndSurnameBC(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameBC(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
                             <p style="font-size: 10px;">Control de Calidad</p>
                         </div>
                     }
@@ -308,41 +346,54 @@
     </div>
 
     <div class="container">
-    <dl class="row justify-content-center">
+        <dl class="row justify-content-center">
             <div class="row justify-content-center">
-                <dt >Producto</dt>
-                <dd >
+                <dt>Producto</dt>
+                <dd>
                     @Html.DisplayFor(model => model.Productos.Nombre)
                 </dd>
-                <dt >Linea controlada</dt>
-                <dd >
+                <dt>Linea controlada</dt>
+                <dd>
                     @Html.DisplayFor(model => model.Linea)
                 </dd>
 
-                <dt >País de destino</dt>
-                <dd >
+                <dt>País de destino</dt>
+                <dd>
                     @Html.DisplayFor(model => model.PaisDestino)
                 </dd>
-                <dt >Tipo de control</dt>
+                <dt>Tipo de control</dt>
                 <dd>
                     @Html.DisplayFor(model => model.Tipodecontrol)
                 </dd>
-                    <dt >Fecha/Hora primer control</dt>
-                    <dd >
-                        @Html.DisplayFor(model => model.FechaHoraPrimerControl)
+                <dt>Fecha/Hora control inicial</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.FechaHoraPrimerControl)
+                </dd>
+                <dt>Estado control inicial</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Estado)
+                </dd>
+
+                @if (Model.Estado == "Reproceso" && !string.IsNullOrEmpty(Model.EstadoFinal) && Model.FechaHoraControlFinal.HasValue)
+                {
+                    <dt>Fecha/Hora control final</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FechaHoraControlFinal)
                     </dd>
-                    <dt >Estado control inicial</dt>
-                    <dd >
-                        @Html.DisplayFor(model => model.Estado)
+                    <dt>Estado control final</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.EstadoFinal)
                     </dd>
+                }
+
                 <dt>Comentario sobre el control</dt>
                 <dd style="word-wrap: break-word;">
                     @Html.DisplayFor(model => model.Comentario)
                 </dd>
                 <dt class="espacio"></dt>
-                <dd class="espacio"></dd>
             </div>
-    </dl>
+        </dl>
+
 </div>
 
 </body>

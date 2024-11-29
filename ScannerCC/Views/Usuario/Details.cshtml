@@ -294,6 +294,11 @@
                             <img src="~/Extras/Informes.png" alt="Informes" />
                         </a>
                     </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                            <img src="~/Extras/escaner.png" alt="Informes" />
+                        </a>
+                    </div>
                 }
             </div>
             <div class="login-btn">
@@ -303,8 +308,27 @@
                         <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@ViewBag.trab.Nombre</p>
-                            <p>Especialista</p>
+                            <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:12px;">Especialista</p>
                         </div>
                     }
 
@@ -313,7 +337,26 @@
                         <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@ViewBag.trab.Nombre</p>
+                            <p style="font-size: 12px;">@GetFirstNameAndSurnameBC(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameBC(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
                             <p style="font-size: 10px;">Control de Calidad</p>
                         </div>
                     }
@@ -342,7 +385,7 @@
     <div class="container">
     <dl class="row justify-content-center">
             <div class="profile-header">
-                <div class="info-left" style="margin-left: 50px;">
+                <div class="info-left" style="margin-left: 40px;">
                     @if (Model.Rol != null && Model.Rol.Nombre != null)
                     {
                         if (Model.Rol.Nombre == "Especialista")
@@ -354,7 +397,27 @@
                             <h1 style="font-family: Arial; font-size: 13px; color:gray;">CONTROL DE CALIDAD</h1>
                         }
                     }
-                    <h2 style="font-family: Arial; font-size: 35px; color: #4B0404">@Html.DisplayFor(model => model.Nombre)</h2>
+                    @functions {
+                        // Función para dividir el nombre completo en nombres y apellidos
+                        public string[] DividirNombre(string nombreCompleto)
+                        {
+                            return nombreCompleto.Split(' ');
+                        }
+                    }
+
+                    <h2 style="font-family: Arial; font-size: 24px; color: #4B0404">
+                        @{
+                            // Llamamos a la función DividirNombre y obtenemos el nombre dividido
+                            var nombreDividido = DividirNombre(Model.Nombre);
+                        }
+
+                        <!-- Mostramos los primeros dos nombres en la primera línea -->
+                        @string.Join(" ", nombreDividido.Take(2)) <br />
+
+                        <!-- Mostramos los apellidos en la segunda línea -->
+                        @string.Join(" ", nombreDividido.Skip(2))
+                    </h2>
+
                     <p style="color:gray; font-size: 13px;">@Html.DisplayFor(model => model.Rut)</p>
                 </div>
 

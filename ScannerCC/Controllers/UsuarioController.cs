@@ -22,21 +22,42 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public IActionResult GestionUsuarios(string Busqueda)
         {
-            // Filtrar usuarios por Rut o Nombre
             var usuarios = _context.Usuario.AsQueryable();
 
             if (!string.IsNullOrEmpty(Busqueda))
             {
-                usuarios = usuarios.Where(u => u.Rut.Contains(Busqueda) || u.Nombre.Contains(Busqueda));
-            }
-            ViewBag.Usuarios = usuarios.ToList(); // Guardamos la lista de usuarios filtrados
+                var usuariosLista = usuarios.ToList();
 
-            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+                string busquedaNormalizada = NormalizarTexto(Busqueda);
+
+                usuariosLista = usuariosLista.Where(u =>
+                    (u.Rut != null && NormalizarTexto(u.Rut).Contains(busquedaNormalizada)) ||
+                    (u.Nombre != null && NormalizarTexto(u.Nombre).Contains(busquedaNormalizada)))
+                    .ToList();
+
+                ViewBag.Usuarios = usuariosLista;
+            }
+            else
+            {
+                ViewBag.Usuarios = usuarios.ToList();
+            }
+
+            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut == User.Identity.Name).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo;
 
             ViewBag.Usuario = _context.Usuario.Include(r => r.Rol).ToList();
+
             return View();
         }
+
+        private string NormalizarTexto(string texto)
+        {
+            if (string.IsNullOrWhiteSpace(texto))
+                return string.Empty;
+
+            return texto.Replace(".", "").Replace("-", "").ToUpper();
+        }
+
 
         // GET: Usuarios/Details
         [Authorize(Roles = "Especialista, Control de Calidad")]
@@ -50,9 +71,8 @@ namespace ScannerCC.Controllers
                 return NotFound();
             }
 
-            // Aquí incluimos el Rol en la consulta que se envía a la vista
             var usuario = await _context.Usuario
-                                        .Include(u => u.Rol) // Incluye el Rol para que esté disponible en la vista
+                                        .Include(u => u.Rol) 
                                         .FirstOrDefaultAsync(u => u.Id == id);
             ViewBag.UsuarioId = usuario?.Id;
 
@@ -113,13 +133,14 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int? id)
         {
-            var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
+            var TrabajadorActivo = _context.Usuario.FirstOrDefault(t => t.Rut.Equals(User.Identity.Name));
             ViewBag.trab = TrabajadorActivo;
 
             if (id == null || _context.Usuario == null)
             {
                 return NotFound();
             }
+
             var usuarios = _context.Usuario.FirstOrDefault(u => u.Id == id);
             ViewBag.UsuarioId = usuarios.Id;
 
@@ -129,8 +150,14 @@ namespace ScannerCC.Controllers
                 return NotFound();
             }
 
-            var rols = _context.Rol.Select(bd => new { bd.idRol, bd.Nombre }).ToList();
-            ViewData["Roles"] = new SelectList(rols, "idRol", "Nombre");
+            var roles = _context.Rol.Select(r => new SelectListItem
+            {
+                Value = r.idRol.ToString(),
+                Text = r.Nombre,
+                Selected = r.idRol == usuario.RolId 
+            }).ToList();
+
+            ViewBag.Roles = roles;
 
             return View(usuario);
         }

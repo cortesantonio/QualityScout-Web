@@ -157,8 +157,27 @@
                     <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                     <div class="welcome-container">
                         <span class="welcome-text">Bienvenido!</span>
-                        <p>@ViewBag.trab.Nombre</p>
-                        <p>Especialista</p>
+                        <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                        @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:12px;">Especialista</p>
                     </div>
                 </div>
                 <button id="showOptionUser" onclick="showOptionUser()">
@@ -193,33 +212,33 @@
         <form asp-action="Create">
             <div class="form-group">
                 <label asp-for="IdInformacionQuimica" class="control-label">Información química</label>
-                <select asp-for="IdInformacionQuimica" name="IdInformacionQuimica" class="form-control" asp-items="ViewBag.IdInformacionQuimica">
+                    <select asp-for="IdInformacionQuimica" name="IdInformacionQuimica" class="form-control" asp-items="ViewBag.IdInformacionQuimica" required>
                     <option value="">Seleccione un información química</option>
                 </select>
             </div>
             <div class="form-group">
                 <label asp-for="CodigoBarra" class="control-label">Código de barras</label>
-                <input asp-for="CodigoBarra" name="CodigoBarra" class="form-control" />
+                <input asp-for="CodigoBarra" name="CodigoBarra" class="form-control" required />
                 <span asp-validation-for="CodigoBarra" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CodigoVE" class="control-label">Código VE</label>
-                <input asp-for="CodigoVE" name="CodigoVE" class="form-control" />
+                    <input asp-for="CodigoVE" name="CodigoVE" class="form-control" required />
                 <span asp-validation-for="CodigoVE" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label">Nombre vino</label>
-                <input asp-for="Nombre" name="Nombre" class="form-control" />
+                    <input asp-for="Nombre" name="Nombre" class="form-control" required />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="URLImagen" class="control-label">URL de la imagen</label>
-                <input asp-for="URLImagen" name="URLImagen" class="form-control" />
+                    <input asp-for="URLImagen" name="URLImagen" class="form-control" required />
                 <span asp-validation-for="URLImagen" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PaisDestino" class="control-label">País de destino</label>
-                    <select asp-for="PaisDestino" name="PaisDestino" id="PaisDestino" class="form-control">
+                    <select asp-for="PaisDestino" name="PaisDestino" id="PaisDestino" class="form-control" required>
                         <option value="">Seleccione un país</option>
                         <option value="Brasil">Brasil</option>
                         <option value="Canadá">Canadá</option>
@@ -239,7 +258,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Idioma" class="control-label">Idioma información</label>
-                    <select asp-for="Idioma" name="Idioma" id="Idioma" class="form-control">
+                    <select asp-for="Idioma" name="Idioma" id="Idioma" class="form-control" required>
                         <option value="">Seleccione un idioma</option>
                         <option value="Chino">Chino</option>
                         <option value="Español">Español</option>
@@ -250,7 +269,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="UnidadMedida" class="control-label">Unidad de medida en etiqueta</label>
-                    <select asp-for="UnidadMedida" name="UnidadMedida" id="UnidadMedida" class="form-control">
+                    <select asp-for="UnidadMedida" name="UnidadMedida" id="UnidadMedida" class="form-control" required>
                         <option value="">Seleccione una unidad de medida</option>
                         <option value="Centímetro cúbico (cc)">Centímetro cúbico (cc)</option>
                         <option value="Mililitros (ml)">Mililitros (ml)</option>
@@ -258,7 +277,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="DescripcionCapsula" class="control-label">Descripción de la cápsula</label>
-                <textarea asp-for="DescripcionCapsula" name="DescripcionCapsula" class="form-control" style=" margin-left:5px; margin-top:5px; width: 500px; height:60px;"></textarea>
+                    <textarea asp-for="DescripcionCapsula" name="DescripcionCapsula" class="form-control" style=" margin-left:5px; margin-top:5px; width: 500px; height:60px;" required></textarea>
                 <span asp-validation-for="DescripcionCapsula" class="text-danger"></span>
             </div>
                 <div class="form-groupp">

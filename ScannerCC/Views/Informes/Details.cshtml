@@ -2,6 +2,8 @@
 
 @{
     Layout = null;
+    bool isEspecialista = User.IsInRole("Especialista");
+    bool isControlCalidad = User.IsInRole("Control de Calidad");
 }
 
 <style>
@@ -77,6 +79,22 @@
             background-color: #F25757;
             color: white;
             width: 30%;
+        }
+
+    #descargarInforme {
+        display: block;
+        margin: 20px auto;
+        font-size: 20px;
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+        /* Efecto de hover para el botón */
+        #descargarInforme:hover {
+            background-color: #333; /* Fondo ligeramente más claro cuando se pasa el mouse */
         }
 
     a {
@@ -173,10 +191,18 @@
     <title>QS - Ver informe</title>
     <link rel="stylesheet" href="~/css/Nav.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        .informesContainer h2, .informesContainer h3, .informesContainer p,
+        .informesContainer .Título, .informesContainer .enfoque, .informesContainer .Contenido,
+        .informesContainer .encargado {
+            color: black;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -185,46 +211,128 @@
                 <img class="logoqs" src="~/Extras/QualityScoutLogo.png" alt="Logo de Quality Scout">
             </a>
             <div class="navstyle">
-                <div class="iconosnav">
-                    <a asp-action="Index" asp-controller="Especialista">
-                        <img src="~/Extras/home.png" alt="Inicio" />
-                    </a>
-                </div>
-                <div class="iconosnav">
-                    <a asp-action="GestionUsuarios" asp-controller="Usuario">
-                        <img src="~/Extras/usuarios.png" alt="Usuarios" />
-                    </a>
-                </div>
-                <div class="iconosnav">
-                    <a asp-action="Controles" asp-controller="Controles">
-                        <img src="~/Extras/controles.png" alt="Controles" />
-                    </a>
-                </div>
-                <div class="iconosnav">
-                    <a asp-action="GestionProductos" asp-controller="Producto">
-                        <img src="~/Extras/productos.png" alt="Productos" />
-                    </a>
-                </div>
-                <div class="iconosnav">
-                    <a asp-action="GestionInformes" asp-controller="Informes">
-                        <img src="~/Extras/Informes.png" alt="Informes" />
-                    </a>
-                </div>
-                <div class="iconosnav">
-                    <a asp-action="GestionEscaneos" asp-controller="Escaneos">
-                        <img src="~/Extras/escaner.png" alt="Informes" />
-                    </a>
-                </div>
-                
+                @if (isEspecialista)
+                {
+                    <div class="iconosnav">
+                        <a asp-action="Index" asp-controller="Especialista">
+                            <img src="~/Extras/home.png" alt="Inicio" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionUsuarios" asp-controller="Usuario">
+                            <img src="~/Extras/usuarios.png" alt="Usuarios" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="Controles" asp-controller="Controles">
+                            <img src="~/Extras/controles.png" alt="Controles" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionProductos" asp-controller="Producto">
+                            <img src="~/Extras/productos.png" alt="Productos" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionInformes" asp-controller="Informes">
+                            <img src="~/Extras/Informes.png" alt="Informes" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                            <img src="~/Extras/escaner.png" alt="Informes" />
+                        </a>
+                    </div>
+                }
+
+                @if (isControlCalidad)
+                {
+                    <div class="iconosnav">
+                        <a asp-action="Index" asp-controller="Controlcalidad">
+                            <img src="~/Extras/home.png" alt="Inicio" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="Controles" asp-controller="Controles">
+                            <img src="~/Extras/controles.png" alt="Controles" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionProductos" asp-controller="Producto">
+                            <img src="~/Extras/productos.png" alt="Productos" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionInformes" asp-controller="Informes">
+                            <img src="~/Extras/Informes.png" alt="Informes" />
+                        </a>
+                    </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                            <img src="~/Extras/escaner.png" alt="Informes" />
+                        </a>
+                    </div>
+                }
             </div>
             <div class="login-btn">
                 <div class="div2">
-                    <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
-                    <div class="welcome-container">
-                        <span class="welcome-text">Bienvenido!</span>
-                        <p>@ViewBag.trab.Nombre</p>
-                        <p>Especialista</p>
+                    @if (isEspecialista)
+                    {
+                        <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
+                        <div class="welcome-container">
+                            <span class="welcome-text">Bienvenido!</span>
+                            <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:12px;">Especialista</p>
                     </div>
+                    }
+
+                    @if (isControlCalidad)
+                    {
+                        <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
+                        <div class="welcome-container">
+                            <span class="welcome-text">Bienvenido!</span>
+                            <p style="font-size:12px;">@GetFirstNameAndSurnameBC(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameBC(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:10px;">Control de Calidad</p>
+                    </div>
+                    }
                 </div>
                 <button id="showOptionUser" onclick="showOptionUser()">
                     <i class="fa-solid fa-caret-down"></i>
@@ -249,41 +357,62 @@
     </header>
     <div class="content">
         <div class="content">
-            <h2 class="accesotitulo">Ver informe</h2>
+            <h2 class="accesotitulo">Informe</h2>
         </div>
     </div>
 
-    <div class="container">
-    <dl class="row justify-content-center">
-            <div class="row justify-content-center">
-                <dt class=>
-                    Titulo
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Titulo)
-                </dd>
-                <dt>
-                    Enfoque
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Enfoque)
-                </dd>
-                <dt>
-                    Fecha
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Fecha)
-                </dd>
-                <dt>
-                    Descripcion
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Descripcion)
-                </dd>
+    <main>
+        <section class="informesContainer">
+            <div class="cabezaInforme">
+
+                <h2 style="font-family: Arial;">Informe N° @ViewBag.IdInforme</h2>
+                <p style="font-family: Arial;">Fecha de generación: @ViewBag.Fecha</p>
+
             </div>
-    </dl>
-</div>
+
+            <div>
+                <div class="Título">
+                    <h3 style="font-family: Arial; margin-bottom: 8px;"> <strong>Título:</strong> @ViewBag.titulo</h3>
+                </div>
+                <div class="enfoque" style="font-family: Arial;">
+                    <strong >Enfoque:</strong> @ViewBag.enfoque
+                </div>
+                <div class="Contenido" style="font-family: Arial;">
+                    <strong>Contenido:</strong> @ViewBag.contenido
+                </div>
+                <div class="encargado" style="font-family: Arial;">Generado por @ViewBag.nombreEncargado con ia.</div>
+            </div>
+            <button id="descargarInforme"><i class="fa-solid fa-file-pdf"></i> Descargar PDF</button>
+        </section>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("descargarInforme").addEventListener("click", function () {
+                const button = document.getElementById("descargarInforme");
+                button.style.display = "none"; 
+
+                const informeContainer = document.querySelector(".informesContainer");
+
+                const options = {
+                    margin: [10, 0, 0, 10], 
+                    filename: 'informe.pdf',
+                    jsPDF: {
+                        unit: 'mm',
+                        format: 'a4',
+                        orientation: 'portrait'
+                    }
+                };
+
+                html2pdf(informeContainer, options).then(function () {
+                    button.style.display = "block";
+                });
+            });
+        });
+    </script>
+
+
 </body>
+
 <script src="~/js/quagga.min.js"></script>
 <script src="~/js/especialista.js"></script>
 

@@ -96,8 +96,27 @@
                         <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@ViewBag.trab.Nombre</p>
-                            <p>Especialista</p>
+                            <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:12px;">Especialista</p>
                         </div>
                     }
 
@@ -106,8 +125,27 @@
                         <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@ViewBag.trab.Nombre</p>
-                            <p>Control de Calidad</p>
+                            <p style="font-size:12px;">@GetFirstNameAndSurnameBC(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameBC(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:12px;">Control de Calidad</p>
                         </div>
                     }
                 </div>
@@ -172,26 +210,25 @@
         {
             @foreach (var item in ViewBag.Controles)
             {
-                <div class="user-card @(item.Estado == "Aprobado" ? "estado-aprobado" : item.Estado == "Rechazado" ? "estado-rechazado" : item.Estado == "Reproceso" ? "estado-reproceso" : "")">
-                    <div class="user-info">
-                        <img src="~/Extras/iconControlCheck.png" class="user-icon" alt="Icono de control" />
-                        <div>
-                            <p><strong>@item.Productos.Nombre</strong></p>
-                            <p>Fecha: @item.FechaHoraPrimerControl.ToString("dd-MM-yyyy HH:mm")</p>
+                    <div class="user-card @(item.Estado == "Aprobado" ? "estado-aprobado" : item.Estado == "Rechazado" ? "estado-rechazado" : item.Estado == "Reproceso" && string.IsNullOrEmpty(item.EstadoFinal) ? "estado-reproceso" : item.EstadoFinal == "Aprobado" ? "estado-aprobado" : "estado-rechazado")">
+                        <div class="user-info">
+                            <img src="~/Extras/iconControlCheck.png" class="user-icon" alt="Icono de control" />
+                            <div>
+                                <p><strong>@item.Productos.Nombre</strong></p>
+                                <p>Fecha: @item.FechaHoraPrimerControl.ToString("dd-MM-yyyy HH:mm")</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="user-details">
+                        <div class="user-details">
                             <p>
                                 Estado:
-                                <span class="@(item.Estado == "Aprobado" ? "aprobado" : item.Estado == "Rechazado" ? "rechazado" : item.Estado == "Reproceso" ? "reproceso" : "")">
-                                    @item.Estado
+                                <span class="@(item.Estado == "Aprobado" ? "aprobado" : item.Estado == "Rechazado" ? "rechazado" : item.Estado == "Reproceso" && string.IsNullOrEmpty(item.EstadoFinal) ? "reproceso" : item.EstadoFinal == "Aprobado" ? "aprobado" : "rechazado")">
+                                    @(item.Estado == "Reproceso" && !string.IsNullOrEmpty(item.EstadoFinal) ? item.EstadoFinal : item.Estado)
                                 </span>
                             </p>
-                    </div>
-                    <div class="user-actions">
+                        </div>
+                        <div class="user-actions">
                             @if (isControlCalidad)
                             {
-
                                 <a class="see-btn" asp-action="Delete2" asp-controller="Controles" asp-route-id="@item.Id">
                                     <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                                 </a>
@@ -200,22 +237,20 @@
                                     <a class="edit-btn" asp-action="Edit2" asp-controller="Controles" asp-route-id="@item.Id">
                                         <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
                                     </a>
-
                                 }
                                 <a class="see-btn" asp-action="Details2" asp-controller="Controles" asp-route-id="@item.Id">
                                     <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
                                 </a>
-                                
                             }
                             @if (isEspecialista)
                             {
-                                    <a class="see-btn" asp-action="Details2" asp-controller="Controles" asp-route-id="@item.Id">
+                                <a class="see-btn" asp-action="Details2" asp-controller="Controles" asp-route-id="@item.Id">
                                     <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
-                                    </a>
-
+                                </a>
                             }
+                        </div>
                     </div>
-                </div>
+
             }
             }
             else

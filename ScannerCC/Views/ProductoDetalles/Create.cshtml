@@ -192,8 +192,27 @@
                     <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                     <div class="welcome-container">
                         <span class="welcome-text">Bienvenido!</span>
-                        <p>@ViewBag.trab.Nombre</p>
-                        <p>Especialista</p>
+                        <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                        @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:12px;">Especialista</p>
                     </div>
                 </div>
                 <button id="showOptionUser" onclick="showOptionUser()">
@@ -230,19 +249,19 @@
             <div class="row">
                     <div class="form-group">
                         <label asp-for="IdProductos" class="control-label">Producto</label>
-                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos">
+                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos" required>
                             <option value="">Seleccione un producto</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label asp-for="IdBotellaDetalles" class="control-label">Botella</label>
-                        <select asp-for="IdBotellaDetalles" class="form-control" asp-items="ViewBag.IdBotellaDetalles">
+                        <select asp-for="IdBotellaDetalles" class="form-control" asp-items="ViewBag.IdBotellaDetalles" required>
                             <option value="">Seleccione una botella</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label asp-for="ColorBotella">Color de botella</label>
-                        <select asp-for="ColorBotella" name="ColorBotella" id="ColorBotella" class="form-control">
+                        <select asp-for="ColorBotella" name="ColorBotella" id="ColorBotella" class="form-control" required>
                             <option value="">Seleccione un color de botella</option>
                             <option value="Ámbar">Ámbar</option>
                             <option value="Blanco">Blanco</option>
@@ -251,12 +270,12 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Capacidad" class="control-label">Capacidad (ml)</label>
-                        <input asp-for="Capacidad" class="form-control" />
+                        <input asp-for="Capacidad" class="form-control" required />
                         <span asp-validation-for="Capacidad" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="TipoCapsula">Tipo de cápsula</label>
-                        <select asp-for="TipoCapsula" name="TipoCapsula" id="TipoCapsula" class="form-control">
+                        <select asp-for="TipoCapsula" name="TipoCapsula" id="TipoCapsula" class="form-control" required>
                             <option value="">Seleccione un tipo de cápsula</option>
                             <option value="Alutín">Alutín</option>
                             <option value="Complex">Complex</option>
@@ -265,7 +284,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="ColorCapsula">Color de cápsula</label>
-                        <select asp-for="ColorCapsula" name="ColorCapsula" id="ColorCapsula" class="form-control">
+                        <select asp-for="ColorCapsula" name="ColorCapsula" id="ColorCapsula" class="form-control" required>
                             <option value="">Seleccione un color de cápsula</option>
                             <option value="Azul">Azul</option>
                             <option value="Blanco">Blanco</option>
@@ -281,12 +300,12 @@
                     <div class="form-grouppp d-flex justify-content-center align-items-center">
                         <label class="med me-3 mb-0">Medalla</label>
                         <div class="form-check form-check-inline align-items-center" style="margin-right: 20px;">
-                            <input class="form-check-input" type="radio" asp-for="Medalla" name="Medalla" value="true" id="medallaSi" />
+                            <input class="form-check-input" type="radio" asp-for="Medalla" name="Medalla" value="true" id="medallaSi" required />
                             <label class="form-check-label radio-circle" for="medallaSi"></label>
                             <span class="option-text">Sí</span>
                         </div>
                         <div class="form-check form-check-inline align-items-center">
-                            <input class="form-check-input" type="radio" asp-for="Medalla" name="Medalla" value="false" id="medallaNo" />
+                            <input class="form-check-input" type="radio" asp-for="Medalla" name="Medalla" value="false" id="medallaNo" required />
                             <label class="form-check-label radio-circle" for="medallaNo"></label>
                             <span class="option-text">No</span>
                         </div>
@@ -294,7 +313,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="TipoEtiqueta">Tipo de etiqueta</label>
-                        <select asp-for="TipoEtiqueta" name="TipoEtiqueta" id="TipoEtiqueta" class="form-control">
+                        <select asp-for="TipoEtiqueta" name="TipoEtiqueta" id="TipoEtiqueta" class="form-control" required>
                             <option value="">Seleccione un tipo de etiqueta</option>
                             <option value="Autoadhesiva">Autoadhesiva</option>
                             <option value="Engomada">Engomada</option>
@@ -302,7 +321,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="TipoCorcho">Tipo de corcho</label>
-                        <select asp-for="TipoCorcho" name="TipoCorcho" id="TipoCorcho" class="form-control">
+                        <select asp-for="TipoCorcho" name="TipoCorcho" id="TipoCorcho" class="form-control" required>
                             <option value="">Seleccione un tipo de corcho</option>
                             <option value="Microaglomerado">Microaglomerado</option>
                             <option value="Natural">Natural</option>
@@ -311,12 +330,12 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="MedidaEtiquetaABoquete" class="control-label">Medida de etiqueta a boquete (cm)</label>
-                        <input asp-for="MedidaEtiquetaABoquete" class="form-control" />
+                        <input asp-for="MedidaEtiquetaABoquete" class="form-control" required />
                         <span asp-validation-for="MedidaEtiquetaABoquete" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="MedidaEtiquetaABase" class="control-label">Medida de etiqueta a base (cm)</label>
-                        <input asp-for="MedidaEtiquetaABase" class="form-control" />
+                        <input asp-for="MedidaEtiquetaABase" class="form-control" required />
                         <span asp-validation-for="MedidaEtiquetaABase" class="text-danger"></span>
                     </div>
                     <div class="form-groupp">

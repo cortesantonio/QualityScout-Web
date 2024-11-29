@@ -164,8 +164,27 @@
                     <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
                     <div class="welcome-container">
                         <span class="welcome-text">Bienvenido!</span>
-                        <p>@ViewBag.trab.Nombre</p>
-                        <p>Control de Calidad</p>
+                        <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                        @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:12px;">Control de Calidad</p>
                     </div>
                 </div>
                 <button id="showOptionUser" onclick="showOptionUser()">
@@ -202,18 +221,18 @@
             <div class="row">
                     <div class="form-group">
                         <label asp-for="IdProductos" class="control-label">Producto</label>
-                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos">
+                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos" required>
                             <option value="">Seleccione un producto</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label asp-for="Linea" class="control-label">Linea controlada</label>
-                        <input asp-for="Linea" class="form-control" />
+                        <input asp-for="Linea" class="form-control" required />
                         <span asp-validation-for="Linea" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="PaisDestino" class="control-label">País de destino</label>
-                        <select asp-for="PaisDestino" name="PaisDestino" id="PaisDestino" class="form-control">
+                        <select asp-for="PaisDestino" name="PaisDestino" id="PaisDestino" class="form-control" required>
                             <option value="">Seleccione un país</option>
                             <option value="Brasil">Brasil</option>
                             <option value="Canadá">Canadá</option>
@@ -233,7 +252,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Tipodecontrol" class="control-label">Tipo de control</label>
-                        <select asp-for="Tipodecontrol" name="Tipodecontrol" id="Tipodecontrol" class="form-control">
+                        <select asp-for="Tipodecontrol" name="Tipodecontrol" id="Tipodecontrol" class="form-control" required>
                             <option value="">Seleccione un tipo de control</option>
                             <option value="Preventivo">Preventivo</option>
                             <option value="Reproceso">Reproceso</option>
@@ -241,7 +260,7 @@
                     </div>
                     <div class="form-group">
                         <label for="Estado">Estado control inicial</label>
-                        <select name="Estado" id="Estado" class="form-control" onchange="checkReproceso()">
+                        <select name="Estado" id="Estado" class="form-control" onchange="checkReproceso()" required>
                             <option value="">Seleccione un estado de control</option>
                             <option value="Aprobado">Aprobado</option>
                             <option value="Reproceso">Reproceso</option>
@@ -250,7 +269,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Comentario" class="control-label">Comentario sobre el control</label>
-                        <textarea asp-for="Comentario" name="Comentario" class="form-control" style=" margin-left:5px; margin-top:5px; width: 500px; height:60px;"></textarea>
+                        <textarea asp-for="Comentario" name="Comentario" class="form-control" style=" margin-left:5px; margin-top:5px; width: 500px; height:60px;" required></textarea>
                         <span asp-validation-for="Comentario" class="text-danger"></span>
                         
 

@@ -221,8 +221,27 @@
                     <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                     <div class="welcome-container">
                         <span class="welcome-text">Bienvenido!</span>
-                        <p>@ViewBag.trab.Nombre</p>
-                        <p>Especialista</p>
+                        <p style="font-size: 12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                        @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size: 12px;">Especialista</p>
                     </div>
                 </div>
                 <button id="showOptionUser" onclick="showOptionUser()">
@@ -252,43 +271,36 @@
         </div>
     </div>
 
-    <div class="container">
-    <dl class="row justify-content-center">
-            <div class="row justify-content-center">
-                <dt>
-                    Titulo
-                </dt>
-                <dd >
-                    @Html.DisplayFor(model => model.Titulo)
-                </dd>
-                <dt >
-                    Enfoque
-                </dt>
-                <dd >
-                    @Html.DisplayFor(model => model.Enfoque)
-                </dd>
-                <dt >
-                    Fecha
-                </dt> 
-                <dd >
-                    @Html.DisplayFor(model => model.Fecha)
-                </dd> 
-                <dt >
-                    Descripcion
-                </dt>
-                <dd >
-                    @Html.DisplayFor(model => model.Descripcion)
-                </dd>
-            </div>
-    </dl>
+    <main>
+        <section class="informesContainer">
+            <div class="cabezaInforme">
 
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="Id" />
-            <button type="submit" class="btnAccionForm" value="Eliminar" style="margin-top: 20px; margin-left: 350px; margin-bottom: 20px;">
-                <i class="fa-solid fa-eraser"></i> Eliminar informe
-            </button>
-        </form>
-</div>
+                <h2 style="font-family: Arial;">Informe N° @ViewBag.IdInforme</h2>
+                <p style="font-family: Arial;">Fecha de generación: @ViewBag.Fecha</p>
+
+            </div>
+
+            <div>
+                <div class="Título">
+                    <h3 style="font-family: Arial; margin-bottom: 8px;"> <strong>Título:</strong> @ViewBag.titulo</h3>
+                </div>
+                <div class="enfoque" style="font-family: Arial;">
+                    <strong>Enfoque:</strong> @ViewBag.enfoque
+                </div>
+                <div class="Contenido" style="font-family: Arial;">
+                    <strong>Contenido:</strong> @ViewBag.contenido
+                </div>
+                <div class="encargado" style="font-family: Arial;">Generado por @ViewBag.nombreEncargado con ia.</div>
+            </div>
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btnAccionForm" value="Eliminar" style="display: block; margin: 20px auto; font-size: 15px;">
+                    <i class="fa-solid fa-eraser"></i> Eliminar informe
+                </button>
+            </form>
+
+        </section>
+    </main>
 </body>
 <script src="~/js/quagga.min.js"></script>
 <script src="~/js/especialista.js"></script>

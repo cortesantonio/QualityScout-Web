@@ -261,10 +261,11 @@ p {
 .informes-info {
     display: flex;
     align-items: center;
-    width: 80%;
-    justify-content: space-between;
+    width: 40%; /* Limita el ancho de la sección de la información del usuario */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
-
 
 .user-icon {
     font-size: 24px;
@@ -285,26 +286,17 @@ p {
 
 .informes-info p {
     margin: 0;
-    font-size: 1rem;
-    color: gray;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    width:30%;
+    font-size: 19px;
 }
-
-    .informes-info p strong {
-        color:black;font-size:1.3rem;
-    }
 
 .informes-details {
     padding-left: 20px;
     border-left: 1px solid #260202;
     font-size: 19px;
-    width: 40%;
+    width: 40%; /* Fija el tamaño del bloque de detalles */
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; /* Asegura que los textos largos no se desborden */
 }
 
     .informes-details p {

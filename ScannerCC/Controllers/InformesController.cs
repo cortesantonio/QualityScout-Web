@@ -38,6 +38,11 @@ namespace ScannerCC.Controllers
 
             }
 
+            var informe = _context.Informe
+                    .Include(pd => pd.Usuarios)
+                    .ToList();
+            ViewBag.Informe = informe;
+
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo;
 
@@ -57,11 +62,19 @@ namespace ScannerCC.Controllers
             }
 
             var informes = await _context.Informe
+                .Include(i => i.Usuarios)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (informes == null)
             {
                 return NotFound();
             }
+
+            ViewBag.IdInforme = id; 
+            ViewBag.titulo = informes.Titulo;
+            ViewBag.enfoque = informes.Enfoque;
+            ViewBag.contenido = informes.Descripcion;
+            ViewBag.Fecha = informes.Fecha;
+            ViewBag.nombreEncargado = informes.Usuarios.Nombre;
 
             return View(informes);
         }
@@ -262,11 +275,19 @@ namespace ScannerCC.Controllers
             }
 
             var informes = await _context.Informe
+                .Include(i => i.Usuarios)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (informes == null)
             {
                 return NotFound();
             }
+
+            ViewBag.IdInforme = id;
+            ViewBag.titulo = informes.Titulo;
+            ViewBag.enfoque = informes.Enfoque;
+            ViewBag.contenido = informes.Descripcion;
+            ViewBag.Fecha = informes.Fecha;
+            ViewBag.nombreEncargado = informes.Usuarios.Nombre;
 
             return View(informes);
         }

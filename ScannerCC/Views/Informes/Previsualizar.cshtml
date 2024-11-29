@@ -100,7 +100,26 @@
                         <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@ViewBag.trab.Nombre</p>
+                            <p>@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
                             <p>Especialista</p>
                         </div>
                     }
@@ -110,7 +129,26 @@
                         <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@ViewBag.trab.Nombre</p>
+                            <p>@GetFirstNameAndSurnameBC(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameBC(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
                             <p>Control de Calidad</p>
                         </div>
                     }
@@ -139,7 +177,7 @@
 
 
     <div class="content" style="margin-top:20px">
-            <h2 class="accesotitulo" style="font-weight:100; font-size:1rem;">Informe Generado</h2>
+            <h2 class="accesotitulo" style="font-weight:100; font-size:1rem;">Informe generado</h2>
 
     </div>
 
@@ -148,40 +186,33 @@
     <section class="informesContainer">
         <div class="cabezaInforme">
 
-                <h2>Informe N.</h2>
+                <h2>Informe N° </h2>
                 <p>Fecha de generacion: @ViewBag.Fecha</p>
 
         </div>
 
         <div >
             <div class="Titulo">
-                <h3> <strong>Titulo:</strong> @ViewBag.titulo</h3>
+                    <h3 style="font-family: Arial; margin-bottom: 8px;"> <strong>Título:</strong> @ViewBag.titulo</h3>
             </div>
-            <div class="enfoque">
-                <strong>Enfoque:</strong> @ViewBag.enfoque
+                <div class="enfoque" style="font-family: Arial;">
+                    <strong >Enfoque:</strong> @ViewBag.enfoque
             </div>
-            <div class="Contenido">
-                <strong>Contenido:</strong> @ViewBag.contenido
+                <div class="Contenido" style="font-family: Arial;">
+                    <strong >Contenido:</strong> @ViewBag.contenido
             </div>
-                <div class="encargado">Generado por @ViewBag.nombreEncargado con ia.</div>
+                <div class="encargado" style="font-family: Arial;">Generado por @ViewBag.nombreEncargado con ia.</div>
 
                 <form asp-action="Create" method="post">
                     <input hidden name="Titulo" value="@ViewBag.titulo" />
                     <input hidden name="Enfoque" value="@ViewBag.enfoque" />
                     <input hidden name="Descripcion" value="@ViewBag.contenido" />
 
-                    <button id="guardarInforme">Guardar Informe</button>
+                    <button id="guardarInforme" style="display: block; margin: 20px auto;"> <i class="fa-solid fa-file-circle-plus" style="font-size: 15px;"></i> Guardar informe</button>
                 </form>
 
         </div>
-
-            
-
     </section>
-
-
-
-
 </main>
 </body>
 

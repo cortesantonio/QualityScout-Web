@@ -174,6 +174,11 @@
                             <img src="~/Extras/Informes.png" alt="Informes" />
                         </a>
                     </div>
+                    <div class="iconosnav">
+                        <a asp-action="GestionEscaneos" asp-controller="Escaneos">
+                            <img src="~/Extras/escaner.png" alt="Informes" />
+                        </a>
+                    </div>
                 }
             </div>
             <div class="login-btn">
@@ -183,9 +188,29 @@
                         <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@ViewBag.trab.Nombre</p>
-                            <p>Especialista</p>
-                        </div>
+                            <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+
+                        <p style="font-size:12px;">Especialista</p>
+                    </div>
                     }
 
                     @if (isControlCalidad)
@@ -193,8 +218,27 @@
                         <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@ViewBag.trab.Nombre</p>
-                            <p>Control de Calidad</p>
+                            <p style="font-size: 12px;">@GetFirstNameAndSurnameBC(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameBC(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size: 12px;">Control de Calidad</p>
                         </div>
                     }
                 </div>
@@ -253,7 +297,7 @@
                         <label class="control-label">Nueva contraseña</label>
                         <div class="input-container" style="position: relative;">
                             <input id="password" name="Password" class="form-control" type="password" placeholder="**********"
-                                   minlength="8" title="Debe tener al menos 8 caracteres." />
+                                   minlength="8" title="Debe tener al menos 8 caracteres." required />
                             <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()"
                                     style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: #000; width: 30px; height: 30px; padding: 0;">
                                 <i id="toggleIcon" class="fa fa-eye-slash"></i>

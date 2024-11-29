@@ -21,7 +21,10 @@ namespace ScannerCC.Controllers
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo;
 
-            ViewBag.ProductoHistorial = _context.ProductoHistorial.ToList();
+            var productoHistorial = _context.ProductoHistorial
+                    .Include(pd => pd.Productos) // Carga la relación Productos
+                    .ToList();
+            ViewBag.ProductoHistorial = productoHistorial;
             return View();
         }
 

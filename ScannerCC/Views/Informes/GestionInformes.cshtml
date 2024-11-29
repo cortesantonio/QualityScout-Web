@@ -183,8 +183,27 @@
                         <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@ViewBag.trab.Nombre</p>
-                            <p>Especialista</p>
+                            <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:12px;">Especialista</p>
                         </div>
                     }
 
@@ -193,8 +212,27 @@
                         <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@ViewBag.trab.Nombre</p>
-                            <p>Control de Calidad</p>
+                            <p style="font-size:12px;">@GetFirstNameAndSurnameBC(ViewBag.trab.Nombre)</p>
+
+                            @functions {
+                            public string GetFirstNameAndSurnameBC(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:12px;">Control de Calidad</p>
                         </div>
                     }
                 </div>
@@ -248,27 +286,44 @@
             @foreach (var item in ViewBag.Informes)
             {
                 <div class="informes-card">
-                        <img src="~/Extras/Informes.png" class="user-icon" />
 
                     <div class="informes-info">
-                       
-                            <p>Titulo: <br /> <strong>@item.Titulo</strong>
-                            </p>
-                            <p class="enfoque" style="max-width:200px">Enfoque: <br /> <strong> @item.Enfoque</strong></p>
-                            <p class="fecha">Fecha: <br /> <strong>@item.Fecha.ToString("dd/MM/yyyy") </strong></p>
-
+                            <img src="~/Extras/Informes.png" class="user-icon" />
+                            <div>
+                                <p><strong>Título:</strong> @item.Titulo</p>
+                                <p>Enfoque: @item.Enfoque</p>
+                            </div>
                     </div>
+                        <div class="informes-details">
+                            <p><strong>Fecha:</strong> @item.Fecha.ToString("dd/MM/yyyy") <strong style="margin-left: 10px;">Hora:</strong> @item.Fecha.ToString("HH:mm")</p>
+                            <p>Encargado: @GetFirstNameAndSurname(item.Usuarios.Nombre)</p>
+                            @functions {
+                        public string GetFirstNameAndSurname(string fullName)
+                        {
+                            if (string.IsNullOrEmpty(fullName))
+                            {
+                                return string.Empty;
+                            }
+
+                            var nameParts = fullName.Split(' ');
+
+                            if (nameParts.Length >= 2)
+                            {
+                                return nameParts[0] + " " + nameParts[2];
+                            }
+
+                            return nameParts[0];
+                        }
+                    }
+                            </div>
                     <div class="informes-actions">
                             @if (isEspecialista)
                             {
-                                <a class="edit-btn" asp-action="Edit" asp-controller="Informes" asp-route-id="@item.Id">
-                                    <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                <a class="see-btn" asp-action="Delete" asp-controller="Informes" asp-route-id="@item.Id">
+                                    <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                                 </a>
                                 <a class="see-btn" asp-action="Details" asp-controller="Informes" asp-route-id="@item.Id">
                                     <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
-                                </a>
-                                <a class="see-btn" asp-action="Delete" asp-controller="Informes" asp-route-id="@item.Id">
-                                    <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                                 </a>
                             }
 

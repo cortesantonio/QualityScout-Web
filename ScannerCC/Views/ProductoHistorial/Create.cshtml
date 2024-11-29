@@ -148,8 +148,27 @@
                     <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                     <div class="welcome-container">
                         <span class="welcome-text">Bienvenido!</span>
-                        <p>@ViewBag.trab.Nombre</p>
-                        <p>Especialista</p>
+                        <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+
+                        @functions {
+                            public string GetFirstNameAndSurnameB(string fullName)
+                            {
+                                if (string.IsNullOrEmpty(fullName))
+                                {
+                                    return string.Empty;
+                                }
+
+                                var nameParts = fullName.Split(' ');
+
+                                if (nameParts.Length >= 2)
+                                {
+                                    return nameParts[0] + " " + nameParts[2];
+                                }
+
+                                return nameParts[0];
+                            }
+                        }
+                        <p style="font-size:12px;">Especialista</p>
                     </div>
                 </div>
                 <button id="showOptionUser" onclick="showOptionUser()">
@@ -186,23 +205,23 @@
             <div class="row">
                     <div class="form-group">
                         <label asp-for="IdProductos" class="control-label">Producto</label>
-                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos">
+                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos" required>
                             <option value="">Seleccione un producto</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label asp-for="FechaCosecha" class="control-label">Fecha de cosecha</label>
-                        <input asp-for="FechaCosecha" class="form-control" type="date" />
+                        <input asp-for="FechaCosecha" class="form-control" type="date" required />
                         <span asp-validation-for="FechaCosecha" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="FechaProduccion" class="control-label">Fecha de producción</label>
-                        <input asp-for="FechaProduccion" class="form-control" type="date" />
+                        <input asp-for="FechaProduccion" class="form-control" type="date" required />
                         <span asp-validation-for="FechaProduccion" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="FechaEnvasado" class="control-label">Fecha de envasado</label>
-                        <input asp-for="FechaEnvasado" class="form-control" type="date" />
+                        <input asp-for="FechaEnvasado" class="form-control" type="date" required />
                         <span asp-validation-for="FechaEnvasado" class="text-danger"></span>
                     </div>
                     <div class="form-groupp">
