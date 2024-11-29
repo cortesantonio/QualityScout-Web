@@ -482,10 +482,9 @@
 
             @if (isControlCalidad)
             {
-                if (Model.Activo && !(bool)ViewBag.TieneControl) 
+                @if (Model.Activo)
                 {
-                    <button class="a" style="color:white; margin-top: 10px; margin-left: 120px;"
-                            onclick="window.location.href='@Url.Action("CreateControl", "Controles", new { idProducto = Model.Id })'">
+                    <button class="a" style="color:white; margin-top: 10px; margin-left: 120px;" onclick="window.location.href='@Url.Action("CreateControl", "Controles", new { idProducto = Model.Id })'">
                         <i class="fa-solid fa-file-medical"></i>
                     </button>
                     <p style="color:black; margin-top:5px; margin-left: 110px; font-size: 13px;">Agregar</p>

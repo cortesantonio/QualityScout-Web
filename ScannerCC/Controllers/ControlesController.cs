@@ -170,12 +170,9 @@ namespace ScannerCC.Controllers
                 .FirstOrDefault(t => t.Rut.Equals(User.Identity.Name));
             ViewBag.trab = TrabajadorActivo;
 
-            var productosDisponibles = _context.Producto
-                .Where(p => !_context.Controles.Any(c => c.IdProductos == p.Id)) 
-                .Select(p => new { p.Id, p.Nombre })
-                .ToList();
+            var productos = _context.Producto.Select(p => new { p.Id, p.Nombre }).ToList();
 
-            ViewBag.IdProductos = new SelectList(productosDisponibles, "Id", "Nombre", idProducto);
+            ViewBag.IdProductos = new SelectList(productos, "Id", "Nombre", idProducto);
 
             return View();
         }
