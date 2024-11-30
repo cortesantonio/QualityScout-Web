@@ -220,8 +220,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
                     <div class="form-group">
-                        <label asp-for="IdProductos" class="control-label">Producto</label>
-                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos" required>
+                        <select asp-for="IdProductos" class="form-control" asp-items="ViewBag.IdProductos" hidden required>
                             <option value="">Seleccione un producto</option>
                         </select>
                     </div>
@@ -231,23 +230,10 @@
                         <span asp-validation-for="Linea" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="PaisDestino" class="control-label">País de destino</label>
-                        <select asp-for="PaisDestino" name="PaisDestino" id="PaisDestino" class="form-control" required>
-                            <option value="">Seleccione un país</option>
-                            <option value="Brasil">Brasil</option>
-                            <option value="Canadá">Canadá</option>
-                            <option value="Chile">Chile</option>
-                            <option value="Colombia">Colombia</option>
-                            <option value="España">España</option>
-                            <option value="Estados Unidos">Estados Unidos</option>
-                            <option value="Japón">Japón</option>
-                            <option value="México">México</option>
-                            <option value="Perú">Perú</option>
-                            <option value="República Checa">República Checa</option>
-                            <option value="Rusia">Rusia</option>
-                            <option value="Turquía">Turquía</option>
-                            <option value="Ucrania">Ucrania</option>
-                            <option value="Venezuela">Venezuela</option>
+                        <select asp-for="PaisDestino" name="PaisDestino" id="PaisDestino" class="form-control" required hidden>
+                            <option selected="selected" value="@ViewBag.PaisDestino">@ViewBag.PaisDestino</option>
+                            
+                            
                         </select>
                     </div>
                     <div class="form-group">
@@ -274,7 +260,7 @@
                         
 
                     </div>
-                    <a asp-action="Reconocimiento" class="btnaAbrirRecIA">
+                    <a asp-action="Reconocimiento" asp-route-Producto="@ViewBag.IdProducto" class="btnaAbrirRecIA">
                         <i class="fa-solid fa-wand-magic-sparkles"></i> Completar con IA.
                     </a>
                     <div class="form-groupp">
@@ -286,7 +272,42 @@
         </form>
     </div>
 </div>
+    <iframe id="iframeId"
+            src="https://www.stack-ai.com/embed/f4e0d66c-8812-4db0-9270-b3eaaeee09e5/f9dd681e-90cd-4c15-b0a6-c40c70bd9f57/6747bfc6ae163a26df8eb677"
+            width="350"
+            height="600"
+            frameborder="0"
+            style="position: fixed; z-index: 1; bottom: 15px; right: 15px;"></iframe>
 
+
+
+    <script>
+        function handleMessage(event) {
+          if (event.data.type === 'chatbotStateChange') {
+            const iframe = document.getElementById('iframeId')
+            if (iframe) {
+              if (event.data.isClosed) {
+                iframe.style.width = '100px'
+                iframe.style.height = '100px'
+                iframe.style.display = 'flex'
+                iframe.style.justifyContent = 'center'
+                iframe.style.alignContent = 'center'
+              } else {
+                iframe.style.width = '350px'
+                iframe.style.height = '650px'
+              }
+            }
+          }
+        }
+
+        // Attach event listener
+        window.addEventListener('message', handleMessage)
+
+        // If you want to clean up the event listener when the page unloads (optional)
+        window.addEventListener('beforeunload', function () {
+          window.removeEventListener('message', handleMessage)
+        })
+    </script>
 </body>
 <script src="~/js/quagga.min.js"></script>
 <script src="~/js/especialista.js"></script>

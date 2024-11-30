@@ -1,84 +1,200 @@
 ﻿@{
     Layout = null;
 }
-
-
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="~/Extras/favicon.png" type="image/x-icon">
-    <title>QS - Reconocimiento de objetos</title>
+    <title>Reconocimiento con Cámara</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #260202;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container p{
+            text-align:center;
+        }
+        video {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        canvas {
+            display: none;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+
+        .results {
+            margin-top: 20px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .missing {
+            color: blue;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .loading {
+            color: gray;
+        }
+    </style>
 </head>
-
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        background-color: rgb(49, 0, 0);
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        flex-direction: column;
-        gap: 0;
-    }
-
-
-    canvas {
-        position: absolute;
-    }
-
-    #deteccion {
-        position: absolute;
-        width: 300px;
-        height: 100px;
-        background-color: rgb(49, 0, 0);
-        border-radius: 10px;
-        padding: 5px;
-        left: 50% - 150;
-        bottom: 30px;
-        color: white;
-    }
-
-</style>
-
 <body>
+    <div>
+        <img src="~/Extras/Brand initial Simple Logo.png" width="150" alt="Alternate Text" />
+    </div>
 
     <div class="container">
+        <h1>Reconocimiento</h1>
+        <p>Producto: @ViewBag.Producto.Nombre Pais Destino: @ViewBag.Producto.PaisDestino Codigo de Barra: @ViewBag.Producto.CodigoBarra</p>
+        <video id="video" autoplay playsinline></video>
+        <canvas id="canvas"></canvas>
+       
         <div>
-            <img src="~/Extras/Brand initial Simple Logo.png" width="150px">
-
+            <button id="captureBtn">Tomar Foto</button>
+            <button id="analyzeBtn" disabled>Analizar</button>
+        </div>
+        <div class="results" id="results">
+            <!-- Resultados se mostrarán aquí -->
         </div>
 
-
-        <div class="camara">
-            <canvas id="canvas" width="640" height="480"></canvas>
-
-            <video id="video" width="640" height="480" playsinline muted autoplay>
-            </video>
-        </div>
-        <div style="text-align:center;" id="deteccion">
-            Elementos encontrados
-            <div id="informacion"></div>
-
-            <button onclick="TerminarBusqueda()" id='boton'>Terminar Busqueda</button>
-        </div>
-
-
+        <button id="copyBtn" class="copy-button" style="display: none;">Copiar Resultados</button>
 
     </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const captureBtn = document.getElementById('captureBtn');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const resultsDiv = document.getElementById('results');
+        const copyBtn = document.getElementById('copyBtn');
+        const objetosEsperados = ["RiesgoParaTuBebe", "NoBeberMenores", "NoBeberAlConducir"];
+        let imageData = null;
+        let lastResults = ""; // Almacena el último resultado generado
+
+
+        // Solicitar acceso a la cámara
+        async function startCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+            } catch (err) {
+                console.error("Error al acceder a la cámara:", err);
+                alert("No se pudo acceder a la cámara. Verifica los permisos.");
+            }
+        }
+
+        // Capturar imagen de la cámara
+        captureBtn.addEventListener('click', () => {
+            const context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            imageData = canvas.toDataURL('image/jpeg').split(',')[1]; // Obtener base64
+            analyzeBtn.disabled = false; // Activar botón de análisis
+            resultsDiv.innerHTML = "<p class='success'>Foto capturada. Listo para analizar.</p>";
+            copyBtn.style.display = "none"; // Ocultar botón de copiar
+        });
+
+        // Enviar la imagen a la API y analizar los resultados
+        analyzeBtn.addEventListener('click', async () => {
+            if (!imageData) {
+                alert("Por favor, toma una foto antes de analizar.");
+                return;
+            }
+
+            const pais ="@ViewBag.Producto.PaisDestino"
+            resultsDiv.innerHTML = "<p class='loading'>Procesando imagen...</p>";
+            copyBtn.style.display = "none"; // Ocultar botón de copiar
+
+            try {
+                const response = await fetch("https://detect.roboflow.com/tesis-zvslj/2?api_key=g8xauDaGODbjfODnMRML", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: imageData,
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error en la API: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const predictions = data.predictions.map(pred => pred.class);
+
+                if (pais === "Chile") {
+                    // Si es Chile, verificar que estén los objetos esperados
+                    const noDetectados = objetosEsperados.filter(obj => !predictions.includes(obj));
+                    lastResults = noDetectados.length > 0
+                        ? `Faltantes: ${noDetectados.join(", ")}`
+                        : "Todos los sellos están presentes.";
+                } else {
+                    // Si no es Chile, verificar que no haya objetos esperados
+                    const presentes = predictions.filter(obj => objetosEsperados.includes(obj));
+                    lastResults = presentes.length > 0
+                        ? `Errores: Sellos nacionales detectados (${presentes.join(", ")})`
+                        : "No se encontraron errores.";
+                }
+
+                resultsDiv.innerHTML = `<h3>Resultados</h3><p>${lastResults}</p>`;
+                copyBtn.style.display = "inline-block"; // Mostrar botón de copiar
+            } catch (error) {
+                console.error(error);
+                resultsDiv.innerHTML = "<p class='error'>Ocurrió un error al procesar la imagen.</p>";
+            }
+        });
+
+        // Copiar resultados al portapapeles
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(lastResults).then(() => {
+                alert("Resultados copiados al portapapeles.");
+                window.history.back()
+            }).catch(err => {
+                console.error("Error al copiar:", err);
+                alert("No se pudo copiar los resultados.");
+            });
+        });
+
+        // Iniciar la cámara al cargar la página
+        startCamera();
+    </script>
 </body>
-
-<script src="https://cdn.jsdelivr.net/npm/@@tensorflow/tfjs"></script>
-<script src="https://cdn.jsdelivr.net/npm/@@tensorflow-models/coco-ssd"></script>
-
-<script src="~/js/reconocimiento.js"></script>
-
 </html>

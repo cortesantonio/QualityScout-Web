@@ -177,6 +177,42 @@
         }
     </section>
 </main>
+    <iframe id="iframeId"
+            src="https://www.stack-ai.com/embed/f4e0d66c-8812-4db0-9270-b3eaaeee09e5/f9dd681e-90cd-4c15-b0a6-c40c70bd9f57/6747bfc6ae163a26df8eb677"
+            width="350"
+            height="600"
+            frameborder="0"
+            style="position: fixed; z-index: 1; bottom: 15px; right: 15px;"></iframe>
+
+
+
+    <script>
+        function handleMessage(event) {
+          if (event.data.type === 'chatbotStateChange') {
+            const iframe = document.getElementById('iframeId')
+            if (iframe) {
+              if (event.data.isClosed) {
+                iframe.style.width = '100px'
+                iframe.style.height = '100px'
+                iframe.style.display = 'flex'
+                iframe.style.justifyContent = 'center'
+                iframe.style.alignContent = 'center'
+              } else {
+                iframe.style.width = '350px'
+                iframe.style.height = '650px'
+              }
+            }
+          }
+        }
+
+        // Attach event listener
+        window.addEventListener('message', handleMessage)
+
+        // If you want to clean up the event listener when the page unloads (optional)
+        window.addEventListener('beforeunload', function () {
+          window.removeEventListener('message', handleMessage)
+        })
+    </script>
 </body>
 <script src="~/js/quagga.min.js"></script>
 <script src="~/js/especialista.js"></script>

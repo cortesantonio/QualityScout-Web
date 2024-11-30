@@ -121,12 +121,17 @@ namespace ScannerCC.Controllers
             return View(model);
         }
 
-
-        public IActionResult Reconocimiento()
+        [HttpGet]
+        public IActionResult Reconocimiento(int Producto)
         {
-            return View();
-        }
+            if (Producto != 0)
+            {
+                ViewBag.Producto = _context.Producto.Where(x => x.Id == Producto).FirstOrDefault();
+                return View();
+            }
 
+            return BadRequest("Producto no válido.");
+        }
 
         // GET: Controles
         [Authorize(Roles = "Control de Calidad")]
@@ -172,7 +177,10 @@ namespace ScannerCC.Controllers
 
             var productos = _context.Producto.Select(p => new { p.Id, p.Nombre }).ToList();
 
+
             ViewBag.IdProductos = new SelectList(productos, "Id", "Nombre", idProducto);
+            ViewBag.PaisDestino = _context.Producto.Where(x => x.Id == idProducto).FirstOrDefault().PaisDestino;
+            ViewBag.IdProducto = idProducto;
 
             return View();
         }
