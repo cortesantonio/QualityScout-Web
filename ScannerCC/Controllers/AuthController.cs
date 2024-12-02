@@ -24,25 +24,27 @@ namespace ScannerCC.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string user, string password)
         {
-            //Trabajador
+            // Busca el usuario si existe en la base de datos e incluye el rol de este.
             var us = _context.Usuario.Include(r => r.Rol).Where(u => u.Email.Equals(user) || u.Rut.Equals(user)).FirstOrDefault();
             if (us != null)
             {
-                //Usuario Encontrado
+             // Si el usuario existe pasa a verificar la contraseña
                 if (VerificarPass(password, us.PasswordHash, us.PasswordSalt))
                 {
+
+                    // si la contraseña existe, verifica el rol del usuario. 
                     if (us.Rol.Nombre == "Especialista") {
                             var Claims = new List<Claim>
                             {
                             new Claim(ClaimTypes.Name, us.Rut),
                             new Claim(ClaimTypes.NameIdentifier, us.Rut),
-                            new Claim(ClaimTypes.Role, "Especialista")
+                            new Claim(ClaimTypes.Role, "Especialista") //se define el rol del usuario
                             };
                             var identity = new ClaimsIdentity(Claims,
                             CookieAuthenticationDefaults.AuthenticationScheme);
 
                             var principal = new ClaimsPrincipal(identity);
-
+                            //Guarda la session en las cookies 
                             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal,
                                 new AuthenticationProperties { IsPersistent = true }
                                 );
@@ -55,13 +57,13 @@ namespace ScannerCC.Controllers
                             {
                             new Claim(ClaimTypes.Name, us.Rut),
                             new Claim(ClaimTypes.NameIdentifier, us.Rut),
-                            new Claim(ClaimTypes.Role, "Control de Calidad")
+                            new Claim(ClaimTypes.Role, "Control de Calidad") //se define el rol del usuario
                             }; 
                             var identity = new ClaimsIdentity(Claims,
                                 CookieAuthenticationDefaults.AuthenticationScheme);
 
-                            var principal = new ClaimsPrincipal(identity);
-
+                            var principal = new ClaimsPrincipal(identity); 
+                            //Guarda la session en las cookies 
                             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal,
                                 new AuthenticationProperties { IsPersistent = true }
                                 );
@@ -71,14 +73,14 @@ namespace ScannerCC.Controllers
                 }
                 else
                 {
-                    //Usuario correcto pero contraseña mala
+                    // Usuario correcto pero contraseña mala.
                     TempData["ErrorMessage"] = "Contraseña incorrecta. Escriba la contraseña correcta e inténtelo de nuevo.";
                     return RedirectToAction("Index2", "Home");
                 }
             }
             else
             {
-                //Usuario No Existe
+                // Usuario No Existe.
                 TempData["ErrorMessage"] = "Usuario no encontrado. Escriba las credenciales correctas e inténtelo de nuevo.";
                 return RedirectToAction("Index2", "Home");
             }
@@ -86,18 +88,21 @@ namespace ScannerCC.Controllers
 
         public async Task<IActionResult> LogOut()
         {
+            // Elimina la session de las cookies.
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult CreateAdminUser()
+    
+        // Se crea el usuario base, el administrador inicial.    
+        public IActionResult CreateAdminUser() 
         {
             Usuarios U = new Usuarios();
-            U.Rut = "1.111.111-1";
+            U.Rut = "1.111.111-1"; //CREDENCIAL DE ACCESO RUT: 1.111.111-1
             U.Email = "espe";
             U.Nombre = "Espe";
             U.Token = Guid.NewGuid().ToString();
-            CreatePasswordHash("espe", out byte[] passwordHash, out byte[] passwordSalt);
+            CreatePasswordHash("espe", out byte[] passwordHash, out byte[] passwordSalt); //CREDENCIAL DE ACCESO, PASSWORD: espe
 
             U.PasswordHash = passwordHash;
             U.PasswordSalt = passwordSalt;
@@ -129,7 +134,7 @@ namespace ScannerCC.Controllers
                 U.Rut = Rut;
                 U.RolId = Rol;
                 U.Activo=true;
-                U.Token = Guid.NewGuid().ToString();
+                U.Token = Guid.NewGuid().ToString(); // Genera un identificador único global para el Token.
 
                 CreatePasswordHash(Password, out byte[] passwordHash, out byte[] passwordSalt);
 
