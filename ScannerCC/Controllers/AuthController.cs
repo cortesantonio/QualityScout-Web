@@ -136,7 +136,7 @@ namespace ScannerCC.Controllers
                 U.Activo=true;
                 U.Token = Guid.NewGuid().ToString(); // Genera un identificador único global para el Token.
 
-                CreatePasswordHash(Password, out byte[] passwordHash, out byte[] passwordSalt);
+                CreatePasswordHash(Password, out byte[] passwordHash, out byte[] passwordSalt); // encripta la contraseña
 
                 U.PasswordHash = passwordHash;
                 U.PasswordSalt = passwordSalt;
@@ -147,12 +147,12 @@ namespace ScannerCC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int Id, string Email, string Rut, string Nombre, string Password, int Rol)
+        public IActionResult Edit(int Id, string Email, string Rut, string Nombre, string Password, int Rol) // edita el usuario
         {
 
             var usuario = _context.Usuario.FirstOrDefault(u => u.Id == Id);
 
-            if (usuario == null)
+            if (usuario == null) // si no existe el usuario
             {
                 ModelState.AddModelError("", "Usuario no encontrado.");
                 return RedirectToAction("GestionUsuarios", "Usuario");
@@ -171,7 +171,7 @@ namespace ScannerCC.Controllers
             usuario.Rut = Rut;
             usuario.RolId = Rol;
 
-            if (!string.IsNullOrEmpty(Password))
+            if (!string.IsNullOrEmpty(Password)) // si el campo password no llega nulo, se cambia la contraseña, si no, se mantiene la actual.
             {
                 CreatePasswordHash(Password, out byte[] passwordHash, out byte[] passwordSalt);
                 usuario.PasswordHash = passwordHash;
@@ -185,7 +185,7 @@ namespace ScannerCC.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditC(int Id, string Password)
+        public IActionResult EditC(int Id, string Password) // se cambia unicamente la contraseña.
         {
 
             // Buscar el usuario por ID
@@ -250,7 +250,7 @@ namespace ScannerCC.Controllers
         }
 
 
-        public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt) // metodo para crear hash y salt de password
         {
             using (var hmac = new HMACSHA512())
             {
