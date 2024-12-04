@@ -91,7 +91,7 @@ namespace ScannerCC.Controllers
         [Authorize(Roles = "Control de Calidad")]
         public async Task<IActionResult> Index(string Busqueda)
         {
-            var stats = new InfoViewModel();
+            var stats = new InfoViewModel(); // solicita la informacion de estadisticas declaradas arriba.
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo; 
 
@@ -113,7 +113,7 @@ namespace ScannerCC.Controllers
                         Estado = g.Key,
                         Porcentaje = (double)g.Count() / totalControles * 100
                     })
-                    .ToList();
+                    .ToList(); // agrupa los controles por estado y calcula el porcentaje de cada uno sobre el total.
                 ViewBag.IndicadoresRendimiento = indicadoresRendimiento;
 
                 //Si se realiza busqueda de productos evalua y filtra datos
