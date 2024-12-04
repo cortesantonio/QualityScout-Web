@@ -15,7 +15,7 @@ namespace ScannerCC.Controllers
         }
 
         [Authorize(Roles = "Especialista")]
-        public IActionResult GestionBotellas()
+        public IActionResult GestionBotellas() // se carga la vista prinpal de botellas, el listado con las opciones.
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo;
@@ -26,7 +26,7 @@ namespace ScannerCC.Controllers
 
         // GET: Botellas/Details
         [Authorize(Roles = "Especialista")]
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id) // se carga una botella en especifico
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo; 
@@ -35,8 +35,8 @@ namespace ScannerCC.Controllers
             {
                 return NotFound();
             }
-
-            var botella = await _context.BotellaDetalle
+            // se obtienen las botellas de manera asincrona, espera a obtener el resultado.
+            var botella = await _context.BotellaDetalle 
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (botella == null)
             {
@@ -46,7 +46,7 @@ namespace ScannerCC.Controllers
             return View(botella);
         }
 
-        // GET: Botellas/Create
+        // GET: Botellas/Create - pagina para crear registros
         [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
@@ -63,7 +63,7 @@ namespace ScannerCC.Controllers
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo;
-
+            // recibe la info y por medio de try-catch se asegura de controlar los errores.
             try
             {
                 BotellaDetalles botella = new BotellaDetalles();
@@ -82,10 +82,10 @@ namespace ScannerCC.Controllers
             }
         }
 
-        // GET: Botellas/Edit
+        // GET: Botellas/Edit - vista para editar la info de botella.
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int? id)
-        {
+        {    
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo; 
 
@@ -102,7 +102,7 @@ namespace ScannerCC.Controllers
             return View(botella);
         }
 
-        // POST: Botellas/Edit
+        // POST: Botellas/Edit  - metodo para editar la info recibida de la vista edit. (metodo de arriba)
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -111,6 +111,7 @@ namespace ScannerCC.Controllers
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo;
 
+            // recibe la info y por medio de try-catch se asegura de controlar los errores.
             try
             {
                 var botella = await _context.BotellaDetalle.FindAsync(id);
@@ -135,18 +136,18 @@ namespace ScannerCC.Controllers
         }
 
 
-        // GET: Botellas/Delete
+        // GET: Botellas/Delete - vista para eliminar el item.
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int? id)
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo;
-
+            // se asegura que el id recibido sea diferente a nulo y que hayan registros en la tabla de botellas.
             if (id == null || _context.BotellaDetalle == null)
             {
                 return NotFound();
             }
-
+            // obtiene el item y lo pasa a la vista 
             var botella = await _context.BotellaDetalle
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (botella == null)
@@ -157,7 +158,7 @@ namespace ScannerCC.Controllers
             return View(botella);
         }
 
-        // POST: Botellas/Delete
+        // POST: Botellas/Delete - metodo eliminador del item
         [Authorize(Roles = "Especialista")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -165,15 +166,15 @@ namespace ScannerCC.Controllers
         {
             var TrabajadorActivo = _context.Usuario.Where(t => t.Rut.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.trab = TrabajadorActivo;
-
+            // try catch para controlar posibles errores
             try
-            {
+            {    //buscar el item 
                 var botella = await _context.BotellaDetalle.FindAsync(id);
                 if (botella == null)
                 {
                     return NotFound("Botella no encontrada.");
                 }
-
+                // elimina el item pasando el resultado de la busqueda anterior
                 _context.BotellaDetalle.Remove(botella);
                 await _context.SaveChangesAsync();
 
