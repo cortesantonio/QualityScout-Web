@@ -16,7 +16,7 @@ namespace ScannerCC.Controllers
     public class InformesController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly string OpenAIApiKey = ";
+        private readonly string OpenAIApiKey = "";
 
         public InformesController(AppDbContext context)
         {

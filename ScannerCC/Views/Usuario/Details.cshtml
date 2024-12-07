@@ -37,6 +37,8 @@
     input.acc{
             background-color: #BF6565;
             width: 30%;
+            cursor: pointer;
+            font-size: 13px;
     }
 
     select {
@@ -74,6 +76,8 @@
     button.btn {
             background-color: black;
             width: 30%;
+        cursor: pointer;
+        font-size: 13px;
     }
 
     input, select, dd {
@@ -471,13 +475,13 @@
 
                         @if (Model.Activo)
                         {
-                            <button class="btn-deactivate" style="color: white;" onclick="openModal()">
+                        <button class="btn-deactivate" style="color: white; cursor: pointer;" onclick="openModal()">
                                 <i class="fa-solid fa-trash-can"></i> Desactivar usuario
                             </button>
                         }
                         else
                         {
-                            <button class="btn-activate" onclick="openModall()">
+                        <button class="btn-activate" style=" cursor: pointer;" onclick="openModall()">
                                 <i class="fa-solid fa-user-check" style="color: #ffffff;"></i> Activar usuario
                             </button>
                         }

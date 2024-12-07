@@ -90,6 +90,13 @@
         background-color: #BF6565;
         color: white;
     }
+
+    .espacio {
+        width: 340px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 </style>
 
 <!DOCTYPE html>
@@ -296,25 +303,7 @@
                     </div>
                         <div class="informes-details">
                             <p><strong>Fecha:</strong> @item.Fecha.ToString("dd/MM/yyyy") <strong style="margin-left: 10px;">Hora:</strong> @item.Fecha.ToString("HH:mm")</p>
-                            <p>Encargado: @GetFirstNameAndSurname(item.Usuarios.Nombre)</p>
-                            @functions {
-                        public string GetFirstNameAndSurname(string fullName)
-                        {
-                            if (string.IsNullOrEmpty(fullName))
-                            {
-                                return string.Empty;
-                            }
-
-                            var nameParts = fullName.Split(' ');
-
-                            if (nameParts.Length >= 2)
-                            {
-                                return nameParts[0] + " " + nameParts[2];
-                            }
-
-                            return nameParts[0];
-                        }
-                    }
+                            <p class="espacio">Encargado: @item.Usuarios.Nombre</p>
                             </div>
                     <div class="informes-actions">
                             @if (isEspecialista)

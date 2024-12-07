@@ -4,6 +4,15 @@
     bool isControlCalidad = User.IsInRole("Control de Calidad");
 }
 
+<style>
+    .espacio {
+        width: 340px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -222,26 +231,8 @@
                         </div>
                     </div>
                     <div class="scan-details">
-                        <p><strong>Fecha:</strong> @item.Fecha</p>
-                        <p>Usuario: @GetFirstNameAndSurname(item.Usuarios.Nombre)</p>
-                        @functions {
-                        public string GetFirstNameAndSurname(string fullName)
-                        {
-                            if (string.IsNullOrEmpty(fullName))
-                            {
-                                return string.Empty;
-                            }
-
-                            var nameParts = fullName.Split(' ');
-
-                            if (nameParts.Length >= 2)
-                            {
-                                return nameParts[0] + " " + nameParts[2];
-                            }
-
-                            return nameParts[0];
-                        }
-                    }
+                        <p><strong>Fecha:</strong> @item.Fecha.ToString("dd/MM/yyyy") <strong style="margin-left: 10px;">Hora:</strong> @item.Fecha.ToString("HH:mm")</p>
+                        <p class="espacio">Usuario: @item.Usuarios.Nombre</p>
                         <p>Rut: @item.Usuarios.Rut</p>
 
                     </div>

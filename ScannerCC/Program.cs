@@ -168,8 +168,8 @@ app.MapControllerRoute(
 );
 
 app.MapControllerRoute(
-    name: "Reconocimiento-de-objetos",
-    pattern: "Reconocimiento-de-objetos/{id?}",
+    name: "Reconocimiento-con-camara",
+    pattern: "Reconocimiento-con-camara/{id?}",
     defaults: new { controller = "Controles", action = "Reconocimiento" }
 );
 

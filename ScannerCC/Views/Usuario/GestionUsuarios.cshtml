@@ -14,6 +14,8 @@
         font-family: Arial;
         border: none;
         margin-bottom: 5px;
+        font-size: 13px;
+        cursor: pointer;
     }
 
     button.btn {
@@ -24,6 +26,62 @@
         border-radius: 5px; /* Bordes redondeados (opcional) */
         font-family: Arial;
         border: none;
+        font-size: 13px;
+    }
+
+    .espacio {
+        width: 270px; 
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+    }
+
+    .modal {
+        display: none; /* Oculto por defecto */
+        position: fixed;
+        z-index: 100; /* Asegura que está por encima del contenido */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    }
+
+    /* El contenedor de contenido del modal */
+    .modal-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        text-align: center;
+        font-family: Arial
+    }
+
+    .alerta {
+        color: #260202 !important;
+        font-size: 24px !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* Texto dentro del modal */
+    .modal-content p {
+        font-size: 18px;
+        color: #333;
+    }
+
+    /* Botones del modal */
+    .modal-buttons {
+        margin-top: 20px;
+    }
+
+    /* Texto destacado en rojo */
+    .desactivar {
+        color: #f25757;
+    }
+
+    .activar {
+        color: #f25757;
     }
 </style>
 
@@ -155,27 +213,7 @@
                         <div class="user-info">
                             <img src="~/Extras/iconUsuario.png" class="user-icon" />
                             <div>
-                                <p><strong>@GetFirstNameAndSurname(item.Nombre)</strong></p>
-
-                        @functions {
-                            public string GetFirstNameAndSurname(string fullName)
-                            {
-                                if (string.IsNullOrEmpty(fullName))
-                                {
-                                    return string.Empty;
-                                }
-
-                                var nameParts = fullName.Split(' ');
-
-                                if (nameParts.Length >= 2)
-                                {
-                                    return nameParts[0] + " " + nameParts[2]; 
-                                }
-
-                                return nameParts[0]; 
-                            }
-                        }
-
+                                <p class="espacio"><strong>@item.Nombre</strong></p>
                                 <p>RUT: @item.Rut</p>
                             </div>
                         </div>
@@ -186,6 +224,24 @@
                         <div class="user-actions">
                             @if (item.Activo)
                             {
+                                <a class="see-btn" href="javascript:void(0)" onclick="showModal('desactivar', @item.Id)">
+                                    <i class="fa-solid fa-ban" style="color: #ffffff;"></i>
+                                </a>
+
+                                <div id="modal-desactivar-@item.Id" class="modal" style="display: none;">
+                                    <div class="modal-content">
+                                        <h2 class="alerta">ALERTA</h2>
+                                        <p>¿Está seguro que desea <span class="desactivar">desactivar</span> este usuario?</p>
+                                        <div class="d-flex justify-content-between w-100" style="margin-left: 5px; margin-top: 15px;">
+                                            <form asp-action="Desactivar" method="post">
+                                                <input type="hidden" name="Id" value="@item.Id" />
+                                                <input type="submit" value="Aceptar" class="acc btn btn-danger" />
+                                            </form>
+                                            <button onclick="hideModal('desactivar', @item.Id)" class="btn btn-secondary">Cancelar</button>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <a class="edit-btn" href="@Url.Action("Edit", "Usuario", new { id = item.Id })">
                                     <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
                                 </a>
@@ -195,6 +251,23 @@
                             }
                             else
                             {
+                                <a class="see-btn" href="javascript:void(0)" onclick="showModal('activar', @item.Id)">
+                                    <i class="fa-solid fa-check-circle" style="color: #ffffff;"></i>
+                                </a>
+
+                                <div id="modal-activar-@item.Id" class="modal" style="display: none;">
+                                    <div class="modal-content">
+                                        <h2 class="alerta">ALERTA</h2>
+                                        <p>¿Está seguro que desea <span class="activar">activar</span> este usuario?</p>
+                                        <div class="d-flex justify-content-between w-100" style="margin-left: 5px; margin-top: 15px;">
+                                            <form asp-action="Activar" method="post">
+                                                <input type="hidden" name="Id" value="@item.Id" />
+                                                <input type="submit" value="Aceptar" class="acc btn btn-success" />
+                                            </form>
+                                            <button onclick="hideModal('activar', @item.Id)" class="btn btn-secondary">Cancelar</button>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <a class="see-btn" href="@Url.Action("Details", "Usuario", new { id = item.Id })">
                                     <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
@@ -251,3 +324,19 @@
 <script src="~/js/especialista.js"></script>
 
 </html>
+
+<script>
+    function showModal(action, id) {
+        const modal = document.getElementById(`modal-${action}-${id}`);
+        if (modal) {
+            modal.style.display = 'block';
+        }
+    }
+
+    function hideModal(action, id) {
+        const modal = document.getElementById(`modal-${action}-${id}`);
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+</script>

@@ -57,11 +57,6 @@
                             <img src="~/Extras/escaner.png" alt="Informes" />
                         </a>
                     </div>
-                    <div class="iconosnav">
-                        <a asp-action="GestionEscaneos" asp-controller="Escaneos">
-                            <img src="~/Extras/escaner.png" alt="Informes" />
-                        </a>
-                    </div>
                 }
 
                 @if (isControlCalidad)
@@ -100,7 +95,7 @@
                         <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+                            <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
 
                             @functions {
                             public string GetFirstNameAndSurnameB(string fullName)
@@ -120,7 +115,7 @@
                                 return nameParts[0];
                             }
                         }
-                            <p>Especialista</p>
+                        <p style="font-size:12px;">Especialista</p>
                         </div>
                     }
 
@@ -129,7 +124,7 @@
                         <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p>@GetFirstNameAndSurnameBC(ViewBag.trab.Nombre)</p>
+                            <p style="font-size:12px;">@GetFirstNameAndSurnameBC(ViewBag.trab.Nombre)</p>
 
                             @functions {
                             public string GetFirstNameAndSurnameBC(string fullName)
@@ -149,7 +144,7 @@
                                 return nameParts[0];
                             }
                         }
-                            <p>Control de Calidad</p>
+                        <p style="font-size:12px;">Control de Calidad</p>
                         </div>
                     }
                 </div>
@@ -187,7 +182,7 @@
         <div class="cabezaInforme">
 
                 <h2>Informe N° </h2>
-                <p>Fecha de generacion: @ViewBag.Fecha</p>
+                <p>Fecha de generación: @ViewBag.Fecha</p>
 
         </div>
 
