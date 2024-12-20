@@ -216,7 +216,7 @@ namespace ScannerCC.Controllers
                 return NotFound();
             }
 
-            var productod = await _context.ProductoDetalle
+            var productod = await _context.ProductoDetalle.Include(x=>x.Productos).Include(x =>x.BotellaDetalles)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (productod == null)
             {

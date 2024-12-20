@@ -24,6 +24,7 @@ namespace ScannerCC.Models
             optionsBuilder.UseSqlServer("");
         }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Escaneos>()

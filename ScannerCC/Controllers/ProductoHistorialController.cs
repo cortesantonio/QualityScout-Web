@@ -173,7 +173,7 @@ namespace ScannerCC.Controllers
                 return NotFound();
             }
 
-            var productoh = await _context.ProductoHistorial
+            var productoh = await _context.ProductoHistorial.Include(x =>x.Productos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (productoh == null)
             {

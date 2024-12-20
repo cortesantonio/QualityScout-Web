@@ -104,26 +104,9 @@
                         <img class="icono-lapiz" src="~/Extras/especialista.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p style="font-size:12px;">@GetFirstNameAndSurnameB(ViewBag.trab.Nombre)</p>
+                            <p style="font-size:12px;">@ViewBag.trab.Nombre</p>
 
-                            @functions {
-                            public string GetFirstNameAndSurnameB(string fullName)
-                            {
-                                if (string.IsNullOrEmpty(fullName))
-                                {
-                                    return string.Empty;
-                                }
-
-                                var nameParts = fullName.Split(' ');
-
-                                if (nameParts.Length >= 2)
-                                {
-                                    return nameParts[0] + " " + nameParts[2];
-                                }
-
-                                return nameParts[0];
-                            }
-                        }
+                            
                         <p style="font-size:12px;">Especialista</p>
                         </div>
                     }
@@ -133,26 +116,9 @@
                         <img class="icono-lapiz" src="~/Extras/controldecalidad.png" alt="Especialista">
                         <div class="welcome-container">
                             <span class="welcome-text">Bienvenido!</span>
-                            <p style="font-size:12px;">@GetFirstNameAndSurnameBC(ViewBag.trab.Nombre)</p>
+                            <p style="font-size:12px;">@ViewBag.trab.Nombre</p>
 
-                            @functions {
-                            public string GetFirstNameAndSurnameBC(string fullName)
-                            {
-                                if (string.IsNullOrEmpty(fullName))
-                                {
-                                    return string.Empty;
-                                }
-
-                                var nameParts = fullName.Split(' ');
-
-                                if (nameParts.Length >= 2)
-                                {
-                                    return nameParts[0] + " " + nameParts[2];
-                                }
-
-                                return nameParts[0];
-                            }
-                        }
+                            
                         <p style="font-size:12px;">Control de Calidad</p>
                         </div>
                     }
