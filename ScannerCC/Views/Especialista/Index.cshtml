@@ -200,7 +200,7 @@
                     </div>
                 </div>
 
-                <p class="reference-text">Indicadores con referencia al mes anterior: @Model.MesAnterior @Model.AnioAnterior</p>
+                <p class="reference-text">Indicadores con referencia al mes actual: @Model.MesAnterior @Model.AnioAnterior</p>
 
             </div>
         </div>
@@ -247,14 +247,14 @@
         var indicadoresRendimiento = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.IndicadoresRendimiento));
 
         var labels = indicadoresRendimiento.map(i => i.Estado);
-        var data = indicadoresRendimiento.map(i => i.Porcentaje);
+        var data = indicadoresRendimiento.map(i => i.Cantidad);
 
         new Chart(document.getElementById('indicadoresRendimiento'), {
             type: 'doughnut',
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Indicadores de Rendimiento (%)',
+                    label: 'Indicadores de Rendimiento',
                     data: data,
                     backgroundColor: [
                         '#F25757',
@@ -273,7 +273,7 @@
                     tooltip: {
                         callbacks: {
                             label: function (tooltipItem) {
-                                return tooltipItem.label + ': ' + tooltipItem.raw.toFixed(2) + '%';
+                                return tooltipItem.label + ': ' + tooltipItem.raw.toLocaleString();
                             }
                         }
                     },
@@ -281,20 +281,21 @@
                         color: '#FFFFFF',
                         formatter: (value, context) => {
                             const label = context.chart.data.labels[context.dataIndex];
-                            return `${label}\n${value.toFixed(2)}%`;
+                            return `${label} \n       ${value.toLocaleString()}`;
                         },
-                        align: 'start',
-                        anchor: 'start',
+                        align: 'center',
+                        anchor: 'center',
                         offset: -85,
                         clamp: false,
                         font: {
-                            size: 14,
+                            size: 15,
                             weight: 'bold',
-                            color: '#FFFFFF'
+                            color: '#FFFFFF',
+                            aling: 'center'
                         },
                     }
                 },
-                cutout: '50%',
+                cutout: '40%',
                 layout: {
                     padding: {
                         top: 8,

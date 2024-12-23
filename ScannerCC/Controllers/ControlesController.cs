@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -104,7 +105,7 @@ namespace ScannerCC.Controllers
             var paises = datosGrafico.Select(d => d.PaisDestino).Distinct().ToList();
             var mesesNumericos = datosGrafico.Select(d => d.Mes).Distinct().OrderBy(m => m).ToList();
             var mesesTexto = mesesNumericos
-                .Select(m => new DateTime(1, m, 1).ToString("MMMM"))
+                .Select(m => new DateTime(1, m, 1).ToString("MMMM", new CultureInfo("es-ES")))
                 .Select(nombreMes => char.ToUpper(nombreMes[0]) + nombreMes.Substring(1))
                 .ToList();
             var exportacionesPorMes = mesesNumericos.Select(mes =>
