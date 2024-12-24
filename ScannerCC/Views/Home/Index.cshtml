@@ -120,8 +120,7 @@
                         <div class="indicator reprocesos">
                             <span class="indicator-title">Controles en reproceso</span>
                             <div class="indicator-value">
-                                <span class="percentage">@Model.ReprocesadosMesAntiguo</span>
-                                <span class="arrow-up">↑</span>
+                                <span class="variation">@Model.VariacionReprocesados</span>
                             </div>
                         </div>
                     </div>
@@ -130,8 +129,7 @@
                         <div class="indicator rechazados">
                             <span class="indicator-title">Controles rechazados</span>
                             <div class="indicator-value">
-                                <span class="percentage">@Model.RechazadosMesAntiguo</span>
-                                <span class="arrow-down">↓</span>
+                                <span class="variation">@Model.VariacionRechazados</span>
                             </div>
                         </div>
                     </div>
@@ -140,14 +138,13 @@
                         <div class="indicator aprobados">
                             <span class="indicator-title">Controles aprobados</span>
                             <div class="indicator-value">
-                                <span class="percentage">@Model.AprobadosMesAntiguo</span>
-                                <span class="arrow-up">↑</span>
+                                <span class="variation">@Model.VariacionAprobados</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <p class="reference-text">Indicadores con referencia al mes actual: @Model.MesAnterior @Model.AnioAnterior</p>
+                <p class="reference-text">Indicadores con referencia al mes anterior: @Model.MesAnterior @Model.AnioAnterior</p>
 
             </div>
         </div>
@@ -194,7 +191,7 @@
         var indicadoresRendimiento = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.IndicadoresRendimiento));
 
         var labels = indicadoresRendimiento.map(i => i.Estado);
-        var data = indicadoresRendimiento.map(i => i.Cantidad);
+        var data = indicadoresRendimiento.map(i => i.Porcentaje);
 
         new Chart(document.getElementById('indicadoresRendimiento'), {
             type: 'doughnut',
@@ -220,7 +217,7 @@
                     tooltip: {
                         callbacks: {
                             label: function (tooltipItem) {
-                                return tooltipItem.label + ': ' + tooltipItem.raw.toLocaleString();
+                                return tooltipItem.label + ': ' + tooltipItem.raw.toFixed(2) + '%';
                             }
                         }
                     },
@@ -228,14 +225,14 @@
                         color: '#FFFFFF',
                         formatter: (value, context) => {
                             const label = context.chart.data.labels[context.dataIndex];
-                            return `${label} \n       ${value.toLocaleString()}`;
+                            return `${label} \n   ${value.toFixed(2)}%`;
                         },
                         align: 'center',
                         anchor: 'center',
                         offset: -85,
                         clamp: false,
                         font: {
-                            size: 15,
+                            size: 14,
                             weight: 'bold',
                             color: '#FFFFFF',
                             aling: 'center'
@@ -257,3 +254,19 @@
     </script>
 </body>
 </html>
+
+<script>
+    document.querySelectorAll('.indicator-value').forEach((indicator) => {
+        const value = parseFloat(indicator.textContent.replace('%', ''));
+        const variationElement = indicator.querySelector('.variation');
+
+        variationElement.classList.remove('up', 'down');
+
+        if (value > 0) {
+            variationElement.classList.add('up');
+        } else if (value < 0) {
+            variationElement.classList.add('down');
+        }
+    });
+
+</script>

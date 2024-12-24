@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fj6PZ7np69lErNsg8WU0gjp5gLDSlCBkUfIwdlT9M80=",
+  "Hash": "U+7YUiFfEMGFOFB9gTXZngyQPRamlF6fIcFP25OGmDI=",
   "Source": "QualityScout",
   "BasePath": "_content/QualityScout",
   "Mode": "Default",
@@ -325,8 +325,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "d774ckmnjh",
-      "Integrity": "h4b6cB6e36CmZiddu0YQqDHnCOmm8VGF1HMc1PVSTgo=",
+      "Fingerprint": "bm3tl9l27l",
+      "Integrity": "bX994NCt3dCPnupq98hKXvS2co8fcuefgaTWeTCGY+k=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\IndicadorHome.css"
@@ -430,8 +430,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "wscchn1su9",
-      "Integrity": "0EhhnUT02aMAt1UohOcvfAkR0cPzY3nKB6+jNDzue1o=",
+      "Fingerprint": "swwj4rr0sr",
+      "Integrity": "pFKNETWc5CSAoZSsFsQ7Zs6LoQ+N0TsPdVzIljEArPk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\Roles.css"
@@ -3565,6 +3565,51 @@
       ]
     },
     {
+      "Route": "css/IndicadorHome.bm3tl9l27l.css",
+      "AssetFile": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\IndicadorHome.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5779"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bX994NCt3dCPnupq98hKXvS2co8fcuefgaTWeTCGY+k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Dec 2024 22:02:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bm3tl9l27l"
+        },
+        {
+          "Name": "label",
+          "Value": "css/IndicadorHome.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-bX994NCt3dCPnupq98hKXvS2co8fcuefgaTWeTCGY+k="
+        }
+      ]
+    },
+    {
       "Route": "css/IndicadorHome.css",
       "AssetFile": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\IndicadorHome.css",
       "Selectors": [],
@@ -3575,7 +3620,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5934"
+          "Value": "5779"
         },
         {
           "Name": "Content-Type",
@@ -3583,11 +3628,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"h4b6cB6e36CmZiddu0YQqDHnCOmm8VGF1HMc1PVSTgo=\""
+          "Value": "\"bX994NCt3dCPnupq98hKXvS2co8fcuefgaTWeTCGY+k=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 23 Dec 2024 06:01:38 GMT"
+          "Value": "Tue, 24 Dec 2024 22:02:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3597,52 +3642,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-h4b6cB6e36CmZiddu0YQqDHnCOmm8VGF1HMc1PVSTgo="
-        }
-      ]
-    },
-    {
-      "Route": "css/IndicadorHome.d774ckmnjh.css",
-      "AssetFile": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\IndicadorHome.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "5934"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"h4b6cB6e36CmZiddu0YQqDHnCOmm8VGF1HMc1PVSTgo=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 23 Dec 2024 06:01:38 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "d774ckmnjh"
-        },
-        {
-          "Name": "label",
-          "Value": "css/IndicadorHome.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-h4b6cB6e36CmZiddu0YQqDHnCOmm8VGF1HMc1PVSTgo="
+          "Value": "sha256-bX994NCt3dCPnupq98hKXvS2co8fcuefgaTWeTCGY+k="
         }
       ]
     },
@@ -3985,7 +3985,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6938"
+          "Value": "6793"
         },
         {
           "Name": "Content-Type",
@@ -3993,11 +3993,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"0EhhnUT02aMAt1UohOcvfAkR0cPzY3nKB6+jNDzue1o=\""
+          "Value": "\"pFKNETWc5CSAoZSsFsQ7Zs6LoQ+N0TsPdVzIljEArPk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 23 Dec 2024 06:01:39 GMT"
+          "Value": "Sun, 24 Nov 2024 21:51:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4007,12 +4007,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-0EhhnUT02aMAt1UohOcvfAkR0cPzY3nKB6+jNDzue1o="
+          "Value": "sha256-pFKNETWc5CSAoZSsFsQ7Zs6LoQ+N0TsPdVzIljEArPk="
         }
       ]
     },
     {
-      "Route": "css/Roles.wscchn1su9.css",
+      "Route": "css/Roles.swwj4rr0sr.css",
       "AssetFile": "C:\\Users\\Alejandra\\Downloads\\QualityScout-Web\\ScannerCC\\wwwroot\\css\\Roles.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -4022,7 +4022,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6938"
+          "Value": "6793"
         },
         {
           "Name": "Content-Type",
@@ -4030,11 +4030,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"0EhhnUT02aMAt1UohOcvfAkR0cPzY3nKB6+jNDzue1o=\""
+          "Value": "\"pFKNETWc5CSAoZSsFsQ7Zs6LoQ+N0TsPdVzIljEArPk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 23 Dec 2024 06:01:39 GMT"
+          "Value": "Sun, 24 Nov 2024 21:51:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4044,7 +4044,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "wscchn1su9"
+          "Value": "swwj4rr0sr"
         },
         {
           "Name": "label",
@@ -4052,7 +4052,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-0EhhnUT02aMAt1UohOcvfAkR0cPzY3nKB6+jNDzue1o="
+          "Value": "sha256-pFKNETWc5CSAoZSsFsQ7Zs6LoQ+N0TsPdVzIljEArPk="
         }
       ]
     },

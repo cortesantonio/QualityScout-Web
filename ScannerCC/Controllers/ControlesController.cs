@@ -68,7 +68,8 @@ namespace ScannerCC.Controllers
 
             // Calcular controles rechazados
             var controlesRechazados = _context.Controles
-                .Where(c => c.Estado != null && c.Estado.Contains("Rechazado"))
+                .Where(c => (c.Estado != null && c.Estado.Contains("Rechazado")) ||
+                            (c.EstadoFinal != null && c.EstadoFinal.Contains("Rechazado")))
                 .Count();
 
             // Calcular controles preventivos

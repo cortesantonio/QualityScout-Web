@@ -40,61 +40,84 @@ namespace ScannerCC.Controllers
 
         private async Task<InfoViewModel> GetInfoStats()
         {
-            // Cálculo de totales actuales para controles
-            var controlesAprobados = await _context.Controles
-                .Where(c => c.Estado != null && c.Estado.Contains("Aprobado"))
-                .CountAsync();
-
-            var controlesReprocesados = await _context.Controles
-                .Where(c => c.Estado != null && c.Estado.Contains("Reproceso"))
-                .CountAsync();
-
-            var controlesRechazados = await _context.Controles
-                .Where(c => c.Estado != null && c.Estado.Contains("Rechazado"))
-                .CountAsync();
-
-            // Obtener la fecha del mes actual
+            // Obtener la fecha actual y el mes anterior
             DateTime fechaMesActual = DateTime.Now;
+            DateTime fechaMesAnterior = fechaMesActual.AddMonths(-1);
 
-            // Cálculo de controles en el mes actual
-            var controlesMesActualAprobados = await _context.Controles
-                .CountAsync(c => c.Estado == "Aprobado" &&
-                                 c.FechaHoraPrimerControl.Month == fechaMesActual.Month &&
-                                 c.FechaHoraPrimerControl.Year == fechaMesActual.Year);
+            // Calcular los controles del mes actual
+            var controlesAprobadosMesActual = await _context.Controles
+                .Where(c => c.Estado == "Aprobado" &&
+                            c.FechaHoraPrimerControl.Month == fechaMesActual.Month &&
+                            c.FechaHoraPrimerControl.Year == fechaMesActual.Year)
+                .CountAsync();
 
-            var controlesMesActualReprocesados = await _context.Controles
-                .CountAsync(c => c.Estado == "Reproceso" &&
-                                 c.FechaHoraPrimerControl.Month == fechaMesActual.Month &&
-                                 c.FechaHoraPrimerControl.Year == fechaMesActual.Year);
+            var controlesReprocesadosMesActual = await _context.Controles
+                .Where(c => c.Estado == "Reproceso" &&
+                            c.FechaHoraPrimerControl.Month == fechaMesActual.Month &&
+                            c.FechaHoraPrimerControl.Year == fechaMesActual.Year)
+                .CountAsync();
 
-            var controlesMesActualRechazados = await _context.Controles
-                .CountAsync(c => c.Estado == "Rechazado" &&
-                                 c.FechaHoraPrimerControl.Month == fechaMesActual.Month &&
-                                 c.FechaHoraPrimerControl.Year == fechaMesActual.Year);
+            var controlesRechazadosMesActual = await _context.Controles
+                .Where(c => c.Estado == "Rechazado" &&
+                            c.FechaHoraPrimerControl.Month == fechaMesActual.Month &&
+                            c.FechaHoraPrimerControl.Year == fechaMesActual.Year)
+                .CountAsync();
 
-            // Calcular el total de controles en el mes actual
-            var totalControlesMesActual = controlesMesActualAprobados + controlesMesActualReprocesados + controlesMesActualRechazados;
+            // Calcular los controles del mes anterior
+            var controlesMesAnteriorAprobados = await _context.Controles
+                .Where(c => c.Estado == "Aprobado" &&
+                            c.FechaHoraPrimerControl.Month == fechaMesAnterior.Month &&
+                            c.FechaHoraPrimerControl.Year == fechaMesAnterior.Year)
+                .CountAsync();
 
-            // Función para calcular porcentajes
-            string CalcularPorcentaje(int controlesMesActual, int totalControlesMesActual)
+            var controlesMesAnteriorReprocesados = await _context.Controles
+                .Where(c => c.Estado == "Reproceso" &&
+                            c.FechaHoraPrimerControl.Month == fechaMesAnterior.Month &&
+                            c.FechaHoraPrimerControl.Year == fechaMesAnterior.Year)
+                .CountAsync();
+
+            var controlesMesAnteriorRechazados = await _context.Controles
+                .Where(c => c.Estado == "Rechazado" &&
+                            c.FechaHoraPrimerControl.Month == fechaMesAnterior.Month &&
+                            c.FechaHoraPrimerControl.Year == fechaMesAnterior.Year)
+                .CountAsync();
+
+            // Función para calcular la variación 
+            string CalcularVariacion(int actual, int anterior)
             {
-                if (controlesMesActual == 0 || totalControlesMesActual == 0)
-                    return "0%";
-
-                var porcentaje = (decimal)controlesMesActual / totalControlesMesActual * 100;
-                return $"{Math.Round(porcentaje, 0)}%";
+                double variacion;
+                if (anterior == 0)
+                {
+                    variacion = actual > 0 ? 100 : 0;
+                }
+                else
+                {
+                    variacion = ((double)(actual - anterior) / anterior) * 100;
+                }
+                return $"{Math.Round(variacion, 2)}%";
             }
+
+            // Calcular las variaciones 
+            var variacionAprobados = CalcularVariacion(controlesAprobadosMesActual, controlesMesAnteriorAprobados);
+            var variacionReprocesados = CalcularVariacion(controlesReprocesadosMesActual, controlesMesAnteriorReprocesados);
+            var variacionRechazados = CalcularVariacion(controlesRechazadosMesActual, controlesMesAnteriorRechazados);
 
             return new InfoViewModel
             {
-                ControlesAprobados = controlesAprobados,
-                ControlesReprocesados = controlesReprocesados,
-                ControlesRechazados = controlesRechazados,
-                AprobadosMesAntiguo = CalcularPorcentaje(controlesMesActualAprobados, totalControlesMesActual),
-                ReprocesadosMesAntiguo = CalcularPorcentaje(controlesMesActualReprocesados, totalControlesMesActual),
-                RechazadosMesAntiguo = CalcularPorcentaje(controlesMesActualRechazados, totalControlesMesActual),
-                MesAnterior = fechaMesActual.ToString("MMMM", new CultureInfo("es-ES")).ToUpper(),
-                AnioAnterior = fechaMesActual.Year
+                AprobadosMesActual = $"{controlesAprobadosMesActual}",
+                ReprocesadosMesActual = $"{controlesReprocesadosMesActual}",
+                RechazadosMesActual = $"{controlesRechazadosMesActual}",
+
+                AprobadosMesAntiguo = $"{controlesMesAnteriorAprobados}",
+                ReprocesadosMesAntiguo = $"{controlesMesAnteriorReprocesados}",
+                RechazadosMesAntiguo = $"{controlesMesAnteriorRechazados}",
+
+                VariacionAprobados = $"{variacionAprobados}",
+                VariacionReprocesados = $"{variacionReprocesados}",
+                VariacionRechazados = $"{variacionRechazados}",
+
+                MesAnterior = fechaMesAnterior.ToString("MMMM", new CultureInfo("es-ES")).ToUpper(),
+                AnioAnterior = fechaMesAnterior.Year
             };
         }
 
@@ -102,14 +125,22 @@ namespace ScannerCC.Controllers
         {
             var stats = await GetInfoStats();
 
-            // Indicadores de rendimiento (rechazados, aprobados, reprocesos)
-            var totalControles = _context.Controles.Count();
+            // Obtener la fecha actual
+            DateTime fechaMesActual = DateTime.Now;
+
+            var totalControles = _context.Controles
+                .Where(c => c.FechaHoraPrimerControl.Month == fechaMesActual.Month &&
+                            c.FechaHoraPrimerControl.Year == fechaMesActual.Year)
+                .Count();
+
             var indicadoresRendimiento = _context.Controles
+                .Where(c => c.FechaHoraPrimerControl.Month == fechaMesActual.Month &&
+                            c.FechaHoraPrimerControl.Year == fechaMesActual.Year)
                 .GroupBy(c => c.Estado)
                 .Select(g => new
                 {
                     Estado = g.Key,
-                    Cantidad = g.Count()
+                    Porcentaje = (double)g.Count() / totalControles * 100
                 })
                 .ToList();
             ViewBag.IndicadoresRendimiento = indicadoresRendimiento;

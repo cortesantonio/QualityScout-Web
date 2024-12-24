@@ -209,21 +209,22 @@ span {
 }
 
 .dashboard-indicators {
-    display: flex; /* Permite que los elementos secundarios se alineen en una fila */
-    justify-content: space-around; /* Espacia los indicadores de manera uniforme */
+    display: flex;
+    justify-content: space-around;
     padding: 20px;
-    flex-wrap: nowrap; /* Evita que los indicadores se muevan a la siguiente línea */
-    overflow-x: auto; /* Permite desplazamiento horizontal si el espacio es limitado */
+    flex-wrap: nowrap;
+    overflow-x: auto;
 }
 
 .indicator-container {
     background-color: #f2f2f2;
     border-radius: 15px;
-    width: 120px; /* Ajusta el ancho según tus necesidades */
-    padding: 15px;
+    width: 140px;
+    height: 90px;
+    padding: 10px;
     text-align: center;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    margin: 0 10px; /* Agrega márgenes laterales para separación */
+    margin: 0 10px;
 }
 
 .indicator {
@@ -241,39 +242,47 @@ span {
     font-size: 28px;
     font-weight: bold;
     position: relative;
-}
-
-.percentage {
-    display: block;
     color: #fff;
 }
 
-.arrow-up,
-.arrow-down {
-    font-size: 20px; /* Ajusta el tamaño de las flechas */
-    position: absolute;
-    top: 5px; /* Ajusta la posición vertical de las flechas */
-    right: -20px; /* Mantiene la posición horizontal de las flechas */
+.variation {
+    display: inline-block;
+    position: relative;
+    z-index: 2; 
 }
 
-.arrow-up {
-    color: #e03c31;
-}
+    .variation::before {
+        content: ""; 
+        position: absolute;
+        top: -20%; 
+        left: 90%; 
+        transform: translate(-50%, -50%) scaleX(1.5); 
+        font-size: 70px; 
+        color: rgba(255, 255, 255, 0.4); 
+        z-index: 1; 
+    }
 
-.arrow-down {
-    color: #3c3c3c;
-}
+    .variation.up::before {
+        content: "↑"; 
+    }
+
+    .variation.down::before {
+        content: "↓"; 
+    }
 
 .reprocesos {
     background-color: #BF6565;
+    height: 70px;
 }
 
 .rechazados {
     background-color: #260202;
+    height: 70px;
 }
 
 .aprobados {
     background-color: #F25757;
+    height: 70px;
 }
 
 .reference-text {
